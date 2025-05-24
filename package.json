@@ -1,5 +1,5 @@
 {
-  "name": "svelte-ui-components",
+  "name": "@davidnet/svelte-ui",
   "version": "1.0.0",
   "main": "index.ts",
   "types": "index.ts",
@@ -10,6 +10,14 @@
     "lintfix": "npx eslint src index.ts --ext .svelte,.ts,.js --fix",
     "fmt": "prettier --write \"src/**/*.{ts,svelte,js}\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidnet-net/svelte-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidnet-net/svelte-ui/issues"
+  },
+  "homepage": "https://design.davidnet.net",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
