@@ -8,7 +8,7 @@
     "build": "tsc",
     "lint": "eslint --ext .ts,.js,.svelte src index.ts; echo 'Try npm run lintfix'",
     "lintfix": "npx eslint src index.ts --ext .svelte,.ts,.js --fix",
-    "fmt": "prettier --write \"src/**/*.{ts,svelte,js}\" eslint --ext .ts,.js,.svelte src index.ts --fix\"index.ts\""
+    "fmt": "prettier --write \"src/**/*.{ts,svelte,js}\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.32.1",
