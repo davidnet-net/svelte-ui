@@ -45,6 +45,7 @@
 
 <style lang="scss">
   @use "../designtokens" as tokens;
+  @use "../fonts";
 
   @mixin button-base {
     display: inline-flex;
