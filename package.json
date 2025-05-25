@@ -1,6 +1,6 @@
 {
   "name": "@davidnet/svelte-ui",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.ts",
   "types": "index.ts",
   "exports": "./index.ts",
