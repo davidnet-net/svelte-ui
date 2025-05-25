@@ -7,6 +7,7 @@
     | "danger"
     | "icon";
   export let icon: string;
+  export let iconsize: string;
   export let disabled: boolean = false;
   export let type: "button" | "submit" | "reset" = "button";
 
@@ -62,7 +63,6 @@
 
   .btn-icon {
     @include fonts.material-icon();
-    font-size: 1.2rem;
     line-height: 0;
     display: inline-flex;
     align-items: center;
