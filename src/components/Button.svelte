@@ -13,9 +13,6 @@
   export let type: "button" | "submit" | "reset" = "button";
   export let onClick: ((_event: MouseEvent) => void) | null = null;
 
-  const test = [1, 2, 3];
-  console.log(test);
-
   const getClass = () => {
     switch (appearance) {
       case "subtle":
