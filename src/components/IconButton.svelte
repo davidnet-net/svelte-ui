@@ -1,6 +1,7 @@
 <script lang="ts">
   export let appearance:
     | "subtle"
+    | "subtle-white"
     | "default"
     | "primary"
     | "warning"
@@ -17,6 +18,8 @@
     switch (appearance) {
       case "subtle":
         return "subtle-icon-btn";
+      case "subtle":
+        return "subtle-white-icon-btn";
       case "primary":
         return "primary-icon-btn";
       case "warning":
@@ -103,6 +106,17 @@
       tokens.$buttons-subtle-background-hover,
       tokens.$buttons-subtle-background-active,
       tokens.$buttons-subtle-background-disabled
+    );
+  }
+
+  .subtle-white-icon-btn {
+    @extend %icon-btn-base;
+    @include icon-btn-theme(
+      tokens.$buttons-subtle-white-text,
+      tokens.$buttons-subtle-white-background-normal,
+      tokens.$buttons-subtle-white-background-hover,
+      tokens.$buttons-subtle-white-background-active,
+      tokens.$buttons-subtle-white-background-disabled
     );
   }
 

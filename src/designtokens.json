@@ -3,7 +3,14 @@
     "buttons": {
       "subtle": {
         "text": "black",
-        "background-normal": "#ffffff2a",
+        "background-normal": "#ffffff00",
+        "background-hover": "#ececec6b",
+        "background-active": "#d6d6d6",
+        "background-disabled": "#d6d6d6"
+      },
+      "subtle-white": {
+        "text": "white",
+        "background-normal": "#ffffff00",
         "background-hover": "#ececec6b",
         "background-active": "#d6d6d6",
         "background-disabled": "#d6d6d6"
