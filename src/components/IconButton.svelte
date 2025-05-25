@@ -61,12 +61,12 @@
   }
 
   .btn-icon {
+    @include fonts.material-icon();
     font-size: 1.2rem;
     line-height: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include fonts.material-icon();
   }
 
   // Mixin for stateful styles
