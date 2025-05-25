@@ -18,7 +18,7 @@
     switch (appearance) {
       case "subtle":
         return "subtle-icon-btn";
-      case "subtle":
+      case "subtle-white":
         return "subtle-white-icon-btn";
       case "primary":
         return "primary-icon-btn";
