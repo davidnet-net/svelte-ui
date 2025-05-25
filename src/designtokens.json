@@ -1,0 +1,41 @@
+{
+  "colors": {
+    "buttons": {
+      "subtle": {
+        "text": "black",
+        "background-normal": "#ffffff2a",
+        "background-hover": "#ececec6b",
+        "background-active": "#d6d6d6",
+        "background-disabled": "#d6d6d6"
+      },
+      "default": {
+        "text": "black",
+        "background-normal": "#e7e7e9b0",
+        "background-hover": "#d9d9da",
+        "background-active": "#c7c7c9",
+        "background-disabled": "#e7e7e981"
+      },
+      "primary": {
+        "text": "white",
+        "background-normal": "#3c86ec",
+        "background-hover": "#247af3",
+        "background-active": "#0c66e4",
+        "background-disabled": "#3c85ec8c"
+      },
+      "warning": {
+        "text": "black",
+        "background-normal": "#f5cd47",
+        "background-hover": "#e6c045",
+        "background-active": "#c4a130",
+        "background-disabled": "#f5cc4788"
+      },
+      "danger": {
+        "text": "white",
+        "background-normal": "#c9372c",
+        "background-hover": "#bd3026",
+        "background-active": "#a1271e",
+        "background-disabled": "#c9362c86"
+      }
+    }
+  }
+}
