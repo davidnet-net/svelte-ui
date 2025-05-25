@@ -58,7 +58,7 @@
     border-radius: 5px;
     cursor: pointer;
 
-    font-family: "Nunito Sans";
+    font-family: tokens.$buttons-font-family;
     font-weight: 600;
     text-align: center;
     text-decoration: none;

@@ -35,7 +35,13 @@
         "background-hover": "#bd3026",
         "background-active": "#a1271e",
         "background-disabled": "#c9362c86"
-      }
+      },
+      "font-family": "Nunito Sans"
+    },
+    "modals": {
+      "background": "white",
+      "title-text": "black",
+      "desc-text": "#646464"
     }
   }
 }
