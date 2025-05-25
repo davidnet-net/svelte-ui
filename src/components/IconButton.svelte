@@ -31,7 +31,13 @@
   };
 </script>
 
-<button class={getClass()} {disabled} {type} on:click={onClick}>
+<button
+  style="font-size={iconsize}"
+  class={getClass()}
+  {disabled}
+  {type}
+  on:click={onClick}
+>
   <span class="material-icons btn-icon">{icon}</span>
   <slot />
 </button>
