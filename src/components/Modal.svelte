@@ -74,7 +74,7 @@
 
 <style lang="scss">
   @use "../designtokens" as tokens;
-  @use "../fonts";
+  @use "../fonts" as fonts;
 
   .modal {
     display: flex;

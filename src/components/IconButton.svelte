@@ -37,7 +37,7 @@
 
 <style lang="scss">
   @use "../designtokens" as tokens;
-  @use "../fonts";
+  @use "../fonts" as fonts;
 
   /* Shared Button Styles */
   %icon-btn-base {
@@ -66,7 +66,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include material-icon();
+    @include fonts.material-icon();
   }
 
   // Mixin for stateful styles

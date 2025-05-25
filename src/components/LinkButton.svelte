@@ -35,7 +35,7 @@
 
 <style lang="scss">
   @use "../designtokens" as tokens;
-  @use "../fonts";
+  @use "../fonts" as fonts;
 
   @mixin button-base {
     display: inline-flex;
@@ -83,7 +83,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include material-icon();
+    @include fonts.material-icon();
   }
 
   // Subtle Button
