@@ -2,18 +2,18 @@
   "colors": {
     "buttons": {
       "subtle": {
-        "text": "black",
-        "background-normal": "#ffffff00",
-        "background-hover": "#ececec6b",
-        "background-active": "#d6d6d6",
-        "background-disabled": "#d6d6d6"
+        "text": "dark",
+        "text-normal": "#333333",
+        "text-hover": "#111111",
+        "text-active": "#000000",
+        "text-disabled": "#999999"
       },
       "subtle-white": {
         "text": "white",
-        "background-normal": "#ffffff00",
-        "background-hover": "#ececec6b",
-        "background-active": "#d6d6d6",
-        "background-disabled": "#d6d6d6"
+        "text-normal": "#ffffff",
+        "text-hover": "#f0f0f0",
+        "text-active": "#e0e0e0",
+        "text-disabled": "#cccccc"
       },
       "default": {
         "text": "black",

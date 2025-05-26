@@ -78,7 +78,7 @@
     justify-content: center;
   }
 
-  // Mixin for stateful styles
+  // Mixin for background-based themes
   @mixin icon-btn-theme($text, $bg, $hover, $active, $disabled) {
     color: $text;
     background-color: $bg;
@@ -97,29 +97,47 @@
     }
   }
 
-  /* Variants */
+  // Mixin for text-color based themes
+  @mixin icon-btn-text-theme($normal, $hover, $active, $disabled) {
+    color: $normal;
+    background-color: transparent;
+
+    &:hover {
+      color: $hover;
+    }
+
+    &:active {
+      color: $active;
+    }
+
+    &:disabled {
+      color: $disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Subtle buttons: only text color changes */
   .subtle-icon-btn {
     @extend %icon-btn-base;
-    @include icon-btn-theme(
-      tokens.$buttons-subtle-text,
-      tokens.$buttons-subtle-background-normal,
-      tokens.$buttons-subtle-background-hover,
-      tokens.$buttons-subtle-background-active,
-      tokens.$buttons-subtle-background-disabled
+    @include icon-btn-text-theme(
+      tokens.$buttons-subtle-text-normal,
+      tokens.$buttons-subtle-text-hover,
+      tokens.$buttons-subtle-text-active,
+      tokens.$buttons-subtle-text-disabled
     );
   }
 
   .subtle-white-icon-btn {
     @extend %icon-btn-base;
-    @include icon-btn-theme(
-      tokens.$buttons-subtle-white-text,
-      tokens.$buttons-subtle-white-background-normal,
-      tokens.$buttons-subtle-white-background-hover,
-      tokens.$buttons-subtle-white-background-active,
-      tokens.$buttons-subtle-white-background-disabled
+    @include icon-btn-text-theme(
+      tokens.$buttons-subtle-white-text-normal,
+      tokens.$buttons-subtle-white-text-hover,
+      tokens.$buttons-subtle-white-text-active,
+      tokens.$buttons-subtle-white-text-disabled
     );
   }
 
+  /* Other button variants: use background colors */
   .default-icon-btn {
     @extend %icon-btn-base;
     @include icon-btn-theme(
