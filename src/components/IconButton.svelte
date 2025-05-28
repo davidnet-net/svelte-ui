@@ -93,6 +93,8 @@
 
   .btn-icon,
   .img-icon {
+    @include fonts.material-icon();
+    line-height: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
