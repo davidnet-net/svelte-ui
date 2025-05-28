@@ -84,27 +84,14 @@
     text-align: center;
 
     line-height: 1.2;
-
-    // Add height constraint if needed
-    height: 2.5rem;
-    max-height: 2.5rem;
-    overflow: hidden;
   }
 
-  .btn-icon,
-  .img-icon {
+  .btn-icon {
     @include fonts.material-icon();
     line-height: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    max-width: 100%;
-    max-height: 100%;
-
-    // Prevent overflow
-    overflow: hidden;
-    object-fit: contain;
   }
 
   // Mixin for stateful styles
