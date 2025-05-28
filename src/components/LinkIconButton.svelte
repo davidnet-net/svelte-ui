@@ -80,13 +80,8 @@
     text-align: center;
 
     line-height: 1.2;
-
-    max-height: 100%;
-    max-width: 100%;
-    overflow: hidden;
   }
 
-  .img-icon,
   .btn-icon {
     @include fonts.material-icon();
     line-height: 0;
