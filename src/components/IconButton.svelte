@@ -5,8 +5,7 @@
     | "default"
     | "primary"
     | "warning"
-    | "danger"
-    | "icon";
+    | "danger";
   export let icon: string;
   export let iconsize: string;
   export let disabled: boolean = false;
