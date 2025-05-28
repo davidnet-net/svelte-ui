@@ -89,6 +89,7 @@
     overflow: hidden;
   }
 
+  .img-icon,
   .btn-icon {
     @include fonts.material-icon();
     line-height: 0;

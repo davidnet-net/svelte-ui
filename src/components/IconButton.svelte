@@ -89,23 +89,16 @@
     height: 2.5rem;
     min-width: 2.5rem;
     max-height: 2.5rem;
+    max-width: 2.5rem;
     overflow: hidden;
   }
-
-  .btn-icon,
-  .img-icon {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+  .img-icon,
   .btn-icon {
     @include fonts.material-icon();
     line-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // Mixin for stateful styles
