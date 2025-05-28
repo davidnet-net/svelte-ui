@@ -84,18 +84,28 @@
     text-align: center;
 
     line-height: 1.2;
+
+    // Size constraints
+    height: 2.5rem;
+    min-width: 2.5rem;
+    max-height: 2.5rem;
+    overflow: hidden;
+  }
+
+  .btn-icon,
+  .img-icon {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .btn-icon {
     @include fonts.material-icon();
-    line-height: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    max-width: 90%;
-
-    max-height: 90%;
   }
 
   // Mixin for stateful styles
