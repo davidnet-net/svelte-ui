@@ -2,14 +2,12 @@
   "colors": {
     "buttons": {
       "subtle": {
-        "text": "dark",
         "text-normal": "#333333",
         "text-hover": "#111111",
         "text-active": "#000000",
         "text-disabled": "#999999"
       },
       "subtle-white": {
-        "text": "white",
         "text-normal": "#ffffff",
         "text-hover": "#f0f0f0",
         "text-active": "#e0e0e0",

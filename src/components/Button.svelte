@@ -97,11 +97,10 @@
   .subtle-btn {
     @include button-base;
     @include button-variant(
-      tokens.$buttons-subtle-text,
-      tokens.$buttons-subtle-background-normal,
-      tokens.$buttons-subtle-background-hover,
-      tokens.$buttons-subtle-background-active,
-      tokens.$buttons-subtle-background-disabled
+      tokens.$buttons-subtle-text-normal,
+      tokens.$buttons-subtle-text-hover,
+      tokens.$buttons-subtle-text-active,
+      tokens.$buttons-subtle-text-disabled
     );
   }
 
