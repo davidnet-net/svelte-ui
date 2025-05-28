@@ -86,12 +86,20 @@
     line-height: 1.2;
   }
 
-  .btn-icon {
-    @include fonts.material-icon();
-    line-height: 0;
+  .btn-icon,
+  .img-icon {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+  }
+  .btn-icon {
+    @include fonts.material-icon();
+    line-height: 0;
   }
 
   // Mixin for stateful styles
