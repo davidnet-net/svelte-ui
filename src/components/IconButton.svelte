@@ -11,6 +11,7 @@
   export let iconsize: string;
   export let disabled: boolean = false;
   export let type: "button" | "submit" | "reset" = "button";
+  $: isImage = icon?.match(/\.(svg|png|jpg|jpeg|gif)$/i);
 
   export let onClick: ((_event: MouseEvent) => void) | null = null;
 
@@ -41,7 +42,18 @@
   {type}
   on:click={onClick}
 >
-  <span class="material-icons btn-icon">{icon}</span>
+  {#if !isImage}
+    <span class="material-icons btn-icon">{icon}</span>
+  {:else}
+    <img
+      class="img-icon"
+      src={icon}
+      alt="icon"
+      width={iconsize}
+      height={iconsize}
+    />
+  {/if}
+
   <slot />
 </button>
 
