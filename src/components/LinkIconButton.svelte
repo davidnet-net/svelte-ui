@@ -81,11 +81,8 @@
 
     line-height: 1.2;
 
-    // Size constraints
-    height: 2.5rem;
-    min-width: 2.5rem;
-    max-height: 2.5rem;
-    max-width: 2.5rem;
+    max-height: 100%;
+    max-width: 100%;
     overflow: hidden;
   }
 
