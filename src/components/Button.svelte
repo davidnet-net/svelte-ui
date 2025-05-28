@@ -12,6 +12,7 @@
   export let disabled: boolean = false;
   export let type: "button" | "submit" | "reset" = "button";
   export let onClick: ((_event: MouseEvent) => void) | null = null;
+  export let width: string | null = "fit-content";
 
   const getClass = () => {
     switch (appearance) {
@@ -30,7 +31,13 @@
   };
 </script>
 
-<button class={getClass()} {disabled} {type} on:click={onClick}>
+<button
+  class={getClass()}
+  {disabled}
+  {type}
+  style="width: {width}"
+  on:click={onClick}
+>
   {#if iconBefore}
     <span class="material-icons btn-icon">{iconBefore}</span>
   {/if}
