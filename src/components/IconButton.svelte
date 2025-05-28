@@ -10,9 +10,10 @@
   export let iconsize: string;
   export let disabled: boolean = false;
   export let type: "button" | "submit" | "reset" = "button";
-  $: isImage = icon?.match(/\.(svg|png|jpg|jpeg|gif)$/i);
 
   export let onClick: ((_event: MouseEvent) => void) | null = null;
+
+  $: isImage = icon?.match(/\.(svg|png|jpg|jpeg|gif)$/i);
 
   const getClass = () => {
     switch (appearance) {
@@ -32,6 +33,10 @@
         return "default-icon-btn";
     }
   };
+
+  function handleClick(event: MouseEvent) {
+    if (onClick) onClick(event);
+  }
 </script>
 
 <button
@@ -39,7 +44,7 @@
   class={getClass()}
   {disabled}
   {type}
-  on:click={onClick}
+  on:click={handleClick}
 >
   {#if !isImage}
     <span class="material-icons btn-icon">{icon}</span>
