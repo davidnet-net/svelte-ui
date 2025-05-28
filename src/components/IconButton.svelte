@@ -92,6 +92,21 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    // Ensure icon does not exceed button size
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    svg,
+    i,
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      height: 1em;
+      width: 1em;
+    }
   }
 
   // Mixin for stateful styles
