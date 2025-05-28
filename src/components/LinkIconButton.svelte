@@ -88,6 +88,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    max-width: 90%;
+
+    max-height: 90%;
   }
 
   // Mixin for stateful styles
