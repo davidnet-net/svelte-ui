@@ -112,7 +112,7 @@
     );
   }
 
-  .subtle-btn {
+  .subtle-white-btn {
     @include button-base;
     @include button-variant(
       tokens.$buttons-subtle-white-text,
