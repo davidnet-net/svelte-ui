@@ -1,4 +1,4 @@
-<div></div>
+<div><slot /></div>
 
 <style>
   div {
