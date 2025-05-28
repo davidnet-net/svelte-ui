@@ -80,6 +80,12 @@
     text-align: center;
 
     line-height: 1.2;
+
+    // Size constraints
+    height: 2.5rem;
+    min-width: 2.5rem;
+    max-height: 2.5rem;
+    overflow: hidden;
   }
 
   .btn-icon {
