@@ -93,8 +93,8 @@
     align-items: center;
     justify-content: center;
 
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
 
     // Prevent overflow
     overflow: hidden;
