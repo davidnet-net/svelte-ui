@@ -84,29 +84,25 @@
     text-align: center;
 
     line-height: 1.2;
+
+    // Add height constraint if needed
+    height: 2.5rem;
+    max-height: 2.5rem;
+    overflow: hidden;
   }
 
-  .btn-icon {
-    @include fonts.material-icon();
-    line-height: 0;
+  .btn-icon,
+  .img-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    // Ensure icon does not exceed button size
     max-width: 100%;
     max-height: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
 
-    svg,
-    i,
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      height: 1em;
-      width: 1em;
-    }
+    // Prevent overflow
+    overflow: hidden;
+    object-fit: contain;
   }
 
   // Mixin for stateful styles
