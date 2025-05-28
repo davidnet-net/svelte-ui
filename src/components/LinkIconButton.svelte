@@ -80,28 +80,17 @@
     text-align: center;
 
     line-height: 1.2;
-
-    // Add height constraint if needed
-    height: 2.5rem;
-    max-height: 2.5rem;
-    overflow: hidden;
   }
 
-  .btn-icon,
-  .img-icon {
+  .btn-icon {
+    @include fonts.material-icon();
+    line-height: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    max-width: 90%;
-    max-height: 90%;
-
-    // Prevent overflow
-    overflow: hidden;
-    object-fit: contain;
   }
 
-  // Mixin for background-based themes
+  // Mixin for stateful styles
   @mixin icon-btn-theme($text, $bg, $hover, $active, $disabled) {
     color: $text;
     background-color: $bg;
@@ -120,47 +109,29 @@
     }
   }
 
-  // Mixin for text-color based themes
-  @mixin icon-btn-text-theme($normal, $hover, $active, $disabled) {
-    color: $normal;
-    background-color: transparent;
-
-    &:hover {
-      color: $hover;
-    }
-
-    &:active {
-      color: $active;
-    }
-
-    &:disabled {
-      color: $disabled;
-      cursor: not-allowed;
-    }
-  }
-
-  /* Subtle buttons: only text color changes */
+  /* Variants */
   .subtle-icon-btn {
     @extend %icon-btn-base;
-    @include icon-btn-text-theme(
-      tokens.$buttons-subtle-text-normal,
-      tokens.$buttons-subtle-text-hover,
-      tokens.$buttons-subtle-text-active,
-      tokens.$buttons-subtle-text-disabled
+    @include icon-btn-theme(
+      tokens.$buttons-subtle-text,
+      tokens.$buttons-subtle-background-normal,
+      tokens.$buttons-subtle-background-hover,
+      tokens.$buttons-subtle-background-active,
+      tokens.$buttons-subtle-background-disabled
     );
   }
 
   .subtle-white-icon-btn {
     @extend %icon-btn-base;
-    @include icon-btn-text-theme(
-      tokens.$buttons-subtle-white-text-normal,
-      tokens.$buttons-subtle-white-text-hover,
-      tokens.$buttons-subtle-white-text-active,
-      tokens.$buttons-subtle-white-text-disabled
+    @include icon-btn-theme(
+      tokens.$buttons-subtle-white-text,
+      tokens.$buttons-subtle-white-background-normal,
+      tokens.$buttons-subtle-white-background-hover,
+      tokens.$buttons-subtle-white-background-active,
+      tokens.$buttons-subtle-white-background-disabled
     );
   }
 
-  /* Other button variants: use background colors */
   .default-icon-btn {
     @extend %icon-btn-base;
     @include icon-btn-theme(
