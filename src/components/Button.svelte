@@ -98,6 +98,7 @@
     @include button-base;
     @include button-variant(
       tokens.$buttons-subtle-text-normal,
+      tokens.$buttons-subtle-text-normal,
       tokens.$buttons-subtle-text-hover,
       tokens.$buttons-subtle-text-active,
       tokens.$buttons-subtle-text-disabled
