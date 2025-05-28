@@ -100,7 +100,6 @@
   // Mixin for text-color based themes
   @mixin icon-btn-text-theme($normal, $hover, $active, $disabled) {
     color: $normal;
-    background-color: transparent;
 
     &:hover {
       color: $hover;
@@ -121,7 +120,6 @@
     @extend %icon-btn-base;
     @include icon-btn-text-theme(
       tokens.$buttons-subtle-text-normal,
-      transparent,
       tokens.$buttons-subtle-text-hover,
       tokens.$buttons-subtle-text-active,
       tokens.$buttons-subtle-text-disabled

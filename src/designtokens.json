@@ -9,9 +9,9 @@
       },
       "subtle-white": {
         "text-normal": "#ffffff",
-        "text-hover": "#f0f0f0",
-        "text-active": "#e0e0e0",
-        "text-disabled": "#cccccc"
+        "text-hover": "#f0f0f088",
+        "text-active": "#afafaf",
+        "text-disabled": "#3a3a3a"
       },
       "default": {
         "text": "black",
