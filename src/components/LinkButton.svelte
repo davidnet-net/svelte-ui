@@ -1,6 +1,10 @@
 <script lang="ts">
-  export let appearance: "default" | "primary" | "warning" | "danger" | "icon" =
-    "default";
+  export let appearance:
+    | "subtle"
+    | "default"
+    | "primary"
+    | "warning"
+    | "danger" = "default";
   export let iconBefore: string = "open_in_new";
   export let iconAfter: string | null = null;
   export let href: string;
@@ -9,6 +13,8 @@
 
   const getClass = () => {
     switch (appearance) {
+      case "subtle":
+        return "subtle-btn";
       case "primary":
         return "primary-btn";
       case "warning":
@@ -23,9 +29,9 @@
   };
 </script>
 
-<a class={getClass()} {href}>
+<a class={getClass()} {href} on:click={onClick}>
   {#if iconBefore}
-    <span class="material-icons btn-icon">{iconBefore} on:click={onClick}</span>
+    <span class="material-icons btn-icon">{iconBefore}</span>
   {/if}
   <slot />
   {#if iconAfter}
