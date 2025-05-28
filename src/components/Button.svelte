@@ -105,6 +105,17 @@
     );
   }
 
+  .subtle-btn {
+    @include button-base;
+    @include button-variant(
+      tokens.$buttons-subtle-white-text,
+      tokens.$buttons-subtle-white-background-normal,
+      tokens.$buttons-subtle-white-background-hover,
+      tokens.$buttons-subtle-white-background-active,
+      tokens.$buttons-subtle-white-background-disabled
+    );
+  }
+
   // Default Button
   .default-btn {
     @include button-base;
