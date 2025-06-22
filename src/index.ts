@@ -1,1 +1,0 @@
-export { default as Test } from '$lib/components/Test.svelte';
