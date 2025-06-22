@@ -93,3 +93,11 @@ npm run release-minor
 ```bash
 npm run release-major
 ```
+
+<h4>Legacy</h4>
+
+Without pushing & versioning
+
+```bash
+npm run release-legacy
+```

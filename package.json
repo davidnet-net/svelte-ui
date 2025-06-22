@@ -31,7 +31,8 @@
 		"lint": "prettier --check . && eslint .",
 		"release-patch": "npm run prepack && npm version patch && npm publish --access public && git push && git push --tags",
 		"release-minor": "npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
-		"release-major": "npm run prepack && npm version major && npm publish --access public && git push && git push --tags"
+		"release-major": "npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
+		"release-legacy": "npm run prepack && npm publish --access public && git push"
 	},
 	"files": [
 		"dist",
