@@ -1,58 +1,95 @@
-# Svelte library
+<p align="center">
+  <img src="meta/svelte-ui-full.png" alt="svelte-ui Logo" width="200px" />
+</p>
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+<h3 align="center">The building bricks for davidnet's advanced UI.</h3>
+<h4 align="center">
+  <a href="https://design.davidnet.net">Design</a> ·
+  <a href="https://github.com/davidnet-net/svelte-ui">GitHub</a> ·
+  <a href="https://npmjs.com/@davidnet/svelte-ui">NPM</a> ·
+  <a href="https://davidnet.net">Davidnet</a>
+</h4>
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+<p align="center">
+  View the docs at <a href="https://design.davidnet.net">Design</a>.
+</p>
 
-## Creating a project
+<br>
+<br>
 
-If you're seeing this, you've probably already done this step. Congrats!
 
+> [!IMPORTANT]
+> The design website is the location for assets!
+>View at <a href="https://github.com/davidnet-net/design/tree/main/static/Assets">Static Repo</a>
+
+> [!CAUTION]
+> svelte-ui is iterating fast.
+> Please use exact version numbers to avoid breaking changes.
+
+<br>
+<br>
+
+<h3>Local Testing</h3>
+
+Prepare svelte-ui
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+**For each iteration do**
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm run prepack
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+<h4>Linking the local version</h4>
 
-## Building
-
-To build your library:
+In svelte-ui do.
 
 ```bash
-npm run package
+npm link
+```
+Then do in the other project.
+```bash
+npm link @davidnet/svelte-ui
 ```
 
-To create a production version of your showcase app:
-
 ```bash
-npm run build
+npm install
 ```
 
-You can preview the production build with `npm run preview`.
+<h4>Unlinking the local version</h4>
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Do in svelte-ui
+```bash
+npm unlink
+```
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
+Do in the other project
+```bash
+npm unlink @davidnet/svelte-ui
+```
 
 ```bash
-npm publish
+npm install
+```
+
+<h3>To release</h3>
+
+<h4>Patch</h4>
+
+```bash
+npm run release-patch
+```
+
+<h4>Minor</h4>
+
+```bash
+npm run release-minor
+```
+
+<h4>Major</h4>
+
+```bash
+npm run release-major
 ```
