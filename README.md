@@ -23,11 +23,8 @@
 >View at <a href="https://github.com/davidnet-net/design/tree/main/static/Assets">Static Repo</a>
 
 > [!CAUTION]
-> svelte-ui is iterating fast.
+> svelte-ui is in BETA and iterating fast.
 > Please use exact version numbers to avoid breaking changes.
-
-<br>
-<br>
 
 <h3>Local Testing</h3>
 
@@ -101,3 +98,35 @@ Without pushing & versioning
 ```bash
 npm run release-legacy
 ```
+
+<br>
+
+<p align="center">
+  Release schedule that is planned after beta.<br><br>
+  MAJOR<b>.</b>MINOR<b>.</b>PATCH
+  <table>
+    <thead>
+      <tr>
+        <th>Version Type</th>
+        <th>Changes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PATCH</strong></td>
+        <td>Bug fixes only</td>
+      </tr>
+      <tr>
+        <td><strong>MINOR</strong></td>
+        <td>Added features</td>
+      </tr>
+      <tr>
+        <td><strong>MAJOR</strong></td>
+        <td>Breaking changes</td>
+      </tr>
+    </tbody>
+  </table>
+  Add an <b>^</b> in your version in package.json to allow PATCHES and MINORS.
+</p>
+<br>
+<br>
