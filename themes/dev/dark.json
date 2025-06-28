@@ -1,18 +1,62 @@
 {
-  "color": {
-    "button": {
-      "danger": {
-        "hover": "#ff4444"
-      }
-    },
-    "text": {
-      "accent": {
-        "lime": "#c0ff33"
-      }
-    },
-    "background": "#121212"
-  },
-  "spacing": {
-    "small": "4px"
-  }
+    "color": {
+        "text": {
+            "default": {
+                "normal": "#f1f1f1",
+                "secondary": "#cccccc",
+                "tertiary": "#999999"
+            },
+            "inverse": {
+                "normal": "#111111",
+                "secondary": "#444444",
+                "tertiary": "#666666"
+            },
+            "danger": "#ae2e24",
+            "warning": "#f5cd47",
+            "success": "#7ee2b8",
+            "discovery": "#b8acf6",
+            "information": "#85b8ff",
+            "disabled": "#666666"
+        },
+        "surface": {
+            "sunken": {
+                "normal": "#161a1d"
+            },
+            "default": {
+                "normal": "#1d2125",
+                "hover": "#22272b",
+                "pressed": "#282e33"
+            },
+            "overlay": {
+                "normal": "#282e33",
+                "hover": "#2c333a",
+                "pressed": "#38414a"
+            },
+            "raised": {
+                "normal": "#22272b",
+                "hover": "#282e33",
+                "pressed": "#2c333a"
+            },
+            "inverse": {
+                "sunken": {
+                    "normal": "#f4f5f7"
+                },
+                "default": {
+                    "normal": "#ffffff",
+                    "hover": "#f0f0f0",
+                    "pressed": "#e6e6e6"
+                },
+                "overlay": {
+                    "normal": "#f0f0f0",
+                    "hover": "#e6e6e6",
+                    "pressed": "#d9d9d9"
+                },
+                "raised": {
+                    "normal": "#ffffff",
+                    "hover": "#f9f9f9",
+                    "pressed": "#f0f0f0"
+                }
+            }
+        }
+    }
 }
