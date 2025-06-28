@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
 
     export let defaultTheme: string = "light";
-    export const HideMenu: boolean = true;
+    export let HideMenu: boolean = true;
     let currentTheme = defaultTheme;
 
     const THEME_KEY = "theme";
