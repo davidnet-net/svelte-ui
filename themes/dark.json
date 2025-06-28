@@ -1,0 +1,18 @@
+{
+  "color": {
+    "button": {
+      "danger": {
+        "hover": "#ff4444"
+      }
+    },
+    "text": {
+      "accent": {
+        "lime": "#c0ff33"
+      }
+    },
+    "background": "#121212"
+  },
+  "spacing": {
+    "small": "4px"
+  }
+}

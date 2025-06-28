@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="meta/svelte-ui-full.png" alt="svelte-ui Logo" width="200px" />
+  <img src="meta/images/svelte-ui-full.png" alt="svelte-ui Logo" width="200px" />
 </p>
 
 <h3 align="center">The building bricks for davidnet's advanced UI.</h3>

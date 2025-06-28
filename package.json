@@ -30,6 +30,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
+		"genthemes": "node meta/scripts/GenerateThemes.js",
 		"release-patch": "npm run prepack && npm version patch && npm publish --access public && git push && git push --tags",
 		"release-minor": "npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
 		"release-major": "npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
@@ -38,7 +39,8 @@
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+		"!dist/**/*.spec.*",
+		"themes"
 	],
 	"sideEffects": [
 		"**/*.css"
