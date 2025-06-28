@@ -41,7 +41,8 @@
 		"dist",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*",
-		"themes"
+		"themes",
+		"fonts"
 	],
 	"sideEffects": [
 		"**/*.css"
