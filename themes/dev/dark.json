@@ -14,9 +14,51 @@
             "danger": "#ae2e24",
             "warning": "#f5cd47",
             "success": "#7ee2b8",
-            "discovery": "#b8acf6",
+            "discover": "#b8acf6",
             "information": "#85b8ff",
             "disabled": "#666666"
+        },
+        "background": {
+            "danger": {
+                "normal": "#d92c20",
+                "hover": "#b4241a",
+                "pressed": "#2c2c2c"
+            },
+            "warning": {
+                "normal": "#f5a623",
+                "hover": "#c48b1c",
+                "pressed": "#2c2c2c"
+            },
+            "primary": {
+                "normal": "#1a73e8",
+                "hover": "#145fcc",
+                "pressed": "#2c2c2c"
+            },
+            "success": {
+                "normal": "#00c48c",
+                "hover": "#009f72",
+                "pressed": "#2c2c2c"
+            },
+            "discover": {
+                "normal": "#8c70f0",
+                "hover": "#7159c4",
+                "pressed": "#2c2c2c"
+            },
+            "information": {
+                "normal": "#4098ff",
+                "hover": "#327ad1",
+                "pressed": "#2c2c2c"
+            },
+            "disabled": {
+                "normal": "#444444",
+                "hover": "#3a3a3a",
+                "pressed": "#2c2c2c"
+            },
+            "subtle": {
+                "normal": "transparent",
+                "hover": "rgba(255, 255, 255, 0.08)",
+                "pressed": "rgba(255, 255, 255, 0.16)"
+            }
         },
         "surface": {
             "sunken": {
@@ -24,18 +66,18 @@
             },
             "default": {
                 "normal": "#1d2125",
-                "hover": "#22272b",
-                "pressed": "#282e33"
+                "hover": "#2a2f35",
+                "pressed": "#32383f"
             },
             "overlay": {
                 "normal": "#282e33",
-                "hover": "#2c333a",
-                "pressed": "#38414a"
+                "hover": "#353c44",
+                "pressed": "#404952"
             },
             "raised": {
                 "normal": "#22272b",
-                "hover": "#282e33",
-                "pressed": "#2c333a"
+                "hover": "#2f353a",
+                "pressed": "#3a4249"
             },
             "inverse": {
                 "sunken": {
@@ -43,18 +85,18 @@
                 },
                 "default": {
                     "normal": "#ffffff",
-                    "hover": "#f0f0f0",
-                    "pressed": "#e6e6e6"
+                    "hover": "#eaeaea",
+                    "pressed": "#dcdcdc"
                 },
                 "overlay": {
                     "normal": "#f0f0f0",
-                    "hover": "#e6e6e6",
-                    "pressed": "#d9d9d9"
+                    "hover": "#dddddd",
+                    "pressed": "#cccccc"
                 },
                 "raised": {
                     "normal": "#ffffff",
-                    "hover": "#f9f9f9",
-                    "pressed": "#f0f0f0"
+                    "hover": "#f3f3f3",
+                    "pressed": "#e6e6e6"
                 }
             }
         }

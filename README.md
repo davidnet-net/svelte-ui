@@ -17,10 +17,9 @@
 <br>
 <br>
 
-
 > [!IMPORTANT]
 > The design website is the location for assets!
->View at <a href="https://github.com/davidnet-net/design/tree/main/static/Assets">Static Repo</a>
+> View at <a href="https://github.com/davidnet-net/design/tree/main/static/Assets">Static Repo</a>
 
 > [!CAUTION]
 > svelte-ui is in BETA and iterating fast.
@@ -29,6 +28,7 @@
 <h3>Local Testing</h3>
 
 Prepare svelte-ui
+
 ```bash
 npm install
 ```
@@ -46,7 +46,9 @@ In svelte-ui do.
 ```bash
 npm link
 ```
+
 Then do in the other project.
+
 ```bash
 npm link @davidnet/svelte-ui
 ```
@@ -58,11 +60,13 @@ npm install
 <h4>Unlinking the local version</h4>
 
 Do in svelte-ui
+
 ```bash
 npm unlink
 ```
 
 Do in the other project
+
 ```bash
 npm unlink @davidnet/svelte-ui
 ```
