@@ -3,4 +3,4 @@
     export let height: string = "1px";
 </script>
 
-<div style="width: {width}; heigth: {height}"></div>
+<div style="width: {width}; height: {height}"></div>
