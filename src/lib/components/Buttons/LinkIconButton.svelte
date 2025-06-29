@@ -22,7 +22,7 @@
 </a>
 
 <style>
-    button {
+    a {
         position: relative; /* Needed for absolute tooltip positioning */
         font-size: 1rem;
         text-decoration: none;
