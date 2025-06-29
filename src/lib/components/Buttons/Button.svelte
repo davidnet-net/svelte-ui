@@ -25,7 +25,7 @@
         text-decoration: none;
         display: inline-flex;
         gap: 0.2rem;
-        padding: 0.6em 1em;
+        padding: 0.4em 0.6em;
         border: none;
         border-radius: 4px;
         cursor: pointer;
@@ -45,19 +45,19 @@
     }
     .primary {
         background-color: var(--token-color-background-primary-normal);
-        color: var(--token-color-text-inverse-normal);
+        color: var(--token-color-text-dark-normal);
     }
     .warning {
         background-color: var(--token-color-background-warning-normal);
-        color: var(--token-color-text-inverse-normal);
+        color: var(--token-color-text-default-normal);
     }
     .danger {
         background-color: var(--token-color-background-danger-normal);
-        color: var(--token-color-text-inverse-normal);
+        color: var(--token-color-text-dark-normal);
     }
     .discover {
         background-color: var(--token-color-background-discover-normal);
-        color: var(--token-color-text-inverse-normal);
+        color: var(--token-color-text-dark-normal);
     }
 
     /* Hover states */

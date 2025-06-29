@@ -16,21 +16,31 @@
             "success": "#7ee2b8",
             "discover": "#b8acf6",
             "information": "#85b8ff",
-            "disabled": "#666666"
+            "disabled": "#666666",
+            "dark": {
+                "normal": "#f1f1f1",
+                "secondary": "#cccccc",
+                "tertiary": "#999999"
+            },
+            "light": {
+                "normal": "#111111",
+                "secondary": "#444444",
+                "tertiary": "#666666"
+            }
         },
         "background": {
             "danger": {
-                "normal": "#d92c20",
+                "normal": "#8b0f06",
                 "hover": "#b4241a",
                 "pressed": "#2c2c2c"
             },
             "warning": {
-                "normal": "#f5a623",
+                "normal": "#866602",
                 "hover": "#c48b1c",
                 "pressed": "#2c2c2c"
             },
             "primary": {
-                "normal": "#1a73e8",
+                "normal": "#0d3e8b",
                 "hover": "#145fcc",
                 "pressed": "#2c2c2c"
             },
@@ -40,7 +50,7 @@
                 "pressed": "#2c2c2c"
             },
             "discover": {
-                "normal": "#8c70f0",
+                "normal": "#540b7e",
                 "hover": "#7159c4",
                 "pressed": "#2c2c2c"
             },

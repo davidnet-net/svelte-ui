@@ -13,6 +13,12 @@
   --token-color-text-discover: #5e4db2;
   --token-color-text-information: #0055cc;
   --token-color-text-disabled: #999999;
+  --token-color-text-dark-normal: #f1f1f1;
+  --token-color-text-dark-secondary: #cccccc;
+  --token-color-text-dark-tertiary: #999999;
+  --token-color-text-light-normal: #111111;
+  --token-color-text-light-secondary: #444444;
+  --token-color-text-light-tertiary: #666666;
   --token-color-background-danger-normal: #e53935;
   --token-color-background-danger-hover: #cc2e2b;
   --token-color-background-danger-pressed: #d0d0d0;
