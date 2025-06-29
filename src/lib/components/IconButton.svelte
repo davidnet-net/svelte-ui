@@ -43,7 +43,7 @@
     }
 
     .icon {
-      font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     /* Tooltip styling */
@@ -75,5 +75,63 @@
         border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
     }
 
-    /* Your existing appearance, hover, and active styles here ... */
+    /* Appearance styles */
+    .subtle {
+        background-color: var(--token-color-background-subtle-normal);
+        color: var(--token-color-text-default-normal);
+    }
+    .primary {
+        background-color: var(--token-color-background-primary-normal);
+        color: var(--token-color-text-inverse-normal);
+    }
+    .warning {
+        background-color: var(--token-color-background-warning-normal);
+        color: var(--token-color-text-inverse-normal);
+    }
+    .danger {
+        background-color: var(--token-color-background-danger-normal);
+        color: var(--token-color-text-inverse-normal);
+    }
+    .discover {
+        background-color: var(--token-color-background-discover-normal);
+        color: var(--token-color-text-inverse-normal);
+    }
+
+    /* Hover states */
+    .subtle:hover {
+        background-color: var(--token-color-background-subtle-hover);
+    }
+    .primary:hover {
+        background-color: var(--token-color-background-primary-hover);
+    }
+    .warning:hover {
+        background-color: var(--token-color-background-warning-hover);
+    }
+    .danger:hover {
+        background-color: var(--token-color-background-danger-hover);
+    }
+    .discover:hover {
+        background-color: var(--token-color-background-discover-hover);
+    }
+
+    /* Active states */
+    .subtle:active {
+        background-color: var(--token-color-background-subtle-pressed);
+    }
+    .primary:active {
+        background-color: var(--token-color-background-primary-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+    .warning:active {
+        background-color: var(--token-color-background-warning-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+    .danger:active {
+        background-color: var(--token-color-background-danger-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+    .discover:active {
+        background-color: var(--token-color-background-discover-pressed);
+        color: var(--token-color-text-default-normal);
+    }
 </style>

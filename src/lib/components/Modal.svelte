@@ -30,7 +30,7 @@
   });
 </script>
 
-<div class="backdrop" tabindex="-1">
+<div class="blanket" tabindex="-1">
   <div
     class="modal"
     role="dialog"
@@ -70,10 +70,10 @@
 </div>
 
 <style>
-  .backdrop {
+  .blanket {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--token-color-blanket-normal);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@
   }
 
   .modal {
-    background-color: var(--token-color-surface-overlay-normal);
+    background-color: var(--token-color-surface-raised-normal);
     color: var(--token-color-text-default-normal);
     padding: 24px;
     border-radius: 16px;

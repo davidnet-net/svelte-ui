@@ -57,4 +57,5 @@
   --token-color-surface-inverse-raised-normal: #22272b;
   --token-color-surface-inverse-raised-hover: #282e33;
   --token-color-surface-inverse-raised-pressed: #2c333a;
+  --token-color-blanket-normal: rgba(0, 0, 0, 0.5);;
 }
