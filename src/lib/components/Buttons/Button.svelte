@@ -3,13 +3,14 @@
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
     export let iconbefore: string | undefined = undefined;
     export let iconafter: string | undefined = undefined;
+    export let disabled: boolean = false;
 
     function handleClick() {
         if (onClick) onClick();
     }
 </script>
 
-<button class={appearance} on:click={handleClick}>
+<button class={appearance} on:click={handleClick} disabled={disabled}>
     {#if iconbefore}
         <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
     {/if}
@@ -96,5 +97,11 @@
     .discover:active {
         background-color: var(--token-color-background-discover-pressed);
         color: var(--token-color-text-default-normal);
+    }
+
+    /* Disabled state */
+    .subtle:disabled, .primary:disabled, .warning:disabled, .danger:disabled, .discover:disabled {
+        background-color: var(--token-color-background-disabled-normal);
+        cursor: not-allowed;
     }
 </style>

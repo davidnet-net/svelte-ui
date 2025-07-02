@@ -1,75 +1,176 @@
 <script lang="ts">
-	import Button from './Button.svelte';
+    export let onClick: (() => void) | undefined = undefined;
+    export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
+    export let iconbefore: string | undefined = undefined;
+    export let iconafter: string | undefined = undefined;
+    export let actions: { label: string; onClick: () => void }[] = [];
 
-	export let label: string;
-	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
-	export let iconbefore: string | undefined = undefined;
-	export let actions: { label: string; onClick: () => void }[] = [];
+    let open = false;
 
-	let open = false;
-	let container: HTMLDivElement;
+    function toggleMenu() {
+        open = !open;
+    }
 
-	function toggle() {
-		open = !open;
-	}
+    function handleMainClick() {
+        if (onClick) onClick();
+    }
 
-	function close() {
-		open = false;
-	}
+    function handleAction(action: () => void) {
+        action();
+        open = false;
+    }
+
+    function closeMenuOnBlur(event: FocusEvent) {
+        const related = event.relatedTarget as HTMLElement | null;
+        if (!related || !event.currentTarget || !(event.currentTarget as HTMLElement).contains(related)) {
+            open = false;
+        }
+    }
 </script>
 
-<div class="split-button" bind:this={container} use:onclck={close}>
-	<Button {appearance} {iconbefore} on:click={() => actions[0]?.onClick()}>
-		{label}
-	</Button>
-	<Button
-		appearance={appearance}
-		iconafter="arrow_drop_down"
-		on:click={toggle}
-		aria-haspopup="menu"
-		aria-expanded={open}
-	/>
+<div class="split-button-wrapper" on:focusout={closeMenuOnBlur}>
+    <button class={`btn ${appearance}`} on:click={handleMainClick}>
+        {#if iconbefore}
+            <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
+        {/if}
+        <slot></slot>
+        {#if iconafter}
+            <span class="icon icon-after material-symbols-outlined">{iconafter}</span>
+        {/if}
+    </button>
 
-	{#if open}
-		<ul class="menu" role="menu">
-			{#each actions.slice(1) as action}
-				<li role="menuitem" on:click={() => { action.onClick(); close(); }}>
-					{action.label}
-				</li>
-			{/each}
-		</ul>
-	{/if}
+    <button class={`btn ${appearance} dropdown-toggle`} on:click={toggleMenu}>
+        <span class="material-symbols-outlined">expand_more</span>
+    </button>
+
+    {#if open}
+        <ul class="dropdown" role="menu">
+            {#each actions as action}
+                <li>
+                    <button on:click={() => handleAction(action.onClick)}>{action.label}</button>
+                </li>
+            {/each}
+        </ul>
+    {/if}
 </div>
 
 <style>
-	.split-button {
-		position: relative;
-		display: inline-flex;
-	}
+    .split-button-wrapper {
+        display: inline-flex;
+        position: relative;
+    }
 
-	.menu {
-		position: absolute;
-		top: 100%;
-		right: 0;
-		margin-top: 0.2rem;
-		background: var(--token-color-background-subtle-normal);
-		border: 1px solid var(--token-color-border-default-normal);
-		border-radius: 4px;
-		min-width: 100%;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		z-index: 1000;
-		padding: 0.2rem 0;
-		list-style: none;
-	}
+    .btn {
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.4em 0.6em;
+        border: none;
+        cursor: pointer;
+        transition: background-color 200ms ease, color 200ms ease;
+        border-radius: 4px;
+    }
 
-	.menu li {
-		padding: 0.4rem 0.8rem;
-		cursor: pointer;
-		white-space: nowrap;
-		color: var(--token-color-text-default-normal);
-	}
+    .dropdown-toggle {
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
 
-	.menu li:hover {
-		background-color: var(--token-color-background-subtle-hover);
-	}
+    .icon {
+        font-size: 1rem;
+    }
+
+    /* Token-based appearance styles */
+    .subtle {
+        background-color: var(--token-color-background-subtle-normal);
+        color: var(--token-color-text-default-normal);
+    }
+    .subtle:hover {
+        background-color: var(--token-color-background-subtle-hover);
+    }
+    .subtle:active {
+        background-color: var(--token-color-background-subtle-pressed);
+    }
+
+    .primary {
+        background-color: var(--token-color-background-primary-normal);
+        color: var(--token-color-text-dark-normal);
+    }
+    .primary:hover {
+        background-color: var(--token-color-background-primary-hover);
+    }
+    .primary:active {
+        background-color: var(--token-color-background-primary-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+
+    .warning {
+        background-color: var(--token-color-background-warning-normal);
+        color: var(--token-color-text-default-normal);
+    }
+    .warning:hover {
+        background-color: var(--token-color-background-warning-hover);
+    }
+    .warning:active {
+        background-color: var(--token-color-background-warning-pressed);
+    }
+
+    .danger {
+        background-color: var(--token-color-background-danger-normal);
+        color: var(--token-color-text-dark-normal);
+    }
+    .danger:hover {
+        background-color: var(--token-color-background-danger-hover);
+    }
+    .danger:active {
+        background-color: var(--token-color-background-danger-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+
+    .discover {
+        background-color: var(--token-color-background-discover-normal);
+        color: var(--token-color-text-dark-normal);
+    }
+    .discover:hover {
+        background-color: var(--token-color-background-discover-hover);
+    }
+    .discover:active {
+        background-color: var(--token-color-background-discover-pressed);
+        color: var(--token-color-text-default-normal);
+    }
+
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 0.2rem;
+        background-color: var(--token-color-surface-raised-normal);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        list-style: none;
+        padding: 0.25rem 0;
+        z-index: 1000;
+        min-width: max-content;
+    }
+
+    .dropdown li button {
+        background: none;
+        border: none;
+        width: 100%;
+        padding: 0.4rem 0.8rem;
+        text-align: left;
+        color: var(--token-color-text-default-normal);
+        cursor: pointer;
+    }
+
+    .dropdown li button:hover {
+        background-color: var(--token-color-surface-raised-hover);
+    }
+
+	.dropdown li button:active {
+        background-color: var(--token-color-surface-raised-pressed);
+    }
 </style>

@@ -105,8 +105,8 @@
                 },
                 "raised": {
                     "normal": "#22272b",
-                    "hover": "#282e33",
-                    "pressed": "#2c333a"
+                    "hover": "#2c333a",
+                    "pressed": "#e4e2e2"
                 }
             }
         },
