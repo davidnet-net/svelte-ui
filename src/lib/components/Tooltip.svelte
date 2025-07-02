@@ -1,4 +1,3 @@
-<!-- src/lib/components/Tooltip.svelte -->
 <script lang="ts">
   export let text: string;
 </script>

@@ -1,4 +1,3 @@
-<!-- src/lib/components/Buttons/IconButton.svelte -->
 <script lang="ts">
   import Tooltip from '$lib/components/Tooltip.svelte';
 

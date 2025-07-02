@@ -1,9 +1,16 @@
 <script lang="ts">
+    import Loader from "$lib/components/Loader.svelte";
+
     export let onClick: (() => void) | undefined = undefined;
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
     export let iconbefore: string | undefined = undefined;
     export let iconafter: string | undefined = undefined;
     export let disabled: boolean = false;
+    export let loading: boolean = false;
+
+    if (loading) {
+        disabled = true;
+    }
 
     function handleClick() {
         if (onClick) onClick();
@@ -11,20 +18,29 @@
 </script>
 
 <button class={appearance} on:click={handleClick} disabled={disabled}>
-    {#if iconbefore}
-        <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
-    {/if}
-    <slot></slot>
-    {#if iconafter}
-        <span class="icon icon-after material-symbols-outlined"> {iconafter}</span>
+    {#if loading}
+        <Loader></Loader>
+    {:else} 
+        {#if iconbefore}
+            <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
+        {/if}
+        <slot></slot>
+        {#if iconafter}
+            <span class="icon icon-after material-symbols-outlined"> {iconafter}</span>
+        {/if}
     {/if}
 </button>
 
 <style>
     button {
+        text-align: center;
+        min-width: 120px;
+        min-height: 2rem;
         font-size: 1rem;
         text-decoration: none;
         display: inline-flex;
+        justify-content: center;
+        align-items: center;
         gap: 0.2rem;
         padding: 0.4em 0.6em;
         border: none;
