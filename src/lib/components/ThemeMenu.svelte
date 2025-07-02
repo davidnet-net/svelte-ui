@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-	let currentTheme = "light";
+	let currentTheme: string;
 
 	function changeTheme(theme: string) {
 		currentTheme = theme;
