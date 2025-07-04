@@ -6,6 +6,7 @@
     export let actions: { label: string; onClick: () => void }[] = [];
 
     let open = false;
+    let menuItems: HTMLButtonElement[] = [];
 
     function toggleMenu() {
         open = !open;
@@ -26,28 +27,71 @@
             open = false;
         }
     }
+
+    function handleMenuKey(event: KeyboardEvent) {
+        const currentIndex = menuItems.findIndex(el => el === document.activeElement);
+        if (event.key === "Escape") {
+            open = false;
+        } else if (event.key === "ArrowDown") {
+            event.preventDefault();
+            const nextIndex = (currentIndex + 1) % menuItems.length;
+            menuItems[nextIndex]?.focus();
+        } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            const prevIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
+            menuItems[prevIndex]?.focus();
+        } else if (event.key === "Tab") {
+            event.preventDefault();
+            const direction = event.shiftKey ? -1 : 1;
+            const nextIndex = (currentIndex + direction + menuItems.length) % menuItems.length;
+            menuItems[nextIndex]?.focus();
+        }
+    }
+
+    $: if (open && menuItems.length) {
+        setTimeout(() => menuItems[0]?.focus(), 0);
+    }
 </script>
 
 <div class="split-button-wrapper" on:focusout={closeMenuOnBlur}>
     <button class={`btn ${appearance}`} on:click={handleMainClick}>
         {#if iconbefore}
-            <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
+            <span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
         {/if}
         <slot></slot>
         {#if iconafter}
-            <span class="icon icon-after material-symbols-outlined">{iconafter}</span>
+            <span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true">{iconafter}</span>
         {/if}
     </button>
 
-    <button class={`btn ${appearance} dropdown-toggle`} on:click={toggleMenu}>
-        <span class="material-symbols-outlined">expand_more</span>
+    <button
+        class={`btn ${appearance} dropdown-toggle`}
+        on:click={toggleMenu}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls="dropdown-menu"
+        aria-label="More actions"
+    >
+        <span class="material-symbols-outlined" translate="no" aria-hidden="true">expand_more</span>
     </button>
 
     {#if open}
-        <ul class="dropdown" role="menu">
-            {#each actions as action}
-                <li>
-                    <button on:click={() => handleAction(action.onClick)}>{action.label}</button>
+        <ul
+            class="dropdown"
+            id="dropdown-menu"
+            role="menu"
+            on:keydown={handleMenuKey}
+        >
+            {#each actions as action, i}
+                <li role="none">
+                    <button
+                        role="menuitem"
+                        tabindex={i === 0 ? 0 : -1}
+                        bind:this={menuItems[i]}
+                        on:click={() => handleAction(action.onClick)}
+                    >
+                        {action.label}
+                    </button>
                 </li>
             {/each}
         </ul>
@@ -82,7 +126,6 @@
         font-size: 1rem;
     }
 
-    /* Token-based appearance styles */
     .subtle {
         background-color: var(--token-color-background-subtle-normal);
         color: var(--token-color-text-default-normal);
@@ -170,7 +213,7 @@
         background-color: var(--token-color-surface-raised-hover);
     }
 
-	.dropdown li button:active {
+    .dropdown li button:active {
         background-color: var(--token-color-surface-raised-pressed);
     }
 </style>

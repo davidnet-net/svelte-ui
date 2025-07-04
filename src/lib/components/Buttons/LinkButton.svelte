@@ -7,11 +7,11 @@
 
 <a class={appearance} {href}>
     {#if iconbefore}
-        <span class="icon icon-before material-symbols-outlined">{iconbefore}</span>
+        <span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
     {/if}
     <slot></slot>
     {#if iconafter}
-        <span class="icon icon-after material-symbols-outlined"> {iconafter}</span>
+        <span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true"> {iconafter}</span>
     {/if}
 </a>
 

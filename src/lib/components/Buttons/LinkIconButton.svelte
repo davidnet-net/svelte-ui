@@ -17,7 +17,7 @@
   on:mouseenter={() => (hovered = true)}
   on:mouseleave={() => (hovered = false)}
 >
-  <span class="icon icon-before material-symbols-outlined" aria-hidden="true">{icon}</span>
+  <span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{icon}</span>
 
   {#if hovered}
     <Tooltip text={alt} />

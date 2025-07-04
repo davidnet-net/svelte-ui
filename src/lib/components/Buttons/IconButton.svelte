@@ -20,7 +20,7 @@
   on:mouseleave={() => (hovered = false)}
   aria-label={alt}
 >
-  <span class="icon material-symbols-outlined" aria-hidden="true">{icon}</span>
+  <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{icon}</span>
   {#if hovered}
     <Tooltip text={alt} />
   {/if}
