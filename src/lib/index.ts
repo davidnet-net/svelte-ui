@@ -8,3 +8,4 @@ export { default as Space } from "$lib/components/Space.svelte";
 export { default as ThemeMenu } from "$lib/components/ThemeMenu.svelte";
 export { default as LinkIconButton } from "$lib/components/Buttons/LinkIconButton.svelte";
 export { default as SplitButton } from "$lib/components/Buttons/SplitButton.svelte";
+export { default as Dropdown } from "$lib/components/Dropdown.svelte";

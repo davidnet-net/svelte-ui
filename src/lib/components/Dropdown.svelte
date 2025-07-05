@@ -1,8 +1,6 @@
 <script lang="ts">
-    export let onClick: (() => void) | undefined = undefined;
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
     export let iconbefore: string | undefined = undefined;
-    export let iconafter: string | undefined = undefined;
     export let actions: { label: string; onClick: () => void }[] = [];
 
     let open = false;
@@ -10,10 +8,6 @@
 
     function toggleMenu() {
         open = !open;
-    }
-
-    function handleMainClick() {
-        if (onClick) onClick();
     }
 
     function handleAction(action: () => void) {
@@ -57,8 +51,14 @@
     }
 </script>
 
-<div class="split-button-wrapper" on:focusout={closeMenuOnBlur}>
-    <button class={`btn ${appearance} root`} on:click={handleMainClick}>
+<div class="dropdown-wrapper" on:focusout={closeMenuOnBlur}>
+    <button
+        class={`btn ${appearance} dropdown-toggle`}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls="dropdown-menu"
+        on:click={toggleMenu}
+    >
         {#if iconbefore}
             <span
                 class="icon icon-before material-symbols-outlined"
@@ -66,25 +66,8 @@
                 aria-hidden="true">{iconbefore}</span
             >
         {/if}
-        <slot></slot>
-        {#if iconafter}
-            <span
-                class="icon icon-after material-symbols-outlined"
-                translate="no"
-                aria-hidden="true">{iconafter}</span
-            >
-        {/if}
-    </button>
-
-    <button
-        class={`btn ${appearance} dropdown-toggle`}
-        on:click={toggleMenu}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls="dropdown-menu"
-        aria-label="More actions"
-    >
-        <span class="material-symbols-outlined" translate="no" aria-hidden="true">expand_more</span>
+        <slot>Menu</slot>
+        <span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
     </button>
 
     {#if open}
@@ -106,8 +89,8 @@
 </div>
 
 <style>
-    .split-button-wrapper {
-        display: inline-flex;
+    .dropdown-wrapper {
+        display: inline-block;
         position: relative;
     }
 
@@ -116,44 +99,31 @@
         display: inline-flex;
         align-items: center;
         gap: 0.3rem;
-        padding: 0.4em 0.6em;
+        padding: 0.4em 0.8em;
         border: none;
         cursor: pointer;
         transition:
             background-color 200ms ease,
             color 200ms ease;
         border-radius: 4px;
+        user-select: none;
     }
 
     .dropdown-toggle {
-        border-left: 1px solid rgba(0, 0, 0, 0.1);
-        padding-left: 0.6em;
-        padding-right: 0.6em;
+        min-width: 120px;
+        justify-content: center;
+        gap: 0.4rem;
     }
 
     .icon {
         font-size: 1rem;
     }
 
-    .root {
-        text-align: center;
-        min-width: 120px;
-        min-height: 2rem;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.2rem;
-        padding: 0.4em 0.6em;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition:
-            background-color 200ms ease,
-            color 200ms ease;
+    .dropdown-arrow {
+        font-size: 1.2rem;
     }
 
+    /* Gebruik dezelfde appearance styles als in jouw splitbutton */
     .subtle {
         background-color: var(--token-color-background-subtle-normal);
         color: var(--token-color-text-default-normal);
