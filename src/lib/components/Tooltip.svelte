@@ -7,32 +7,35 @@
 </div>
 
 <style>
-    .tooltip {
-        position: absolute;
-        bottom: -2.4em;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: rgba(0, 0, 0, 0.75);
-        color: white;
-        padding: 0.25em 0.5em;
-        font-size: 0.75rem;
-        border-radius: 3px;
-        white-space: nowrap;
-        pointer-events: none;
-        user-select: none;
-        z-index: 10;
-        line-height: 0;
-        box-sizing: border-box;
-    }
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    background-color: var(--token-color-surface-inverse-raised-normal);
+    color: var(--token-color-text-inverse-normal);
+    padding: 0.25em 0.5em;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
+    box-sizing: border-box;
+    line-height: 1;
+}
 
-    .tooltip::after {
-        content: "";
-        position: absolute;
-        top: -5%;
-        right: 50%;
-        margin-left: 5px;
-        border-width: -5px;
-        border-style: solid;
-        border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
-    }
+/* Arrow with tip facing UP */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* position arrow just above tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 6px 6px 6px; /* height 6px pointing up */
+    border-style: solid;
+    border-color: transparent transparent var(--token-color-surface-inverse-raised-normal) transparent;
+}
+
 </style>

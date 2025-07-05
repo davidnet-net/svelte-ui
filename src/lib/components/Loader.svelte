@@ -4,7 +4,7 @@
     .loader {
         width: 15px;
         height: 15px;
-        border: 2px solid #fff;
+        border: 2px solid var(--token-color-text-default-normal);
         border-bottom-color: transparent;
         border-radius: 50%;
         display: inline-block;
