@@ -1,6 +1,5 @@
 <script lang="ts">
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
-    export let iconbefore: string | undefined = undefined;
     export let actions: { label: string; onClick: () => void }[] = [];
 
     let open = false;
@@ -59,13 +58,7 @@
         aria-controls="dropdown-menu"
         on:click={toggleMenu}
     >
-        {#if iconbefore}
-            <span
-                class="icon icon-before material-symbols-outlined"
-                translate="no"
-                aria-hidden="true">{iconbefore}</span
-            >
-        {/if}
+        <span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">menu</span>
         <slot>Menu</slot>
         <span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
     </button>
@@ -125,70 +118,80 @@
         font-size: 1.2rem;
     }
 
-    /* Gebruik dezelfde appearance styles als in jouw splitbutton */
+    /* Appearances */
     .subtle {
-        background-color: var(--token-color-background-subtle-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .subtle:hover {
-        background-color: var(--token-color-background-subtle-hover);
-    }
-    .subtle:active {
-        background-color: var(--token-color-background-subtle-pressed);
+        --bg-normal: var(--token-color-background-subtle-normal);
+        --bg-hover: var(--token-color-background-subtle-hover);
+        --bg-pressed: var(--token-color-background-subtle-pressed);
+        --color-normal: var(--token-color-text-default-normal);
+        --color-hover: var(--token-color-text-default-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
 
     .primary {
-        background-color: var(--token-color-background-primary-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .primary:hover {
-        background-color: var(--token-color-background-primary-hover);
-    }
-    .primary:active {
-        background-color: var(--token-color-background-primary-pressed);
-        color: var(--token-color-text-default-normal);
+        --bg-normal: var(--token-color-background-primary-normal);
+        --bg-hover: var(--token-color-background-primary-hover);
+        --bg-pressed: var(--token-color-background-primary-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
 
     .warning {
-        background-color: var(--token-color-background-warning-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .warning:hover {
-        background-color: var(--token-color-background-warning-hover);
-    }
-    .warning:active {
-        background-color: var(--token-color-background-warning-pressed);
+        --bg-normal: var(--token-color-background-warning-normal);
+        --bg-hover: var(--token-color-background-warning-hover);
+        --bg-pressed: var(--token-color-background-warning-pressed);
+        --color-normal: var(--token-color-text-light-normal);
+        --color-hover: var(--token-color-text-light-normal);
+        --color-pressed: var(--token-color-text-light-normal);
     }
 
     .danger {
-        background-color: var(--token-color-background-danger-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .danger:hover {
-        background-color: var(--token-color-background-danger-hover);
-    }
-    .danger:active {
-        background-color: var(--token-color-background-danger-pressed);
-        color: var(--token-color-text-default-normal);
+        --bg-normal: var(--token-color-background-danger-normal);
+        --bg-hover: var(--token-color-background-danger-hover);
+        --bg-pressed: var(--token-color-background-danger-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
 
     .discover {
-        background-color: var(--token-color-background-discover-normal);
-        color: var(--token-color-text-dark-normal);
+        --bg-normal: var(--token-color-background-discover-normal);
+        --bg-hover: var(--token-color-background-discover-hover);
+        --bg-pressed: var(--token-color-background-discover-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
-    .discover:hover {
-        background-color: var(--token-color-background-discover-hover);
+
+    /* Apply colors */
+    .btn {
+        background-color: var(--bg-normal);
+        color: var(--color-normal);
     }
-    .discover:active {
-        background-color: var(--token-color-background-discover-pressed);
+
+    .btn:hover:not(:disabled) {
+        background-color: var(--bg-hover);
+        color: var(--color-hover);
+    }
+
+    .btn:active:not(:disabled) {
+        background-color: var(--bg-pressed);
+        color: var(--color-pressed);
+    }
+
+    .btn:disabled {
+        background-color: var(--token-color-background-disabled-normal);
+        cursor: not-allowed;
         color: var(--token-color-text-default-normal);
     }
 
+    /* Dropdown menu */
     .dropdown {
         position: absolute;
         top: 100%;
         right: 0;
-        margin-top: 0.2rem;
+        margin-top: 0.25rem;
         background-color: var(--token-color-surface-raised-normal);
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 4px;
@@ -203,17 +206,20 @@
         background: none;
         border: none;
         width: 100%;
-        padding: 0.8rem 1rem;
+        padding: 0.5rem 1rem;
         text-align: left;
         color: var(--token-color-text-default-normal);
         cursor: pointer;
+        font-size: 1rem;
+        line-height: 1;
+        user-select: none;
     }
 
     .dropdown li button:hover {
-        background-color: var(--token-color-surface-raised-hover);
+        background-color: var(--token-color-background-subtle-hover);
     }
 
     .dropdown li button:active {
-        background-color: var(--token-color-surface-raised-pressed);
+        background-color: var(--token-color-background-subtle-pressed);
     }
 </style>

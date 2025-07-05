@@ -17,82 +17,101 @@
 
 <style>
     a {
-        font-size: 1rem;
-        text-decoration: none;
         display: inline-flex;
-        gap: 0.2rem;
-        padding: 0.6em 1em;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        line-height: 0;
+        justify-content: center;
+        align-items: center;
+        min-width: 120px;
+        min-height: 2rem;
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
         box-sizing: border-box;
+        white-space: nowrap;
+        vertical-align: middle;
+        position: relative;
+
+        font-size: 1rem;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+
+        border: none;
+        border-radius: 0.2rem;
+        cursor: pointer;
+
         transition:
             background-color 200ms ease,
             color 200ms ease;
     }
 
     .icon {
-      font-size: 1rem;
-    }
-    
-   /* Appearance styles */
-    .subtle {
-        background-color: var(--token-color-background-subtle-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .primary {
-        background-color: var(--token-color-background-primary-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .warning {
-        background-color: var(--token-color-background-warning-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .danger {
-        background-color: var(--token-color-background-danger-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .discover {
-        background-color: var(--token-color-background-discover-normal);
-        color: var(--token-color-text-dark-normal);
+        font-size: 1rem;
     }
 
-    /* Hover states */
-    .subtle:hover {
-        background-color: var(--token-color-background-subtle-hover);
-    }
-    .primary:hover {
-        background-color: var(--token-color-background-primary-hover);
-    }
-    .warning:hover {
-        background-color: var(--token-color-background-warning-hover);
-    }
-    .danger:hover {
-        background-color: var(--token-color-background-danger-hover);
-    }
-    .discover:hover {
-        background-color: var(--token-color-background-discover-hover);
+    /* Appearances */
+    a.subtle {
+        --bg-normal: var(--token-color-background-subtle-normal);
+        --bg-hover: var(--token-color-background-subtle-hover);
+        --bg-pressed: var(--token-color-background-subtle-pressed);
+        --color-normal: var(--token-color-text-default-normal);
+        --color-hover: var(--token-color-text-default-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
 
-    /* Active states */
-    .subtle:active {
-        background-color: var(--token-color-background-subtle-pressed);
+    a.primary {
+        --bg-normal: var(--token-color-background-primary-normal);
+        --bg-hover: var(--token-color-background-primary-hover);
+        --bg-pressed: var(--token-color-background-primary-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
-    .primary:active {
-        background-color: var(--token-color-background-primary-pressed);
-        color: var(--token-color-text-default-normal);
+
+    a.warning {
+        --bg-normal: var(--token-color-background-warning-normal);
+        --bg-hover: var(--token-color-background-warning-hover);
+        --bg-pressed: var(--token-color-background-warning-pressed);
+        --color-normal: var(--token-color-text-light-normal);
+        --color-hover: var(--token-color-text-light-normal);
+        --color-pressed: var(--token-color-text-light-normal);
     }
-    .warning:active {
-        background-color: var(--token-color-background-warning-pressed);
-        color: var(--token-color-text-default-normal);
+
+    a.danger {
+        --bg-normal: var(--token-color-background-danger-normal);
+        --bg-hover: var(--token-color-background-danger-hover);
+        --bg-pressed: var(--token-color-background-danger-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
-    .danger:active {
-        background-color: var(--token-color-background-danger-pressed);
-        color: var(--token-color-text-default-normal);
+
+    a.discover {
+        --bg-normal: var(--token-color-background-discover-normal);
+        --bg-hover: var(--token-color-background-discover-hover);
+        --bg-pressed: var(--token-color-background-discover-pressed);
+        --color-normal: var(--token-color-text-dark-normal);
+        --color-hover: var(--token-color-text-dark-normal);
+        --color-pressed: var(--token-color-text-default-normal);
     }
-    .discover:active {
-        background-color: var(--token-color-background-discover-pressed);
+
+    /* Apply appearancessss */
+    a {
+        background-color: var(--bg-normal);
+        color: var(--color-normal);
+    }
+
+    a:hover:not(:disabled) {
+        background-color: var(--bg-hover);
+        color: var(--color-hover);
+    }
+
+    a:active:not(:disabled) {
+        background-color: var(--bg-pressed);
+        color: var(--color-pressed);
+    }
+
+    a:disabled {
+        background-color: var(--token-color-background-disabled-normal);
+        cursor: not-allowed;
         color: var(--token-color-text-default-normal);
     }
 </style>
