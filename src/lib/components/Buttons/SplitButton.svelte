@@ -119,6 +119,8 @@
         padding: 0.4em 0.6em;
         border: none;
         cursor: pointer;
+        line-height: 0;
+        box-sizing: border-box;
         transition:
             background-color 200ms ease,
             color 200ms ease;
@@ -149,6 +151,8 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        line-height: 0;
+        box-sizing: border-box;
         transition:
             background-color 200ms ease,
             color 200ms ease;

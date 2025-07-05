@@ -17,107 +17,122 @@
     }
 </script>
 
-<button class={appearance} on:click={handleClick} disabled={disabled}>
+<button class={appearance} on:click={handleClick} {disabled}>
     {#if loading}
         <Loader></Loader>
-    {:else} 
+    {:else}
         {#if iconbefore}
-            <span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
+            <span
+                class="icon icon-before material-symbols-outlined"
+                translate="no"
+                aria-hidden="true">{iconbefore}</span
+            >
         {/if}
         <slot></slot>
         {#if iconafter}
-            <span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true"> {iconafter}</span>
+            <span
+                class="icon icon-after material-symbols-outlined"
+                translate="no"
+                aria-hidden="true"
+            >
+                {iconafter}</span
+            >
         {/if}
     {/if}
 </button>
 
 <style>
-    button {
-        text-align: center;
-        min-width: 120px;
-        min-height: 2rem;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.2rem;
-        padding: 0.4em 0.6em;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition:
-            background-color 200ms ease,
-            color 200ms ease;
-    }
+button {
+  text-align: center;
+  min-width: 120px;
+  min-height: 2rem;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  line-height: 1;
+  box-sizing: border-box;
+  transition: background-color 200ms ease, color 200ms ease;
+  white-space: nowrap;
+  vertical-align: middle;
+}
 
-    .icon {
-      font-size: 1rem;
-    }
+.icon {
+  font-size: 1rem;
+}
 
-    /* Appearance styles */
-    .subtle {
-        background-color: var(--token-color-background-subtle-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .primary {
-        background-color: var(--token-color-background-primary-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .warning {
-        background-color: var(--token-color-background-warning-normal);
-        color: var(--token-color-text-default-normal);
-    }
-    .danger {
-        background-color: var(--token-color-background-danger-normal);
-        color: var(--token-color-text-dark-normal);
-    }
-    .discover {
-        background-color: var(--token-color-background-discover-normal);
-        color: var(--token-color-text-dark-normal);
-    }
+/* Define appearances in a single block with CSS custom properties */
+button.subtle {
+  --bg-normal: var(--token-color-background-subtle-normal);
+  --bg-hover: var(--token-color-background-subtle-hover);
+  --bg-pressed: var(--token-color-background-subtle-pressed);
+  --color-normal: var(--token-color-text-default-normal);
+  --color-hover: var(--token-color-text-default-normal);
+  --color-pressed: var(--token-color-text-default-normal);
+}
 
-    /* Hover states */
-    .subtle:hover {
-        background-color: var(--token-color-background-subtle-hover);
-    }
-    .primary:hover {
-        background-color: var(--token-color-background-primary-hover);
-    }
-    .warning:hover {
-        background-color: var(--token-color-background-warning-hover);
-    }
-    .danger:hover {
-        background-color: var(--token-color-background-danger-hover);
-    }
-    .discover:hover {
-        background-color: var(--token-color-background-discover-hover);
-    }
+button.primary {
+  --bg-normal: var(--token-color-background-primary-normal);
+  --bg-hover: var(--token-color-background-primary-hover);
+  --bg-pressed: var(--token-color-background-primary-pressed);
+  --color-normal: var(--token-color-text-dark-normal);
+  --color-hover: var(--token-color-text-dark-normal);
+  --color-pressed: var(--token-color-text-default-normal);
+}
 
-    /* Active states */
-    .subtle:active {
-        background-color: var(--token-color-background-subtle-pressed);
-    }
-    .primary:active {
-        background-color: var(--token-color-background-primary-pressed);
-        color: var(--token-color-text-default-normal);
-    }
-    .warning:active {
-        background-color: var(--token-color-background-warning-pressed);
-        color: var(--token-color-text-default-normal);
-    }
-    .danger:active {
-        background-color: var(--token-color-background-danger-pressed);
-        color: var(--token-color-text-default-normal);
-    }
-    .discover:active {
-        background-color: var(--token-color-background-discover-pressed);
-        color: var(--token-color-text-default-normal);
-    }
+button.warning {
+  --bg-normal: var(--token-color-background-warning-normal);
+  --bg-hover: var(--token-color-background-warning-hover);
+  --bg-pressed: var(--token-color-background-warning-pressed);
+  --color-normal: var(--token-color-text-default-normal);
+  --color-hover: var(--token-color-text-default-normal);
+  --color-pressed: var(--token-color-text-default-normal);
+}
 
-    /* Disabled state */
-    .subtle:disabled, .primary:disabled, .warning:disabled, .danger:disabled, .discover:disabled {
-        background-color: var(--token-color-background-disabled-normal);
-        cursor: not-allowed;
-    }
+button.danger {
+  --bg-normal: var(--token-color-background-danger-normal);
+  --bg-hover: var(--token-color-background-danger-hover);
+  --bg-pressed: var(--token-color-background-danger-pressed);
+  --color-normal: var(--token-color-text-dark-normal);
+  --color-hover: var(--token-color-text-dark-normal);
+  --color-pressed: var(--token-color-text-default-normal);
+}
+
+button.discover {
+  --bg-normal: var(--token-color-background-discover-normal);
+  --bg-hover: var(--token-color-background-discover-hover);
+  --bg-pressed: var(--token-color-background-discover-pressed);
+  --color-normal: var(--token-color-text-dark-normal);
+  --color-hover: var(--token-color-text-dark-normal);
+  --color-pressed: var(--token-color-text-default-normal);
+}
+
+/* Use the custom properties */
+button {
+  background-color: var(--bg-normal);
+  color: var(--color-normal);
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--bg-hover);
+  color: var(--color-hover);
+}
+
+button:active:not(:disabled) {
+  background-color: var(--bg-pressed);
+  color: var(--color-pressed);
+}
+
+button:disabled {
+  background-color: var(--token-color-background-disabled-normal);
+  cursor: not-allowed;
+  color: var(--color-normal); /* You can customize this if needed */
+}
+
 </style>

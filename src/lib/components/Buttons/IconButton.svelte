@@ -38,6 +38,8 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 200ms ease, color 200ms ease;
+    line-height: 0;
+    box-sizing: border-box;
   }
 
   .icon {
