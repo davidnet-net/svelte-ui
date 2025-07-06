@@ -3,22 +3,59 @@
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
     export let iconbefore: string | undefined = undefined;
     export let iconafter: string | undefined = undefined;
+    export let justifycontent: string | undefined = "center";
+    export let overidetextcolor: string | undefined = undefined;
 </script>
 
-<a class={appearance} {href}>
-    {#if iconbefore}
-        <span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
-    {/if}
-    <slot></slot>
-    {#if iconafter}
-        <span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true"> {iconafter}</span>
-    {/if}
-</a>
+{#if overidetextcolor}
+    <a
+        class={appearance}
+        {href}
+        style="justify-content: {justifycontent} ; color: {overidetextcolor};"
+    >
+        {#if iconbefore}
+            <span
+                class="icon icon-before material-symbols-outlined"
+                translate="no"
+                aria-hidden="true">{iconbefore}</span
+            >
+        {/if}
+        <slot></slot>
+        {#if iconafter}
+            <span
+                class="icon icon-after material-symbols-outlined"
+                translate="no"
+                aria-hidden="true"
+            >
+                {iconafter}</span
+            >
+        {/if}
+    </a>
+{:else}
+    <a class={appearance} {href} style="justify-content: {justifycontent};">
+        {#if iconbefore}
+            <span
+                class="icon icon-before material-symbols-outlined"
+                translate="no"
+                aria-hidden="true">{iconbefore}</span
+            >
+        {/if}
+        <slot></slot>
+        {#if iconafter}
+            <span
+                class="icon icon-after material-symbols-outlined"
+                translate="no"
+                aria-hidden="true"
+            >
+                {iconafter}</span
+            >
+        {/if}
+    </a>
+{/if}
 
 <style>
     a {
         display: inline-flex;
-        justify-content: center;
         align-items: center;
         min-width: 120px;
         height: 2rem;
@@ -32,7 +69,7 @@
 
         font-size: 1rem;
         line-height: 1;
-        text-align: center;
+        text-align: left;
         text-decoration: none;
 
         border: none;
