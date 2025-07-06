@@ -118,17 +118,12 @@
         margin-right: 0.5rem;
     }
 
-    .actions a {
-        color: lightblue;
+    .actions :global(a) {
         margin-right: 0.5rem;
-        text-decoration: none;
     }
 
-    .actions a:hover {
-        color: rgb(107, 186, 212);
+    .actions :global(a:hover) {
+        color: #3366cc;
     }
 
-    .actions a:active {
-        color: rgb(2, 120, 160);
-    }
 </style>
