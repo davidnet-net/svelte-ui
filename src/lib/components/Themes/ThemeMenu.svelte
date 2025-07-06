@@ -1,9 +1,20 @@
 <script lang="ts">
-	import { theme } from '$lib/stores/theme';
+	import { theme } from '$lib/stores/theme.js';
+	import { Dropdown } from '$lib/index.js';
+
+	// Dropdown action handler
+	function setTheme(value: any) {
+		theme.setTheme(value)
+	}
 </script>
 
-<select bind:value={$theme} on:change={(e) => theme.setTheme((e.target as HTMLSelectElement)?.value)}>
-	<option value="system">Auto</option>
-	<option value="light">Light</option>
-	<option value="dark">Dark</option>
-</select>
+<Dropdown
+	appearance="subtle"
+	iconbefore="format_paint"
+	actions={[
+		{ label: 'Auto', onClick: () => setTheme('system') },
+		{ label: 'Light', onClick: () => setTheme('light') },
+		{ label: 'Dark', onClick: () => setTheme('dark') }
+	]}>
+	Theme
+</Dropdown>

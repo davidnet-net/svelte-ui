@@ -1,5 +1,6 @@
 <script lang="ts">
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
+    export let iconbefore: string | undefined = undefined;
     export let actions: { label: string; onClick: () => void }[] = [];
 
     let open = false;
@@ -58,7 +59,13 @@
         aria-controls="dropdown-menu"
         on:click={toggleMenu}
     >
-        <span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">menu</span>
+        {#if iconbefore}
+            <span
+                class="icon icon-before material-symbols-outlined"
+                translate="no"
+                aria-hidden="true">{iconbefore}</span
+            >
+        {/if}
         <slot>Menu</slot>
         <span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
     </button>

@@ -14,6 +14,7 @@ export { default as Toaster } from '$lib/components/Toaster.svelte';
 export { default as BlockNote } from '$lib/components/BlockNote.svelte';
 export { default as Center } from '$lib/components/Layout/Center.svelte'
 export { default as FlexWrapper } from '$lib/components/Layout/FlexWrapper.svelte'
+export { default as ConnectivityCheck } from '$lib/components/ConnectivityCheck.svelte'
 
 // Stores
 export { toast } from '$lib/stores/toasts.js';
