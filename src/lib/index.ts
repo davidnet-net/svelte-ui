@@ -9,3 +9,5 @@ export { default as ThemeMenu } from "$lib/components/Themes/ThemeMenu.svelte";
 export { default as LinkIconButton } from "$lib/components/Buttons/LinkIconButton.svelte";
 export { default as SplitButton } from "$lib/components/Buttons/SplitButton.svelte";
 export { default as Dropdown } from "$lib/components/Dropdown.svelte";
+export { default as Toaster } from '$lib/components/Toaster.svelte';
+export { toast } from '$lib/stores/toasts.js';

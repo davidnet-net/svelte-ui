@@ -82,7 +82,7 @@
   }
 
   .modal {
-    background-color: var(--token-color-surface-raised-normal);
+    background-color: var(--token-color-surface-overlay-normal);
     color: var(--token-color-text-default-normal);
     padding: 24px;
     border-radius: 16px;
