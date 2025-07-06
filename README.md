@@ -36,7 +36,7 @@ npm install
 **For each iteration do**
 
 ```bash
-npm run prepack
+npm run update
 ```
 
 <h4>Linking the local version</h4>
