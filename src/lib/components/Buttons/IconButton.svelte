@@ -2,6 +2,8 @@
 	import { Loader, ToolTip } from "$lib/index.js";
 	import { theme, GetIconColor } from "$lib/stores/theme.js";
 	import { derived } from "svelte/store";
+	import { browser } from "$app/environment";
+	import { onMount } from "svelte";
 
 	export let onClick: (() => void) | undefined = undefined;
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
@@ -22,11 +24,14 @@
 	let resolvedIcon = icon;
 	let isIconUrl = false;
 
-	$:
-	iconTheme.subscribe(($iconTheme) => {
-		resolvedIcon = $iconTheme === "light" && lighticon ? lighticon : icon;
-		isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
-	});
+	if (browser) {
+		onMount(() => {
+			iconTheme.subscribe(($iconTheme) => {
+				resolvedIcon = $iconTheme === "light" && lighticon ? lighticon : icon;
+				isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
+			});
+		});
+	}
 
 	function handleClick() {
 		if (onClick) onClick();
