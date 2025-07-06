@@ -79,15 +79,15 @@
                 "hover": "#f0f0f0",
                 "pressed": "#e6e6e6"
             },
-            "overlay": {
-                "normal": "#f0f0f0",
-                "hover": "#e6e6e6",
-                "pressed": "#d9d9d9"
-            },
             "raised": {
                 "normal": "#ffffff",
                 "hover": "#f9f9f9",
                 "pressed": "#f0f0f0"
+            },
+            "overlay": {
+                "normal": "#f0f0f0",
+                "hover": "#e6e6e6",
+                "pressed": "#d9d9d9"
             },
             "inverse": {
                 "sunken": {
