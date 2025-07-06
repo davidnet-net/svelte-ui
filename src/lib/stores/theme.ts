@@ -67,4 +67,19 @@ function createThemeStore() {
 	};
 }
 
+export function GetIconColor(currentTheme: string){
+	//! LIGHT = LIGHT COLORED ICON
+	//! DARK = DARK COLORED ICON
+
+	if (currentTheme === "dark") {
+		return "light"
+    }
+    if (currentTheme === "light") {
+		return "dark"
+	}
+	
+	// Fallback to LIGHT theme.
+	return "dark"
+}
+
 export const theme = createThemeStore();
