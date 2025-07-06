@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 
 export type Theme = 'light' | 'dark' | 'system';
 const THEME_KEY = 'theme';
-const defaultTheme: Theme = 'system';
+const defaultTheme: Theme = 'dark';
 
 const internal = writable<Theme>(defaultTheme);
 
