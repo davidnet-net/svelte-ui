@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LinkButton from './Buttons/LinkButton.svelte';
+    import LinkButton from "./Buttons/LinkButton.svelte";
     import { Button, Space } from "$lib/index.js";
 
     export let appearance: "info" | "warning" | "error" | "success" = "info";
@@ -89,6 +89,13 @@
         font-family: sans-serif;
     }
 
+    @media (min-width: 1000px) {
+        .blocknote {
+            width: 750px;
+            max-width: fit-content;
+        }
+    }
+
     .icon {
         font-size: 20px;
         margin-top: 0.15rem;
@@ -122,8 +129,14 @@
         margin-right: 0.5rem;
     }
 
-    .actions :global(a:hover) {
-        color: #3366cc;
+    .actions a {
+        transition:
+            background-color 200ms ease,
+            color 200ms ease;
     }
 
+    /* No :global here due not wanting to change the LinkButton */
+    .actions a:hover {
+        color: #3366cc;
+    }
 </style>
