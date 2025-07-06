@@ -45,7 +45,7 @@
         justify-content: center;
         align-items: center;
         min-width: 120px;
-        min-height: 2rem;
+        height: 2rem;
         padding: 0.5rem 1rem;
         gap: 0.5rem;
         box-sizing: border-box;

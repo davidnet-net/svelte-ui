@@ -35,8 +35,8 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        min-width: 2rem;
-        min-height: 2rem;
+        width: 2rem;
+        height: 2rem;
         padding: 0.5rem 0.5rem;
         gap: 0.5rem;
         box-sizing: border-box;
