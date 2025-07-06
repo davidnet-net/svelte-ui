@@ -64,4 +64,11 @@
   --token-color-surface-inverse-raised-hover: #2c333a;
   --token-color-surface-inverse-raised-pressed: #e4e2e2;
   --token-color-blanket-normal: rgba(0, 0, 0, 0.5);;
+  --token-space-0: 0rem;
+  --token-space-1: 0.25rem;
+  --token-space-2: 0.5rem;
+  --token-space-3: 0.75rem;
+  --token-space-4: 1rem;
+  --token-space-5: 1.5rem;
+  --token-space-6: 2rem;
 }
