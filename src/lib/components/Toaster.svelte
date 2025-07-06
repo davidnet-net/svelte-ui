@@ -1,6 +1,6 @@
 <script lang="ts">
   import Toast from '$lib/components/Toast.svelte';
-  import { toasts, removeToast } from '$lib/stores/toasts';
+  import { toasts, removeToast } from '$lib/stores/toasts.js';
 
   const positions = [
     'top-left',
