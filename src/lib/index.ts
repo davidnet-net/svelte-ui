@@ -1,3 +1,4 @@
+// Components
 export { default as Test } from "$lib/components/Test.svelte";
 export { default as ThemeProvider } from "$lib/components/Themes/ThemeProvider.svelte";
 export { default as Button } from "$lib/components/Buttons/Button.svelte";
@@ -10,4 +11,12 @@ export { default as LinkIconButton } from "$lib/components/Buttons/LinkIconButto
 export { default as SplitButton } from "$lib/components/Buttons/SplitButton.svelte";
 export { default as Dropdown } from "$lib/components/Dropdown.svelte";
 export { default as Toaster } from '$lib/components/Toaster.svelte';
+export { default as BlockNote } from '$lib/components/BlockNote.svelte';
+
+// Stores
 export { toast } from '$lib/stores/toasts.js';
+
+// Internal\
+export { default as Toast } from '$lib/components/Toast.svelte';
+export { default as Loader } from '$lib/components/Loader.svelte';
+export { default as ToolTip } from '$lib/components/ToolTip.svelte';

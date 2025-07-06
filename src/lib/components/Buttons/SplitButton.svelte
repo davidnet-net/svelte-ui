@@ -107,6 +107,7 @@
     line-height: 1;
     vertical-align: middle;
     width: max-content;
+    margin-right: 0.25rem;
   }
 
   .btn {

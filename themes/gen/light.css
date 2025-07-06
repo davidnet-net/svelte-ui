@@ -47,12 +47,12 @@
   --token-color-surface-default-normal: #ffffff;
   --token-color-surface-default-hover: #f0f0f0;
   --token-color-surface-default-pressed: #e6e6e6;
-  --token-color-surface-overlay-normal: #f0f0f0;
-  --token-color-surface-overlay-hover: #e6e6e6;
-  --token-color-surface-overlay-pressed: #d9d9d9;
   --token-color-surface-raised-normal: #ffffff;
   --token-color-surface-raised-hover: #f9f9f9;
   --token-color-surface-raised-pressed: #f0f0f0;
+  --token-color-surface-overlay-normal: #f0f0f0;
+  --token-color-surface-overlay-hover: #e6e6e6;
+  --token-color-surface-overlay-pressed: #d9d9d9;
   --token-color-surface-inverse-sunken-normal: #161a1d;
   --token-color-surface-inverse-default-normal: #1d2125;
   --token-color-surface-inverse-default-hover: #22272b;

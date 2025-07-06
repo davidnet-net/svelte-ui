@@ -54,7 +54,7 @@
       <div class="desc">{desc}</div>
     {/if}
   </div>
-  <button aria-label="Close toast" class="close-btn" on:click={close}>×</button>
+  <button aria-label="Close toast" class="close-btn" on:click={close}></button> <!--×-->
 </div>
 
 <style>
@@ -62,7 +62,7 @@
     display: flex;
     align-items: flex-start;
     background-color: var(--token-color-surface-overlay-normal);
-    color: var(--token-color-text-default-normal);
+    color: var(--token-color-text-default);
     border-radius: 4px;
     padding: 0.75rem 1rem;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
@@ -73,27 +73,27 @@
   }
   .toast.info {
     background-color: var(--token-color-background-information-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-light-normal);
   }
   .toast.warning {
     background-color: var(--token-color-background-warning-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-light-normal);
   }
   .toast.danger {
     background-color: var(--token-color-background-danger-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-default);
   }
   .toast.discover {
     background-color: var(--token-color-background-discover-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-default);
   }
   .toast.success {
     background-color: var(--token-color-background-success-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-light-normal);
   }
   .toast.primary {
     background-color: var(--token-color-background-primary-normal);
-    color: var(--token-color-text-inverse-normal);
+    color: var(--token-color-text-default);
   }
 
   .icon {
@@ -113,7 +113,19 @@
 
   .desc {
     font-size: 0.875rem;
-    color: var(--token-color-text-inverse-secondary);
+    color: var(--token-color-text-light-normal);
+  }
+
+  .toast.discover .desc {
+    color: var(--token-color-text-default);
+  }
+
+  .toast.primary .desc {
+    color: var(--token-color-text-default);
+  }
+
+  .toast.danger .desc {
+    color: var(--token-color-text-default);
   }
 
   .close-btn {

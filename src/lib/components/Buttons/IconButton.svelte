@@ -1,6 +1,5 @@
 <script lang="ts">
-    import Tooltip from "$lib/components/Tooltip.svelte";
-    import Loader from "$lib/components/Loader.svelte";
+    import { Loader, ToolTip } from "$lib/index.js";
 
     export let onClick: (() => void) | undefined = undefined;
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
@@ -27,7 +26,7 @@
         <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{icon}</span>
     {/if}
     {#if hovered}
-        <Tooltip text={alt} />
+        <ToolTip text={alt} />
     {/if}
 </button>
 
@@ -44,6 +43,7 @@
         white-space: nowrap;
         vertical-align: middle;
         position: relative;
+        margin-right: 0.25rem;
 
         font-size: 1rem;
         line-height: 1;

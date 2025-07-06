@@ -13,14 +13,34 @@ export type ToastData = {
 const toasts = writable<ToastData[]>([]);
 let currentId = 0;
 
-export function toast(toast: Omit<ToastData, 'id'>) {
+// BroadcastChannel for cross-tab syncing
+const channel = new BroadcastChannel('davidnet-toasts');
+
+channel.onmessage = (event) => {
+  if (event.data?.type === 'toast') {
+    const toast = event.data.toast as Omit<ToastData, 'id'>;
+    internalToast(toast, true); // true = don't rebroadcast
+  }
+};
+
+function internalToast(toast: Omit<ToastData, 'id'>, fromRemote = false) {
   const id = ++currentId;
-  toasts.update(all => [...all, { id, ...toast }]);
+  const newToast = { id, ...toast };
+  toasts.update((all) => [...all, newToast]);
+
+  if (!fromRemote) {
+    channel.postMessage({ type: 'toast', toast });
+  }
+
   return id;
 }
 
+export function toast(toast: Omit<ToastData, 'id'>) {
+  return internalToast(toast);
+}
+
 export function removeToast(id: number) {
-  toasts.update(all => all.filter(t => t.id !== id));
+  toasts.update((all) => all.filter((t) => t.id !== id));
 }
 
 export { toasts };

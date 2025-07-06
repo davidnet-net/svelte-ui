@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Loader from "$lib/components/Loader.svelte";
+    import { Loader } from "$lib/index.js";
 
     export let onClick: (() => void) | undefined = undefined;
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
@@ -52,6 +52,7 @@
         white-space: nowrap;
         vertical-align: middle;
         position: relative;
+        margin-right: 0.25rem;
 
         font-size: 1rem;
         line-height: 1;

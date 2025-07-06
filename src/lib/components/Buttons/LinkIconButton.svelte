@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Tooltip from "$lib/components/Tooltip.svelte";
+    import { ToolTip } from "$lib/index.js";
 
     export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
     export let icon: string;
@@ -21,7 +21,7 @@
     >
 
     {#if hovered}
-        <Tooltip text={alt} />
+        <ToolTip text={alt} />
     {/if}
 </a>
 
@@ -38,6 +38,7 @@
         white-space: nowrap;
         vertical-align: middle;
         position: relative;
+        margin-right: 0.25rem;
 
         font-size: 1rem;
         line-height: 1;

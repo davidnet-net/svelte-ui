@@ -28,6 +28,7 @@
         white-space: nowrap;
         vertical-align: middle;
         position: relative;
+        margin-right: 0.25rem;
 
         font-size: 1rem;
         line-height: 1;
