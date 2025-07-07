@@ -9,7 +9,7 @@
 <style>
     div {
         display: flex;
-        height: fit-content;
-        width: fit-content;
+        height: 100%;
+        width: 100%;
     }
 </style>
