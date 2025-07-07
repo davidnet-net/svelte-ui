@@ -12,6 +12,7 @@
 	export let alt: string;
 	export let disabled: boolean = false;
 	export let loading: boolean = false;
+	export let disabletooltip: boolean = false;
 
 	let hovered = false;
 
@@ -24,14 +25,12 @@
 	let resolvedIcon = icon;
 	let isIconUrl = false;
 
-	if (browser) {
-		onMount(() => {
-			iconTheme.subscribe(($iconTheme) => {
-				resolvedIcon = $iconTheme === "light" && lighticon ? lighticon : icon;
-				isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
-			});
-		});
-	}
+$: if (browser) {
+	// reactively update resolvedIcon and isIconUrl whenever icon, lighticon or theme changes
+	$iconTheme; // dependency on store
+	resolvedIcon = $iconTheme === "light" && lighticon ? lighticon : icon;
+	isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
+}
 
 	function handleClick() {
 		if (onClick) onClick();
@@ -54,7 +53,7 @@
 		<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
 	{/if}
 
-	{#if hovered}
+	{#if hovered && !disabletooltip}
 		<ToolTip text={alt} />
 	{/if}
 </button>
