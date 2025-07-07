@@ -2,7 +2,7 @@
   <img src="meta/images/svelte-ui-full.png" alt="svelte-ui Logo" width="200px" />
 </p>
 
-<h3 align="center">The building bricks for davidnet's advanced UI.</h3>
+<h3 align="center">The building blocks for davidnet's advanced UI.</h3>
 <h4 align="center">
   <a href="https://design.davidnet.net">Design</a> ·
   <a href="https://github.com/davidnet-net/svelte-ui">GitHub</a> ·
