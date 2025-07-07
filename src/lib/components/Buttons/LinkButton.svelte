@@ -5,11 +5,12 @@
     export let iconafter: string | undefined = undefined;
     export let justifycontent: string | undefined = "center";
     export let overidetextcolor: string | undefined = undefined;
+    export let stretchwidth: boolean = false;
 </script>
 
 {#if overidetextcolor}
     <a
-        class={appearance}
+        class="{appearance} {stretchwidth ? 'stretch' : ''}"
         {href}
         style="justify-content: {justifycontent} ; color: {overidetextcolor};"
     >
@@ -32,7 +33,7 @@
         {/if}
     </a>
 {:else}
-    <a class={appearance} {href} style="justify-content: {justifycontent};">
+    <a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent};">
         {#if iconbefore}
             <span
                 class="icon icon-before material-symbols-outlined"
@@ -84,6 +85,10 @@
     .icon {
         font-size: 1rem;
     }
+
+    a.stretch {
+		width: 100%;
+	}
 
     /* Appearances */
     a.subtle {
