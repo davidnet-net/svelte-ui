@@ -1,6 +1,5 @@
 <script lang="ts">
-    import LinkButton from "./Buttons/LinkButton.svelte";
-    import { Button, Space } from "$lib/index.js";
+    import { Button, Space, LinkButton } from "$lib/index.js";
 
     export let appearance: "info" | "warning" | "error" | "success" = "info";
     export let title: string | undefined = undefined;

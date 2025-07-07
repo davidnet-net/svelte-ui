@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import Button from '$lib/components/Buttons/Button.svelte';
+  import { Button } from '$lib/index.js';
 
   export let title: string;
   export let titleIcon: string | undefined = undefined;

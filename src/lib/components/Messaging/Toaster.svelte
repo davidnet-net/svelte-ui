@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Toast from '$lib/components/Toast.svelte';
+  import { Toast } from '$lib/index.js';
   import { toasts, removeToast } from '$lib/stores/toasts.js';
 
   const positions = [
