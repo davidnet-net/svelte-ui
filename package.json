@@ -31,11 +31,12 @@
         "fmt": "prettier --write .",
         "lint": "prettier --check . && eslint .",
         "genthemes": "node meta/scripts/GenerateThemes.js",
-        "release-patch": "npm run genthemes && npm run prepack && npm version patch && npm publish --access public && git push && git push --tags",
-        "release-minor": "npm run genthemes && npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
-        "release-major": "npm run genthemes && npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
-        "release-legacy": "npm run genthemes && npm run prepack && npm publish --access public && git push",
-        "update": "npm run genthemes && npm run prepack"
+        "genmetadata": "node meta/scripts/GenerateMetaData.js",
+        "release-patch": "npm run genthemes && npm run genmetadata && npm run prepack && npm version patch && npm publish --access public && git push && git push --tags",
+        "release-minor": "npm run genthemes && npm run genmetadata && npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
+        "release-major": "npm run genthemes && npm run genmetadata && npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
+        "release-legacy": "npm run genthemes && npm run genmetadata && npm run prepack && npm publish --access public && git push",
+        "update": "npm run genthemes && npm run genmetadata && npm run prepack"
     },
     "files": [
         "dist",
