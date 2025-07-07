@@ -45,7 +45,8 @@ export const metadata = {
   fullCommitHash: "${gitInfo.fullCommitHash}",
   commitDate: "${gitInfo.commitDate}",
   branch: "${gitInfo.branch}",
-  commitUrl: "${gitInfo.commitUrl}"
+  commitUrl: "${gitInfo.commitUrl}",
+  repoUrl: "${repoUrl}"
 };
 `;
 
