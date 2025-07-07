@@ -4,10 +4,10 @@ export const metadata = {
   version: "1.5.12",
   packageName: "@davidnet/svelte-ui",
   npmUrl: "https://www.npmjs.com/package/@davidnet/svelte-ui",
-  commitHash: "05ae386",
-  fullCommitHash: "05ae38606cc2129bcc73f8eb07dbe0561afb6ac4",
-  commitDate: "2025-07-07T19:45:59+02:00",
+  commitHash: "1d3ce86",
+  fullCommitHash: "1d3ce86b0deed784cde9a250c5af9f066161720f",
+  commitDate: "2025-07-07T20:56:54+02:00",
   branch: "main",
-  commitUrl: "https://github.com/davidnet-net/svelte-ui/commit/05ae38606cc2129bcc73f8eb07dbe0561afb6ac4",
+  commitUrl: "https://github.com/davidnet-net/svelte-ui/commit/1d3ce86b0deed784cde9a250c5af9f066161720f",
   repoUrl: "https://github.com/davidnet-net/svelte-ui"
 };

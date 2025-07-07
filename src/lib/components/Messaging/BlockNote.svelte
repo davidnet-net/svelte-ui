@@ -106,6 +106,7 @@
         display: flex;
         flex-direction: column;
         color: var(--token-color-text-default-normal);
+        line-height: 1.2;
     }
 
     .title {
