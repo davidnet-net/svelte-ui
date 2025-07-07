@@ -36,7 +36,7 @@
         "release-minor": "npm run genthemes && npm run genmetadata && npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
         "release-major": "npm run genthemes && npm run genmetadata && npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
         "release-legacy": "npm run genthemes && npm run genmetadata && npm run prepack && npm publish --access public && git push",
-        "update": "npm run genthemes && npm run genmetadata && npm run prepack"
+        "update": "npm run genmetadata && npm run genthemes && npm run prepack"
     },
     "files": [
         "dist",
