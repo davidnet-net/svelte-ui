@@ -122,5 +122,10 @@
     "4": "1rem",
     "5": "1.5rem",
     "6": "2rem"
+  },
+  "font": {
+    "mono": "JetBrains Mono",
+    "main": "Inter",
+    "heading": "Merriweather Sans"
   }
 }

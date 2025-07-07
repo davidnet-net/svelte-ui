@@ -1,0 +1,131 @@
+{
+  "color": {
+    "text": {
+      "default": {
+        "normal": "#FFFFFF",
+        "secondary": "#FFFF00",
+        "tertiary": "#00FFFF"
+      },
+      "inverse": {
+        "normal": "#000000",
+        "secondary": "#333300",
+        "tertiary": "#003333"
+      },
+      "danger": "#FF0000",
+      "warning": "#FFD700",
+      "success": "#00FF00",
+      "discover": "#FF00FF",
+      "information": "#00BFFF",
+      "disabled": "#777777",
+      "dark": {
+        "normal": "#FFFFFF",
+        "secondary": "#FFFF00",
+        "tertiary": "#00FFFF"
+      },
+      "light": {
+        "normal": "#000000",
+        "secondary": "#333300",
+        "tertiary": "#003333"
+      }
+    },
+    "background": {
+      "danger": {
+        "normal": "#8B0000",
+        "hover": "#B22222",
+        "pressed": "#660000"
+      },
+      "warning": {
+        "normal": "#B8860B",
+        "hover": "#FFD700",
+        "pressed": "#665500"
+      },
+      "primary": {
+        "normal": "#000000",
+        "hover": "#222222",
+        "pressed": "#444444"
+      },
+      "success": {
+        "normal": "#008000",
+        "hover": "#00FF00",
+        "pressed": "#004400"
+      },
+      "discover": {
+        "normal": "#8B008B",
+        "hover": "#FF00FF",
+        "pressed": "#660066"
+      },
+      "information": {
+        "normal": "#00008B",
+        "hover": "#0000FF",
+        "pressed": "#000044"
+      },
+      "disabled": {
+        "normal": "#555555",
+        "hover": "#444444",
+        "pressed": "#333333"
+      },
+      "subtle": {
+        "normal": "transparent",
+        "hover": "rgba(255, 255, 255, 0.15)",
+        "pressed": "rgba(255, 255, 255, 0.30)"
+      }
+    },
+    "surface": {
+      "sunken": {
+        "normal": "#000000"
+      },
+      "default": {
+        "normal": "#111111",
+        "hover": "#333333",
+        "pressed": "#555555"
+      },
+      "raised": {
+        "normal": "#222222",
+        "hover": "#444444",
+        "pressed": "#666666"
+      },
+      "overlay": {
+        "normal": "#111111",
+        "hover": "#222222",
+        "pressed": "#333333"
+      },
+      "inverse": {
+        "sunken": {
+          "normal": "#FFFFFF"
+        },
+        "default": {
+          "normal": "#F0F0F0",
+          "hover": "#DCDCDC",
+          "pressed": "#C8C8C8"
+        },
+        "overlay": {
+          "normal": "#E0E0E0",
+          "hover": "#CCCCCC",
+          "pressed": "#B8B8B8"
+        },
+        "raised": {
+          "normal": "#FFFFFF",
+          "hover": "#F8F8F8",
+          "pressed": "#E8E8E8"
+        }
+      }
+    },
+    "blanket": {
+      "normal": "rgba(0, 0, 0, 0.7)"
+    }
+  },
+  "space": {
+    "0": "0rem",
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.5rem",
+    "6": "2rem"
+  },
+  "font": {
+    "mono": "JetBrains Mono",
+    "main": "Inter",
+    "heading": "Merriweather Sans"
+  }
+}

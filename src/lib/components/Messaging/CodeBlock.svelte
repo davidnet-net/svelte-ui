@@ -59,7 +59,7 @@
         padding-right: 3rem;
         overflow-x: auto;
         width: fit-content;
-        font-family: var(--token-font-mono, monospace);
+        font-family: "JetBrains Mono";
     }
 
     .codeblock :global(pre) {

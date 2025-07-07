@@ -71,4 +71,7 @@
   --token-space-4: 1rem;
   --token-space-5: 1.5rem;
   --token-space-6: 2rem;
+  --token-font-mono: JetBrains Mono;
+  --token-font-main: Inter;
+  --token-font-heading: Merriweather Sans;
 }

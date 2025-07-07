@@ -29,7 +29,8 @@
 		actions={[
 			{ label: 'Auto', onClick: () => setTheme('system') },
 			{ label: 'Light', onClick: () => setTheme('light') },
-			{ label: 'Dark', onClick: () => setTheme('dark') }
+			{ label: 'Dark', onClick: () => setTheme('dark') },
+			{ label: 'Highcontrast', onClick: () => setTheme('highcontrast') }
 		]}
 	/>
 {:else}
@@ -39,7 +40,8 @@
 		actions={[
 			{ label: 'Auto', onClick: () => setTheme('system') },
 			{ label: 'Light', onClick: () => setTheme('light') },
-			{ label: 'Dark', onClick: () => setTheme('dark') }
+			{ label: 'Dark', onClick: () => setTheme('dark') },
+			{ label: 'Highcontrast', onClick: () => setTheme('highcontrast') }
 		]}>
 		Theme
 	</Dropdown>

@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark' | 'highcontrast' | 'system';
 const THEME_KEY = 'theme';
 const defaultTheme: Theme = 'dark';
 
 const internal = writable<Theme>(defaultTheme);
 
-function applyResolvedTheme(resolved: 'light' | 'dark') {
+function applyResolvedTheme(resolved: 'light' | 'dark' | 'highcontrast' ) {
 	if (!browser) return;
 
 	const url = new URL(`../../themes/gen/${resolved}.css`, import.meta.url).href;
@@ -22,9 +22,13 @@ function applyResolvedTheme(resolved: 'light' | 'dark') {
 	document.head.appendChild(link);
 }
 
-function getPreferredTheme(): 'light' | 'dark' {
+function getPreferredTheme(): 'light' | 'dark' | 'highcontrast' {
+	if (window.matchMedia('(prefers-contrast: more)').matches) {
+		return 'highcontrast';
+	}
 	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
+
 
 function createThemeStore() {
 	const { subscribe, set, update } = internal;
@@ -35,6 +39,7 @@ function createThemeStore() {
 		set(start);
 
 		const mql = window.matchMedia('(prefers-color-scheme: dark)');
+		const contrastMql = window.matchMedia('(prefers-contrast: more)');
 
 		// Listen to system theme changes
 		const handleChange = () => {
@@ -44,6 +49,7 @@ function createThemeStore() {
 			});
 		};
 		mql.addEventListener('change', handleChange);
+		contrastMql.addEventListener('change', handleChange);
 
 		// React to store changes
 		subscribe((value) => {
@@ -51,6 +57,7 @@ function createThemeStore() {
 			const resolved = value === 'system' ? getPreferredTheme() : value;
 			applyResolvedTheme(resolved);
 		});
+
 
 		// Check other tabs
 		window.addEventListener('storage', (e) => {
@@ -72,6 +79,9 @@ export function GetIconColor(currentTheme: string){
 	//! DARK = DARK COLORED ICON
 
 	if (currentTheme === "dark") {
+		return "light"
+    }
+	if (currentTheme === "highcontrast") {
 		return "light"
     }
     if (currentTheme === "light") {
