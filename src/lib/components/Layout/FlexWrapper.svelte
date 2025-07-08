@@ -3,8 +3,8 @@
     export let gap: string | undefined = "0px;";
     export let height: string | undefined = "fit-content";
     export let width: string | undefined = "fit-content";
-    export let justifycontent: string | undefined = "center"
-    export let alignitems: string | undefined = "center"
+    export let justifycontent: string = "center"
+    export let alignitems: string = "center"
 </script>
 
 <div style="flex-direction: {direction}; gap: {gap}; height: {height}; width: {width} justify-content: {justifycontent} align-items: {alignitems}">
