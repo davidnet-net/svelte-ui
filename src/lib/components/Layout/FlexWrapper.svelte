@@ -3,16 +3,16 @@
     export let gap: string | undefined = "0px;";
     export let height: string | undefined = "fit-content";
     export let width: string | undefined = "fit-content";
+    export let justifycontent: string | undefined = "center"
+    export let alignitems: string | undefined = "center"
 </script>
 
-<div style="flex-direction: {direction}; gap: {gap}; height: {height}; width: {width}">
+<div style="flex-direction: {direction}; gap: {gap}; height: {height}; width: {width} justify-content: {justifycontent} align-items: {alignitems}">
     <slot/>
 </div>
 
 <style>
     div {
         display: flex;
-        justify-content: center;
-        align-items: center;
     }
 </style>
