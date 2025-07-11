@@ -78,6 +78,10 @@ export function GetIconColor(currentTheme: string){
 	//! LIGHT = LIGHT COLORED ICON
 	//! DARK = DARK COLORED ICON
 
+	if (currentTheme === "auto") {
+		return GetIconColor(getPreferredTheme())
+	}
+
 	if (currentTheme === "dark") {
 		return "light"
     }
