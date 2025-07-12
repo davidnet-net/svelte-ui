@@ -3,10 +3,22 @@
 	import { theme } from '$lib/stores/theme.js';
 	import { Dropdown, IconDropdown } from '$lib/index.js';
 
+	export let forceicon: boolean | undefined = false;
+	export let forcetext: boolean | undefined = false;
+
 	let isMobile = false;
 
 	function checkWidth() {
-		isMobile = window.innerWidth < 750;
+		if (forceicon) {
+			isMobile = true;
+		} else if (forcetext) {
+			isMobile = false;
+		} else if (forcetext && forceicon) {
+			console.error("Cannot force ICON and TEXT at the same time!");
+			throw Error("Cannot force ICON and TEXT at the same time!");
+		} else {
+			isMobile = window.innerWidth < 750;
+		}	
 	}
 
 	// Dropdown action handler
