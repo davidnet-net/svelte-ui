@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { Loader, ToolTip } from "$lib/index.js";
-	import { theme, GetIconColor } from "$lib/stores/theme.js";
-	import { derived } from "svelte/store";
 	import { browser } from "$app/environment";
-	import { onMount } from "svelte";
+	import { theme, GetIconColor } from "$lib/stores/theme.js";
 
-	export let onClick: (() => void) | undefined = undefined;
+	export let onClick: (event: MouseEvent) => void;
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let icon: string;
 	export let lighticon: string | undefined = undefined;
@@ -20,35 +18,29 @@
 		disabled = true;
 	}
 
-	const iconTheme = derived(theme, ($theme) => GetIconColor($theme));
-
 	let resolvedIcon = icon;
 	let isIconUrl = false;
 
-$: if (browser) {
-	// reactively update resolvedIcon and isIconUrl whenever icon, lighticon or theme changes
-	$iconTheme; // dependency on store
-	resolvedIcon = $iconTheme === "light" && lighticon ? lighticon : icon;
-	isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
-}
+	$: if (browser) {
+		const iconColor = GetIconColor($theme);
 
-	function handleClick() {
-		if (onClick) onClick();
+		resolvedIcon = iconColor === "light" && lighticon ? lighticon : icon;
+		isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
 	}
 </script>
 
 <button
 	class={appearance}
-	on:click={handleClick}
 	on:mouseenter={() => (hovered = true)}
 	on:mouseleave={() => (hovered = false)}
+	on:click={onClick}
 	aria-label={alt}
 	{disabled}
 >
 	{#if loading}
 		<Loader />
 	{:else if isIconUrl}
-		<img src={resolvedIcon} alt={alt} class="icon image-icon" />
+		<img src={resolvedIcon} {alt} class="icon image-icon" />
 	{:else}
 		<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
 	{/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount } from "svelte";
 
 	function LoadFonts() {
 		const remoteUrl = "https://design.davidnet.net/fonts/fonts.css";

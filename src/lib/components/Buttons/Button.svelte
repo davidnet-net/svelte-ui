@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Loader } from "$lib/index.js";
 
-	export let onClick: (() => void) | undefined = undefined;
+	export let onClick: (event: MouseEvent) => void;
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let iconbefore: string | undefined = undefined;
 	export let iconafter: string | undefined = undefined;
@@ -9,72 +9,48 @@
 	export let loading: boolean = false;
 	export let justifycontent: string | undefined = "center";
 	export let stretchwidth: boolean = false;
-    export let overidetextcolor: string | undefined = undefined;
+	export let overidetextcolor: string | undefined = undefined;
 
 	if (loading) {
 		disabled = true;
 	}
-
-	function handleClick() {
-		if (onClick) onClick();
-	}
 </script>
 
 {#if overidetextcolor}
-    <button
-        class="{appearance} {stretchwidth ? 'stretch' : ''}"
-        on:click={handleClick}
-        {disabled}
-        style="justify-content: {justifycontent}; color: {overidetextcolor};"
-    >
-        {#if loading}
-            <Loader />
-        {:else}
-            {#if iconbefore}
-                <span
-                    class="icon icon-before material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                >{iconbefore}</span>
-            {/if}
-            <slot></slot>
-            {#if iconafter}
-                <span
-                    class="icon icon-after material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                >{iconafter}</span>
-            {/if}
-        {/if}
-    </button>
+	<button
+		class="{appearance} {stretchwidth ? 'stretch' : ''}"
+		{disabled}
+		on:click={onClick}
+		style="justify-content: {justifycontent}; color: {overidetextcolor};"
+	>
+		{#if loading}
+			<Loader />
+		{:else}
+			{#if iconbefore}
+				<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
+			{/if}
+			<slot></slot>
+			{#if iconafter}
+				<span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true">{iconafter}</span>
+			{/if}
+		{/if}
+	</button>
 {:else}
-    <button
-        class="{appearance} {stretchwidth ? 'stretch' : ''}"
-        on:click={handleClick}
-        {disabled}
-        style="justify-content: {justifycontent}"
-    >
-        {#if loading}
-            <Loader />
-        {:else}
-            {#if iconbefore}
-                <span
-                    class="icon icon-before material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                >{iconbefore}</span>
-            {/if}
-            <slot></slot>
-            {#if iconafter}
-                <span
-                    class="icon icon-after material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                >{iconafter}</span>
-            {/if}
-        {/if}
-    </button>
+	<button class="{appearance} {stretchwidth ? 'stretch' : ''}" {disabled} on:click={onClick} style="justify-content: {justifycontent}">
+		{#if loading}
+			<Loader />
+		{:else}
+			{#if iconbefore}
+				<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
+			{/if}
+			<slot></slot>
+			{#if iconafter}
+				<span class="icon icon-after material-symbols-outlined" translate="no" aria-hidden="true">{iconafter}</span>
+			{/if}
+		{/if}
+	</button>
 {/if}
+
 <style>
 	button {
 		display: inline-flex;

@@ -1,36 +1,34 @@
-import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
-import { execSync } from 'child_process';
+import { readFileSync, writeFileSync } from "fs";
+import path from "path";
+import { execSync } from "child_process";
 
-const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
+const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
 const version = pkg.version;
 const packageName = pkg.name;
 
-let repoUrl = '';
+let repoUrl = "";
 if (pkg.repository && pkg.repository.url) {
-  repoUrl = pkg.repository.url
-    .replace(/^git\+/, '')
-    .replace(/\.git$/, '');
+	repoUrl = pkg.repository.url.replace(/^git\+/, "").replace(/\.git$/, "");
 } else {
-  console.warn('repository.url not found in package.json');
-  console.warn('package.json not yapping the required info.');
+	console.warn("repository.url not found in package.json");
+	console.warn("package.json not yapping the required info.");
 }
 
-const npmUrl = packageName ? `https://www.npmjs.com/package/${packageName}` : '';
+const npmUrl = packageName ? `https://www.npmjs.com/package/${packageName}` : "";
 
 function getGitInfo() {
-  try {
-    const fullCommitHash = execSync('git rev-parse HEAD').toString().trim();
-    const shortCommitHash = fullCommitHash.slice(0, 7);
-    const commitDate = execSync('git log -1 --format=%cI').toString().trim();
-    const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+	try {
+		const fullCommitHash = execSync("git rev-parse HEAD").toString().trim();
+		const shortCommitHash = fullCommitHash.slice(0, 7);
+		const commitDate = execSync("git log -1 --format=%cI").toString().trim();
+		const branch = execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
 
-    const commitUrl = repoUrl ? `${repoUrl}/commit/${fullCommitHash}` : '';
+		const commitUrl = repoUrl ? `${repoUrl}/commit/${fullCommitHash}` : "";
 
-    return { fullCommitHash, shortCommitHash, commitDate, branch, commitUrl };
-  } catch (e) {
-    return { fullCommitHash: 'unknown', shortCommitHash: 'unknown', commitDate: 'unknown', branch: 'unknown', commitUrl: '' };
-  }
+		return { fullCommitHash, shortCommitHash, commitDate, branch, commitUrl };
+	} catch {
+		return { fullCommitHash: "unknown", shortCommitHash: "unknown", commitDate: "unknown", branch: "unknown", commitUrl: "" };
+	}
 }
 
 const gitInfo = getGitInfo();
@@ -50,7 +48,7 @@ export const metadata = {
 };
 `;
 
-const outputPath = path.resolve('src/lib/metadata.ts');
+const outputPath = path.resolve("src/lib/metadata.ts");
 writeFileSync(outputPath, content);
 
 console.log(`✅ Generated metadata.ts`);

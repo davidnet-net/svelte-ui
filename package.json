@@ -1,88 +1,87 @@
 {
-    "name": "@davidnet/svelte-ui",
-    "version": "1.5.24",
-    "author": {
-        "name": "davidnet",
-        "email": "contact@davidnet.net"
-    },
-    "license": "MIT",
-    "contributors": [
-        {
-            "name": "David @dedestem",
-            "email": "david@davidnet.net"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/davidnet-net/svelte-ui.git"
-    },
-    "bugs": {
-        "url": "https://github.com/davidnet-net/svelte-ui/issues"
-    },
-    "homepage": "https://design.davidnet.net",
-    "scripts": {
-        "dev": "vite dev",
-        "build": "vite build && npm run prepack",
-        "preview": "vite preview",
-        "prepare": "svelte-kit sync || echo ''",
-        "prepack": "svelte-kit sync && svelte-package && publint",
-        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "fmt": "prettier --write .",
-        "lint": "prettier --check . && eslint .",
-        "genthemes": "node meta/scripts/GenerateThemes.js",
-        "genmetadata": "node meta/scripts/GenerateMetaData.js",
-        "release-patch": "npm version patch && npm run genthemes && npm run genmetadata && npm run prepack &&  npm publish --access public && git push && git push --tags && git add . && git commit -m 'AUTOMATED: Clean local git' && git push",
-        "release-minor": "npm run genthemes && npm run genmetadata && npm run prepack && npm version minor && npm publish --access public && git push && git push --tags",
-        "release-major": "npm run genthemes && npm run genmetadata && npm run prepack && npm version major && npm publish --access public && git push && git push --tags",
-        "release-legacy": "npm run genthemes && npm run genmetadata && npm run prepack && npm publish --access public && git push",
-        "update": "npm run genmetadata && npm run genthemes && npm run prepack"
-    },
-    "files": [
-        "dist",
-        "!dist/**/*.test.*",
-        "!dist/**/*.spec.*",
-        "themes",
-        "fonts"
-    ],
-    "sideEffects": [
-        "**/*.css"
-    ],
-    "svelte": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "type": "module",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "svelte": "./dist/index.js"
-        }
-    },
-    "peerDependencies": {
-        "@sveltejs/kit": "^2.16.0",
-        "svelte": "^5.0.0"
-    },
-    "devDependencies": {
-        "@eslint/compat": "^1.2.5",
-        "@eslint/js": "^9.18.0",
-        "@sveltejs/adapter-auto": "^6.0.0",
-        "@sveltejs/kit": "^2.16.0",
-        "@sveltejs/package": "^2.0.0",
-        "@sveltejs/vite-plugin-svelte": "^5.0.0",
-        "eslint": "^9.18.0",
-        "eslint-config-prettier": "^10.0.1",
-        "eslint-plugin-svelte": "^3.0.0",
-        "globals": "^16.0.0",
-        "mdsvex": "^0.12.3",
-        "prettier": "^3.4.2",
-        "prettier-plugin-svelte": "^3.3.3",
-        "publint": "^0.3.2",
-        "svelte": "^5.0.0",
-        "svelte-check": "^4.0.0",
-        "typescript": "^5.0.0",
-        "typescript-eslint": "^8.20.0",
-        "vite": "^6.2.6"
-    },
-    "keywords": [
-        "svelte"
-    ]
+	"name": "@davidnet/svelte-ui",
+	"version": "1.5.24",
+	"author": {
+		"name": "davidnet",
+		"email": "contact@davidnet.net"
+	},
+	"license": "MIT",
+	"contributors": [
+		{
+			"name": "David @dedestem",
+			"email": "david@davidnet.net"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/davidnet-net/svelte-ui.git"
+	},
+	"bugs": {
+		"url": "https://github.com/davidnet-net/svelte-ui/issues"
+	},
+	"homepage": "https://design.davidnet.net",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && npm run prepack",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"prepack": "svelte-kit sync && svelte-package && publint",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"fmt": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"genthemes": "node meta/scripts/GenerateThemes.js",
+		"genmetadata": "node meta/scripts/GenerateMetaData.js",
+		"release-patch": "npm run lint && npm version patch && npm run genthemes && npm run genmetadata && npm run prepack &&  npm publish --access public",
+		"release-minor": "npm run lint && npm run genthemes && npm run genmetadata && npm run prepack && npm version minor && npm publish --access public",
+		"release-legacy": "npm run lint && npm run genthemes && npm run genmetadata && npm run prepack && npm publish --access public",
+		"dev-release": "npm run genmetadata && npm run genthemes && npm run prepack"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*",
+		"themes",
+		"fonts"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.16.0",
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@eslint/compat": "^1.2.5",
+		"@eslint/js": "^9.18.0",
+		"@sveltejs/adapter-auto": "^6.0.0",
+		"@sveltejs/kit": "^2.16.0",
+		"@sveltejs/package": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"eslint": "^9.18.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^3.0.0",
+		"globals": "^16.0.0",
+		"mdsvex": "^0.12.3",
+		"prettier": "^3.4.2",
+		"prettier-plugin-svelte": "^3.3.3",
+		"publint": "^0.3.2",
+		"svelte": "^5.0.0",
+		"svelte-check": "^4.0.0",
+		"typescript": "^5.0.0",
+		"typescript-eslint": "^8.20.0",
+		"vite": "^6.2.6"
+	},
+	"keywords": [
+		"svelte"
+	]
 }

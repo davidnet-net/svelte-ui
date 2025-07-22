@@ -1,14 +1,14 @@
 {
-    "[json]": {
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true
-    },
-    "[ts]": {
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true
-    },
-    "[svelte]": {
-        "editor.tabSize": 4,
-        "editor.insertSpaces": true
-    }
+	"[json]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true
+	},
+	"[ts]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true
+	},
+	"[svelte]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true
+	}
 }

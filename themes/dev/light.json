@@ -1,131 +1,131 @@
 {
-    "color": {
-        "text": {
-            "default": {
-                "normal": "#111111",
-                "secondary": "#444444",
-                "tertiary": "#666666"
-            },
-            "inverse": {
-                "normal": "#ffffff",
-                "secondary": "#cccccc",
-                "tertiary": "#999999"
-            },
-            "danger": "#ae2e24",
-            "warning": "#a54800",
-            "success": "#216e4e",
-            "discover": "#5e4db2",
-            "information": "#0055cc",
-            "disabled": "#999999",
-            "dark": {
-                "normal": "#f1f1f1",
-                "secondary": "#cccccc",
-                "tertiary": "#999999"
-            },
-            "light": {
-                "normal": "#111111",
-                "secondary": "#444444",
-                "tertiary": "#666666"
-            }
-        },
-        "background": {
-            "danger": {
-                "normal": "#e53935",
-                "hover": "#cc2e2b",
-                "pressed": "#d0d0d0"
-            },
-            "warning": {
-                "normal": "#f5a623",
-                "hover": "#e0971f",
-                "pressed": "#d0d0d0"
-            },
-            "primary": {
-                "normal": "#1a73e8",
-                "hover": "#1669c1",
-                "pressed": "#d0d0d0"
-            },
-            "success": {
-                "normal": "#00c48c",
-                "hover": "#00a97a",
-                "pressed": "#d0d0d0"
-            },
-            "discover": {
-                "normal": "#8c70f0",
-                "hover": "#7159c4",
-                "pressed": "#d0d0d0"
-            },
-            "information": {
-                "normal": "#4098ff",
-                "hover": "#327ad1",
-                "pressed": "#d0d0d0"
-            },
-            "disabled": {
-                "normal": "#cccccc",
-                "hover": "#bbbbbb",
-                "pressed": "#d0d0d0"
-            },
-            "subtle": {
-                "normal": "transparent",
-                "hover": "rgba(0, 0, 0, 0.04)",
-                "pressed": "rgba(0, 0, 0, 0.08)"
-            }
-        },
-        "surface": {
-            "sunken": {
-                "normal": "#f4f5f7"
-            },
-            "default": {
-                "normal": "#ffffff",
-                "hover": "#f0f0f0",
-                "pressed": "#e6e6e6"
-            },
-            "raised": {
-                "normal": "#ffffff",
-                "hover": "#f9f9f9",
-                "pressed": "#f0f0f0"
-            },
-            "overlay": {
-                "normal": "#f0f0f0",
-                "hover": "#e6e6e6",
-                "pressed": "#d9d9d9"
-            },
-            "inverse": {
-                "sunken": {
-                    "normal": "#161a1d"
-                },
-                "default": {
-                    "normal": "#1d2125",
-                    "hover": "#22272b",
-                    "pressed": "#282e33"
-                },
-                "overlay": {
-                    "normal": "#282e33",
-                    "hover": "#2c333a",
-                    "pressed": "#38414a"
-                },
-                "raised": {
-                    "normal": "#22272b",
-                    "hover": "#2c333a",
-                    "pressed": "#e4e2e2"
-                }
-            }
-        },
-        "blanket": {
-            "normal": "rgba(0, 0, 0, 0.5);"
-        }
-    },
-    "space": {
-        "0": "0rem",
-        "1": "0.25rem",
-        "2": "0.5rem",
-        "3": "0.75rem",
-        "4": "1rem",
-        "5": "1.5rem",
-        "6": "2rem"
-    },
-    "font": {
-        "mono": "JetBrains Mono",
-        "main": "Inter",
-        "heading": "Merriweather Sans"
-    }
+	"color": {
+		"text": {
+			"default": {
+				"normal": "#111111",
+				"secondary": "#444444",
+				"tertiary": "#666666"
+			},
+			"inverse": {
+				"normal": "#ffffff",
+				"secondary": "#cccccc",
+				"tertiary": "#999999"
+			},
+			"danger": "#ae2e24",
+			"warning": "#a54800",
+			"success": "#216e4e",
+			"discover": "#5e4db2",
+			"information": "#0055cc",
+			"disabled": "#999999",
+			"dark": {
+				"normal": "#f1f1f1",
+				"secondary": "#cccccc",
+				"tertiary": "#999999"
+			},
+			"light": {
+				"normal": "#111111",
+				"secondary": "#444444",
+				"tertiary": "#666666"
+			}
+		},
+		"background": {
+			"danger": {
+				"normal": "#e53935",
+				"hover": "#cc2e2b",
+				"pressed": "#d0d0d0"
+			},
+			"warning": {
+				"normal": "#f5a623",
+				"hover": "#e0971f",
+				"pressed": "#d0d0d0"
+			},
+			"primary": {
+				"normal": "#1a73e8",
+				"hover": "#1669c1",
+				"pressed": "#d0d0d0"
+			},
+			"success": {
+				"normal": "#00c48c",
+				"hover": "#00a97a",
+				"pressed": "#d0d0d0"
+			},
+			"discover": {
+				"normal": "#8c70f0",
+				"hover": "#7159c4",
+				"pressed": "#d0d0d0"
+			},
+			"information": {
+				"normal": "#4098ff",
+				"hover": "#327ad1",
+				"pressed": "#d0d0d0"
+			},
+			"disabled": {
+				"normal": "#cccccc",
+				"hover": "#bbbbbb",
+				"pressed": "#d0d0d0"
+			},
+			"subtle": {
+				"normal": "transparent",
+				"hover": "rgba(0, 0, 0, 0.04)",
+				"pressed": "rgba(0, 0, 0, 0.08)"
+			}
+		},
+		"surface": {
+			"sunken": {
+				"normal": "#f4f5f7"
+			},
+			"default": {
+				"normal": "#ffffff",
+				"hover": "#f0f0f0",
+				"pressed": "#e6e6e6"
+			},
+			"raised": {
+				"normal": "#ffffff",
+				"hover": "#f9f9f9",
+				"pressed": "#f0f0f0"
+			},
+			"overlay": {
+				"normal": "#f0f0f0",
+				"hover": "#e6e6e6",
+				"pressed": "#d9d9d9"
+			},
+			"inverse": {
+				"sunken": {
+					"normal": "#161a1d"
+				},
+				"default": {
+					"normal": "#1d2125",
+					"hover": "#22272b",
+					"pressed": "#282e33"
+				},
+				"overlay": {
+					"normal": "#282e33",
+					"hover": "#2c333a",
+					"pressed": "#38414a"
+				},
+				"raised": {
+					"normal": "#22272b",
+					"hover": "#2c333a",
+					"pressed": "#e4e2e2"
+				}
+			}
+		},
+		"blanket": {
+			"normal": "rgba(0, 0, 0, 0.5);"
+		}
+	},
+	"space": {
+		"0": "0rem",
+		"1": "0.25rem",
+		"2": "0.5rem",
+		"3": "0.75rem",
+		"4": "1rem",
+		"5": "1.5rem",
+		"6": "2rem"
+	},
+	"font": {
+		"mono": "JetBrains Mono",
+		"main": "Inter",
+		"heading": "Merriweather Sans"
+	}
 }
