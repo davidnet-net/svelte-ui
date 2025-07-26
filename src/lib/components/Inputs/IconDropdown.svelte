@@ -10,7 +10,10 @@
 	export let disabled: boolean = false;
 	export let loading: boolean = false;
 	export let disabletooltip: boolean = false;
-	export let actions: { label: string; onClick: () => void }[] = [];
+	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
+
+	// Bindbare waarde van de geselecteerde actie
+	export let value: string | number | object | null = null;
 
 	let open = false;
 	let hovered = false;
@@ -25,7 +28,6 @@
 
 	$: if (browser) {
 		const iconColor = GetIconColor($theme);
-
 		resolvedIcon = iconColor === "light" && lighticon ? lighticon : icon;
 		isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
 	}
@@ -34,8 +36,13 @@
 		if (!disabled) open = !open;
 	}
 
-	function handleAction(action: () => void) {
-		action();
+	function handleAction(action: { onClick?: () => void; value?: string | number | object | null }, label: string) {
+		if (action.value !== undefined) {
+			value = action.value;
+		} else {
+			value = label;
+		}
+		if (action.onClick) action.onClick();
 		open = false;
 	}
 
@@ -100,9 +107,9 @@
 
 	{#if open}
 		<ul class="dropdown" id="icon-dropdown-menu" role="menu" on:keydown={handleMenuKey}>
-			{#each actions as action, i (i)}
+			{#each actions as action, i (action.label)}
 				<li role="none">
-					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action.onClick)}>
+					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action, action.label)}>
 						{action.label}
 					</button>
 				</li>

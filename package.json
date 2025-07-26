@@ -35,7 +35,8 @@
 		"release-patch": "npm run lint && npm version patch && npm run genthemes && npm run genmetadata && npm run prepack &&  npm publish --access public",
 		"release-minor": "npm run lint && npm run genthemes && npm run genmetadata && npm run prepack && npm version minor && npm publish --access public",
 		"release-legacy": "npm run lint && npm run genthemes && npm run genmetadata && npm run prepack && npm publish --access public",
-		"dev-release": "npm run genmetadata && npm run genthemes && npm run prepack"
+		"dev-release": "npm run genmetadata && npm run genthemes && npm run prepack",
+		"clean": "rm -rf node_modules package-lock.json .svelte-kit build src/lib/metadata.ts themes/gen dist"
 	},
 	"files": [
 		"dist",
@@ -48,7 +49,7 @@
 		"**/*.css"
 	],
 	"svelte": "./dist/index.js",
-	"types": "./dist/index.ts",
+	"types": "./dist/index.d.ts",
 	"type": "module",
 	"exports": {
 		".": {

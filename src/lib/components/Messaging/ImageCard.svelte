@@ -43,7 +43,6 @@
 		flex-direction: column;
 		width: 200px;
 		min-height: 250px;
-		height: fit-content;
 		background: var(--token-color-surface-raised-normal);
 		border-radius: var(--token-space-2);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -56,7 +55,7 @@
 	}
 
 	.card-image-wrapper {
-		flex: 1;
+		flex: 0 0 50%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -64,13 +63,16 @@
 	}
 
 	.card-image {
+		min-width: 100px;
+		min-height: 125px;
 		max-width: 100%;
 		max-height: 100%;
 		object-fit: contain;
+		display: block;
 	}
 
 	.card-content {
-		flex: 1;
+		flex: 0 0 50%;
 		padding: var(--token-space-4);
 		display: flex;
 		flex-direction: column;

@@ -1,8 +1,10 @@
 <script lang="ts">
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let iconbefore: string | undefined = undefined;
-	export let actions: { label: string; onClick: () => void }[] = [];
-	//TODO Maybe split the ID from label svelte/require-each-key in {}
+	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
+
+	// Bindable selected value (kan string, number, object zijn)
+	export let value: string | number | object | null = null;
 
 	let open = false;
 	let menuItems: HTMLButtonElement[] = [];
@@ -11,8 +13,16 @@
 		open = !open;
 	}
 
-	function handleAction(action: () => void) {
-		action();
+	function handleAction(action: { onClick?: () => void; value?: string | number | object | null }, label: string) {
+		if (action.value !== undefined) {
+			value = action.value;
+		} else {
+			// fallback naar label als value niet is ingesteld
+			value = label;
+		}
+
+		if (action.onClick) action.onClick();
+
 		open = false;
 	}
 
@@ -53,7 +63,18 @@
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}
-		<slot>Menu</slot>
+
+		<!-- Toon label van geselecteerde value of default slot -->
+		{#if value !== null}
+			{#if actions.find((a) => a.value === value)?.label}
+				{actions.find((a) => a.value === value)?.label}
+			{:else}
+				{value}
+			{/if}
+		{:else}
+			<slot />
+		{/if}
+
 		<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
 	</button>
 
@@ -61,7 +82,7 @@
 		<ul class="dropdown" id="dropdown-menu" role="menu" on:keydown={handleMenuKey}>
 			{#each actions as action, i (action.label)}
 				<li role="none">
-					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action.onClick)}>
+					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action, action.label)}>
 						{action.label}
 					</button>
 				</li>
