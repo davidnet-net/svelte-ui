@@ -46,6 +46,7 @@
 	<Dropdown
 		appearance="subtle"
 		iconbefore="format_paint"
+		alwaysshowslot
 		actions={[
 			{ label: "Auto", onClick: () => setTheme("system") },
 			{ label: "Light", onClick: () => setTheme("light") },

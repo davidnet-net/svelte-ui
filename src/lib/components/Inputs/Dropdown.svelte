@@ -2,6 +2,7 @@
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let iconbefore: string | undefined = undefined;
 	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
+	export let alwaysshowslot: boolean = false;
 
 	// Bindable selected value (kan string, number, object zijn)
 	export let value: string | number | object | null = null;
@@ -9,34 +10,39 @@
 	let open = false;
 	let menuItems: HTMLButtonElement[] = [];
 
+	function closeMenu() {
+		open = false;
+		document.getElementById("returnfocus")?.focus();
+	}
+
 	function toggleMenu() {
-		open = !open;
+		if (open) {
+			closeMenu();
+		} else {
+			open = true;
+		}
 	}
 
 	function handleAction(action: { onClick?: () => void; value?: string | number | object | null }, label: string) {
-		if (action.value !== undefined) {
-			value = action.value;
-		} else {
-			// fallback naar label als value niet is ingesteld
-			value = label;
-		}
+		value = action.value ?? label;
 
 		if (action.onClick) action.onClick();
 
-		open = false;
+		closeMenu();
 	}
 
 	function closeMenuOnBlur(event: FocusEvent) {
 		const related = event.relatedTarget as HTMLElement | null;
 		if (!related || !event.currentTarget || !(event.currentTarget as HTMLElement).contains(related)) {
 			open = false;
+			// We do NOT focus here because the user might be tabbing elsewhere intentionally.
 		}
 	}
 
 	function handleMenuKey(event: KeyboardEvent) {
 		const currentIndex = menuItems.findIndex((el) => el === document.activeElement);
 		if (event.key === "Escape") {
-			open = false;
+			closeMenu();
 		} else if (event.key === "ArrowDown") {
 			event.preventDefault();
 			const nextIndex = (currentIndex + 1) % menuItems.length;
@@ -59,13 +65,21 @@
 </script>
 
 <div class="dropdown-wrapper" on:focusout={closeMenuOnBlur}>
-	<button class={`btn ${appearance} dropdown-toggle`} aria-haspopup="menu" aria-expanded={open} aria-controls="dropdown-menu" on:click={toggleMenu}>
+	<button
+		id="returnfocus"
+		class={`btn ${appearance} dropdown-toggle`}
+		aria-haspopup="menu"
+		aria-expanded={open}
+		aria-controls="dropdown-menu"
+		on:click={toggleMenu}
+	>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}
 
-		<!-- Toon label van geselecteerde value of default slot -->
-		{#if value !== null}
+		{#if alwaysshowslot}
+			<slot />
+		{:else if value !== null}
 			{#if actions.find((a) => a.value === value)?.label}
 				{actions.find((a) => a.value === value)?.label}
 			{:else}
@@ -79,7 +93,7 @@
 	</button>
 
 	{#if open}
-		<ul class="dropdown" id="dropdown-menu" role="menu" on:keydown={handleMenuKey}>
+		<ul class="dropdown" id="dropdown-menu" role="menu" on:keydown={handleMenuKey} aria-labelledby="returnfocus">
 			{#each actions as action, i (action.label)}
 				<li role="none">
 					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action, action.label)}>
@@ -196,6 +210,12 @@
 		color: var(--token-color-text-default-normal);
 	}
 
+	.btn:focus {
+		outline: 2px solid var(--token-color-focusring);
+		background-color: var(--bg-hover);
+		color: var(--color-hover);
+	}
+
 	/* Dropdown menu */
 	.dropdown {
 		position: absolute;
@@ -231,5 +251,10 @@
 
 	.dropdown li button:active {
 		background-color: var(--token-color-background-subtle-pressed);
+	}
+
+	.dropdown li button:focus {
+		outline: 2px solid var(--token-color-focusring);
+		background-color: var(--token-color-background-subtle-hover);
 	}
 </style>

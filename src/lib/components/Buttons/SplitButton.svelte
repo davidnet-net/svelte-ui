@@ -214,6 +214,11 @@
 		color: var(--token-color-text-default-normal);
 	}
 
+	.btn:focus {
+		outline: 2px solid var(--token-color-focusring);
+		background-color: var(--bg-hover);
+		color: var(--color-hover);
+	}
 	/* Dropdown menu */
 	.dropdown {
 		position: absolute;
@@ -249,5 +254,10 @@
 
 	.dropdown li button:active {
 		background-color: var(--token-color-background-subtle-pressed);
+	}
+
+	.dropdown li button:focus {
+		outline: 2px solid var(--token-color-focusring);
+		background-color: var(--token-color-background-subtle-hover);
 	}
 </style>

@@ -133,4 +133,10 @@
 		cursor: not-allowed;
 		color: var(--token-color-text-default-normal);
 	}
+
+	a:focus {
+		outline: 2px solid var(--token-color-focusring);
+		background-color: var(--bg-hover);
+		color: var(--color-hover);
+	}
 </style>

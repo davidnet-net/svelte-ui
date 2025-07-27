@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
 	import { cubicOut } from "svelte/easing";
+	import { onMount } from "svelte";
 
 	export let title: string;
 	export let desc: string | null = null;
@@ -11,6 +12,13 @@
 	export let position: string = "bottom-right";
 
 	let timeout: ReturnType<typeof setTimeout>;
+	let toastEl: HTMLDivElement;
+	let previousFocus: Element | null = null;
+
+	onMount(() => {
+		previousFocus = document.activeElement;
+		toastEl?.focus();
+	});
 
 	if (autoDismiss) {
 		timeout = setTimeout(() => {
@@ -20,7 +28,14 @@
 
 	function close() {
 		if (timeout) clearTimeout(timeout);
+		if (previousFocus && typeof (previousFocus as HTMLElement).focus === "function") {
+			(previousFocus as HTMLElement).focus();
+		}
 		onClose();
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === "Escape") close();
 	}
 
 	// Determine fly direction based on position
@@ -34,7 +49,15 @@
 	else if (position.includes("bottom")) flyParams.y = 20;
 </script>
 
-<div class="toast {appearance}" in:fly={flyParams} out:fly={flyParams}>
+<div
+	class="toast {appearance}"
+	role={appearance === "danger" || appearance === "warning" ? "alert" : "status"}
+	aria-live={appearance === "danger" || appearance === "warning" ? "assertive" : "polite"}
+	bind:this={toastEl}
+	on:keydown={handleKeydown}
+	in:fly={flyParams}
+	out:fly={flyParams}
+>
 	{#if icon}
 		<span class="material-symbols-outlined icon" aria-hidden="true">{icon}</span>
 	{/if}
@@ -49,7 +72,6 @@
 		{/if}
 	</div>
 	<button aria-label="Close toast" class="close-btn" on:click={close}>×</button>
-	<!--×-->
 </div>
 
 <style>
@@ -65,6 +87,7 @@
 		max-width: 360px;
 		position: relative;
 		pointer-events: auto;
+		outline: none;
 	}
 	.toast.info {
 		background-color: var(--token-color-background-information-normal);
@@ -111,14 +134,8 @@
 		color: var(--token-color-text-light-normal);
 	}
 
-	.toast.discover .desc {
-		color: var(--token-color-text-default);
-	}
-
-	.toast.primary .desc {
-		color: var(--token-color-text-default);
-	}
-
+	.toast.discover .desc,
+	.toast.primary .desc,
 	.toast.danger .desc {
 		color: var(--token-color-text-default);
 	}
@@ -130,11 +147,10 @@
 		cursor: pointer;
 		background: transparent;
 		border: none;
-		font-size: 1.1rem;
+		font-size: 1.5rem;
 		color: inherit;
 		padding: 0;
 		line-height: 1;
-		font-size: 1.5rem;
 	}
 	.close-btn:hover {
 		color: var(--token-color-text-danger);
