@@ -7,7 +7,7 @@
 	export let alignitems: string = "center";
 </script>
 
-<div style="flex-direction: {direction}; gap: {gap}; height: {height}; width: {width} justify-content: {justifycontent}; align-items: {alignitems};">
+<div style="flex-direction: {direction}; gap: {gap}; height: {height}; width: {width}; justify-content: {justifycontent}; align-items: {alignitems};">
 	<slot />
 </div>
 
