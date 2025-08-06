@@ -36,7 +36,7 @@
 		icon="format_paint"
 		alt="Theme"
 		actions={[
-			{ label: "Auto", onClick: () => setTheme("system") },
+			{ label: "System (Auto)", onClick: () => setTheme("system") },
 			{ label: "Light", onClick: () => setTheme("light") },
 			{ label: "Dark", onClick: () => setTheme("dark") },
 			{ label: "Highcontrast", onClick: () => setTheme("highcontrast") }
@@ -48,7 +48,7 @@
 		iconbefore="format_paint"
 		alwaysshowslot
 		actions={[
-			{ label: "Auto", onClick: () => setTheme("system") },
+			{ label: "system (auto)", onClick: () => setTheme("system") },
 			{ label: "Light", onClick: () => setTheme("light") },
 			{ label: "Dark", onClick: () => setTheme("dark") },
 			{ label: "Highcontrast", onClick: () => setTheme("highcontrast") }
