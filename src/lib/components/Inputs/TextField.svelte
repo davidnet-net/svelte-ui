@@ -2,25 +2,33 @@
 	export let id: string = "input-" + Math.random().toString(36).substring(2, 8);
 	export let label: string;
 	export let placeholder: string;
-	export let type: "text" | "email" | "password" | "url" | "search" = "text";
+	export let type: "text" | "email" | "password" | "url" | "search" | "username" = "text";
 	export let value: string = "";
 	export let disabled: boolean = false;
 	export let invalid: boolean = false;
 	export let invalidMessage: string = "Invalid";
+	export let required: boolean = false;
 	export let onEnter: (event: KeyboardEvent) => void = () => {};
 </script>
 
 <div class="input-root">
-	<label for={id}>{label}</label>
+	<label for={id}>
+		{label}
+		{#if required}
+			<span aria-hidden="true" style="color: red;">*</span>
+		{/if}
+	</label>
 	<input
 		{id}
 		{type}
 		{placeholder}
 		{disabled}
-		bind:value
+		{required}
+		aria-required={required}
 		aria-invalid={invalid}
 		aria-describedby={invalid ? id + "-error" : undefined}
-		on:keypress={(event) => {
+		bind:value
+		on:keydown={(event) => {
 			if (event.key === "Enter" && onEnter) {
 				onEnter(event);
 			}
@@ -28,10 +36,8 @@
 	/>
 	{#if invalid}
 		<div id={id + "-error"} class="error-message">
-			<p>
-				<span class="material-symbols-outlined" aria-hidden="true">error</span>
-				{invalidMessage}
-			</p>
+			<span class="material-symbols-outlined" aria-hidden="true">error</span>
+			{invalidMessage}
 		</div>
 	{/if}
 </div>
@@ -50,26 +56,34 @@
 
 	input {
 		all: unset;
+		border: 1px solid transparent;
 		border-radius: 8px;
 		cursor: text;
 		padding: 0.5rem;
 		font-family: var(--token-font-main);
 		background-color: var(--token-color-surface-raised-normal);
+		transition: border-color 0.2s;
+	}
+
+	input:focus {
+		border-color: var(--token-color-primary);
+		outline: none;
+	}
+
+	input[aria-invalid="true"] {
+		border-color: var(--token-color-text-danger);
 	}
 
 	.error-message {
-		color: var(--token-color-text-danger);
-	}
-
-	p {
-		font-size: 1rem;
-		vertical-align: middle;
 		display: flex;
+		flex-direction: row;
 		align-items: center;
-		gap: 0.25rem;
+		color: var(--token-color-text-danger);
+		gap: var(--token-space-1);
+		vertical-align: middle;
 	}
 
-	span {
+	span.material-symbols-outlined {
 		font-size: 1.2rem;
 	}
 </style>
