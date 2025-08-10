@@ -9,9 +9,10 @@
 	export let invalidMessage: string = "Invalid";
 	export let required: boolean = false;
 	export let onEnter: (event: KeyboardEvent) => void = () => {};
+	export let width: "100%";
 </script>
 
-<div class="input-root">
+<div class="input-root" style="width: {width};">
 	<label for={id}>
 		{label}
 		{#if required}
@@ -39,6 +40,8 @@
 			<span class="material-symbols-outlined" aria-hidden="true">error</span>
 			{invalidMessage}
 		</div>
+	{:else}
+		<div class="error-placeholder"></div>
 	{/if}
 </div>
 
@@ -76,10 +79,13 @@
 
 	.error-message {
 		display: flex;
-		flex-direction: row;
 		align-items: center;
 		color: var(--token-color-text-danger);
 		gap: var(--token-space-1);
+		min-height: 1.4rem;
+		width: 100%;
+		white-space: normal;
+		overflow-wrap: break-word;
 		vertical-align: middle;
 	}
 
