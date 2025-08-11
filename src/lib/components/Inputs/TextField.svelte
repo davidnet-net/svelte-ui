@@ -9,7 +9,7 @@
 	export let invalidMessage: string = "Invalid";
 	export let required: boolean = false;
 	export let onEnter: (event: KeyboardEvent) => void = () => {};
-	export let width: "100%";
+	export let width = "100%";
 </script>
 
 <div class="input-root" style="width: {width};">
