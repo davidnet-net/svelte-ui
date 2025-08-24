@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let iconbefore: string | undefined = undefined;
-	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
+	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null; iconbefore?: string | null }[] = [];
 	export let alwaysshowslot: boolean = false;
 
 	// Bindable selected value (kan string, number, object zijn)
@@ -81,6 +81,7 @@
 			<slot />
 		{:else if value !== null}
 			{#if actions.find((a) => a.value === value)?.label}
+				<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">{actions.find((a) => a.value === value)?.iconbefore}</span>
 				{actions.find((a) => a.value === value)?.label}
 			{:else}
 				{value}
@@ -97,7 +98,7 @@
 			{#each actions as action, i (action.label)}
 				<li role="none">
 					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action, action.label)}>
-						{action.label}
+						<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">{action.iconbefore}</span> {action.label}
 					</button>
 				</li>
 			{/each}
@@ -129,9 +130,11 @@
 	}
 
 	.dropdown-toggle {
+		width: fit-content(100%);
 		min-width: 120px;
 		justify-content: center;
 		gap: 0.4rem;
+		white-space: nowrap;
 	}
 
 	.icon {
@@ -230,9 +233,16 @@
 		padding: 0.25rem 0;
 		z-index: 1000;
 		min-width: max-content;
+		overflow-x: scroll;
+		max-height: 15rem;
 	}
 
 	.dropdown li button {
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
+		gap: var(--token-space-2);
+		vertical-align: middle;
 		background: none;
 		border: none;
 		width: 100%;
@@ -243,6 +253,7 @@
 		font-size: 1rem;
 		line-height: 1;
 		user-select: none;
+		white-space: nowrap;
 	}
 
 	.dropdown li button:hover {
