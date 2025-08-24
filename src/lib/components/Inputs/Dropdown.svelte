@@ -98,7 +98,8 @@
 			{#each actions as action, i (action.label)}
 				<li role="none">
 					<button role="menuitem" tabindex={i === 0 ? 0 : -1} bind:this={menuItems[i]} on:click={() => handleAction(action, action.label)}>
-						<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">{action.iconbefore}</span> {action.label}
+						<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">{action.iconbefore}</span>
+						{action.label}
 					</button>
 				</li>
 			{/each}

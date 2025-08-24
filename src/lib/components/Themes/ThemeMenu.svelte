@@ -49,9 +49,9 @@
 		alwaysshowslot
 		actions={[
 			{ label: "System (auto)", onClick: () => setTheme("system"), iconbefore: "routine" },
-			{ label: "Light", onClick: () => setTheme("light"), iconbefore: "light_mode"},
-			{ label: "Dark", onClick: () => setTheme("dark"), iconbefore: "dark_mode"},
-			{ label: "Highcontrast", onClick: () => setTheme("highcontrast"), iconbefore: "contrast"}
+			{ label: "Light", onClick: () => setTheme("light"), iconbefore: "light_mode" },
+			{ label: "Dark", onClick: () => setTheme("dark"), iconbefore: "dark_mode" },
+			{ label: "Highcontrast", onClick: () => setTheme("highcontrast"), iconbefore: "contrast" }
 		]}
 	>
 		Theme

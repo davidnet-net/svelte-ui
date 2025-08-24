@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { Icon } from "$lib/index.js";
+	import { Icon } from "$lib/index.js";
 
-    export let id = "";
+	export let id = "";
 </script>
 
 <div class="avatar">
-    {#if id === ""}
-        <Icon icon="account_circle"/>
-    {:else}
-        <Icon icon="mood_bad"/>
-    {/if}
+	{#if id === ""}
+		<Icon icon="account_circle" />
+	{:else}
+		<Icon icon="mood_bad" />
+	{/if}
 </div>
 
 <style>
-    .avatar {
-        margin: 0rem var(--token-space-2);
-    }
+	.avatar {
+		margin: 0rem var(--token-space-2);
+	}
 </style>

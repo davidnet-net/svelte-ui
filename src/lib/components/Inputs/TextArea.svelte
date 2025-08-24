@@ -42,7 +42,7 @@
 		style="resize: {resize}; overflow: hidden;"
 		aria-required={required}
 		aria-invalid={invalid}
-		aria-describedby={(invalid ? id + "-error" : undefined)}
+		aria-describedby={invalid ? id + "-error" : undefined}
 		bind:value
 		on:input={adjustHeight}
 		on:keydown={(event) => {
@@ -65,10 +65,12 @@
 	<!-- Character counter if maxLength is set -->
 	{#if maxLength !== null && maxLength == value.length}
 		<div class="max-char-counter">{value.length}/{maxLength}</div>
-    {:else if maxLength !== null}
-        <div class="char-counter">{value.length}/{maxLength}</div>
+	{:else if maxLength !== null}
+		<div class="char-counter">{value.length}/{maxLength}</div>
 	{/if}
 </div>
+
+<svelte:window on:load={adjustHeight} />
 
 <style>
 	.textarea-root {
@@ -131,5 +133,3 @@
 		text-align: right;
 	}
 </style>
-
-<svelte:window on:load={adjustHeight} />

@@ -5,14 +5,14 @@
 	export let description: string;
 	export let href: string | undefined = undefined;
 	export let imageheight: string = "125px";
-	export let imagewidth: string = "100px;"
+	export let imagewidth: string = "100px;";
 </script>
 
 {#if href}
 	<a {href}>
 		<div class="card">
 			<div class="card-image-wrapper">
-				<img class="card-image" {src} {alt} width={imagewidth} height="={imageheight}"/>
+				<img class="card-image" {src} {alt} width={imagewidth} height="={imageheight}" />
 			</div>
 
 			<div class="card-content">
@@ -93,7 +93,7 @@
 
 	.card-description {
 		margin-top: var(--token-space-2);
-		font-size: 0.90rem;
+		font-size: 0.9rem;
 		line-height: 1.1;
 		color: var(--token-color-text-default-secondary);
 	}
