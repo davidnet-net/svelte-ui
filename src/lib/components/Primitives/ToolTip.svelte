@@ -53,6 +53,7 @@
 		z-index: 10;
 		box-sizing: border-box;
 		line-height: 1;
+		font-weight: normal;
 	}
 
 	.tooltip::after {
