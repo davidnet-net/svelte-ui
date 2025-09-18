@@ -49,7 +49,7 @@
 					{
 						label: "Help & Support",
 						onClick: () => {
-							goto("https://davidnet.net/help/");
+							window.location.href = "https://davidnet.net/help/";
 						}
 					},
 					{
@@ -61,7 +61,7 @@
 					{
 						label: "Log out",
 						onClick: () => {
-							window.location.href = "https://account.davidnet.net/logout";
+							window.location.href = "https://account.davidnet.net/logout/";
 						}
 					}
 				]}
