@@ -11,6 +11,8 @@
 	export let loading: boolean = false;
 	export let disabletooltip: boolean = false;
 	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
+	export let roundimage: boolean = false;
+	export let hidearrow: boolean = false;
 
 	// Bindbare waarde van de geselecteerde actie
 	export let value: string | number | object | null = null;
@@ -76,6 +78,11 @@
 	$: if (open && menuItems.length) {
 		setTimeout(() => menuItems[0]?.focus(), 0);
 	}
+
+	let roundclass = "";
+	$: if (roundimage) {
+		roundclass = "roundimage";
+	}
 </script>
 
 <div class="dropdown-wrapper" on:focusout={closeMenuOnBlur}>
@@ -93,12 +100,14 @@
 		{#if loading}
 			<Loader />
 		{:else if isIconUrl}
-			<img src={resolvedIcon} {alt} class="icon image-icon" />
+			<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
 		{:else}
 			<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
 		{/if}
 
-		<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
+		{#if !hidearrow}
+			<span class="material-symbols-outlined dropdown-arrow" aria-hidden="true">expand_more</span>
+		{/if}
 
 		{#if hovered && !disabletooltip && !open}
 			<ToolTip text={alt} />
@@ -156,6 +165,10 @@
 		width: 1.5rem;
 		height: 1.5rem;
 		object-fit: contain;
+	}
+
+	.roundimage {
+		border-radius: 50%;
 	}
 
 	.dropdown-arrow {

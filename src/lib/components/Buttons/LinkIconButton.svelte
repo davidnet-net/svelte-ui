@@ -1,18 +1,42 @@
 <script lang="ts">
 	import { ToolTip } from "$lib/index.js";
+	import { browser } from "$app/environment";
+	import { theme, GetIconColor } from "$lib/stores/theme.js";
 
 	export let appearance: "subtle" | "primary" | "warning" | "danger" | "discover" = "subtle";
 	export let icon: string;
+	export let lighticon: string | undefined = undefined;
 	export let alt: string;
 	export let href: string;
+	export let disabletooltip: boolean = false;
+	export let roundimage: boolean = false;
 
 	let hovered = false;
+
+	let resolvedIcon = icon;
+	let isIconUrl = false;
+
+	$: if (browser) {
+		const iconColor = GetIconColor($theme);
+
+		resolvedIcon = iconColor === "light" && lighticon ? lighticon : icon;
+		isIconUrl = typeof resolvedIcon === "string" && /^(https?:\/\/|data:image\/)/.test(resolvedIcon);
+	}
+
+	let roundclass = "";
+	$: if (roundimage) {
+		roundclass = "roundimage";
+	}
 </script>
 
 <a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)}>
-	<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{icon}</span>
+	{#if isIconUrl}
+		<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
+	{:else}
+		<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
+	{/if}
 
-	{#if hovered}
+	{#if hovered && !disabletooltip}
 		<ToolTip text={alt} />
 	{/if}
 </a>
@@ -48,6 +72,16 @@
 
 	.icon {
 		font-size: 1rem;
+	}
+
+	.image-icon {
+		width: 1rem;
+		height: 1rem;
+		object-fit: contain;
+	}
+
+	.roundimage {
+		border-radius: 50%;
 	}
 
 	/* Appearances */
