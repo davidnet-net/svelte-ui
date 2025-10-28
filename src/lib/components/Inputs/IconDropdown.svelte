@@ -97,6 +97,7 @@
 		on:mouseenter={() => (hovered = true)}
 		on:mouseleave={() => (hovered = false)}
 		{disabled}
+		type="button"
 	>
 		{#if loading}
 			<Loader />

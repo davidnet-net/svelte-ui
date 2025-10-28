@@ -72,6 +72,7 @@
 		aria-expanded={open}
 		aria-controls="dropdown-menu"
 		on:click={toggleMenu}
+		type="button"
 	>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
