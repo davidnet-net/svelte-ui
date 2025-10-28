@@ -13,6 +13,7 @@
 	export let actions: { label: string; onClick?: () => void; value?: string | number | object | null }[] = [];
 	export let roundimage: boolean = false;
 	export let hidearrow: boolean = false;
+	export let anonymous: boolean = false;
 
 	// Bindbare waarde van de geselecteerde actie
 	export let value: string | number | object | null = null;
@@ -100,7 +101,11 @@
 		{#if loading}
 			<Loader />
 		{:else if isIconUrl}
-			<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
+			{#if anonymous}
+				<img src={resolvedIcon} crossorigin="anonymous" {alt} class="icon image-icon {roundclass}" />
+			{:else}
+				<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
+			{/if}
 		{:else}
 			<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
 		{/if}
