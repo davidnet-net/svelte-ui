@@ -19,6 +19,7 @@
 				alt="Your profile."
 				hidearrow
 				roundimage
+				anonymous
 				actions={[
 					{
 						label: "View profile",
