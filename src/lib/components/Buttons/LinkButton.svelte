@@ -6,10 +6,16 @@
 	export let justifycontent: string | undefined = "center";
 	export let overidetextcolor: string | undefined = undefined;
 	export let stretchwidth: boolean = false;
+	export let opennewtab: boolean = false;
+
+	let target: "_blank" | undefined = undefined;
+	if (opennewtab) {
+		target = "_blank";
+	}
 </script>
 
 {#if overidetextcolor}
-	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent} ; color: {overidetextcolor};">
+	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent} ; color: {overidetextcolor};" target={target}>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}
@@ -19,7 +25,7 @@
 		{/if}
 	</a>
 {:else}
-	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent};">
+	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent};" target={target}>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}

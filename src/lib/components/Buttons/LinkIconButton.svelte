@@ -11,6 +11,7 @@
 	export let disabletooltip: boolean = false;
 	export let roundimage: boolean = false;
 	export let anonymous: boolean = false;
+	export let opennewtab: boolean = false;
 
 	let hovered = false;
 
@@ -28,9 +29,14 @@
 	$: if (roundimage) {
 		roundclass = "roundimage";
 	}
+
+	let target: "_blank" | undefined = undefined;
+	if (opennewtab) {
+		target = "_blank";
+	}
 </script>
 
-<a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)}>
+<a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)} target={target}>
 	{#if isIconUrl}
 		{#if anonymous}
 			<img src={resolvedIcon} crossorigin="anonymous" {alt} class="icon image-icon {roundclass}" />
