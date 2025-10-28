@@ -1,0 +1,132 @@
+{
+	"color": {
+		"text": {
+			"default": {
+				"normal": "#f9f9f9",
+				"secondary": "#e0e0e0",
+				"tertiary": "#b0b0b0"
+			},
+			"inverse": {
+				"normal": "#111111",
+				"secondary": "#444444",
+				"tertiary": "#666666"
+			},
+			"danger": "#d32f2f",
+			"warning": "#f9a825",
+			"success": "#388e3c",
+			"discover": "#c2185b",
+			"information": "#1976d2",
+			"disabled": "#777777",
+			"dark": {
+				"normal": "#f9f9f9",
+				"secondary": "#e0e0e0",
+				"tertiary": "#b0b0b0"
+			},
+			"light": {
+				"normal": "#111111",
+				"secondary": "#444444",
+				"tertiary": "#666666"
+			}
+		},
+		"background": {
+			"danger": {
+				"normal": "#b71c1c",
+				"hover": "#e53935",
+				"pressed": "#4a0000"
+			},
+			"warning": {
+				"normal": "#fbc02d",
+				"hover": "#fff176",
+				"pressed": "#c49000"
+			},
+			"primary": {
+				"normal": "#0d530d",
+				"hover": "#2e7d32",
+				"pressed": "#1b3b1b"
+			},
+			"success": {
+				"normal": "#2e7d32",
+				"hover": "#4caf50",
+				"pressed": "#1b3b1b"
+			},
+			"discover": {
+				"normal": "#c2185b",
+				"hover": "#e91e63",
+				"pressed": "#4a002a"
+			},
+			"information": {
+				"normal": "#1976d2",
+				"hover": "#2196f3",
+				"pressed": "#0d3f66"
+			},
+			"disabled": {
+				"normal": "#444444",
+				"hover": "#3a3a3a",
+				"pressed": "#2c2c2c"
+			},
+			"subtle": {
+				"normal": "transparent",
+				"hover": "rgba(255, 255, 255, 0.08)",
+				"pressed": "rgba(255, 255, 255, 0.16)"
+			}
+		},
+		"surface": {
+			"sunken": {
+				"normal": "#1b1f1d"
+			},
+			"default": {
+				"normal": "#222726",
+				"hover": "#2d322f",
+				"pressed": "#353c39"
+			},
+			"raised": {
+				"normal": "#262c28",
+				"hover": "#323a33",
+				"pressed": "#3a433d"
+			},
+			"overlay": {
+				"normal": "#2b322c",
+				"hover": "#373f38",
+				"pressed": "#404a41"
+			},
+			"inverse": {
+				"sunken": {
+					"normal": "#f4f5f7"
+				},
+				"default": {
+					"normal": "#ffffff",
+					"hover": "#f0f0f0",
+					"pressed": "#e0e0e0"
+				},
+				"overlay": {
+					"normal": "#f9f9f9",
+					"hover": "#eeeeee",
+					"pressed": "#dddddd"
+				},
+				"raised": {
+					"normal": "#ffffff",
+					"hover": "#f7f7f7",
+					"pressed": "#eaeaea"
+				}
+			}
+		},
+		"blanket": {
+			"normal": "rgba(0, 0, 0, 0.5)"
+		},
+		"focusring": "rgba(255, 0, 0, 0.6)"
+	},
+	"space": {
+		"0": "0rem",
+		"1": "0.25rem",
+		"2": "0.5rem",
+		"3": "0.75rem",
+		"4": "1rem",
+		"5": "1.5rem",
+		"6": "2rem"
+	},
+	"font": {
+		"mono": "JetBrains Mono, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+		"main": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+		"heading": "Merriweather Sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
+	}
+}
