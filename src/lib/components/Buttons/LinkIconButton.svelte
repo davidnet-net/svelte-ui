@@ -10,6 +10,7 @@
 	export let href: string;
 	export let disabletooltip: boolean = false;
 	export let roundimage: boolean = false;
+	export let anonymous: boolean = false;
 
 	let hovered = false;
 
@@ -31,7 +32,11 @@
 
 <a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)}>
 	{#if isIconUrl}
-		<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
+		{#if anonymous}
+			<img src={resolvedIcon} crossorigin="anonymous" {alt} class="icon image-icon {roundclass}" />
+		{:else}
+			<img src={resolvedIcon} {alt} class="icon image-icon {roundclass}" />
+		{/if}
 	{:else}
 		<span class="icon material-symbols-outlined" translate="no" aria-hidden="true">{resolvedIcon}</span>
 	{/if}
