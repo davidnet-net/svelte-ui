@@ -34,7 +34,6 @@
 	$: if (roundimage) {
 		roundclass = "roundimage";
 	}
-
 </script>
 
 <button
