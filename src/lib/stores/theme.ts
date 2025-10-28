@@ -1,13 +1,13 @@
 import { writable } from "svelte/store";
 import { browser } from "$app/environment";
 
-export type Theme = "light" | "dark" | "highcontrast" | "system" | "halloween" | "christmas" ;
+export type Theme = "light" | "dark" | "highcontrast" | "system" | "halloween" | "christmas";
 const THEME_KEY = "theme";
 const defaultTheme: Theme = "dark";
 
 const internal = writable<Theme>(defaultTheme);
 
-function applyResolvedTheme(resolved: "light" | "dark" | "highcontrast" | "halloween" | "christmas" ) {
+function applyResolvedTheme(resolved: "light" | "dark" | "highcontrast" | "halloween" | "christmas") {
 	if (!browser) return;
 
 	const url = new URL(`../../themes/gen/${resolved}.css`, import.meta.url).href;
@@ -22,7 +22,7 @@ function applyResolvedTheme(resolved: "light" | "dark" | "highcontrast" | "hallo
 	document.head.appendChild(link);
 }
 
-function getPreferredTheme(): "light" | "dark" | "highcontrast" | "halloween" | "christmas"  {
+function getPreferredTheme(): "light" | "dark" | "highcontrast" | "halloween" | "christmas" {
 	if (window.matchMedia("(prefers-contrast: more)").matches) {
 		return "highcontrast";
 	}

@@ -19,7 +19,7 @@
 	}
 
 	// Dropdown action handler
-	function setTheme(value: "system" | "light" | "dark" | "highcontrast" | "halloween" | "christmas" ) {
+	function setTheme(value: "system" | "light" | "dark" | "highcontrast" | "halloween" | "christmas") {
 		theme.setTheme(value);
 	}
 
