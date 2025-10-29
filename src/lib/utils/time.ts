@@ -119,9 +119,7 @@ export async function isMachineTimeSameAsPreferred(correlationID: string): Promi
 		const machineOffset = now.getTimezoneOffset();
 
 		// Get the UTC offset for the preferred timezone at this exact time
-		const tzOffset = -new Date(
-			now.toLocaleString("en-US", { timeZone: timezone })
-		).getTimezoneOffset();
+		const tzOffset = -new Date(now.toLocaleString("en-US", { timeZone: timezone })).getTimezoneOffset();
 
 		// We compare offsets (convert both to minutes)
 		// Note: machineOffset is *positive for west of UTC* (we invert for match)
@@ -131,4 +129,3 @@ export async function isMachineTimeSameAsPreferred(correlationID: string): Promi
 		return false;
 	}
 }
-
