@@ -69,6 +69,14 @@
 			/>
 		{:else if src && id && name}
 			<LinkIconButton alt="{name}'s profile" href="https://account.davidnet.net/profile/{id}" icon={src} roundimage anonymous />
+		{:else if owner}
+			<IconButton
+				alt="Login / Sign up"
+				onClick={() => {
+					window.location.href = "https://account.davidnet.net/profile/";
+				}}
+				icon="no_accounts"
+			/>
 		{:else}
 			<IconButton loading alt="Avatar loading" onClick={() => {}} icon="no_accounts" />
 		{/if}
