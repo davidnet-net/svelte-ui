@@ -36,7 +36,7 @@
 	}
 </script>
 
-<a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)} target={target}>
+<a class={appearance} {href} aria-label={alt} on:mouseenter={() => (hovered = true)} on:mouseleave={() => (hovered = false)} {target}>
 	{#if isIconUrl}
 		{#if anonymous}
 			<img src={resolvedIcon} crossorigin="anonymous" {alt} class="icon image-icon {roundclass}" />

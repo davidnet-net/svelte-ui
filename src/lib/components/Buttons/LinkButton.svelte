@@ -15,7 +15,7 @@
 </script>
 
 {#if overidetextcolor}
-	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent} ; color: {overidetextcolor};" target={target}>
+	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent} ; color: {overidetextcolor};" {target}>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}
@@ -25,7 +25,7 @@
 		{/if}
 	</a>
 {:else}
-	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent};" target={target}>
+	<a class="{appearance} {stretchwidth ? 'stretch' : ''}" {href} style="justify-content: {justifycontent};" {target}>
 		{#if iconbefore}
 			<span class="icon icon-before material-symbols-outlined" translate="no" aria-hidden="true">{iconbefore}</span>
 		{/if}
