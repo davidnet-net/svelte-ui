@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Basic flex props
 	export let direction: "column" | "row" | "column-reverse" | "row-reverse" = "column";
 	export let gap: string = "0px";
 	export let height: string = "fit-content";
