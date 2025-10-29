@@ -69,7 +69,7 @@
 			/>
 		{:else if src && id && name}
 			<LinkIconButton alt="{name}'s profile" href="https://account.davidnet.net/profile/{id}" icon={src} roundimage anonymous />
-		{:else if owner}
+		{:else if owner && !src && !id && !name}
 			<IconButton
 				alt="Login / Sign up"
 				onClick={() => {
