@@ -125,15 +125,18 @@ export async function isMachineTimeSameAsPreferred(correlationID: string): Promi
 				hour12: false
 			})
 				.formatToParts(now)
-				.reduce((acc: Record<string, number>, part: Intl.DateTimeFormatPart) => {
-					if (part.type === "year") acc.year = Number(part.value);
-					if (part.type === "month") acc.month = Number(part.value);
-					if (part.type === "day") acc.day = Number(part.value);
-					if (part.type === "hour") acc.hour = Number(part.value);
-					if (part.type === "minute") acc.minute = Number(part.value);
-					if (part.type === "second") acc.second = Number(part.value);
-					return acc;
-				}, {} as Record<string, number>);
+				.reduce(
+					(acc: Record<string, number>, part: Intl.DateTimeFormatPart) => {
+						if (part.type === "year") acc.year = Number(part.value);
+						if (part.type === "month") acc.month = Number(part.value);
+						if (part.type === "day") acc.day = Number(part.value);
+						if (part.type === "hour") acc.hour = Number(part.value);
+						if (part.type === "minute") acc.minute = Number(part.value);
+						if (part.type === "second") acc.second = Number(part.value);
+						return acc;
+					},
+					{} as Record<string, number>
+				);
 
 			// Build a UTC timestamp as if that wall-clock time were UTC
 			const tzWallClockUtcMs = Date.UTC(
