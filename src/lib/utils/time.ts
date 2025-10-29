@@ -102,3 +102,33 @@ export async function formatDate_PREFERREDTIME(date: Date | string | undefined |
 export async function wait(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export async function isMachineTimeSameAsPreferred(correlationID: string): Promise<boolean> {
+	try {
+		// Refresh access token silently
+		await refreshAccessToken(correlationID, true, false);
+
+		// Get session info (no fresh DB fetch)
+		const session = await getSessionInfo(correlationID, false);
+		const timezone = session?.preferences?.timezone || "UTC";
+
+		// If timezone is UTC or same as machine’s, we can check
+		const now = new Date();
+
+		// Machine offset in minutes (e.g., UTC+2 = -120)
+		const machineOffset = now.getTimezoneOffset();
+
+		// Get the UTC offset for the preferred timezone at this exact time
+		const tzOffset = -new Date(
+			now.toLocaleString("en-US", { timeZone: timezone })
+		).getTimezoneOffset();
+
+		// We compare offsets (convert both to minutes)
+		// Note: machineOffset is *positive for west of UTC* (we invert for match)
+		return tzOffset * -1 === machineOffset;
+	} catch (err) {
+		console.warn("isMachineTimeSameAsPreferred: Failed to compare timezones", err);
+		return false;
+	}
+}
+
