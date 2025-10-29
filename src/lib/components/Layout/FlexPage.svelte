@@ -1,9 +1,9 @@
-	<!-- DECEPERATED DO NOT USE -->
-	<!-- DECEPERATED DO NOT USE -->
-	<!-- DECEPERATED DO NOT USE -->
-	<!-- DECEPERATED DO NOT USE -->
-	<!-- DECEPERATED DO NOT USE -->
-	 
+<!-- DECEPERATED DO NOT USE -->
+<!-- DECEPERATED DO NOT USE -->
+<!-- DECEPERATED DO NOT USE -->
+<!-- DECEPERATED DO NOT USE -->
+<!-- DECEPERATED DO NOT USE -->
+
 <script lang="ts">
 	export let direction: "column" | "row" | "column-reverse" | "row-reverse" = "column";
 </script>
