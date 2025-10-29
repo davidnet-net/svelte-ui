@@ -105,27 +105,58 @@ export async function wait(ms: number) {
 
 export async function isMachineTimeSameAsPreferred(correlationID: string): Promise<boolean> {
 	try {
-		// Refresh access token silently
 		await refreshAccessToken(correlationID, true, false);
-
-		// Get session info (no fresh DB fetch)
 		const session = await getSessionInfo(correlationID, false);
-		const timezone = session?.preferences?.timezone || "UTC";
+		const preferredTZ = session?.preferences?.timezone || "UTC";
 
-		// If timezone is UTC or same as machine’s, we can check
 		const now = new Date();
 
-		// Machine offset in minutes (e.g., UTC+2 = -120)
-		const machineOffset = now.getTimezoneOffset();
+		// --- Helper: get the offset (in minutes ahead of UTC) for a given timezone ---
+		const getOffsetForZone = (tz: string): number => {
+			// Format the current time in that timezone
+			const parts = new Intl.DateTimeFormat("en-US", {
+				timeZone: tz,
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit",
+				hour12: false
+			})
+				.formatToParts(now)
+				.reduce((acc: Record<string, number>, part: Intl.DateTimeFormatPart) => {
+					if (part.type === "year") acc.year = Number(part.value);
+					if (part.type === "month") acc.month = Number(part.value);
+					if (part.type === "day") acc.day = Number(part.value);
+					if (part.type === "hour") acc.hour = Number(part.value);
+					if (part.type === "minute") acc.minute = Number(part.value);
+					if (part.type === "second") acc.second = Number(part.value);
+					return acc;
+				}, {} as Record<string, number>);
 
-		// Get the UTC offset for the preferred timezone at this exact time
-		const tzOffset = -new Date(now.toLocaleString("en-US", { timeZone: timezone })).getTimezoneOffset();
+			// Build a UTC timestamp as if that wall-clock time were UTC
+			const tzWallClockUtcMs = Date.UTC(
+				parts.year ?? now.getUTCFullYear(),
+				(parts.month ?? now.getUTCMonth() + 1) - 1,
+				parts.day ?? now.getUTCDate(),
+				parts.hour ?? now.getUTCHours(),
+				parts.minute ?? now.getUTCMinutes(),
+				parts.second ?? now.getUTCSeconds()
+			);
 
-		// We compare offsets (convert both to minutes)
-		// Note: machineOffset is *positive for west of UTC* (we invert for match)
-		return tzOffset * -1 === machineOffset;
+			// Offset in minutes ahead of UTC
+			return Math.round((tzWallClockUtcMs - now.getTime()) / 60000);
+		};
+
+		// Get machine and preferred offsets
+		const machineOffset = -now.getTimezoneOffset(); // minutes ahead of UTC
+		const preferredOffset = getOffsetForZone(preferredTZ);
+
+		// Compare
+		return machineOffset === preferredOffset;
 	} catch (err) {
-		console.warn("isMachineTimeSameAsPreferred: Failed to compare timezones", err);
+		console.warn("isMachineTimeSameAsPreferred: error", err);
 		return false;
 	}
 }
