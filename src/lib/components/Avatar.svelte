@@ -73,7 +73,7 @@
 			<IconButton
 				alt="Login / Sign up"
 				onClick={() => {
-					window.location.href = "https://account.davidnet.net/profile/";
+					window.location.href = "https://account.davidnet.net/";
 				}}
 				icon="no_accounts"
 			/>
