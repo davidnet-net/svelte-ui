@@ -1,15 +1,19 @@
 <script lang="ts">
+	// Basic flex props
 	export let direction: "column" | "row" | "column-reverse" | "row-reverse" = "column";
 	export let gap: string = "0px";
 	export let height: string = "fit-content";
 	export let width: string = "fit-content";
 	export let justifycontent: string = "center";
 	export let alignitems: string = "center";
-	export let overflow: "visible" | "hidden" | "scroll" | "auto" = "visible";
 	export let wrap: "nowrap" | "wrap" | "wrap-reverse" = "nowrap";
+	export let overflowX: "visible" | "hidden" | "scroll" | "auto" = "visible";
+	export let overflowY: "visible" | "hidden" | "scroll" | "auto" = "visible";
+	export let flex: string | undefined;
 </script>
 
 <div
+	class={$$props.class}
 	style="
 		display: flex;
 		flex-direction: {direction};
@@ -18,8 +22,10 @@
 		width: {width};
 		justify-content: {justifycontent};
 		align-items: {alignitems};
-		overflow: {overflow};
 		flex-wrap: {wrap};
+		overflow-x: {overflowX};
+		overflow-y: {overflowY};
+		{flex ? `flex: ${flex};` : ''}
 	"
 >
 	<slot />
