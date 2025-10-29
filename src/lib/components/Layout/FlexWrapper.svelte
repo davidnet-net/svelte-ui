@@ -9,7 +9,7 @@
 	export let wrap: "nowrap" | "wrap" | "wrap-reverse" = "nowrap";
 	export let overflowX: "visible" | "hidden" | "scroll" | "auto" = "visible";
 	export let overflowY: "visible" | "hidden" | "scroll" | "auto" = "visible";
-	export let flex: string | undefined;
+	export let flex: string | undefined = undefined;
 </script>
 
 <div
