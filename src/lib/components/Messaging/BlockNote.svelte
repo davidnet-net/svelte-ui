@@ -3,6 +3,7 @@
 
 	export let appearance: "info" | "warning" | "error" | "success" = "info";
 	export let title: string | undefined = undefined;
+	export let stretchwidth: boolean = false;
 	export let actions: {
 		content: string;
 		appearance?: "primary" | "subtle" | "warning" | "danger" | "discover" | "link";
@@ -34,6 +35,11 @@
 	};
 
 	const iconColors = borderColors;
+
+	let width = "";
+	if (stretchwidth) {
+		width = "min-width: 100%;"
+	}
 </script>
 
 <div
@@ -41,6 +47,7 @@
 	style="
     background-color: {bgColors[appearance]};
     border: 1px solid {borderColors[appearance]};
+	{width}
   "
 >
 	<span class="icon material-symbols-outlined" style="color: {iconColors[appearance]}" translate="no" aria-hidden="true">
