@@ -38,7 +38,7 @@
 
 	let width = "";
 	if (stretchwidth) {
-		width = "min-width: 100%;"
+		width = "min-width: 100%;";
 	}
 </script>
 
