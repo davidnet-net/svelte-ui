@@ -50,7 +50,7 @@
 		white-space: nowrap;
 		pointer-events: none;
 		user-select: none;
-		z-index: 10;
+		z-index: 9000;
 		box-sizing: border-box;
 		line-height: 1;
 		font-weight: normal;

@@ -16,7 +16,7 @@
 <style>
 	.toaster {
 		position: fixed;
-		z-index: 9999;
+		z-index: 8000;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
