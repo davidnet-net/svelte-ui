@@ -1,4 +1,4 @@
-async function hashSHA256(data: string) {
+export async function hashSHA256(data: string) {
 	const encoder = new TextEncoder();
 	const buffer = encoder.encode(data);
 	const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
