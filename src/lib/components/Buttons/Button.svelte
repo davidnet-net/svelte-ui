@@ -10,6 +10,7 @@
 	export let justifycontent: string | undefined = "center";
 	export let stretchwidth: boolean = false;
 	export let overidetextcolor: string | undefined = undefined;
+	export let allowtextwrap: boolean | undefined = false;
 
 	if (loading) {
 		disabled = true;
@@ -18,7 +19,7 @@
 
 {#if overidetextcolor}
 	<button
-		class="{appearance} {stretchwidth ? 'stretch' : ''}"
+		class="{appearance} {stretchwidth ? 'stretch' : ''} {allowtextwrap ? '' : 'no-wrap'}"
 		{disabled}
 		on:click={onClick}
 		style="justify-content: {justifycontent}; color: {overidetextcolor};"
@@ -61,7 +62,6 @@
 		padding: 0.5rem 1rem;
 		gap: 0.5rem;
 		box-sizing: border-box;
-		white-space: nowrap;
 		vertical-align: middle;
 		position: relative;
 		margin-right: 0.25rem;
@@ -78,6 +78,10 @@
 		transition:
 			background-color 200ms ease,
 			color 200ms ease;
+	}
+
+	.no-wrap {
+		white-space: nowrap;
 	}
 
 	.icon {
