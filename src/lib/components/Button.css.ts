@@ -1,16 +1,16 @@
-import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
-import { token } from '../styles/schema.css.ts';
+import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
+import { token } from "../styles/schema.css.ts";
 
 export const buttonRecipe = recipe({
 	base: {
-		border: 'none',
-		cursor: 'pointer',
-		borderRadius: '6px',
+		border: "none",
+		cursor: "pointer",
+		borderRadius: "6px",
 		fontWeight: 600,
-		transition: 'all 0.2s',
-		display: 'inline-flex',
-		alignItems: 'center',
-		fontFamily: 'inherit',
+		transition: "all 0.2s",
+		display: "inline-flex",
+		alignItems: "center",
+		fontFamily: "inherit",
 
 		// Use tokens from the theme contract
 		padding: token.space.md
@@ -20,33 +20,33 @@ export const buttonRecipe = recipe({
 		kind: {
 			primary: {
 				backgroundColor: token.colors.brand,
-				color: '#ffffff',
-				':hover': { opacity: 0.9 }
+				color: "#ffffff",
+				":hover": { opacity: 0.9 }
 			},
 			secondary: {
 				backgroundColor: token.colors.bg.secondary,
 				color: token.colors.text.primary,
-				':hover': { backgroundColor: '#e2e8f0' } // manual color or another token
+				":hover": { backgroundColor: "#e2e8f0" } // manual color or another token
 			},
 			ghost: {
-				backgroundColor: 'transparent',
+				backgroundColor: "transparent",
 				color: token.colors.text.secondary,
-				':hover': {
+				":hover": {
 					backgroundColor: token.colors.bg.secondary,
 					color: token.colors.text.primary
 				}
 			}
 		},
 		size: {
-			small: { padding: token.space.sm, fontSize: '0.875rem' },
-			medium: { padding: token.space.md, fontSize: '1rem' },
-			large: { padding: token.space.lg, fontSize: '1.125rem' }
+			small: { padding: token.space.sm, fontSize: "0.875rem" },
+			medium: { padding: token.space.md, fontSize: "1rem" },
+			large: { padding: token.space.lg, fontSize: "1.125rem" }
 		}
 	},
 
 	defaultVariants: {
-		kind: 'primary',
-		size: 'medium'
+		kind: "primary",
+		size: "medium"
 	}
 });
 

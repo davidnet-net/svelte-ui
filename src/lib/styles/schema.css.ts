@@ -1,4 +1,4 @@
-import { createThemeContract } from '@vanilla-extract/css';
+import { createThemeContract } from "@vanilla-extract/css";
 
 //? Contract - Schema
 export const token = createThemeContract({
@@ -7,8 +7,7 @@ export const token = createThemeContract({
 			neutral: null
 		}
 	},
-	
-	
+
 	colors: {
 		bg: {
 			primary: null,
