@@ -1,31 +1,94 @@
 import { createThemeContract } from "@vanilla-extract/css";
 
 //? Contract - Schema
-export const token = createThemeContract({
+export const theme = createThemeContract({
 	color: {
 		text: {
-			neutral: null
-		}
-	},
-
-	colors: {
-		bg: {
-			primary: null,
+			default: null,
 			secondary: null,
-			surface: null
+			tertiary: null,
+			inverse: null,
+			disabled: null,
+			selected: null,
+			danger: null,
+			warning: null,
+			success: null,
+			discover: null,
+			information: null
 		},
-		text: {
-			primary: null,
-			secondary: null
+		link: {
+			default: null,
+			pressed: null,
+			visited: {
+				default: null,
+				pressed: null
+			}
 		},
-		brand: null
-	},
-	space: {
-		sm: null,
-		md: null,
-		lg: null
-	},
-	fonts: {
-		test: null
+		background: {
+			danger: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			warning: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			primary: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			success: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			discover: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			information: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			disabled: {
+				normal: null
+			},
+			subtle: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+		},
+
+		surface: {
+			sunken: {
+				normal: null
+			},
+			default: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			raised: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+			overlay: {
+				normal: null,
+				hover: null,
+				pressed: null
+			},
+		},
+		border: {
+			focus: null,
+			default: null
+		},
+		blanket: null,
 	}
 });

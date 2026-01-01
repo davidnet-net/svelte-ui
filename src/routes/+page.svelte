@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { token } from "../lib/styles/schema.css.ts";
+	import { token } from "../lib/styles/designtokens.ts";
 </script>
 
-<h1 style="color: {token.color.text.neutral}">Test</h1>
+<div style="padding: 3rem">
+	<h1 style="color: {token.theme.color.text.default}">Grote Yapper</h1>
+</div>

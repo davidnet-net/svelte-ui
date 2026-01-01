@@ -1,5 +1,6 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { token } from "./schema.css.ts";
+import { token } from "./designtokens.ts";
+import { interFontName } from "./fonts.css.ts";
 
 globalStyle("*, *::before, *::after", {
 	boxSizing: "border-box"
@@ -11,12 +12,15 @@ globalStyle("*", {
 });
 
 globalStyle(".appshell", {
-	lineHeight: 1.1,
-	WebkitFontSmoothing: "antialiased",
-	fontFamily: token.fonts.test,
-	backgroundColor: token.colors.bg.primary,
+	backgroundColor: token.theme.color.surface.default.normal,
+	
 	minHeight: "100vh",
-	minWidth: "100vw"
+	minWidth: "100vw",
+	
+	fontFamily: token.global.font.family.sans,
+	fontWeight: token.global.font.weight.regular,
+	WebkitFontSmoothing: 'antialiased',
+	MozOsxFontSmoothing: 'grayscale',
 });
 
 globalStyle("img, picture, video, canvas, svg", {
