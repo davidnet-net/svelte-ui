@@ -1,5 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { token } from "./designtokens.ts";
+import { token } from "./designTokens.ts";
 import { interFontName } from "./fonts.css.ts";
 
 globalStyle("*, *::before, *::after", {

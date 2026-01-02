@@ -1,5 +1,5 @@
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
-import { token } from "../styles/schema.css.ts";
+import { token } from "../styles/themes/schema.css.ts";
 
 export const buttonRecipe = recipe({
 	base: {

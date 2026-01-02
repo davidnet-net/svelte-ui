@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { token } from "../../styles/schema.css.ts";
-	import { darkTheme } from "../../styles/themes/dark.css.ts";
-	import { lightTheme } from "../../styles/themes/light.css.ts";
+	import { currentTheme, setTheme } from '../../styles/themeManager.svelte.ts';
 	import type { Snippet } from "svelte";
 	import "$lib/styles/reset.css.ts";
 
@@ -10,11 +8,16 @@
 		children: Snippet;
 	}
 	let { children }: Props = $props();
-
-	// Variables
-	let theme = $state(lightTheme);
 </script>
 
-<div class="appshell {theme}">
+<div class="appshell {currentTheme.themeObject}">
 	{@render children()}
+
+	<button onclick={()=>{
+		setTheme("dark");
+	}}>dark</button>
+
+	<button onclick={()=>{
+		setTheme("light");
+	}}>light</button>
 </div>
