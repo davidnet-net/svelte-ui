@@ -62,7 +62,7 @@ export const theme = createThemeContract({
 				normal: null,
 				hover: null,
 				pressed: null
-			},
+			}
 		},
 
 		surface: {
@@ -83,12 +83,12 @@ export const theme = createThemeContract({
 				normal: null,
 				hover: null,
 				pressed: null
-			},
+			}
 		},
 		border: {
 			focus: null,
 			default: null
 		},
-		blanket: null,
+		blanket: null
 	}
 });

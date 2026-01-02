@@ -1,5 +1,5 @@
 <script>
-	import AppShell from "$lib/components/primitives/AppShell.svelte";
+	import AppShell from "$lib/components/primitives/AppShell/AppShell.svelte";
 
 	let { children } = $props();
 </script>
