@@ -14,7 +14,11 @@ export const theme = createThemeContract({
 			warning: null,
 			success: null,
 			discover: null,
-			information: null
+			information: null,
+			UNSAFE: {
+				white_default: null,
+				dark_default: null
+			}
 		},
 		link: {
 			default: null,

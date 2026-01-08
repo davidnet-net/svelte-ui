@@ -1,4 +1,4 @@
-import { createGlobalTheme, createThemeContract } from "@vanilla-extract/css";
+import { createGlobalTheme } from "@vanilla-extract/css";
 import { interFontName } from "../fonts.css.ts";
 
 export const global = createGlobalTheme(":root", {
@@ -10,28 +10,31 @@ export const global = createGlobalTheme(":root", {
 		weight: {
 			regular: "400",
 			bold: "700"
+		},
+		size: {
+			xhuge: "3rem",
+			huge: "2.5rem",
+			xlarge: "2rem",
+			large: "1.5rem",
+			medium: "1rem",
+			small: "0.75rem"
 		}
 	},
 
 	spacing: {
-		"0": "0",
-		"1": "0.25rem", // 4px
-		"1.5": "0.375rem", // 6px
-		"2": "0.5rem", // 8px
-		"2.5": "0.625rem", // 10px
-		"3": "0.75rem", // 12px
-		"4": "1rem", // 16px
-		"5": "1.25rem", // 20px
-		"6": "1.5rem" // 24px
+		none: "0",
+		xsmall: "0.25rem", // 4px
+		small: "0.5rem", // 8px
+		medium: "1rem", // 16px
+		large: "1.5rem", // 24px
+		xlarge: "2rem" // 32px
 	},
 
 	radius: {
-		"0": "0",
-		"1": "2px",
-		"2": "4px",
-		"3": "8px",
-		"4": "12px",
-		"5": "16px",
+		none: "0",
+		small: "4px",
+		medium: "8px",
+		large: "16px",
 		full: "9999px"
 	},
 

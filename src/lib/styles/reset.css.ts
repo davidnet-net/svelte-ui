@@ -1,6 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
 import { token } from "./designTokens.ts";
-import { interFontName } from "./fonts.css.ts";
 
 globalStyle("*, *::before, *::after", {
 	boxSizing: "border-box"
@@ -19,6 +18,9 @@ globalStyle(".appshell", {
 
 	fontFamily: token.global.font.family.sans,
 	fontWeight: token.global.font.weight.regular,
+	fontSize: token.global.font.size.medium,
+	color: token.theme.color.text.default,
+
 	WebkitFontSmoothing: "antialiased",
 	MozOsxFontSmoothing: "grayscale"
 });

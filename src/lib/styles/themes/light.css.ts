@@ -14,7 +14,11 @@ export const lightTheme = createTheme(token.theme, {
 			warning: "#a54800",
 			success: "#216e4e",
 			discover: "#5e4db2",
-			information: "#0055cc"
+			information: "#0055cc",
+			UNSAFE: {
+				white_default: "#111111",
+				dark_default: "#f1f1f1"
+			}
 		},
 
 		link: {

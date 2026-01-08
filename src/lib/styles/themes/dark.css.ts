@@ -10,11 +10,15 @@ export const darkTheme = createTheme(token.theme, {
 			inverse: "#111111",
 			disabled: "#666666",
 			selected: "#4C9AFF",
-			danger: "#ae2e24",
+			danger: "#e53935",
 			warning: "#f5cd47",
 			success: "#7ee2b8",
 			discover: "#b8acf6",
-			information: "#85b8ff"
+			information: "#85b8ff",
+			UNSAFE: {
+				white_default: "#111111",
+				dark_default: "#f1f1f1"
+			}
 		},
 
 		link: {
@@ -28,14 +32,14 @@ export const darkTheme = createTheme(token.theme, {
 
 		background: {
 			danger: {
-				normal: "#8b0f06",
+				normal: "#ae2e24",
 				hover: "#b4241a",
 				pressed: "#2c2c2c"
 			},
 			warning: {
-				normal: "#866602",
-				hover: "#c48b1c",
-				pressed: "#2c2c2c"
+				normal: "#cb8616ff",
+				hover: "#cf8714ff",
+				pressed: "#d0d0d0"
 			},
 			primary: {
 				normal: "#0d3e8b",
