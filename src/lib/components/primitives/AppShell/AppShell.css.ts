@@ -16,14 +16,7 @@ const nav = style({
 	padding: "0 1.5rem"
 });
 
-const sidepanel = style({
-	backgroundColor: "blue",
-	width: "100%",
-	height: "100%"
-});
-
 export const styles = {
 	base,
-	nav,
-	sidepanel
+	nav
 };
