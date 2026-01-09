@@ -1,9 +1,10 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
-import { interFontName } from "../fonts.css.ts";
+import { interFontName, momoTrustDisplayFontName } from "../fonts.css.ts";
 
 export const global = createGlobalTheme(":root", {
 	font: {
 		family: {
+			display: `"${momoTrustDisplayFontName}"`,
 			sans: `"${interFontName}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
 			mono: "monospace"
 		},

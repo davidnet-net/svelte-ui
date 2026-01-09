@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { currentTheme, setTheme } from "../../../styles/themeManager.svelte.ts";
 	import type { Snippet } from "svelte";
-	import "$lib/styles/reset.css.ts";
+	import "$lib/styles/global.css.ts";
 	import { styles } from "./AppShell.css.ts";
 	import Flex from "../Flex/Flex.svelte";
 
