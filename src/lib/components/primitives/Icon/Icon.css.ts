@@ -3,6 +3,7 @@ import { token } from "../../../styles/designTokens.ts";
 import { styleVariants } from "@vanilla-extract/css";
 
 const size = styleVariants({
+	inherit: { fontSize: "inherit" },
 	small: { fontSize: token.global.font.size.small },
 	medium: { fontSize: token.global.font.size.medium },
 	large: { fontSize: token.global.font.size.large },

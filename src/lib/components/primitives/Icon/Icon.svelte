@@ -4,9 +4,9 @@
 
 	interface Props {
 		icon: iconType;
-		size: keyof typeof styles.size;
+		size?: keyof typeof styles.size;
 	}
-	let { icon, size }: Props = $props();
+	let { icon, size = "inherit" }: Props = $props();
 </script>
 
 <span class="{styles.iconType.filled} {styles.size[size]}" translate="no" aria-hidden="true">

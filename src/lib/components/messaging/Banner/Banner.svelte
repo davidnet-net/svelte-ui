@@ -15,9 +15,9 @@
 </script>
 
 <div class="{styles.baseBanner} {styles.appearance[appearance]}">
-	<Flex width="100%" height="3rem" direction="row" alignItems="center" gap="medium">
+	<Flex width="100%" height="3rem" direction="row" alignItems="center" gap="small">
 		{#if icon}
-			<Icon {icon} size="xlarge" />
+			<Icon {icon} size="large" />
 		{/if}
 		<span class={styles.message}>
 			{@render children()}
