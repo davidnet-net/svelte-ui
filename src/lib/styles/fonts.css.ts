@@ -12,38 +12,38 @@ export const iconFontRoundedName = "Material Symbols Rounded";
 export const momoTrustDisplayFontName = "Momo Trust Display";
 
 globalFontFace(interFontName, {
-    src: `url("${interUrl}") format("woff2")`,
-    fontDisplay: "swap",
-    fontWeight: "100 900",
-    fontStyle: "normal"
+	src: `url("${interUrl}") format("woff2")`,
+	fontDisplay: "swap",
+	fontWeight: "100 900",
+	fontStyle: "normal"
 });
 
 globalFontFace(momoTrustDisplayFontName, {
-    src: `url("${momoTrustDisplayUrl}") format("woff2")`,
-    fontDisplay: "swap",
-    fontWeight: "400",
-    fontStyle: "normal"
+	src: `url("${momoTrustDisplayUrl}") format("woff2")`,
+	fontDisplay: "swap",
+	fontWeight: "400",
+	fontStyle: "normal"
 });
 
 globalFontFace(interFontName, {
-    src: `url("${interItalicUrl}") format("woff2")`,
-    fontDisplay: "swap",
-    fontWeight: "100 900",
-    fontStyle: "italic"
+	src: `url("${interItalicUrl}") format("woff2")`,
+	fontDisplay: "swap",
+	fontWeight: "100 900",
+	fontStyle: "italic"
 });
 
 globalFontFace(iconFontRoundedName, {
-    fontStyle: "normal",
-    fontWeight: "400",
-    src: `url("${iconFontRoundedUrl}") format("woff2")`
+	fontStyle: "normal",
+	fontWeight: "400",
+	src: `url("${iconFontRoundedUrl}") format("woff2")`
 });
 
 globalFontFace(iconFontName, {
-    fontStyle: "normal",
-    fontWeight: "400",
-    src: `url("${iconFontUrl}") format("woff2")`
+	fontStyle: "normal",
+	fontWeight: "400",
+	src: `url("${iconFontUrl}") format("woff2")`
 });
 
 export const tabularNums = style({
-    fontVariantNumeric: "tabular-nums"
+	fontVariantNumeric: "tabular-nums"
 });
