@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
-	import Loader from "$lib/components/primitives/Loader/Loader.svelte";
+	import Loader from "$lib/components/primitives/Spinner/Spinner.svelte";
 	import Skeleton from "$lib/components/primitives/Skeleton/Skeleton.svelte";
 
 	//import { token } from "../lib/styles/designTokens.ts";

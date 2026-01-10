@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { currentTheme, setTheme } from "../../../styles/themeManager.svelte.ts";
-	import { type Snippet } from "svelte"; // Removed onMount
+	import { type Snippet } from "svelte";
 	import "$lib/styles/global.css.ts";
 	import { styles } from "./AppShell.css.ts";
 	import Flex from "../Flex/Flex.svelte";
@@ -13,7 +13,6 @@
 	}
 
 	let { children, banners }: Props = $props();
-	// Removed javascriptenabled state logic
 </script>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">

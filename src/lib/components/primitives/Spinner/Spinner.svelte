@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { styles } from "./Loader.css.ts";
+	import { styles } from "./Spinner.css.ts";
 
 	interface Props {
 		size?: keyof typeof styles.size;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
-	import Loader from "$lib/components/primitives/Loader/Loader.svelte";
+	import Loader from "$lib/components/primitives/Spinner/Spinner.svelte";
 	import type { Snippet } from "svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import type { iconType } from "../../../types/Icon.ts";
