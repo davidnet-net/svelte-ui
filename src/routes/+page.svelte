@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
-	import Loader from "$lib/components/primitives/Spinner/Spinner.svelte";
-	import Skeleton from "$lib/components/primitives/Skeleton/Skeleton.svelte";
+	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
+	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 </script>
 
