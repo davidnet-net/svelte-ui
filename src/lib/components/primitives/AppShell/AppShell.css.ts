@@ -16,7 +16,20 @@ const nav = style({
 	padding: "0 1.5rem"
 });
 
+const noscriptoverlay = style({
+	position: "fixed",
+	top: "0",
+	left: "0",
+	width: "100vw",
+	height: "100vh",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+	backgroundColor: token.theme.color.surface.overlay.normal
+});
+
 export const styles = {
 	base,
-	nav
+	nav,
+	noscriptoverlay
 };

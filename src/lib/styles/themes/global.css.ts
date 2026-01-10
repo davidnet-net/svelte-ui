@@ -4,13 +4,15 @@ import { interFontName, momoTrustDisplayFontName } from "../fonts.css.ts";
 export const global = createGlobalTheme(":root", {
 	font: {
 		family: {
-			display: `"${momoTrustDisplayFontName}"`,
+			brand: `"${momoTrustDisplayFontName}"`,
 			sans: `"${interFontName}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
 			mono: "monospace"
 		},
 		weight: {
 			regular: "400",
-			bold: "700"
+			medium: "500",
+			bold: "700",
+			heavy: "900"
 		},
 		size: {
 			xhuge: "3rem",
@@ -19,6 +21,11 @@ export const global = createGlobalTheme(":root", {
 			large: "1.5rem",
 			medium: "1rem",
 			small: "0.75rem"
+		},
+		lineHeight: {
+			none: "1",
+			tight: "1.25",
+			normal: "1.5"
 		}
 	},
 
@@ -34,13 +41,31 @@ export const global = createGlobalTheme(":root", {
 	radius: {
 		none: "0",
 		small: "4px",
-		medium: "8px",
-		large: "16px",
+		medium: "6px",
+		large: "8px",
+		xlarge: "12px",
+		xxlarge: "16px",
 		full: "9999px"
 	},
 
 	borderWidth: {
 		standard: "1px",
 		thick: "2px"
+	},
+
+	transition: {
+		duration: {
+			fast: "100ms", // Micro
+			standard: "200ms", // Hover & Fade in
+			slow: "400ms", // Modal
+			xslow: "2s" // Shimmer
+		},
+		timing: {
+			linear: "linear",
+			ease: "ease",
+			easeIn: "ease-in",
+			easeOut: "ease-out",
+			easeInOut: "ease-in-out"
+		}
 	}
 });

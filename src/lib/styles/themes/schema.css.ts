@@ -14,7 +14,7 @@ export const theme = createThemeContract({
 			warning: null,
 			success: null,
 			discover: null,
-			information: null,
+			primary: null,
 			UNSAFE: {
 				white_default: null,
 				dark_default: null
@@ -27,6 +27,10 @@ export const theme = createThemeContract({
 				default: null,
 				pressed: null
 			}
+		},
+		skeleton: {
+			from: null,
+			to: null
 		},
 		background: {
 			danger: {
@@ -50,11 +54,6 @@ export const theme = createThemeContract({
 				pressed: null
 			},
 			discover: {
-				normal: null,
-				hover: null,
-				pressed: null
-			},
-			information: {
 				normal: null,
 				hover: null,
 				pressed: null

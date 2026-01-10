@@ -32,10 +32,6 @@ const appearance = styleVariants({
 		backgroundColor: token.theme.color.background.discover.normal,
 		color: token.theme.color.text.default
 	},
-	information: {
-		backgroundColor: token.theme.color.background.information.normal,
-		color: token.theme.color.text.UNSAFE.white_default
-	},
 	success: {
 		backgroundColor: token.theme.color.background.success.normal,
 		color: token.theme.color.text.UNSAFE.white_default

@@ -14,7 +14,7 @@ export const lightTheme = createTheme(token.theme, {
 			warning: "#a54800",
 			success: "#216e4e",
 			discover: "#5e4db2",
-			information: "#0055cc",
+			primary: "#0055cc",
 			UNSAFE: {
 				white_default: "#111111",
 				dark_default: "#f1f1f1"
@@ -29,7 +29,10 @@ export const lightTheme = createTheme(token.theme, {
 				pressed: "#5243AA"
 			}
 		},
-
+		skeleton: {
+			from: "#dfe1e6",
+			to: "#ebecf0"
+		},
 		background: {
 			danger: {
 				normal: "#e53935",
@@ -42,7 +45,7 @@ export const lightTheme = createTheme(token.theme, {
 				pressed: "#d0d0d0"
 			},
 			primary: {
-				normal: "#1a73e8",
+				normal: "#0C66E4",
 				hover: "#1669c1",
 				pressed: "#d0d0d0"
 			},
@@ -54,11 +57,6 @@ export const lightTheme = createTheme(token.theme, {
 			discover: {
 				normal: "#8c70f0",
 				hover: "#7159c4",
-				pressed: "#d0d0d0"
-			},
-			information: {
-				normal: "#4098ff",
-				hover: "#327ad1",
 				pressed: "#d0d0d0"
 			},
 
