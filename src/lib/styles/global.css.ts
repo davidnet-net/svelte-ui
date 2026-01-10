@@ -1,4 +1,5 @@
-import { globalStyle } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
+
 import { token } from "./designTokens.ts";
 
 globalStyle("*, *::before, *::after", {
@@ -23,4 +24,13 @@ globalStyle(".appshell", {
 
 	WebkitFontSmoothing: "antialiased",
 	MozOsxFontSmoothing: "grayscale"
+});
+
+export const focusring = style({
+	":focus-visible": {
+		outlineWidth: token.global.borderWidth.thick,
+		outlineStyle: "solid",
+		outlineColor: token.theme.color.border.focus,
+		outlineOffset: token.global.spacing.none
+	}
 });

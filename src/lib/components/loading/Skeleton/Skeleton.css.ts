@@ -1,5 +1,6 @@
-import { token } from "../../../styles/designTokens.ts";
 import { keyframes, style, styleVariants } from "@vanilla-extract/css";
+
+import { token } from "../../../styles/designTokens.ts";
 
 const shimmereffect = keyframes({
 	"0%": { transform: "translateX(-100%)" },

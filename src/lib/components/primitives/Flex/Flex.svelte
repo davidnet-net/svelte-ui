@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { styles } from "./Flex.css.ts";
 	import type { Snippet } from "svelte";
+
+	import { styles } from "./Flex.css.ts";
 
 	interface Props {
 		direction?: keyof typeof styles.direction;

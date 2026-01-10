@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { currentTheme, setTheme } from "../../../styles/themeManager.svelte.ts";
-	import { type Snippet } from "svelte";
 	import "$lib/styles/global.css.ts";
-	import { styles } from "./AppShell.css.ts";
-	import Flex from "../Flex/Flex.svelte";
+
+	import { type Snippet } from "svelte";
+
 	import Button from "$lib/components/input/Button/Button.svelte";
+
+	import { currentTheme, setTheme } from "../../../styles/themeManager.svelte.ts";
+	import Flex from "../Flex/Flex.svelte";
+	import { styles } from "./AppShell.css.ts";
 
 	// Props
 	interface Props {

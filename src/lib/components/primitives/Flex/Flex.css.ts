@@ -1,5 +1,6 @@
-import { token } from "../../../styles/designTokens.ts";
 import { style, styleVariants } from "@vanilla-extract/css";
+
+import { token } from "../../../styles/designTokens.ts";
 
 const baseFlex = style({
 	display: "flex",

@@ -1,4 +1,5 @@
-import { style, styleVariants, keyframes } from "@vanilla-extract/css";
+import { keyframes, style, styleVariants } from "@vanilla-extract/css";
+
 import { token } from "../../../styles/designTokens.ts";
 
 const rotate = keyframes({

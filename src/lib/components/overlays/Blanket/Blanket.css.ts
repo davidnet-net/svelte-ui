@@ -1,5 +1,6 @@
-import { token } from "../../../styles/designTokens.ts";
 import { style } from "@vanilla-extract/css";
+
+import { token } from "../../../styles/designTokens.ts";
 
 const baseBlanket = style({
 	position: "fixed",

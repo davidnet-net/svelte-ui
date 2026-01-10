@@ -1,4 +1,5 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
+
 import { interFontName, momoTrustDisplayFontName } from "../fonts.css.ts";
 
 export const global = createGlobalTheme(":root", {
@@ -70,6 +71,7 @@ export const global = createGlobalTheme(":root", {
 	},
 
 	zIndex: {
-		blanket: "1000"
+		blanket: "1000",
+		toolTip: "900"
 	}
 });

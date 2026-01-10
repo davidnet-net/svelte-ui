@@ -86,6 +86,26 @@ export const theme = createThemeContract({
 				normal: null,
 				hover: null,
 				pressed: null
+			},
+			inversed: {
+				sunken: {
+					normal: null
+				},
+				default: {
+					normal: null,
+					hover: null,
+					pressed: null
+				},
+				raised: {
+					normal: null,
+					hover: null,
+					pressed: null
+				},
+				overlay: {
+					normal: null,
+					hover: null,
+					pressed: null
+				}
 			}
 		},
 		border: {

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Button from "$lib/components/input/Button/Button.svelte";
-	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
-	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
-	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
+	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
-	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
+	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
+	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
+	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 </script>
 
 <div style="padding: 3rem">
@@ -28,5 +28,5 @@
 	<Loader size="small" />
 	<br />
 	<Skeleton height="50px" />
-	<Blanket><h1>Test</h1></Blanket>
+	<IconButton tip="yapper" icon="home" onclick={() => {}} />
 </div>

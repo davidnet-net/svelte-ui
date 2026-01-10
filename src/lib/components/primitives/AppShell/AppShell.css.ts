@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+
 import { token } from "../../../styles/designTokens.ts";
 
 const base = style({

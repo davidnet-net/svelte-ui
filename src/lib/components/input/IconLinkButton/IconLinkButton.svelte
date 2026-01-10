@@ -1,26 +1,16 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
+	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { focusring } from "../../../styles/global.css.ts";
 	import type { iconType } from "../../../types/Icon.ts";
-	import { styles } from "./LinkButton.css.ts";
+	import { styles } from "./IconLinkButton.css.ts";
 
 	interface Props extends HTMLAnchorAttributes {
-		children: Snippet;
-
-		/**
-		 * Name icon before content
-		 */
-		iconbefore?: iconType;
-
-		/**
-		 * Name icon after content
-		 */
-		iconafter?: iconType;
+		icon: iconType;
 
 		/**
 		 * Expands button width to 100%
@@ -43,33 +33,38 @@
 		external?: boolean;
 		disabled?: boolean;
 		href: string;
+		tip: string;
 		appearance?: keyof typeof styles.appearance;
 	}
 
 	let {
-		children,
 		appearance = "subtle",
-		iconbefore,
-		iconafter,
-		stretchwidth,
+		icon,
 		loading = false,
 		opennewtab = false,
 		external = false,
 		class: className = "",
+		tip,
 		href,
 		disabled = false,
 		...rest
 	}: Props = $props();
 
 	const isDisabled = $derived(disabled || loading);
-	const iconAfter = $derived(iconafter ? iconafter : opennewtab ? "open_in_new" : "");
 	const target = $derived(opennewtab || external ? "_blank" : rest.target);
 	const rel = $derived(opennewtab || external ? "noopener noreferrer" : rest.rel);
+	let hovered = $state(false);
 </script>
 
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
-	class="{focusring} {styles.baseLinkButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
+	onmouseenter={() => {
+		hovered = true;
+	}}
+	onmouseleave={() => {
+		hovered = false;
+	}}
+	class="{focusring} {styles.baseIconLinkButton} {isDisabled
 		? styles.disabledappearance
 		: styles.appearance[appearance]} {className}"
 	href={disabled ? undefined : href}
@@ -81,12 +76,9 @@
 	{#if loading}
 		<Loader size="medium" />
 	{:else}
-		{#if iconbefore}
-			<Icon icon={iconbefore} />
-		{/if}
-		{@render children()}
-		{#if iconAfter}
-			<Icon icon={iconAfter} />
-		{/if}
+		<Icon {icon} />
+	{/if}
+	{#if hovered && !disabled}
+		<ToolTip {tip} />
 	{/if}
 </a>

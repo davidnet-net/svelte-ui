@@ -1,6 +1,7 @@
-import { icons, iconLoadedStyle } from "../../../styles/icons.css.ts";
-import { token } from "../../../styles/designTokens.ts";
 import { styleVariants } from "@vanilla-extract/css";
+
+import { token } from "../../../styles/designTokens.ts";
+import { iconLoadedStyle, icons } from "../../../styles/icons.css.ts";
 
 const size = styleVariants({
 	inherit: { fontSize: "inherit" },

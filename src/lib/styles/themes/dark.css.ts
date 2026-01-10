@@ -1,4 +1,5 @@
 import { createTheme } from "@vanilla-extract/css";
+
 import { token } from "../designTokens.ts";
 
 export const darkTheme = createTheme(token.theme, {
@@ -89,6 +90,26 @@ export const darkTheme = createTheme(token.theme, {
 				normal: "#282e33",
 				hover: "#353c44",
 				pressed: "#404952"
+			},
+			inversed: {
+				sunken: {
+					normal: "#f4f5f7"
+				},
+				default: {
+					normal: "#F8F9FB",
+					hover: "#f0f0f0",
+					pressed: "#e6e6e6"
+				},
+				raised: {
+					normal: "#ffffffff",
+					hover: "#f9f9f9",
+					pressed: "#f0f0f0"
+				},
+				overlay: {
+					normal: "#ffffffff",
+					hover: "#e6e6e6",
+					pressed: "#d9d9d9"
+				}
 			}
 		},
 

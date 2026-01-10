@@ -2,7 +2,7 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 import { token } from "../../../styles/designTokens.ts";
 
-const baseLinkButton = style({
+const baseIconButton = style({
 	display: "inline-flex",
 	justifyContent: "center",
 	alignItems: "center",
@@ -11,7 +11,6 @@ const baseLinkButton = style({
 	position: "relative",
 	flexShrink: "0",
 
-	minWidth: "120px",
 	width: "auto",
 	height: "2rem",
 
@@ -116,13 +115,8 @@ const disabledappearance = style({
 	cursor: "not-allowed"
 });
 
-const stretchwidth = style({
-	width: "100%"
-});
-
 export const styles = {
-	baseLinkButton,
+	baseIconButton,
 	appearance,
-	disabledappearance,
-	stretchwidth
+	disabledappearance
 };

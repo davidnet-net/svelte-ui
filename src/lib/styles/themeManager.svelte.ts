@@ -1,11 +1,11 @@
-import { lightTheme } from "./themes/light.css.ts";
-import { darkTheme } from "./themes/dark.css.ts";
 import {
 	iconFontName,
 	iconFontRoundedName,
 	interFontName,
 	momoTrustDisplayFontName
 } from "./fonts.css.ts";
+import { darkTheme } from "./themes/dark.css.ts";
+import { lightTheme } from "./themes/light.css.ts";
 
 export const currentTheme = $state({
 	themeObject: lightTheme,

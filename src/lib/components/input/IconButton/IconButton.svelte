@@ -1,32 +1,16 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
+	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { focusring } from "../../../styles/global.css.ts";
 	import type { iconType } from "../../../types/Icon.ts";
-	import { styles } from "./Button.css.ts";
+	import { styles } from "./IconButton.css.ts";
 
 	interface Props extends HTMLButtonAttributes {
-		children: Snippet;
-
-		/**
-		 * Name icon before content
-		 */
-		iconbefore?: iconType;
-
-		/**
-		 * Name icon after content
-		 */
-		iconafter?: iconType;
-
-		/**
-		 * Expands button width to 100%
-		 * @default false
-		 */
-		stretchwidth?: boolean;
+		icon: iconType;
 
 		/**
 		 * Disables the button and display an loader
@@ -35,27 +19,33 @@
 		loading?: boolean;
 		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		appearance?: keyof typeof styles.appearance;
+		tip: string;
 	}
 
 	let {
-		children,
 		appearance = "subtle",
-		iconbefore,
-		iconafter,
-		stretchwidth,
 		loading = false,
 		onclick,
 		class: className = "",
 		type = "button",
+		icon,
+		tip,
 		disabled = false,
 		...rest
 	}: Props = $props();
 
 	const isDisabled = $derived(disabled || loading);
+	let hovered = $state(false);
 </script>
 
 <button
-	class="{focusring} {styles.baseButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
+	onmouseenter={() => {
+		hovered = true;
+	}}
+	onmouseleave={() => {
+		hovered = false;
+	}}
+	class="{focusring} {styles.baseIconButton} {isDisabled
 		? styles.disabledappearance
 		: styles.appearance[appearance]} {className}"
 	{type}
@@ -66,12 +56,9 @@
 	{#if loading}
 		<Loader size="medium" />
 	{:else}
-		{#if iconbefore}
-			<Icon icon={iconbefore} />
-		{/if}
-		{@render children()}
-		{#if iconafter}
-			<Icon icon={iconafter} />
-		{/if}
+		<Icon {icon} />
+	{/if}
+	{#if hovered && !disabled}
+		<ToolTip {tip} />
 	{/if}
 </button>

@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { styles } from "./Banner.css.ts";
 	import type { Snippet } from "svelte";
 
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+
 	import type { iconType } from "../../../types/Icon.ts";
+	import { styles } from "./Banner.css.ts";
 
 	interface Props {
 		appearance: keyof typeof styles.appearance;

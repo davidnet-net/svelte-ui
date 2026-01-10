@@ -1,5 +1,6 @@
-import { token } from "../../../styles/designTokens.ts";
 import { style, styleVariants } from "@vanilla-extract/css";
+
+import { token } from "../../../styles/designTokens.ts";
 
 const baseBanner = style({
 	paddingLeft: token.global.spacing.medium,

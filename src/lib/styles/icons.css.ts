@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
-import { iconFontName, iconFontRoundedName } from "./fonts.css.ts";
+
 import { token } from "./designTokens.ts";
+import { iconFontName, iconFontRoundedName } from "./fonts.css.ts";
 
 const outlined = style({
 	fontFamily: iconFontName,
