@@ -33,6 +33,7 @@
 		external?: boolean;
 		disabled?: boolean;
 		href: string;
+		keyboardTip?: string[];
 		tip: string;
 		appearance?: keyof typeof styles.appearance;
 	}
@@ -46,6 +47,7 @@
 		class: className = "",
 		tip,
 		href,
+		keyboardTip = [],
 		disabled = false,
 		...rest
 	}: Props = $props();
@@ -79,6 +81,6 @@
 		<Icon {icon} />
 	{/if}
 	{#if hovered && !disabled}
-		<ToolTip {tip} />
+		<ToolTip {tip} {keyboardTip} />
 	{/if}
 </a>

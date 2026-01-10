@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fontState } from "../../../styles/themeManager.svelte.ts";
+	import { fontState } from "../../../engines/themeEngine.svelte.ts";
 	import type { iconType } from "../../../types/Icon.ts";
 	import { styles } from "./Icon.css.ts";
 
@@ -7,12 +7,13 @@
 		icon: iconType;
 		size?: keyof typeof styles.size;
 		color?: keyof typeof styles.color;
+		type?: keyof typeof styles.iconType;
 	}
-	let { icon, size = "inherit", color = "inherit" }: Props = $props();
+	let { icon, size = "inherit", color = "inherit", type = "filled" }: Props = $props();
 </script>
 
 <span
-	class="{styles.iconType.filled} {styles.size[size]} {styles.color[
+	class="{styles.iconType[type]} {styles.size[size]} {styles.color[
 		color
 	]} {fontState.iconFontsLoaded ? styles.iconLoadedStyle : ''}"
 	translate="no"

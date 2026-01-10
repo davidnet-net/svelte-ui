@@ -5,7 +5,7 @@
 
 	import Button from "$lib/components/input/Button/Button.svelte";
 
-	import { currentTheme, setTheme } from "../../../styles/themeManager.svelte.ts";
+	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import Flex from "../Flex/Flex.svelte";
 	import { styles } from "./AppShell.css.ts";
 

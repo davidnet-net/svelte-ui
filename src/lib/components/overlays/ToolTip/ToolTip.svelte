@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount, tick } from "svelte";
 
+	import KeyboardTip from "$lib/components/messaging/KeyboardTip/KeyboardTip.svelte";
+
 	import { styles } from "./ToolTip.css.ts";
 
 	let tooltipElement: HTMLDivElement | undefined = $state();
@@ -25,9 +27,10 @@
 
 	interface Props {
 		tip: string;
+		keyboardTip?: string[];
 	}
 
-	let { tip }: Props = $props();
+	let { tip, keyboardTip = [] }: Props = $props();
 
 	onMount(() => {
 		adjustPositionOnce();
@@ -45,5 +48,8 @@
 	bind:this={tooltipElement}
 	class={styles.baseToolTip}
 >
-	{tip}
+	<div>{tip}</div>
+	{#if keyboardTip.length > 0}
+		<KeyboardTip {keyboardTip} />
+	{/if}
 </div>

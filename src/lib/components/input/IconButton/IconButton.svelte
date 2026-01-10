@@ -20,6 +20,7 @@
 		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		appearance?: keyof typeof styles.appearance;
 		tip: string;
+		keyboardTip?: string[];
 	}
 
 	let {
@@ -31,6 +32,7 @@
 		icon,
 		tip,
 		disabled = false,
+		keyboardTip = [],
 		...rest
 	}: Props = $props();
 
@@ -59,6 +61,6 @@
 		<Icon {icon} />
 	{/if}
 	{#if hovered && !disabled}
-		<ToolTip {tip} />
+		<ToolTip {tip} {keyboardTip} />
 	{/if}
 </button>

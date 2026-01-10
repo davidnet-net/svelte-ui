@@ -3,9 +3,9 @@ import {
 	iconFontRoundedName,
 	interFontName,
 	momoTrustDisplayFontName
-} from "./fonts.css.ts";
-import { darkTheme } from "./themes/dark.css.ts";
-import { lightTheme } from "./themes/light.css.ts";
+} from "../styles/fonts.css.ts";
+import { darkTheme } from "../styles/themes/dark.css.ts";
+import { lightTheme } from "../styles/themes/light.css.ts";
 
 export const currentTheme = $state({
 	themeObject: lightTheme,
