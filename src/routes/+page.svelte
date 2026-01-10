@@ -3,15 +3,15 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Loader from "$lib/components/primitives/Spinner/Spinner.svelte";
 	import Skeleton from "$lib/components/primitives/Skeleton/Skeleton.svelte";
-
-	//import { token } from "../lib/styles/designTokens.ts";
+	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 </script>
 
 <div style="padding: 3rem">
 	<Flex>
-		<Button iconbefore="add" appearance="primary">Board aanmaken</Button>
-		<Button loading>Aanpassen</Button>
-		<Button disabled>Disabled</Button>
+		<Button onclick={() => {}} iconbefore="add" appearance="primary">Board aanmaken</Button>
+		<Button onclick={() => {}} loading>Aanpassen</Button>
+		<Button onclick={() => {}} disabled>Disabled</Button>
+		<LinkButton opennewtab href="https://davidnet.net">LinkButton</LinkButton>
 	</Flex>
 
 	<Loader size="xhuge" />

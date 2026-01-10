@@ -39,7 +39,7 @@
 					<h1>Javascript is disabled</h1>
 					<p>Please enable javascript to use Davidnet.</p>
 				</div>
-				<Button appearance="primary">Help</Button>
+				<!--TODO Add LinkButton to help-->
 			</Flex>
 		</div>
 	</noscript>

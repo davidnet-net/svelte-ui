@@ -2,11 +2,11 @@
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import Loader from "$lib/components/primitives/Spinner/Spinner.svelte";
 	import type { Snippet } from "svelte";
-	import type { HTMLButtonAttributes } from "svelte/elements";
+	import type { HTMLAnchorAttributes } from "svelte/elements";
 	import type { iconType } from "../../../types/Icon.ts";
-	import { styles } from "./Button.css.ts";
+	import { styles } from "./LinkButton.css.ts";
 
-	interface Props extends HTMLButtonAttributes {
+	interface Props extends HTMLAnchorAttributes {
 		children: Snippet;
 
 		/**
@@ -30,7 +30,16 @@
 		 * @default false
 		 */
 		loading?: boolean;
-		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+
+		/**
+		 * Adds an opennewtabicon if no icon is set on the right.
+		 * Opens link in new tab.
+		 * @default false
+		 */
+		opennewtab?: boolean;
+		external?: boolean;
+		disabled?: boolean;
+		href: string;
 		appearance?: keyof typeof styles.appearance;
 	}
 
@@ -41,23 +50,29 @@
 		iconafter,
 		stretchwidth,
 		loading = false,
-		onclick,
+		opennewtab = false,
+		external = false,
 		class: className = "",
-		type = "button",
+		href,
 		disabled = false,
 		...rest
 	}: Props = $props();
 
 	const isDisabled = $derived(disabled || loading);
+	const iconAfter = $derived(iconafter ? iconafter : opennewtab ? "open_in_new" : "");
+	const target = $derived(opennewtab || external ? "_blank" : rest.target);
+	const rel = $derived(opennewtab || external ? "noopener noreferrer" : rest.rel);
 </script>
 
-<button
-	class="{styles.baseButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+<a
+	class="{styles.baseLinkButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
 		? styles.disabledappearance
 		: styles.appearance[appearance]} {className}"
-	{type}
-	{onclick}
-	disabled={isDisabled}
+	href={disabled ? undefined : href}
+	{target}
+	{rel}
+	aria-disabled={disabled}
 	{...rest}
 >
 	{#if loading}
@@ -67,8 +82,8 @@
 			<Icon icon={iconbefore} />
 		{/if}
 		{@render children()}
-		{#if iconafter}
-			<Icon icon={iconafter} />
+		{#if iconAfter}
+			<Icon icon={iconAfter} />
 		{/if}
 	{/if}
-</button>
+</a>
