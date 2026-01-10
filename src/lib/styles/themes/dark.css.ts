@@ -97,6 +97,6 @@ export const darkTheme = createTheme(token.theme, {
 			default: "#2f353a"
 		},
 
-		blanket: "rgba(0, 0, 0, 0.5);"
+		blanket: "rgba(0, 0, 0, 0.6);"
 	}
 });

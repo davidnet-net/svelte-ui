@@ -67,5 +67,9 @@ export const global = createGlobalTheme(":root", {
 			easeOut: "ease-out",
 			easeInOut: "ease-in-out"
 		}
+	},
+
+	zIndex: {
+		blanket: "1000"
 	}
 });

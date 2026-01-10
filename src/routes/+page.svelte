@@ -4,6 +4,7 @@
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
+	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 </script>
 
 <div style="padding: 3rem">
@@ -27,4 +28,5 @@
 	<Loader size="small" />
 	<br />
 	<Skeleton height="50px" />
+	<Blanket><h1>Test</h1></Blanket>
 </div>

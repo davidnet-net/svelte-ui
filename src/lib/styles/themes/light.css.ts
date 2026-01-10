@@ -97,6 +97,6 @@ export const lightTheme = createTheme(token.theme, {
 			default: "#dfe1e6"
 		},
 
-		blanket: "rgba(0, 0, 0, 0.5);"
+		blanket: "rgba(0, 0, 0, 0.6);"
 	}
 });

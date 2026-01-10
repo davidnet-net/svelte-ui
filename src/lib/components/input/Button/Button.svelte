@@ -5,7 +5,7 @@
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import type { iconType } from "../../../types/Icon.ts";
 	import { styles } from "./Button.css.ts";
-
+	
 	interface Props extends HTMLButtonAttributes {
 		children: Snippet;
 
