@@ -3,7 +3,7 @@
 
 	import { styles } from "./ToolTip.css.ts";
 
-	let tooltipElement: HTMLDivElement;
+	let tooltipElement: HTMLDivElement | undefined = $state();
 	let nudgeX = $state(0);
 
 	async function adjustPositionOnce() {

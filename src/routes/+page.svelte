@@ -9,9 +9,11 @@
 
 <div style="padding: 3rem">
 	<Flex>
-		<Button onclick={() => {}} iconbefore="add" appearance="primary">Board aanmaken</Button>
-		<Button onclick={() => {}} loading>Aanpassen</Button>
-		<Button onclick={() => {}} disabled>Disabled</Button>
+		<Button onclick={() => console.log("click")} iconbefore="add" appearance="primary"
+			>Board aanmaken</Button
+		>
+		<Button onclick={() => console.log("click")} loading>Aanpassen</Button>
+		<Button onclick={() => console.log("click")} disabled>Disabled</Button>
 		<LinkButton opennewtab href="https://davidnet.net">LinkButton</LinkButton>
 	</Flex>
 
@@ -28,5 +30,5 @@
 	<Loader size="small" />
 	<br />
 	<Skeleton height="50px" />
-	<IconButton tip="yapper" icon="home" onclick={() => {}} />
+	<IconButton tip="yapper" icon="home" onclick={() => console.log("click")} />
 </div>

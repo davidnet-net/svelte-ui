@@ -13,12 +13,15 @@ export const currentTheme = $state({
 });
 
 export function setTheme(themeName: "light" | "dark") {
-	if (themeName === "light") {
-		currentTheme.themeObject = lightTheme;
-		currentTheme.themeName = "light";
-	} else if (themeName === "dark") {
-		currentTheme.themeObject = darkTheme;
-		currentTheme.themeName = "dark";
+	switch (themeName) {
+		case "light":
+			currentTheme.themeObject = lightTheme;
+			currentTheme.themeName = "light";
+			break;
+		case "dark":
+			currentTheme.themeObject = darkTheme;
+			currentTheme.themeName = "dark";
+			break;
 	}
 }
 

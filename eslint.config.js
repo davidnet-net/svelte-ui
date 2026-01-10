@@ -4,7 +4,6 @@ import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import prettier from "eslint-config-prettier";
-// Add this line right here:
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import svelte from "eslint-plugin-svelte";
 import globals from "globals";
@@ -22,23 +21,23 @@ export default defineConfig(
 	prettier,
 	...svelte.configs.prettier,
 	{
-		languageOptions: { globals: { ...globals.browser, ...globals.node } },
-
+		languageOptions: {
+			globals: { ...globals.browser, ...globals.node }
+		},
 		plugins: {
 			"simple-import-sort": simpleImportSort
 		},
-
 		rules: {
-			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
-			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			"no-undef": "off",
 			"simple-import-sort/imports": "error",
-			"simple-import-sort/exports": "error"
+			"simple-import-sort/exports": "error",
+			"no-empty-function": "off",
+			"@typescript-eslint/no-empty-function": "error",
+			"@typescript-eslint/no-inferrable-types": "error"
 		}
 	},
 	{
-		files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
-
+		files: ["**/*.ts", "**/*.svelte", "**/*.svelte.ts", "**/*.css.ts"],
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
@@ -46,6 +45,13 @@ export default defineConfig(
 				parser: ts.parser,
 				svelteConfig
 			}
+		},
+		// Rules that require type information:
+		rules: {
+			"@typescript-eslint/no-deprecated": "error",
+			"@typescript-eslint/no-unnecessary-condition": "error",
+			"@typescript-eslint/no-unnecessary-type-arguments": "error",
+			"@typescript-eslint/no-unnecessary-boolean-literal-compare": "error"
 		}
 	}
 );
