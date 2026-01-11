@@ -19,7 +19,7 @@
 </script>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">
-	<div class="main-content">
+	<div class={styles.container}>
 		{@render banners?.()}
 
 		<Flex height="100%" width="100%" direction="column">

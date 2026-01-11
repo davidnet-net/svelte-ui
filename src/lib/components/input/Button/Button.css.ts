@@ -17,8 +17,6 @@ const baseButton = style({
 
 	paddingLeft: token.global.spacing.small,
 	paddingRight: token.global.spacing.small,
-	marginRight: token.global.spacing.small,
-	marginBottom: token.global.spacing.small,
 
 	lineHeight: token.global.font.lineHeight.none,
 	fontSize: token.global.font.size.medium,

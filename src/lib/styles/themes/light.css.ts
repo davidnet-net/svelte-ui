@@ -5,7 +5,7 @@ import { token } from "../designTokens.ts";
 export const lightTheme = createTheme(token.theme, {
 	color: {
 		text: {
-			default: "#111111",
+			default: "#292a2e",
 			secondary: "#444444",
 			tertiary: "#666666",
 			inverse: "#ffffff",
@@ -74,10 +74,10 @@ export const lightTheme = createTheme(token.theme, {
 
 		surface: {
 			sunken: {
-				normal: "#f4f5f7"
+				normal: "#f8f8f8"
 			},
 			default: {
-				normal: "#F8F9FB",
+				normal: "##ffffff",
 				hover: "#f0f0f0",
 				pressed: "#e6e6e6"
 			},
