@@ -28,7 +28,7 @@
 				<Button onclick={() => setTheme("light")}>Light</Button>
 			</nav>
 			<Flex height="100%" width="100%" direction="row">
-				<main style="width: 50%">
+				<main style="overflow: auto; height: 100%; width: 100%;">
 					{@render children()}
 				</main>
 			</Flex>

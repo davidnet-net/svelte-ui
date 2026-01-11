@@ -1,3 +1,4 @@
+import { untrack } from "svelte";
 import { SvelteMap } from "svelte/reactivity";
 
 const isMac = typeof navigator !== "undefined" && /Mac|iPod|iPhone|iPad/.test(navigator.userAgent);
@@ -7,6 +8,20 @@ export type Handler = (e: KeyboardEvent) => void;
 
 export interface ShortcutDefinition {
 	id: string;
+	display: string[];
+	original: string;
+}
+
+export interface ShortcutOptions {
+	preventDefault?: boolean;
+	name?: string;
+	description?: string;
+}
+
+interface RegisteredShortcut {
+	handler: Handler;
+	name?: string;
+	description?: string;
 	display: string[];
 	original: string;
 }
@@ -77,15 +92,15 @@ export function getEventId(e: KeyboardEvent): string {
 	return parts.join("+");
 }
 
-const handlers = new SvelteMap<string, Handler[]>();
+const handlers = new SvelteMap<string, RegisteredShortcut[]>();
 
 const handleKeydown = (e: KeyboardEvent) => {
 	const id = getEventId(e);
 	const stack = handlers.get(id);
 
 	if (stack && stack.length > 0) {
-		const activeHandler = stack[stack.length - 1];
-		activeHandler(e);
+		const activeEntry = stack[stack.length - 1];
+		activeEntry.handler(e);
 	}
 };
 
@@ -93,16 +108,16 @@ if (typeof window !== "undefined") {
 	window.addEventListener("keydown", handleKeydown);
 }
 
-function register(id: string, handler: Handler) {
+function register(id: string, entry: RegisteredShortcut) {
 	if (!handlers.has(id)) {
 		handlers.set(id, []);
 	}
 
 	const stack = handlers.get(id)!;
-	stack.push(handler);
+	stack.push(entry);
 
 	return () => {
-		const index = stack.indexOf(handler);
+		const index = stack.indexOf(entry);
 		if (index !== -1) stack.splice(index, 1);
 		if (stack.length === 0) handlers.delete(id);
 	};
@@ -111,20 +126,31 @@ function register(id: string, handler: Handler) {
 export function useShortcut(
 	combo: string | (() => string),
 	callback: Handler,
-	options = { preventDefault: true }
+	options: ShortcutOptions = {}
 ) {
+	const { preventDefault = true, name, description } = options;
+
 	const definition = $derived.by(() => {
 		const raw = typeof combo === "function" ? combo() : combo;
 		return assembleShortcut(raw);
 	});
 
 	$effect(() => {
-		const cleanup = register(definition.id, (e) => {
-			if (options.preventDefault) e.preventDefault();
-			callback(e);
-		});
+		const entry: RegisteredShortcut = {
+			handler: (e) => {
+				if (preventDefault) e.preventDefault();
+				callback(e);
+			},
+			name,
+			description,
+			display: definition.display,
+			original: definition.original
+		};
 
-		return cleanup;
+		// untrack prevents the effect from re-running when `handlers` is modified
+		// We still track `definition.id` implicitly because we pass it in,
+		// ensuring re-registration if the keys change.
+		return untrack(() => register(definition.id, entry));
 	});
 
 	return {
@@ -135,4 +161,21 @@ export function useShortcut(
 			return definition.original;
 		}
 	};
+}
+
+export function getShortcuts() {
+	const items = [];
+	for (const [id, stack] of handlers) {
+		if (stack.length > 0) {
+			const entry = stack[stack.length - 1];
+			items.push({
+				id,
+				display: entry.display,
+				original: entry.original,
+				name: entry.name,
+				description: entry.description
+			});
+		}
+	}
+	return items;
 }
