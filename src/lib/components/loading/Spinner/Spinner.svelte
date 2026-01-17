@@ -8,4 +8,4 @@
 	let { size = "medium" }: Props = $props();
 </script>
 
-<span class="{styles.baseLoader} {styles.size[size]}"></span>
+<span class="{styles.baseLoader} {styles.size[size]}" aria-label="Loading spinner"></span>

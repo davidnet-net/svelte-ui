@@ -26,7 +26,7 @@ const baseShortcut = style({
 
 const key = style({
 	fontFamily: "inherit",
-	background: "rgba(255, 255, 255, 0.15)",
+	background: token.theme.color.surface.inversed.overlay.pressed,
 	padding: "2px 4px",
 	borderRadius: "2px",
 	fontSize: "0.9em",

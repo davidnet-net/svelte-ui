@@ -3,6 +3,7 @@
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
+	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { focusring } from "../../../styles/global.css.ts";
@@ -63,19 +64,16 @@
 
 	const isDisabled = $derived(disabled || loading);
 	const iconAfter = $derived(iconafter ? iconafter : opennewtab ? "open_in_new" : "");
-	const target = $derived(opennewtab || external ? "_blank" : rest.target);
-	const rel = $derived(opennewtab || external ? "noopener noreferrer" : rest.rel);
 </script>
 
-<!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a
+<Anchor
 	class="{focusring} {styles.baseLinkButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
 		? styles.disabledappearance
 		: styles.appearance[appearance]} {className}"
-	href={disabled ? undefined : href}
-	{target}
-	{rel}
-	aria-disabled={disabled}
+	{href}
+	{disabled}
+	{opennewtab}
+	{external}
 	{...rest}
 >
 	{#if loading}
@@ -89,4 +87,4 @@
 			<Icon icon={iconAfter} />
 		{/if}
 	{/if}
-</a>
+</Anchor>

@@ -3,6 +3,7 @@
 
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
+	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { focusring } from "../../../styles/global.css.ts";
@@ -25,7 +26,6 @@
 		loading?: boolean;
 
 		/**
-		 * Adds an opennewtabicon if no icon is set on the right.
 		 * Opens link in new tab.
 		 * @default false
 		 */
@@ -53,13 +53,10 @@
 	}: Props = $props();
 
 	const isDisabled = $derived(disabled || loading);
-	const target = $derived(opennewtab || external ? "_blank" : rest.target);
-	const rel = $derived(opennewtab || external ? "noopener noreferrer" : rest.rel);
 	let hovered = $state(false);
 </script>
 
-<!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a
+<Anchor
 	onmouseenter={() => {
 		hovered = true;
 	}}
@@ -69,10 +66,10 @@
 	class="{focusring} {styles.baseIconLinkButton} {isDisabled
 		? styles.disabledappearance
 		: styles.appearance[appearance]} {className}"
-	href={disabled ? undefined : href}
-	{target}
-	{rel}
-	aria-disabled={disabled}
+	{href}
+	{disabled}
+	{opennewtab}
+	{external}
 	{...rest}
 >
 	{#if loading}
@@ -83,4 +80,4 @@
 	{#if hovered && !disabled}
 		<ToolTip {tip} {keyboardTip} />
 	{/if}
-</a>
+</Anchor>

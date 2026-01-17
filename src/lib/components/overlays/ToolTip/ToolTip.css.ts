@@ -38,26 +38,6 @@ const baseToolTip = style({
 	}
 });
 
-const shortcuts = style({
-	display: "flex",
-	alignItems: "center",
-	gap: "4px",
-	marginTop: "2px",
-	opacity: 0.8
-});
-
-const shortcut = style({
-	fontFamily: "inherit",
-	background: "rgba(255, 255, 255, 0.15)",
-	padding: "2px 4px",
-	borderRadius: "2px",
-	fontSize: "0.9em",
-	minWidth: "1.2em",
-	textAlign: "center"
-});
-
 export const styles = {
-	baseToolTip,
-	shortcuts,
-	shortcut
+	baseToolTip
 };

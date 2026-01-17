@@ -53,6 +53,7 @@
 	{type}
 	{onclick}
 	disabled={isDisabled}
+	aria-label={tip}
 	{...rest}
 >
 	{#if loading}
