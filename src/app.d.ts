@@ -3,11 +3,21 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			lang: "en" | "nl";
+		}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	// Add your custom global constants here
+	const __DDS_INFO__: {
+		commitHash: string;
+		commitUrl: string;
+		buildTime: string;
+		version: string;
+	};
 }
 
 export {};

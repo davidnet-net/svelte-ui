@@ -8,6 +8,7 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 
 	import { getShortcuts, useShortcut } from "../lib/engines/shortcutEngine.svelte.ts";
+	import * as m from "../paraglide/messages.js";
 
 	function helpFunc() {
 		alert("help");
@@ -119,4 +120,7 @@
 			{/if}
 		{/each}
 	</div>
+
+	<h4>TEST: PARAGLIDE</h4>
+	<p>{m.example_message({ username: "World" })}</p>
 </div>
