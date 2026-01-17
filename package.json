@@ -16,7 +16,10 @@
 		"fmt": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"lintfix": "prettier --write .&& eslint . --fix",
-		"paracompile": "echo 'Compile paraglide thing' && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide"
+		"paracompile": "echo 'Compile paraglide thing' && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright test"
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
@@ -48,11 +51,13 @@
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
 		"@inlang/paraglide-js": "^2.8.0",
+		"@playwright/test": "^1.57.0",
 		"@sveltejs/adapter-node": "^5.4.0",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/node": "^22",
+		"@vitest/browser-playwright": "^4.0.15",
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
@@ -60,6 +65,8 @@
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.7",
+		"mdsvex": "^0.12.6",
+		"playwright": "^1.57.0",
 		"prettier": "^3.7.4",
 		"prettier-plugin-svelte": "^3.4.0",
 		"publint": "^0.3.15",
@@ -67,7 +74,9 @@
 		"svelte-check": "^4.3.4",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.48.1",
-		"vite": "^7.2.6"
+		"vite": "^7.2.6",
+		"vitest": "^4.0.15",
+		"vitest-browser-svelte": "^2.0.1"
 	},
 	"keywords": [
 		"svelte"
