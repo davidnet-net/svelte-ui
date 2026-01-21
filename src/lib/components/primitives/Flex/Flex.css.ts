@@ -15,13 +15,21 @@ const direction = styleVariants({
 const justifyContent = styleVariants({
 	start: { justifyContent: "flex-start" },
 	center: { justifyContent: "center" },
-	between: { justifyContent: "space-between" }
+	between: { justifyContent: "space-between" },
+	end: { justifyContent: "flex-end" },
+	spaceEvenly: { justifyContent: "space-evenly" },
+	spaceAround: { justifyContent: "space-around" },
+	spaceBetween: { justifyContent: "space-between" }
 });
 
 const alignItems = styleVariants({
 	start: { alignItems: "flex-start" },
 	center: { alignItems: "center" },
-	stretch: { alignItems: "stretch" }
+	stretch: { alignItems: "stretch" },
+	end: { alignItems: "flex-end" },
+	spaceEvenly: { alignItems: "space-evenly" },
+	spaceAround: { alignItems: "space-around" },
+	spaceBetween: { alignItems: "space-between" }
 });
 
 const gap = styleVariants({
@@ -33,10 +41,50 @@ const gap = styleVariants({
 	xsmall: { gap: token.global.spacing.xsmall }
 });
 
+export const marginTop = styleVariants({
+	none: { marginTop: token.global.spacing.none },
+	xlarge: { marginTop: token.global.spacing.xlarge },
+	large: { marginTop: token.global.spacing.large },
+	medium: { marginTop: token.global.spacing.medium },
+	small: { marginTop: token.global.spacing.small },
+	xsmall: { marginTop: token.global.spacing.xsmall }
+});
+
+export const marginRight = styleVariants({
+	none: { marginRight: token.global.spacing.none },
+	xlarge: { marginRight: token.global.spacing.xlarge },
+	large: { marginRight: token.global.spacing.large },
+	medium: { marginRight: token.global.spacing.medium },
+	small: { marginRight: token.global.spacing.small },
+	xsmall: { marginRight: token.global.spacing.xsmall }
+});
+
+export const marginBottom = styleVariants({
+	none: { marginBottom: token.global.spacing.none },
+	xlarge: { marginBottom: token.global.spacing.xlarge },
+	large: { marginBottom: token.global.spacing.large },
+	medium: { marginBottom: token.global.spacing.medium },
+	small: { marginBottom: token.global.spacing.small },
+	xsmall: { marginBottom: token.global.spacing.xsmall }
+});
+
+export const marginLeft = styleVariants({
+	none: { marginLeft: token.global.spacing.none },
+	xlarge: { marginLeft: token.global.spacing.xlarge },
+	large: { marginLeft: token.global.spacing.large },
+	medium: { marginLeft: token.global.spacing.medium },
+	small: { marginLeft: token.global.spacing.small },
+	xsmall: { marginLeft: token.global.spacing.xsmall }
+});
+
 export const styles = {
 	baseFlex,
 	direction,
 	justifyContent,
 	alignItems,
+	marginTop,
+	marginBottom,
+	marginRight,
+	marginLeft,
 	gap
 };

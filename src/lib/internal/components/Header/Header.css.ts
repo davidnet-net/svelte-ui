@@ -10,7 +10,8 @@ const baseHeader = style({
 	display: "flex",
 	alignContent: "center",
 	flexDirection: "row",
-	lineHeight: token.global.font.lineHeight.normal
+	lineHeight: token.global.font.lineHeight.normal,
+	fontSize: token.global.font.size.xmedium
 });
 
 const header = style({

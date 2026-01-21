@@ -10,6 +10,10 @@
 		width?: string;
 		height?: string;
 		gap?: keyof typeof styles.gap;
+		marginTop?: keyof typeof styles.marginTop;
+		marginRight?: keyof typeof styles.marginRight;
+		marginBottom?: keyof typeof styles.marginBottom;
+		marginLeft?: keyof typeof styles.marginLeft;
 		children: Snippet;
 	}
 
@@ -20,6 +24,10 @@
 		width = "100%",
 		height = "100%",
 		gap = "none",
+		marginTop = "none",
+		marginRight = "none",
+		marginBottom = "none",
+		marginLeft = "none",
 		children
 	}: Props = $props();
 </script>
@@ -31,9 +39,12 @@
         {styles.alignItems[alignItems]} 
         {styles.justifyContent[justifyContent]}
         {styles.gap[gap]}
+        {styles.marginTop[marginTop]}
+        {styles.marginRight[marginRight]}
+        {styles.marginBottom[marginBottom]}
+        {styles.marginLeft[marginLeft]}
     "
 	style:width
-	style:height
->
+	style:height>
 	{@render children()}
 </div>

@@ -17,7 +17,6 @@
 		color
 	]} {fontState.iconFontsLoaded ? styles.iconLoadedStyle : ''}"
 	translate="no"
-	aria-hidden="true"
->
+	aria-hidden="true">
 	{icon}
 </span>

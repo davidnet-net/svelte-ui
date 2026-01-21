@@ -22,7 +22,6 @@
 		external = false,
 		disabled = false,
 		href,
-		class: className = "",
 		...rest
 	}: Props = $props();
 
@@ -30,14 +29,18 @@
 	const rel = $derived(opennewtab || external ? "noopener noreferrer" : rest.rel);
 </script>
 
+<!-- LINK element for decoration. Anchor as primitive -->
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a
-	class={className}
-	href={disabled ? undefined : href}
-	{target}
-	{rel}
-	aria-disabled={disabled}
-	{...rest}
->
+<a href={disabled ? undefined : href} {target} {rel} aria-disabled={disabled} {...rest}>
 	{@render children()}
 </a>
+
+<style>
+	/* By using the element selector 'a', the specificity is very low (0,0,1).
+		Classes or direct styling gets priority
+    */
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+</style>

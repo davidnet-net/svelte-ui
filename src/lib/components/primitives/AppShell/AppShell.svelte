@@ -26,13 +26,18 @@
 		banners?: Snippet;
 
 		/**
+		 * @remarks Make sure to add an <footer> element
+		 */
+		footer?: Snippet;
+
+		/**
 		 * @remarks Make sure to import * as paraglideRuntime from "../paraglide/runtime.js"
 		 */
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		paraglideRuntime: any;
 	}
 
-	let { children, banners, paraglideRuntime }: Props = $props();
+	let { children, banners, footer, paraglideRuntime }: Props = $props();
 
 	onMount(async () => {
 		console.groupCollapsed("Davidnet Design System - information");
@@ -61,19 +66,21 @@
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">
 	<div class={styles.container}>
-		{@render banners?.()}
+		<div class={styles.maincontainer}>
+			{@render banners?.()}
 
-		<Flex height="100%" width="100%" direction="column">
-			<nav class={styles.nav}>
-				<Button onclick={() => setTheme("dark")}>Dark</Button>
-				<Button onclick={() => setTheme("light")}>Light</Button>
-			</nav>
-			<Flex height="100%" width="100%" direction="row">
-				<main style="overflow: auto; height: 100%; width: 100%;">
+			<Flex height="100%" width="100%" direction="column">
+				<nav class={styles.nav}>
+					<Button onclick={() => setTheme("dark")}>Dark</Button>
+					<Button onclick={() => setTheme("light")}>Light</Button>
+					Todo add 3 split navbar here
+				</nav>
+				<main style="overflow: auto; width: 100%; flex: 1;">
 					{@render children()}
 				</main>
 			</Flex>
-		</Flex>
+		</div>
+		{@render footer?.()}
 	</div>
 
 	<noscript>

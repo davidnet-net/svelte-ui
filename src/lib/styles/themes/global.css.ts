@@ -20,6 +20,7 @@ export const global = createGlobalTheme(":root", {
 			huge: "2.5rem",
 			xlarge: "2rem",
 			large: "1.5rem",
+			xmedium: "1.25rem",
 			medium: "1rem",
 			small: "0.75rem"
 		},
@@ -45,7 +46,7 @@ export const global = createGlobalTheme(":root", {
 		medium: "6px",
 		large: "8px",
 		xlarge: "12px",
-		xxlarge: "16px",
+		huge: "16px",
 		full: "9999px"
 	},
 

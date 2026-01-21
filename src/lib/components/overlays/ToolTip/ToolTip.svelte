@@ -46,8 +46,7 @@
 <div
 	style="transform: translateX(calc(-50% + {nudgeX}px)); --arrow-offset: {nudgeX}px;"
 	bind:this={tooltipElement}
-	class={styles.baseToolTip}
->
+	class={styles.baseToolTip}>
 	<div>{tip}</div>
 	{#if keyboardTip.length > 0}
 		<KeyboardTip {keyboardTip} />

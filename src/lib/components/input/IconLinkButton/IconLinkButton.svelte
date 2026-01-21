@@ -70,8 +70,7 @@
 	{disabled}
 	{opennewtab}
 	{external}
-	{...rest}
->
+	{...rest}>
 	{#if loading}
 		<Loader size="medium" />
 	{:else}

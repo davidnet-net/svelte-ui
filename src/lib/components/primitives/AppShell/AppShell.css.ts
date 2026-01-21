@@ -6,7 +6,8 @@ const base = style({
 	display: "flex",
 	flexDirection: "column",
 	height: "100vh",
-	width: "100vw"
+	width: "100vw",
+	overflow: "auto"
 });
 
 const container = style({
@@ -16,16 +17,24 @@ const container = style({
 	width: "100vw"
 });
 
+const maincontainer = style({
+	display: "flex",
+	flexDirection: "column",
+	minHeight: "100vh",
+	width: "100vw"
+});
+
 const nav = style({
 	backgroundColor: token.theme.color.surface.raised.normal,
 	height: "48px",
 	width: "100%",
-	padding: "0 1.5rem",
+	padding: "1rem 1.5rem",
 	display: "flex",
-	verticalAlign: "center",
+	verticalAlign: "middle",
 	flexDirection: "row",
 	alignItems: "center",
 	position: "relative",
+	flexShrink: 0,
 	boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)"
 });
 
@@ -44,6 +53,7 @@ const noscriptoverlay = style({
 export const styles = {
 	base,
 	container,
+	maincontainer,
 	nav,
 	noscriptoverlay
 };

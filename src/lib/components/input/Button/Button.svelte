@@ -61,8 +61,7 @@
 	{type}
 	{onclick}
 	disabled={isDisabled}
-	{...rest}
->
+	{...rest}>
 	{#if loading}
 		<Loader size="medium" />
 	{:else}

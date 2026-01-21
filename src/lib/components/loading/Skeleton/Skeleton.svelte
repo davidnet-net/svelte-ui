@@ -14,7 +14,6 @@
 	style:height
 	style:width
 	class="{styles.baseSkeleton} {styles.radius[radius]}"
-	aria-hidden="true"
->
+	aria-hidden="true">
 	<div class={styles.shimmer}></div>
 </div>

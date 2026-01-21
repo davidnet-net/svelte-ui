@@ -7,6 +7,7 @@ const size = styleVariants({
 	inherit: { fontSize: "inherit" },
 	small: { fontSize: token.global.font.size.small },
 	medium: { fontSize: token.global.font.size.medium },
+	xmedium: { fontSize: token.global.font.size.xmedium },
 	large: { fontSize: token.global.font.size.large },
 	xlarge: { fontSize: token.global.font.size.xlarge },
 	huge: { fontSize: token.global.font.size.huge },
