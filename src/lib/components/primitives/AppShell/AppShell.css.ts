@@ -38,6 +38,27 @@ const nav = style({
 	boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)"
 });
 
+const navLeft = style({
+	justifyContent: "flex-start",
+	flex: 1,
+	display: "flex",
+	alignItems: "center"
+});
+
+const navCenter = style({
+	justifyContent: "center",
+	flex: 1,
+	display: "flex",
+	alignItems: "center"
+});
+
+const navRight = style({
+	justifyContent: "flex-end",
+	flex: 1,
+	display: "flex",
+	alignItems: "center"
+});
+
 const noscriptoverlay = style({
 	position: "fixed",
 	top: "0",
@@ -55,5 +76,8 @@ export const styles = {
 	container,
 	maincontainer,
 	nav,
+	navLeft,
+	navRight,
+	navCenter,
 	noscriptoverlay
 };

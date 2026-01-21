@@ -14,12 +14,6 @@
 		icon: iconType;
 
 		/**
-		 * Expands button width to 100%
-		 * @default false
-		 */
-		stretchwidth?: boolean;
-
-		/**
 		 * Disables the button and display an loader
 		 * @default false
 		 */

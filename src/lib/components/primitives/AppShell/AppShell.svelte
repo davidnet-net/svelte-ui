@@ -4,9 +4,12 @@
 	import { onMount, type Snippet } from "svelte";
 
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
+	import { token } from "$lib/styles/designTokens.ts";
 
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
+	import Anchor from "../Anchor/Anchor.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import { styles } from "./AppShell.css.ts";
 
@@ -71,9 +74,23 @@
 
 			<Flex height="100%" width="100%" direction="column">
 				<nav class={styles.nav}>
-					<Button onclick={() => setTheme("dark")}>Dark</Button>
-					<Button onclick={() => setTheme("light")}>Light</Button>
-					Todo add 3 split navbar here
+					<div class={styles.navLeft}>
+						<IconLinkButton
+							icon="apps"
+							tip="Davidnet Home"
+							href="https://home.davidnet.net"
+							appearance="subtle" />
+						<Anchor href="/">Davidnet Design System</Anchor>
+					</div>
+					<div class={styles.navCenter}>
+						{#if import.meta.env.DEV}<span style="color: {token.theme.color.text.warning}">
+								Davidnet Development Build
+							</span>{:else}Davidnet{/if}
+					</div>
+					<div class={styles.navRight}>
+						<Button onclick={() => setTheme("dark")}>Dark</Button>
+						<Button onclick={() => setTheme("light")}>Light</Button>
+					</div>
 				</nav>
 				<main style="overflow: auto; width: 100%; flex: 1;">
 					{@render children()}
