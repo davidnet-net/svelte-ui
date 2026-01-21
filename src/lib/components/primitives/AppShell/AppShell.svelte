@@ -4,13 +4,15 @@
 	import { onMount, type Snippet } from "svelte";
 
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
-	import { token } from "$lib/styles/designTokens.ts";
 
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
+	import { token } from "../../../styles/designTokens.ts";
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Flex from "../Flex/Flex.svelte";
+	import Icon from "../Icon/Icon.svelte";
 	import { styles } from "./AppShell.css.ts";
 
 	interface Props {
@@ -28,10 +30,14 @@
 		 */
 		banners?: Snippet;
 
+		sidebar?: Snippet;
+
 		/**
 		 * @remarks Make sure to add an <footer> element
 		 */
 		footer?: Snippet;
+
+		appName: string;
 
 		/**
 		 * @remarks Make sure to import * as paraglideRuntime from "../paraglide/runtime.js"
@@ -40,7 +46,7 @@
 		paraglideRuntime: any;
 	}
 
-	let { children, banners, footer, paraglideRuntime }: Props = $props();
+	let { children, banners, sidebar, footer, appName, paraglideRuntime }: Props = $props();
 
 	onMount(async () => {
 		console.groupCollapsed("Davidnet Design System - information");
@@ -65,6 +71,8 @@
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
 	});
+
+	let sidebarOpen = $state(true);
 </script>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">
@@ -75,29 +83,69 @@
 			<Flex height="100%" width="100%" direction="column">
 				<nav class={styles.nav}>
 					<div class={styles.navLeft}>
+						{#if sidebar && sidebarOpen}
+							<IconButton
+								icon="left_panel_close"
+								tip="Close sidebar"
+								appearance="subtle"
+								onclick={() => {
+									sidebarOpen = !sidebarOpen;
+								}} />
+						{:else if sidebar}
+							<IconButton
+								icon="left_panel_open"
+								tip="Open sidebar"
+								appearance="subtle"
+								onclick={() => {
+									sidebarOpen = !sidebarOpen;
+								}} />
+						{/if}
+
 						<IconLinkButton
 							icon="apps"
 							tip="Davidnet Home"
 							href="https://home.davidnet.net"
 							appearance="subtle" />
-						<Anchor href="/">Davidnet Design System</Anchor>
+						<Anchor href="/">{appName}</Anchor>
 					</div>
 					<div class={styles.navCenter}>
-						{#if import.meta.env.DEV}<span style="color: {token.theme.color.text.warning}">
-								Davidnet Development Build
-							</span>{:else}Davidnet{/if}
+						<Anchor href="https://davidnet.net">
+							{#if import.meta.env.DEV}
+								<span
+									style="color: {token.theme.color.text
+										.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
+										.global.spacing.xsmall}">
+									<Icon icon="construction" />
+									Davidnet Development Build
+									<Icon icon="construction" />
+								</span>
+							{:else}
+								Davidnet
+							{/if}
+						</Anchor>
 					</div>
 					<div class={styles.navRight}>
 						<Button onclick={() => setTheme("dark")}>Dark</Button>
 						<Button onclick={() => setTheme("light")}>Light</Button>
 					</div>
 				</nav>
-				<main style="overflow: auto; width: 100%; flex: 1;">
-					{@render children()}
-				</main>
+				<div class={styles.contentRow}>
+					{#if sidebarOpen}
+						<div class={styles.sidebarWrapper}>
+							{@render sidebar?.()}
+						</div>
+					{/if}
+					<div class={styles.mainScrollArea}>
+						<main class={styles.childrenWrapper}>
+							{@render children()}
+						</main>
+						<div class={styles.footerWrapper}>
+							{@render footer?.()}
+						</div>
+					</div>
+				</div>
 			</Flex>
 		</div>
-		{@render footer?.()}
 	</div>
 
 	<noscript>
@@ -107,7 +155,6 @@
 					<h1>Javascript is disabled</h1>
 					<p>Please enable javascript to use Davidnet.</p>
 				</div>
-				<!--TODO Add LinkButton to help-->
 			</Flex>
 		</div>
 	</noscript>

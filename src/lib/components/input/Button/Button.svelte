@@ -28,6 +28,8 @@
 		 */
 		stretchwidth?: boolean;
 
+		alignContent?: keyof typeof styles.alignContent;
+
 		/**
 		 * Disables the button and display an loader
 		 * @default false
@@ -43,6 +45,7 @@
 		iconbefore,
 		iconafter,
 		stretchwidth,
+		alignContent = "center",
 		loading = false,
 		onclick,
 		class: className = "",
@@ -55,9 +58,9 @@
 </script>
 
 <button
-	class="{focusring} {styles.baseButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
-		? styles.disabledappearance
-		: styles.appearance[appearance]} {className}"
+	class="{focusring} {styles.alignContent[alignContent]} {styles.baseButton} {stretchwidth
+		? styles.stretchwidth
+		: ''} {isDisabled ? styles.disabledappearance : styles.appearance[appearance]} {className}"
 	{type}
 	{onclick}
 	disabled={isDisabled}

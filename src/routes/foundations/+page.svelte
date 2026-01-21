@@ -14,10 +14,7 @@
 <div class={styles.pageContainer}>
 	<h2>{m.page_foundations_subheading_design_tokens()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
-		<Card
-			href="#"
-			title={m.page_foundations_card_tokens_title()}
-			description={m.page_foundations_card_tokens_description()} />
+		<Card href="#" title="tokens" description="placeholder" />
 	</Flex>
 
 	<h2>{m.page_foundations_subheading_content_guidelines()}</h2>

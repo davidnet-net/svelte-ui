@@ -7,21 +7,21 @@ const base = style({
 	flexDirection: "column",
 	height: "100vh",
 	width: "100vw",
-	overflow: "auto"
+	overflow: "hidden" // Prevents window scrolling
 });
 
 const container = style({
 	display: "flex",
 	flexDirection: "column",
-	height: "100vh",
-	width: "100vw"
+	height: "100%",
+	width: "100%"
 });
 
 const maincontainer = style({
 	display: "flex",
 	flexDirection: "column",
-	minHeight: "100vh",
-	width: "100vw"
+	height: "100%",
+	width: "100%"
 });
 
 const nav = style({
@@ -59,6 +59,38 @@ const navRight = style({
 	alignItems: "center"
 });
 
+const contentRow = style({
+	display: "flex",
+	flex: 1,
+	overflow: "hidden",
+	width: "100%"
+});
+
+const sidebarWrapper = style({
+	height: "100%",
+	overflowY: "auto",
+	flexShrink: 0
+});
+
+const mainScrollArea = style({
+	flex: 1,
+	height: "100%",
+	overflowY: "auto",
+	display: "flex",
+	flexDirection: "column"
+});
+
+const childrenWrapper = style({
+	minHeight: "100%",
+	width: "100%",
+	flex: "1 0 auto",
+	flexDirection: "column"
+});
+
+const footerWrapper = style({
+	flexShrink: 0
+});
+
 const noscriptoverlay = style({
 	position: "fixed",
 	top: "0",
@@ -68,7 +100,8 @@ const noscriptoverlay = style({
 	display: "flex",
 	justifyContent: "center",
 	alignItems: "center",
-	backgroundColor: token.theme.color.surface.overlay.normal
+	backgroundColor: token.theme.color.surface.overlay.normal,
+	zIndex: 2000
 });
 
 export const styles = {
@@ -79,5 +112,10 @@ export const styles = {
 	navLeft,
 	navRight,
 	navCenter,
+	contentRow,
+	sidebarWrapper,
+	mainScrollArea,
+	childrenWrapper,
+	footerWrapper,
 	noscriptoverlay
 };

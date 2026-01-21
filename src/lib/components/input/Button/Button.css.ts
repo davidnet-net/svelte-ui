@@ -4,7 +4,6 @@ import { token } from "../../../styles/designTokens.ts";
 
 const baseButton = style({
 	display: "inline-flex",
-	justifyContent: "center",
 	alignItems: "center",
 	gap: token.global.spacing.xsmall,
 	verticalAlign: "middle",
@@ -20,7 +19,7 @@ const baseButton = style({
 
 	lineHeight: token.global.font.lineHeight.none,
 	fontSize: token.global.font.size.medium,
-	textAlign: "center",
+
 	textDecoration: "none",
 	fontWeight: token.global.font.weight.medium,
 	textWrap: "nowrap",
@@ -31,6 +30,21 @@ const baseButton = style({
 	transitionProperty: "background-color, color",
 	transitionDuration: token.global.transition.duration.standard,
 	transitionTimingFunction: token.global.transition.timing.ease
+});
+
+const alignContent = styleVariants({
+	left: {
+		justifyContent: "flex-start",
+		textAlign: "left"
+	},
+	center: {
+		justifyContent: "center",
+		textAlign: "center"
+	},
+	right: {
+		justifyContent: "flex-end",
+		textAlign: "right"
+	}
 });
 
 const appearance = styleVariants({
@@ -120,6 +134,7 @@ const stretchwidth = style({
 
 export const styles = {
 	baseButton,
+	alignContent,
 	appearance,
 	disabledappearance,
 	stretchwidth
