@@ -7,7 +7,31 @@ const base = style({
 	flexDirection: "column",
 	height: "100vh",
 	width: "100vw",
-	overflow: "hidden" // Prevents window scrolling
+	overflow: "hidden",
+
+	// Firefox & Zen Browser support
+	scrollbarWidth: "thin",
+	scrollbarColor: "#4a4a4a transparent",
+
+	selectors: {
+		// Webkit browsers (Chrome, Safari, Edge)
+		"&::-webkit-scrollbar": {
+			width: "8px",
+			height: "8px"
+		},
+		"&::-webkit-scrollbar-track": {
+			background: "transparent"
+		},
+		"&::-webkit-scrollbar-thumb": {
+			backgroundColor: "#4a4a4a",
+			borderRadius: "20px",
+			border: "2px solid transparent",
+			backgroundClip: "content-box"
+		},
+		"&::-webkit-scrollbar-thumb:hover": {
+			backgroundColor: "#666666"
+		}
+	}
 });
 
 const container = style({
