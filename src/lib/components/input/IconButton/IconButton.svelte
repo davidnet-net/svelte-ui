@@ -7,10 +7,12 @@
 
 	import { focusring } from "../../../styles/global.css.ts";
 	import type { iconType } from "../../../types/Icon.ts";
+	import { styles as iconStyles } from "../../primitives/Icon/Icon.css.ts";
 	import { styles } from "./IconButton.css.ts";
 
 	interface Props extends HTMLButtonAttributes {
 		icon: iconType;
+		iconstyle?: keyof typeof iconStyles.iconType;
 
 		/**
 		 * Disables the button and display an loader
@@ -31,6 +33,7 @@
 		type = "button",
 		icon,
 		tip,
+		iconstyle = "filled",
 		disabled = false,
 		keyboardTip = [],
 		...rest
@@ -58,7 +61,7 @@
 	{#if loading}
 		<Loader size="medium" />
 	{:else}
-		<Icon {icon} />
+		<Icon {icon} type={iconstyle} />
 	{/if}
 	{#if hovered && !disabled}
 		<ToolTip {tip} {keyboardTip} />

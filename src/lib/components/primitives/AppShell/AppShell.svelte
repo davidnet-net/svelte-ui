@@ -7,6 +7,7 @@
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 
+	import { useShortcut } from "../../../../lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
 	import { token } from "../../../styles/designTokens.ts";
@@ -73,6 +74,11 @@
 	});
 
 	let sidebarOpen = $state(true);
+	const toggleSidebar = useShortcut("ctrl+[", () => (sidebarOpen = !sidebarOpen), {
+		name: "Toggle sidebar",
+		description: "Closes or opens the sidebar.",
+		preventDefault: true
+	});
 </script>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">
@@ -88,6 +94,8 @@
 								icon="left_panel_close"
 								tip="Close sidebar"
 								appearance="subtle"
+								keyboardTip={toggleSidebar.keys}
+								iconstyle="filled"
 								onclick={() => {
 									sidebarOpen = !sidebarOpen;
 								}} />
@@ -96,6 +104,8 @@
 								icon="left_panel_open"
 								tip="Open sidebar"
 								appearance="subtle"
+								keyboardTip={toggleSidebar.keys}
+								iconstyle="outlined"
 								onclick={() => {
 									sidebarOpen = !sidebarOpen;
 								}} />

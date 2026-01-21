@@ -101,7 +101,7 @@ const noscriptoverlay = style({
 	justifyContent: "center",
 	alignItems: "center",
 	backgroundColor: token.theme.color.surface.overlay.normal,
-	zIndex: 2000
+	zIndex: token.global.zIndex.noscript
 });
 
 export const styles = {
