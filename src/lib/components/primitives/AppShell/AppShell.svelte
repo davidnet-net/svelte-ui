@@ -7,12 +7,12 @@
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
+	import { token } from "$lib/styles/designTokens.ts";
 
 	import { useShortcut } from "../../../../lib/engines/shortcutEngine.svelte.ts";
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
-	import { token } from "../../../styles/designTokens.ts";
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";

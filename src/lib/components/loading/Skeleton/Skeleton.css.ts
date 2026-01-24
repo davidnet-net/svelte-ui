@@ -1,6 +1,6 @@
 import { keyframes, style, styleVariants } from "@vanilla-extract/css";
 
-import { token } from "../../../styles/designTokens.ts";
+import { token } from "$lib/styles/designTokens.ts";
 
 const shimmereffect = keyframes({
 	"0%": { transform: "translateX(-100%)" },
@@ -31,7 +31,7 @@ const radius = styleVariants({
 	medium: { borderRadius: token.global.radius.medium },
 	large: { borderRadius: token.global.radius.large },
 	xlarge: { borderRadius: token.global.radius.xlarge },
-	xxlarge: { borderRadius: token.global.radius.xxlarge },
+	huge: { borderRadius: token.global.radius.huge },
 	full: { borderRadius: token.global.radius.full }
 });
 

@@ -4,10 +4,10 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { token } from "$lib/styles/designTokens.ts";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { useShortcut, useTrap } from "../../../engines/shortcutEngine.svelte.ts";
-	import { token } from "../../../styles/designTokens.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
 	interface NavigationItem {

@@ -1,10 +1,10 @@
 import { globalFontFace, style } from "@vanilla-extract/css";
 
-import interUrl from "../assets/fonts/Inter-4.1/InterVariable.woff2";
-import interItalicUrl from "../assets/fonts/Inter-4.1/InterVariable-Italic.woff2";
-import iconFontUrl from "../assets/fonts/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOej.woff2";
-import momoTrustDisplayUrl from "../assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
-import iconFontRoundedUrl from "../assets/fonts/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rFmiXxc.woff2";
+import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
+import interItalicUrl from "$lib/assets/fonts/Inter-4.1/InterVariable-Italic.woff2";
+import iconFontUrl from "$lib/assets/fonts/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOej.woff2";
+import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
+import iconFontRoundedUrl from "$lib/assets/fonts/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rFmiXxc.woff2";
 
 export const interFontName = "Inter";
 export const iconFontName = "Material Symbols Outlined";
@@ -34,12 +34,14 @@ globalFontFace(interFontName, {
 
 globalFontFace(iconFontRoundedName, {
 	fontStyle: "normal",
+	fontDisplay: "swap",
 	fontWeight: "400",
 	src: `url("${iconFontRoundedUrl}") format("woff2")`
 });
 
 globalFontFace(iconFontName, {
 	fontStyle: "normal",
+	fontDisplay: "swap",
 	fontWeight: "400",
 	src: `url("${iconFontUrl}") format("woff2")`
 });

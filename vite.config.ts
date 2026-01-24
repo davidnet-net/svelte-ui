@@ -3,6 +3,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { playwright } from "@vitest/browser-playwright";
 import { execSync } from "child_process";
+import path from "path";
 import { defineConfig } from "vitest/config";
 
 import pkg from "./package.json" with { type: "json" };
@@ -27,9 +28,15 @@ export default defineConfig({
 		vanillaExtractPlugin()
 	],
 
+	resolve: {
+		alias: {
+			$lib: path.resolve("./src/lib")
+		}
+	},
+
 	define: {
 		__DDS_INFO__: {
-			version: JSON.stringify(pkgVersion), // Added version
+			version: JSON.stringify(pkgVersion),
 			commitHash: JSON.stringify(commitHash),
 			commitUrl: JSON.stringify(commitUrl),
 			buildTime: JSON.stringify(new Date().toISOString())
