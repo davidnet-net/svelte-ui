@@ -6,6 +6,7 @@
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
+	import { useShortcut, useTrap } from "../../../engines/shortcutEngine.svelte.ts";
 	import { token } from "../../../styles/designTokens.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
@@ -51,6 +52,21 @@
 
 		// eslint-disable-next-line svelte/no-navigation-without-resolve
 		await goto(item.href, { invalidateAll: true });
+	}
+
+	if (appState.isMobile) {
+		useTrap();
+		useShortcut(
+			"escape",
+			() => {
+				appState.sidebarOpen = !appState.sidebarOpen;
+			},
+			{
+				name: "Close overlay",
+				description: "",
+				preventDefault: true
+			}
+		);
 	}
 </script>
 

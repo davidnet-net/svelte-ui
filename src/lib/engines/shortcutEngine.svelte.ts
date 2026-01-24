@@ -24,6 +24,7 @@ interface RegisteredShortcut {
 	description?: string;
 	display: string[];
 	original: string;
+	sequence: number;
 }
 
 const ALIASES: Record<string, string> = {
@@ -94,12 +95,25 @@ export function getEventId(e: KeyboardEvent): string {
 
 const handlers = new SvelteMap<string, RegisteredShortcut[]>();
 
+let currentSequence = 0;
+const trapStack: number[] = [];
+
 const handleKeydown = (e: KeyboardEvent) => {
 	const id = getEventId(e);
 	const stack = handlers.get(id);
 
 	if (stack && stack.length > 0) {
 		const activeEntry = stack[stack.length - 1];
+
+		// Check for active traps
+		if (trapStack.length > 0) {
+			const activeTrapSequence = trapStack[trapStack.length - 1];
+			// If the handler was registered BEFORE the current trap, ignore it.
+			if (activeEntry.sequence < activeTrapSequence) {
+				return;
+			}
+		}
+
 		activeEntry.handler(e);
 	}
 };
@@ -144,7 +158,8 @@ export function useShortcut(
 			name,
 			description,
 			display: definition.display,
-			original: definition.original
+			original: definition.original,
+			sequence: ++currentSequence // Assign current sequence
 		};
 
 		// untrack prevents the effect from re-running when `handlers` is modified
@@ -161,6 +176,25 @@ export function useShortcut(
 			return definition.original;
 		}
 	};
+}
+
+/**
+ * Registers a "Trap" that blocks any shortcuts registered prior to this trap.
+ * Useful for modals or overlays where background shortcuts should be disabled.
+ * Supports nesting (multiple traps).
+ */
+export function useTrap() {
+	$effect(() => {
+		const trapSequence = ++currentSequence;
+		trapStack.push(trapSequence);
+
+		return () => {
+			const index = trapStack.indexOf(trapSequence);
+			if (index !== -1) {
+				trapStack.splice(index, 1);
+			}
+		};
+	});
 }
 
 export function getShortcuts() {
