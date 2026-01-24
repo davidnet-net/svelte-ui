@@ -34,14 +34,14 @@ globalFontFace(interFontName, {
 
 globalFontFace(iconFontRoundedName, {
 	fontStyle: "normal",
-	fontDisplay: "swap",
+	fontDisplay: "optional",
 	fontWeight: "400",
 	src: `url("${iconFontRoundedUrl}") format("woff2")`
 });
 
 globalFontFace(iconFontName, {
 	fontStyle: "normal",
-	fontDisplay: "swap",
+	fontDisplay: "optional",
 	fontWeight: "400",
 	src: `url("${iconFontUrl}") format("woff2")`
 });
