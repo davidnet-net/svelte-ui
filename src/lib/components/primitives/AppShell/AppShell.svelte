@@ -86,6 +86,10 @@
 		};
 		mediaQuery.addEventListener("change", handler);
 
+		if (!appState.isMobile) {
+			appState.sidebarOpen = true;
+		}
+
 		return () => {
 			mediaQuery.removeEventListener("change", handler);
 		};
