@@ -6,6 +6,7 @@ import iconFontUrl from "$lib/assets/fonts/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9
 import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 import iconFontRoundedUrl from "$lib/assets/fonts/syl0-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjpZIvDmUSVOK7BDJ_vb9vUSzq3wzLK-P0J-V_Zs-QtQth3-jOcbTCVpeRL2w5rwZu2rFmiXxc.woff2";
 
+export const interFallbackName = "Inter Fallback";
 export const interFontName = "Inter";
 export const iconFontName = "Material Symbols Outlined";
 export const iconFontRoundedName = "Material Symbols Rounded";
@@ -20,7 +21,7 @@ globalFontFace(interFontName, {
 
 globalFontFace(momoTrustDisplayFontName, {
 	src: `url("${momoTrustDisplayUrl}") format("woff2")`,
-	fontDisplay: "swap",
+	fontDisplay: "block",
 	fontWeight: "400",
 	fontStyle: "normal"
 });
@@ -34,16 +35,24 @@ globalFontFace(interFontName, {
 
 globalFontFace(iconFontRoundedName, {
 	fontStyle: "normal",
-	fontDisplay: "optional",
+	fontDisplay: "block",
 	fontWeight: "400",
 	src: `url("${iconFontRoundedUrl}") format("woff2")`
 });
 
 globalFontFace(iconFontName, {
 	fontStyle: "normal",
-	fontDisplay: "optional",
+	fontDisplay: "block",
 	fontWeight: "400",
 	src: `url("${iconFontUrl}") format("woff2")`
+});
+
+globalFontFace(interFallbackName, {
+	src: 'local("Arial")',
+	ascentOverride: "90%",
+	descentOverride: "22.5%",
+	lineGapOverride: "0%",
+	sizeAdjust: "107%"
 });
 
 export const tabularNums = style({
