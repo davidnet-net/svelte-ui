@@ -102,7 +102,7 @@
 	);
 </script>
 
-<div class="appshell {currentTheme.themeObject} {styles.base}">
+<div class="appshell {currentTheme.themeObject} {styles.base}" id="appshell">
 	<div class={styles.container}>
 		<div class={styles.maincontainer}>
 			{@render banners?.()}

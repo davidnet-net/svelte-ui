@@ -12,8 +12,6 @@
 	"page_card_for_content_designers_description": "Get started with content design guidelines.",
 	"page_card_for_designers_title": "For designers",
 	"page_card_for_designers_description": "Get started with UI design guidelines.",
-	"page_card_foundations_title": "Foundations",
-	"page_card_foundations_description": "View the guidelines.",
 	"page_card_components_title": "Components",
 	"page_card_components_description": "View the components to build Davidnet interfaces with.",
 	"page_card_tools_title": "Tools",
@@ -26,5 +24,16 @@
 	"footer_contact": "Contact",
 	"footer_license": "License",
 	"footer_policies": "Policies",
-	"footer_get_started": "Get started"
+	"footer_get_started": "Get started",
+	"page_design_tokens_header_paragraph": "Design tokens are the single source of truth to name and store design decisions.",
+	"page_design_tokens_header_heading": "\\{\"Design Tokens\"\\}",
+	"page_foundations_card_design_tokens_title": "Design tokens",
+	"page_foundations_card_design_tokens_description": "Design tokens are the single source of truth to name and store design decisions.",
+	"common_coming_soon": "Coming soon",
+	"page_design_tokens_card_design_token_libary_title": "Design token libary",
+	"page_design_tokens_card_design_token_libary_description": "View all the design tokens",
+	"page_design_tokens_libary_header_heading": "Design token libary",
+	"page_design_tokens_libary_header_paragraph": "This page shows all design tokens.",
+	"page_card_foundations_title": "Foundations",
+	"page_card_foundations_description": "View guidelines"
 }

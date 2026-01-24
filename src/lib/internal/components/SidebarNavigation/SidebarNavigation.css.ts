@@ -10,7 +10,8 @@ const baseSidebar = style({
 	borderRightWidth: token.global.borderWidth.thick,
 	borderRightStyle: "solid",
 	display: "flex",
-	flexDirection: "column"
+	flexDirection: "column",
+	gap: token.global.spacing.small
 });
 
 const baseSidebarNavigation = styleVariants({
