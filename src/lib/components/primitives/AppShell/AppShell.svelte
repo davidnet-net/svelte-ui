@@ -6,6 +6,7 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
+	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 
 	import { useShortcut } from "../../../../lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
@@ -39,6 +40,7 @@
 		footer?: Snippet;
 
 		appName: string;
+		shortAppName: string;
 
 		/**
 		 * @remarks Make sure to import * as paraglideRuntime from "../paraglide/runtime.js"
@@ -47,9 +49,10 @@
 		paraglideRuntime: any;
 	}
 
-	let { children, banners, sidebar, footer, appName, paraglideRuntime }: Props = $props();
+	let { children, banners, sidebar, footer, appName, shortAppName, paraglideRuntime }: Props =
+		$props();
 
-	onMount(async () => {
+	onMount(() => {
 		console.groupCollapsed("Davidnet Design System - information");
 		console.log("version: " + __DDS_INFO__.version);
 		console.log("commitUrl: " + __DDS_INFO__.commitUrl);
@@ -71,6 +74,19 @@
 
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
+
+		// Sidebar logic & isMobile logic
+		const mediaQuery = window.matchMedia("(max-width: 768px)");
+		currentTheme.isMobile = mediaQuery.matches;
+
+		const handler = (e: MediaQueryListEvent) => {
+			currentTheme.isMobile = e.matches;
+		};
+		mediaQuery.addEventListener("change", handler);
+
+		return () => {
+			mediaQuery.removeEventListener("change", handler);
+		};
 	});
 
 	let sidebarOpen = $state(true);
@@ -116,23 +132,31 @@
 							tip="Davidnet Home"
 							href="https://home.davidnet.net"
 							appearance="subtle" />
-						<Anchor href="/">{appName}</Anchor>
-					</div>
-					<div class={styles.navCenter}>
-						<Anchor href="https://davidnet.net">
-							{#if import.meta.env.DEV}
-								<span
-									style="color: {token.theme.color.text
-										.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
-										.global.spacing.xsmall}">
-									<Icon icon="construction" />
-									Davidnet Development Build
-									<Icon icon="construction" />
-								</span>
+						<Anchor href="/">
+							{#if currentTheme.isMobile}
+								{shortAppName}
 							{:else}
-								Davidnet
+								{appName}
 							{/if}
 						</Anchor>
+					</div>
+					<div class={styles.navCenter}>
+						{#if !currentTheme.isMobile}
+							<Anchor href="https://davidnet.net">
+								{#if import.meta.env.DEV}
+									<span
+										style="color: {token.theme.color.text
+											.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
+											.global.spacing.xsmall}">
+										<Icon icon="construction" />
+										Davidnet Development Build
+										<Icon icon="construction" />
+									</span>
+								{:else}
+									Davidnet
+								{/if}
+							</Anchor>
+						{/if}
 					</div>
 					<div class={styles.navRight}>
 						<Button onclick={() => setTheme("dark")}>Dark</Button>
@@ -141,9 +165,17 @@
 				</nav>
 				<div class={styles.contentRow}>
 					{#if sidebarOpen}
-						<div class={styles.sidebarWrapper}>
-							{@render sidebar?.()}
-						</div>
+						{#if currentTheme.isMobile}
+							<Blanket centerContent={false} onclick={() => (sidebarOpen = false)}>
+								<div class={styles.sidebarWrapper}>
+									{@render sidebar?.()}
+								</div>
+							</Blanket>
+						{:else}
+							<div class={styles.sidebarWrapper}>
+								{@render sidebar?.()}
+							</div>
+						{/if}
 					{/if}
 					<div class={styles.mainScrollArea}>
 						<main class={styles.childrenWrapper}>

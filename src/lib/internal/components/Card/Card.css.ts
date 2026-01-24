@@ -12,6 +12,7 @@ const baseCard = style({
 	lineHeight: token.global.font.lineHeight.normal,
 	borderRadius: token.global.radius.huge,
 	color: token.theme.color.text.default,
+	margin: token.global.borderWidth.thick,
 	":hover": {
 		outlineColor: token.theme.color.border.default,
 		outlineWidth: token.global.borderWidth.thick,

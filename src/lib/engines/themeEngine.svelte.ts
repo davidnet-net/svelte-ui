@@ -9,7 +9,8 @@ import { lightTheme } from "../styles/themes/light.css.ts";
 
 export const currentTheme = $state({
 	themeObject: lightTheme,
-	themeName: "light"
+	themeName: "light",
+	isMobile: false
 });
 
 export function setTheme(themeName: "light" | "dark") {

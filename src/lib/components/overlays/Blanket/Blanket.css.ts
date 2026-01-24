@@ -10,12 +10,22 @@ const baseBlanket = style({
 	height: "100vh",
 	backgroundColor: token.theme.color.blanket,
 	zIndex: token.global.zIndex.blanket,
-	display: "flex",
+	display: "flex"
+});
+
+const centered = style({
 	alignItems: "center",
 	justifyContent: "center",
 	flexDirection: "column"
 });
 
+const notCentered = style({
+	alignItems: "flex-start",
+	justifyContent: "flex-start"
+});
+
 export const styles = {
-	baseBlanket
+	baseBlanket,
+	centered,
+	notCentered
 };

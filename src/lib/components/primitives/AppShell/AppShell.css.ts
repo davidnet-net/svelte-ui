@@ -93,7 +93,15 @@ const contentRow = style({
 const sidebarWrapper = style({
 	height: "100%",
 	overflowY: "auto",
-	flexShrink: 0
+	flexShrink: 0,
+	backgroundColor: token.theme.color.surface.raised.normal,
+
+	"@media": {
+		"screen and (max-width: 768px)": {
+			boxShadow: "2px 0 8px rgba(0, 0, 0, 0.2)",
+			borderRight: "none"
+		}
+	}
 });
 
 const mainScrollArea = style({

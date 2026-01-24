@@ -6,9 +6,12 @@
 	interface Props {
 		children: Snippet;
 		onclick?: (event?: MouseEvent) => void;
+
+		centerContent?: boolean;
 	}
 
-	let { children, onclick }: Props = $props();
+	let { children, onclick, centerContent = true }: Props = $props();
+
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === "Escape" && onclick) {
 			onclick();
@@ -18,7 +21,10 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
-<div class={styles.baseBlanket} {onclick} role="presentation">
+<div
+	class="{styles.baseBlanket} {centerContent ? styles.centered : styles.notCentered}"
+	{onclick}
+	role="presentation">
 	<div role="none" onclick={(e) => e.stopPropagation()}>
 		{@render children()}
 	</div>

@@ -8,7 +8,7 @@
 	let { children } = $props();
 </script>
 
-<AppShell appName="Davidnet Design System" {paraglideRuntime}>
+<AppShell appName="Davidnet Design System" shortAppName="DDS" {paraglideRuntime}>
 	{#snippet banners()}
 		<!--<Banner appearance="warning" icon="frame_source">Davidnet development mode active!</Banner>-->
 	{/snippet}

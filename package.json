@@ -6,7 +6,7 @@
 		"url": "https://github.com/davidnet-net/svelte-ui.git"
 	},
 	"scripts": {
-		"dev": "npm run paracompile && vite dev",
+		"dev": "npm run paracompile && vite dev --host",
 		"build": "npm run paracompile && vite build && npm run prepack",
 		"preview": "vite preview",
 		"prepare": "husky",
