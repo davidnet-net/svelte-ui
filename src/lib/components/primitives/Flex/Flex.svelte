@@ -15,6 +15,8 @@
 		marginBottom?: keyof typeof styles.marginBottom;
 		marginLeft?: keyof typeof styles.marginLeft;
 		children: Snippet;
+		overflowX?: keyof typeof styles.overflowX;
+		overflowY?: keyof typeof styles.overflowY;
 	}
 
 	let {
@@ -28,6 +30,8 @@
 		marginRight = "none",
 		marginBottom = "none",
 		marginLeft = "none",
+		overflowX = "visible",
+		overflowY = "visible",
 		children
 	}: Props = $props();
 </script>
@@ -43,6 +47,8 @@
         {styles.marginRight[marginRight]}
         {styles.marginBottom[marginBottom]}
         {styles.marginLeft[marginLeft]}
+		{styles.overflowX[overflowX]}
+        {styles.overflowY[overflowY]}
     "
 	style:width
 	style:height>

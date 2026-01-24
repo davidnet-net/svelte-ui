@@ -41,6 +41,20 @@ const gap = styleVariants({
 	xsmall: { gap: token.global.spacing.xsmall }
 });
 
+const overflowX = styleVariants({
+	visible: { overflowX: "visible" },
+	hidden: { overflowX: "hidden" },
+	scroll: { overflowX: "scroll" },
+	auto: { overflowX: "auto" }
+});
+
+const overflowY = styleVariants({
+	visible: { overflowY: "visible" },
+	hidden: { overflowY: "hidden" },
+	scroll: { overflowY: "scroll" },
+	auto: { overflowY: "auto" }
+});
+
 export const marginTop = styleVariants({
 	none: { marginTop: token.global.spacing.none },
 	xlarge: { marginTop: token.global.spacing.xlarge },
@@ -86,5 +100,7 @@ export const styles = {
 	marginBottom,
 	marginRight,
 	marginLeft,
-	gap
+	gap,
+	overflowX,
+	overflowY
 };
