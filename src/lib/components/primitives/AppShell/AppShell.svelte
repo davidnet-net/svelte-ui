@@ -9,6 +9,7 @@
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 
 	import { useShortcut } from "../../../../lib/engines/shortcutEngine.svelte.ts";
+	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
 	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
 	import { token } from "../../../styles/designTokens.ts";
@@ -76,12 +77,12 @@
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
 
-		// Sidebar logic & isMobile logic
+		// Is mobile
 		const mediaQuery = window.matchMedia("(max-width: 768px)");
-		currentTheme.isMobile = mediaQuery.matches;
+		appState.isMobile = mediaQuery.matches;
 
 		const handler = (e: MediaQueryListEvent) => {
-			currentTheme.isMobile = e.matches;
+			appState.isMobile = e.matches;
 		};
 		mediaQuery.addEventListener("change", handler);
 
@@ -90,12 +91,15 @@
 		};
 	});
 
-	let sidebarOpen = $state(true);
-	const toggleSidebar = useShortcut("ctrl+[", () => (sidebarOpen = !sidebarOpen), {
-		name: "Toggle sidebar",
-		description: "Closes or opens the sidebar.",
-		preventDefault: true
-	});
+	const toggleSidebar = useShortcut(
+		"ctrl+[",
+		() => (appState.sidebarOpen = !appState.sidebarOpen),
+		{
+			name: "Toggle sidebar",
+			description: "Closes or opens the sidebar.",
+			preventDefault: true
+		}
+	);
 </script>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}">
@@ -106,7 +110,7 @@
 			<Flex height="100%" width="100%" direction="column">
 				<nav class={styles.nav}>
 					<div class={styles.navLeft}>
-						{#if sidebar && sidebarOpen}
+						{#if sidebar && appState.sidebarOpen}
 							<IconButton
 								icon="left_panel_close"
 								tip="Close sidebar"
@@ -114,7 +118,7 @@
 								keyboardTip={toggleSidebar.keys}
 								iconstyle="filled"
 								onclick={() => {
-									sidebarOpen = !sidebarOpen;
+									appState.sidebarOpen = !appState.sidebarOpen;
 								}} />
 						{:else if sidebar}
 							<IconButton
@@ -124,7 +128,7 @@
 								keyboardTip={toggleSidebar.keys}
 								iconstyle="outlined"
 								onclick={() => {
-									sidebarOpen = !sidebarOpen;
+									appState.sidebarOpen = !appState.sidebarOpen;
 								}} />
 						{:else}
 							<IconLinkButton
@@ -135,7 +139,7 @@
 								appearance="subtle" />
 						{/if}
 						<Anchor href="/">
-							{#if currentTheme.isMobile}
+							{#if appState.isMobile}
 								{shortAppName}
 							{:else}
 								{appName}
@@ -143,7 +147,7 @@
 						</Anchor>
 					</div>
 					<div class={styles.navCenter}>
-						{#if !currentTheme.isMobile}
+						{#if !appState.isMobile}
 							<Anchor href="https://davidnet.net">
 								{#if import.meta.env.DEV}
 									<span
@@ -161,14 +165,14 @@
 						{/if}
 					</div>
 					<div class={styles.navRight}>
-						<Button onclick={() => setTheme("dark")}>Dark</Button>
-						<Button onclick={() => setTheme("light")}>Light</Button>
+						<Button onclick={() => setTheme("dark")}>D - Temp</Button>
+						<Button onclick={() => setTheme("light")}>L - Temp</Button>
 					</div>
 				</nav>
 				<div class={styles.contentRow}>
-					{#if sidebarOpen}
-						{#if currentTheme.isMobile}
-							<Blanket centerContent={false} onclick={() => (sidebarOpen = false)}>
+					{#if appState.sidebarOpen}
+						{#if appState.isMobile}
+							<Blanket centerContent={false} onclick={() => (appState.sidebarOpen = false)}>
 								<div class={styles.sidebarWrapper}>
 									{@render sidebar?.()}
 								</div>

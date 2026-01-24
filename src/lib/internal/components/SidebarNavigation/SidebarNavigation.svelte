@@ -5,6 +5,7 @@
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
+	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { token } from "../../../styles/designTokens.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
@@ -24,8 +25,14 @@
 			href: "/foundations",
 			children: [
 				{
-					pageName: "Some Child Page",
-					href: "/foundations/somechildpage"
+					pageName: "Design tokens",
+					href: "/foundations/design_tokens",
+					children: [
+						{
+							pageName: "Design token libary",
+							href: "/foundations/design_tokens/libary"
+						}
+					]
 				}
 			]
 		}
@@ -78,9 +85,24 @@
 	{/each}
 {/snippet}
 
-<aside class={styles.baseSidebarNavigation}>
-	<LinkButton opennewtab stretchwidth href="https://home.davidnet.net" alignContent="left">
-		Davidnet Home
-	</LinkButton>
-	{@render navTree(navigationData, 0)}
+<aside class={styles.baseSidebarNavigation[appState.isMobile ? "mobile" : "desktop"]}>
+	<div class={styles.navigation}>
+		<LinkButton opennewtab stretchwidth href="https://home.davidnet.net" alignContent="left">
+			Davidnet Home
+		</LinkButton>
+		{@render navTree(navigationData, 0)}
+	</div>
+	{#if appState.isMobile}
+		<div class={styles.bottom}>
+			<Button
+				iconbefore="close"
+				stretchwidth
+				alignContent="left"
+				onclick={() => {
+					appState.sidebarOpen = !appState.sidebarOpen;
+				}}>
+				Close sidebar
+			</Button>
+		</div>
+	{/if}
 </aside>

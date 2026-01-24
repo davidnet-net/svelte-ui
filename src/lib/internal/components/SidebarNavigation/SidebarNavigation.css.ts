@@ -1,18 +1,34 @@
-import { style } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 
 import { token } from "../../../styles/designTokens.ts";
 
-const baseSidebarNavigation = style({
+const baseSidebar = style({
 	position: "relative",
-	height: "calc(100vh - 48px)",
 	width: "15rem",
 	padding: token.global.spacing.medium,
 	borderRightColor: token.theme.color.border.default,
 	borderRightWidth: token.global.borderWidth.thick,
 	borderRightStyle: "solid",
-	overflow: "auto"
+	display: "flex",
+	flexDirection: "column"
+});
+
+const baseSidebarNavigation = styleVariants({
+	desktop: [baseSidebar, { height: "calc(100dvh - 48px)" }],
+	mobile: [baseSidebar, { height: "100dvh" }]
+});
+
+const navigation = style({
+	overflow: "auto",
+	height: "calc(100%)"
+});
+
+const bottom = style({
+	flex: 1
 });
 
 export const styles = {
-	baseSidebarNavigation
+	baseSidebarNavigation,
+	navigation,
+	bottom
 };
