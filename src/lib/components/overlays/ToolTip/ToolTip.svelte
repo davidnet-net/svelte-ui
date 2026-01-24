@@ -10,19 +10,23 @@
 
 	async function adjustPositionOnce() {
 		await tick();
-
 		if (!tooltipElement) return;
 
-		const rect = tooltipElement.getBoundingClientRect();
-		const viewportWidth = window.innerWidth;
+		requestAnimationFrame(() => {
+			const rect = tooltipElement!.getBoundingClientRect();
+			const viewportWidth = window.innerWidth;
 
-		if (rect.left < 0) {
-			nudgeX = -rect.left + 8;
-		} else if (rect.right > viewportWidth) {
-			nudgeX = viewportWidth - rect.right - 8;
-		} else {
-			nudgeX = 0;
-		}
+			let nextNudge = 0;
+			if (rect.left < 0) {
+				nextNudge = -rect.left + 8;
+			} else if (rect.right > viewportWidth) {
+				nextNudge = viewportWidth - rect.right - 8;
+			}
+
+			if (nudgeX !== nextNudge) {
+				nudgeX = nextNudge;
+			}
+		});
 	}
 
 	interface Props {

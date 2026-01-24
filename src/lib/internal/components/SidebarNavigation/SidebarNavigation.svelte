@@ -113,7 +113,7 @@
 			<Button
 				iconbefore="close"
 				stretchwidth
-				alignContent="left"
+				alignContent="center"
 				onclick={() => {
 					appState.sidebarOpen = !appState.sidebarOpen;
 				}}>

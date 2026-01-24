@@ -22,6 +22,7 @@
 		mounted = true;
 	});
 
+	//TODO: PERFORMANCE BOTTLENECK - FORCED REFLOW
 	function resolveCssValue(cssValue: string): string {
 		if (typeof window === "undefined" || !cssValue || !mounted) return cssValue;
 
