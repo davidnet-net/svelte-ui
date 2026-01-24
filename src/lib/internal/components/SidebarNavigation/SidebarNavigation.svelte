@@ -79,7 +79,7 @@
 {/snippet}
 
 <aside class={styles.baseSidebarNavigation}>
-	<LinkButton iconbefore="apps" stretchwidth href="https://home.davidnet.net" alignContent="left">
+	<LinkButton opennewtab stretchwidth href="https://home.davidnet.net" alignContent="left">
 		Davidnet Home
 	</LinkButton>
 	{@render navTree(navigationData, 0)}

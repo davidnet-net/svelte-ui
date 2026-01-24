@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 
+	import { useShortcut } from "../../../engines/shortcutEngine.svelte.ts";
 	import { styles } from "./Blanket.css.ts";
 
 	interface Props {
@@ -12,14 +13,14 @@
 
 	let { children, onclick, centerContent = true }: Props = $props();
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === "Escape" && onclick) {
-			onclick();
-		}
-	}
+	useShortcut("escape", () => onclick?.(), {
+		name: "Close overlay",
+		description: "",
+		preventDefault: true
+	});
 </script>
 
-<svelte:window onkeydown={handleKeydown} />
+<svelte:window onkeydown={() => onclick?.()} />
 
 <div
 	class="{styles.baseBlanket} {centerContent ? styles.centered : styles.notCentered}"

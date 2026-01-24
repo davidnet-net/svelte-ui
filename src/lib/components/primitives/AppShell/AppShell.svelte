@@ -131,6 +131,7 @@
 								icon="apps"
 								tip="Davidnet Home"
 								href="https://home.davidnet.net"
+								opennewtab
 								appearance="subtle" />
 						{/if}
 						<Anchor href="/">
