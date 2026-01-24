@@ -33,6 +33,21 @@ const baseLinkButton = style({
 	transitionTimingFunction: token.global.transition.timing.ease
 });
 
+const alignContent = styleVariants({
+	left: {
+		justifyContent: "flex-start",
+		textAlign: "left"
+	},
+	center: {
+		justifyContent: "center",
+		textAlign: "center"
+	},
+	right: {
+		justifyContent: "flex-end",
+		textAlign: "right"
+	}
+});
+
 const appearance = styleVariants({
 	danger: {
 		backgroundColor: token.theme.color.background.danger.normal,
@@ -122,5 +137,6 @@ export const styles = {
 	baseLinkButton,
 	appearance,
 	disabledappearance,
+	alignContent,
 	stretchwidth
 };

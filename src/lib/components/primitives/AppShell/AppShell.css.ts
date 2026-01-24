@@ -66,21 +66,24 @@ const navLeft = style({
 	justifyContent: "flex-start",
 	flex: 1,
 	display: "flex",
-	alignItems: "center"
+	alignItems: "center",
+	gap: token.global.spacing.small
 });
 
 const navCenter = style({
 	justifyContent: "center",
 	flex: 1,
 	display: "flex",
-	alignItems: "center"
+	alignItems: "center",
+	gap: token.global.spacing.small
 });
 
 const navRight = style({
 	justifyContent: "flex-end",
 	flex: 1,
 	display: "flex",
-	alignItems: "center"
+	alignItems: "center",
+	gap: token.global.spacing.small
 });
 
 const contentRow = style({

@@ -41,6 +41,8 @@
 		 * @default false
 		 */
 		opennewtab?: boolean;
+		alignContent?: keyof typeof styles.alignContent;
+
 		external?: boolean;
 		disabled?: boolean;
 		href: string;
@@ -55,6 +57,7 @@
 		stretchwidth,
 		loading = false,
 		opennewtab = false,
+		alignContent = "center",
 		external = false,
 		class: className = "",
 		href,
@@ -67,9 +70,9 @@
 </script>
 
 <Anchor
-	class="{focusring} {styles.baseLinkButton} {stretchwidth ? styles.stretchwidth : ''} {isDisabled
-		? styles.disabledappearance
-		: styles.appearance[appearance]} {className}"
+	class="{focusring} {styles.baseLinkButton} {styles.alignContent[alignContent]} {stretchwidth
+		? styles.stretchwidth
+		: ''} {isDisabled ? styles.disabledappearance : styles.appearance[appearance]} {className}"
 	{href}
 	{disabled}
 	{opennewtab}

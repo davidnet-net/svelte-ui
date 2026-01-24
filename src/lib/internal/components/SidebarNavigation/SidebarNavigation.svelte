@@ -2,8 +2,10 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
+	import { token } from "../../../styles/designTokens.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
 	interface NavigationItem {
@@ -14,7 +16,7 @@
 
 	const navigationData: NavigationItem[] = [
 		{
-			pageName: "Home",
+			pageName: "Davidnet Design System",
 			href: "/"
 		},
 		{
@@ -51,7 +53,7 @@
 		{@const isExpanded = expandedItems.includes(item.href)}
 		{@const isActive = page.url.pathname === item.href}
 
-		<div style="padding-left: {depth * 1}rem">
+		<div style="padding-left: {depth * 1}rem; padding-top: {token.global.spacing.small}">
 			<Button
 				type="button"
 				stretchwidth
@@ -77,5 +79,8 @@
 {/snippet}
 
 <aside class={styles.baseSidebarNavigation}>
+	<LinkButton iconbefore="apps" stretchwidth href="https://home.davidnet.net" alignContent="left">
+		Davidnet Home
+	</LinkButton>
 	{@render navTree(navigationData, 0)}
 </aside>

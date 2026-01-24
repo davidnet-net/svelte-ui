@@ -36,6 +36,7 @@
 
 		/**
 		 * @remarks Make sure to add an <footer> element
+		 * @remarks Also include an link to home.davidnet.net
 		 */
 		footer?: Snippet;
 
@@ -125,13 +126,13 @@
 								onclick={() => {
 									sidebarOpen = !sidebarOpen;
 								}} />
+						{:else}
+							<IconLinkButton
+								icon="apps"
+								tip="Davidnet Home"
+								href="https://home.davidnet.net"
+								appearance="subtle" />
 						{/if}
-
-						<IconLinkButton
-							icon="apps"
-							tip="Davidnet Home"
-							href="https://home.davidnet.net"
-							appearance="subtle" />
 						<Anchor href="/">
 							{#if currentTheme.isMobile}
 								{shortAppName}
