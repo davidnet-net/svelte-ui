@@ -52,6 +52,7 @@ export function createTranslationEngine<T extends string>(
 
 	return async function translationEngine() {
 		//TODO JWT Session language preference
+		document.documentElement.lang = getLocale();
 
 		// Check if on the most best navigator language.
 		let navigatorLanguageBestMatch: Locale | null = null;
@@ -65,6 +66,7 @@ export function createTranslationEngine<T extends string>(
 
 		if (navigatorLanguageBestMatch && navigatorLanguageBestMatch !== getLocale()) {
 			setLocale(navigatorLanguageBestMatch);
+			document.documentElement.lang = getLocale();
 			return;
 		}
 	};
