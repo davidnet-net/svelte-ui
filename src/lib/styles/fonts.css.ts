@@ -21,7 +21,7 @@ globalFontFace(interFontName, {
 
 globalFontFace(momoTrustDisplayFontName, {
 	src: `url("${momoTrustDisplayUrl}") format("woff2")`,
-	fontDisplay: "block",
+	fontDisplay: "optional",
 	fontWeight: "400",
 	fontStyle: "normal"
 });
