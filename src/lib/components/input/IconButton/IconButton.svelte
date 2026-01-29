@@ -19,6 +19,13 @@
 		 * @default false
 		 */
 		loading?: boolean;
+
+		/**
+		 * Lets the button look selected
+		 * @default false
+		 */
+		selected?: boolean;
+
 		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		appearance?: keyof typeof styles.appearance;
 		tip: string;
@@ -32,6 +39,7 @@
 		class: className = "",
 		type = "button",
 		icon,
+		selected = false,
 		tip,
 		iconstyle = "filled",
 		disabled = false,
@@ -39,8 +47,18 @@
 		...rest
 	}: Props = $props();
 
-	const isDisabled = $derived(disabled || loading);
 	let hovered = $state(false);
+
+	const isDisabled = $derived(disabled || loading);
+	const isSelected = $derived(isDisabled ? false : selected);
+
+	const currentState = $derived(
+		isDisabled
+			? styles.disabledappearance
+			: isSelected
+				? styles.selectedappearance
+				: styles.appearance[appearance]
+	);
 </script>
 
 <button
@@ -50,9 +68,7 @@
 	onmouseleave={() => {
 		hovered = false;
 	}}
-	class="{focusring} {styles.baseIconButton} {isDisabled
-		? styles.disabledappearance
-		: styles.appearance[appearance]} {className}"
+	class="{focusring} {styles.baseIconButton} {currentState} {className}"
 	{type}
 	{onclick}
 	disabled={isDisabled}

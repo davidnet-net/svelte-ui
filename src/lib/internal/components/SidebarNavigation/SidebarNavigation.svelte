@@ -81,7 +81,7 @@
 				type="button"
 				stretchwidth
 				alignContent="left"
-				appearance={isActive ? "primary" : undefined}
+				appearance={isActive ? "primary" : "subtle"}
 				onclick={() => handleItemClick(item)}>
 				{#if hasChildren}
 					{#if isExpanded}
