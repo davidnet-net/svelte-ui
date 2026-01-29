@@ -35,18 +35,26 @@
 		 * @default false
 		 */
 		loading?: boolean;
+
+		/**
+		 * Lets the button look selected
+		 * @default false
+		 */
+		selected?: boolean;
+
 		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		appearance?: keyof typeof styles.appearance;
 	}
 
 	let {
 		children,
-		appearance = "subtle",
+		appearance = "default",
 		iconbefore,
 		iconafter,
 		stretchwidth,
 		alignContent = "center",
 		loading = false,
+		selected = false,
 		onclick,
 		class: className = "",
 		type = "button",
@@ -55,12 +63,21 @@
 	}: Props = $props();
 
 	const isDisabled = $derived(disabled || loading);
+	const isSelected = $derived(isDisabled ? false : selected);
+
+	const state = $derived(
+		isDisabled
+			? styles.disabledappearance
+			: isSelected
+				? styles.selectedappearance
+				: styles.appearance[appearance]
+	);
 </script>
 
 <button
 	class="{focusring} {styles.alignContent[alignContent]} {styles.baseButton} {stretchwidth
 		? styles.stretchwidth
-		: ''} {isDisabled ? styles.disabledappearance : styles.appearance[appearance]} {className}"
+		: ''} {state} {className}"
 	{type}
 	{onclick}
 	disabled={isDisabled}

@@ -69,6 +69,11 @@ export const darkTheme = createTheme(token.theme, {
 				normal: "transparent",
 				hover: "rgba(255, 255, 255, 0.08)",
 				pressed: "rgba(255, 255, 255, 0.16)"
+			},
+			selected: {
+				normal: "#0d3d8b79",
+				hover: "#145ecc83",
+				pressed: "#2c2c2c"
 			}
 		},
 
@@ -115,7 +120,8 @@ export const darkTheme = createTheme(token.theme, {
 
 		border: {
 			focus: "rgba(255, 0, 0, 0.5)",
-			default: "#2f353a"
+			default: "#2f353a",
+			selected: "#145fcc"
 		},
 
 		blanket: "rgba(0, 0, 0, 0.6);"

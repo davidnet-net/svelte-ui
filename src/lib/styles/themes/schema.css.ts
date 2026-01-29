@@ -65,6 +65,11 @@ export const theme = createThemeContract({
 				normal: null,
 				hover: null,
 				pressed: null
+			},
+			selected: {
+				normal: null,
+				hover: null,
+				pressed: null
 			}
 		},
 
@@ -110,7 +115,8 @@ export const theme = createThemeContract({
 		},
 		border: {
 			focus: null,
-			default: null
+			default: null,
+			selected: null
 		},
 		blanket: null
 	}

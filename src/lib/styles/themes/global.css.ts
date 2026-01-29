@@ -1,6 +1,6 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
 
-import { interFallbackName,interFontName, momoTrustDisplayFontName } from "../fonts.css.ts";
+import { interFallbackName, interFontName, momoTrustDisplayFontName } from "../fonts.css.ts";
 
 export const global = createGlobalTheme(":root", {
 	font: {

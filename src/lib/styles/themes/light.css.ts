@@ -69,6 +69,11 @@ export const lightTheme = createTheme(token.theme, {
 				normal: "transparent",
 				hover: "rgba(0, 0, 0, 0.04)",
 				pressed: "rgba(0, 0, 0, 0.08)"
+			},
+			selected: {
+				normal: "#0c66e486",
+				hover: "#1669c184",
+				pressed: "#2c2c2c"
 			}
 		},
 
@@ -115,7 +120,8 @@ export const lightTheme = createTheme(token.theme, {
 
 		border: {
 			focus: "rgba(255, 0, 0, 0.5)",
-			default: "#dfe1e6"
+			default: "#dfe1e6",
+			selected: "#145fcc"
 		},
 
 		blanket: "rgba(0, 0, 0, 0.6);"
