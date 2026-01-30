@@ -3,7 +3,6 @@
 	import { page } from "$app/state";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
-	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
@@ -82,15 +81,12 @@
 				stretchwidth
 				alignContent="left"
 				appearance={isActive ? "primary" : "subtle"}
+				iconbefore={hasChildren
+					? isExpanded
+						? "keyboard_arrow_down"
+						: "keyboard_arrow_right"
+					: undefined}
 				onclick={() => handleItemClick(item)}>
-				{#if hasChildren}
-					{#if isExpanded}
-						<Icon icon="keyboard_arrow_down" />
-					{:else}
-						<Icon icon="keyboard_arrow_right" />
-					{/if}
-				{/if}
-
 				{item.pageName}
 			</Button>
 		</div>
