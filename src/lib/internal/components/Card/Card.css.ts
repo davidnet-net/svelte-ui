@@ -13,10 +13,12 @@ const baseCard = style({
 	borderRadius: token.global.radius.huge,
 	color: token.theme.color.text.default,
 	margin: token.global.borderWidth.thick,
+	outlineWidth: token.global.borderWidth.standard,
+	outlineStyle: "solid",
+	outlineColor: token.theme.color.border.default,
 	":hover": {
-		outlineColor: token.theme.color.border.default,
 		outlineWidth: token.global.borderWidth.thick,
-		outlineStyle: "solid",
+		outlineColor: token.theme.color.border.highlighted,
 		color: token.theme.color.text.secondary
 	}
 });

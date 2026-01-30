@@ -116,7 +116,8 @@ export const theme = createThemeContract({
 		border: {
 			focus: null,
 			default: null,
-			selected: null
+			selected: null,
+			highlighted: null
 		},
 		blanket: null
 	}
