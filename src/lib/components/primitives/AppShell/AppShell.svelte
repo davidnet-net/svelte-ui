@@ -6,6 +6,7 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
+	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { token } from "$lib/styles/designTokens.ts";
 
@@ -195,7 +196,7 @@
 			</Flex>
 		</div>
 	</div>
-
+	<Toaster />
 	<noscript>
 		<div class={styles.noscriptoverlay}>
 			<Flex direction="column" alignItems="center" justifyContent="center" gap="medium">

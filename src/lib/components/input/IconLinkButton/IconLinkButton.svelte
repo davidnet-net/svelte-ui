@@ -70,7 +70,7 @@
 	{:else}
 		<Icon {icon} />
 	{/if}
-	{#if hovered && !disabled}
+	{#if hovered && !disabled && tip.length > 0}
 		<ToolTip {tip} {keyboardTip} />
 	{/if}
 </Anchor>

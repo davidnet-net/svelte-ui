@@ -13,20 +13,6 @@
 	<h2>{m.page_subheading_get_started()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		<Card
-			href="#"
-			title={m.page_card_for_designers_title()}
-			description={m.page_card_for_designers_description()} />
-		<Card
-			href="#"
-			title={m.page_card_for_developers_title()}
-			description={m.page_card_for_developers_description()} />
-		<Card
-			href="#"
-			title={m.page_card_for_content_designers_title()}
-			description={m.page_card_for_content_designers_description()} />
-	</Flex>
-	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
-		<Card
 			href="/foundations"
 			title={m.page_card_foundations_title()}
 			description={m.page_card_foundations_description()} />

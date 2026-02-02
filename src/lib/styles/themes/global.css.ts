@@ -72,8 +72,9 @@ export const global = createGlobalTheme(":root", {
 	},
 
 	zIndex: {
-		noscript: "30",
-		blanket: "20",
-		toolTip: "10"
+		noscript: "40",
+		toaster: "30",
+		toolTip: "20",
+		blanket: "10"
 	}
 });
