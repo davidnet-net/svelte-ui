@@ -3,6 +3,7 @@
 
 	import { onMount, type Snippet } from "svelte";
 
+	import DNLogo from "$lib/assets/images/DNLogo.png";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
@@ -101,7 +102,21 @@
 			preventDefault: true
 		}
 	);
+
+	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
+	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 </script>
+
+<svelte:head>
+	<link rel="icon" href={DNLogo} />
+	<link
+		rel="preload"
+		href={momoTrustDisplayUrl}
+		as="font"
+		type="font/woff2"
+		crossorigin="anonymous" />
+	<link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+</svelte:head>
 
 <div class="appshell {currentTheme.themeObject} {styles.base}" id="appshell">
 	<div class={styles.container}>
