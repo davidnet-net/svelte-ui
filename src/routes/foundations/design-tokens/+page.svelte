@@ -15,8 +15,8 @@
 	<h2>{m.page_foundations_subheading_design_tokens()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
 		<Card
-			href="/foundations/design_tokens/libary"
-			title={m.page_design_tokens_card_design_token_libary_title()}
-			description={m.page_design_tokens_card_design_token_libary_description()} />
+			href="/foundations/design-tokens/library"
+			title={m.page_design_tokens_card_design_token_library_title()}
+			description={m.page_design_tokens_card_design_token_library_description()} />
 	</Flex>
 </div>

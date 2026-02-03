@@ -2,10 +2,25 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Card from "$lib/internal/components/Card/Card.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import { getCurrentPage } from "$lib/internal/navigationData.svelte.ts";
 
 	import * as m from "../paraglide/messages.js";
 	import { styles } from "./page.css.ts";
+
+	const navigationPageData = getCurrentPage();
 </script>
+
+<svelte:head>
+	<title>{navigationPageData.title}</title>
+	<meta name="description" content={navigationPageData.description} />
+	<link rel="canonical" href={navigationPageData.fullUrl} />
+
+	<meta property="og:type" content={navigationPageData.ogType} />
+	<meta property="og:url" content={navigationPageData.fullUrl} />
+	<meta property="og:title" content={navigationPageData.title} />
+	<meta property="og:description" content={navigationPageData.description} />
+	<meta property="og:image" content={navigationPageData.ogImage} />
+</svelte:head>
 
 <Header heading="Davidnet Design System" paragraph={m.page_header_paragraph()} />
 

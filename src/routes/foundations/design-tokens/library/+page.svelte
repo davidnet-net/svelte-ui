@@ -10,8 +10,8 @@
 </script>
 
 <Header
-	heading={m.page_design_tokens_libary_header_heading()}
-	paragraph={m.page_design_tokens_libary_header_paragraph()} />
+	heading={m.page_design_tokens_library_header_heading()}
+	paragraph={m.page_design_tokens_library_header_paragraph()} />
 
 <div class={styles.pageContainer}>
 	<h2>{m.page_foundations_subheading_design_tokens()}</h2>

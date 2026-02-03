@@ -3,40 +3,12 @@
 	import { page } from "$app/state";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
+	import { navigationData, type NavigationItem } from "$lib/internal/navigationData.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { useShortcut, useTrap } from "../../../engines/shortcutEngine.svelte.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
-
-	interface NavigationItem {
-		pageName: string;
-		href: string;
-		children?: NavigationItem[];
-	}
-
-	const navigationData: NavigationItem[] = [
-		{
-			pageName: "Davidnet Design System",
-			href: "/"
-		},
-		{
-			pageName: "Foundations",
-			href: "/foundations",
-			children: [
-				{
-					pageName: "Design tokens",
-					href: "/foundations/design_tokens",
-					children: [
-						{
-							pageName: "Design token libary",
-							href: "/foundations/design_tokens/libary"
-						}
-					]
-				}
-			]
-		}
-	];
 
 	let expandedItems = $state<string[]>([]);
 

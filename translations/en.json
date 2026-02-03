@@ -16,7 +16,7 @@
 	"page_card_components_description": "View the components to build Davidnet interfaces with.",
 	"page_card_tools_title": "Tools",
 	"page_subheading_get_started": "Get started",
-	"page_header_paragraph": "The DDS makes building Davidnet interfaces easier!",
+	"page_header_paragraph": "Build consistent, high-quality Davidnet interfaces faster. The official source for our design patterns, components, and documentation.",
 	"footer_get_started_for_designers": "For designers",
 	"footer_get_started_for_developers": "For developers",
 	"footer_get_started_for_content_designers": "For content designers",
@@ -30,10 +30,10 @@
 	"page_foundations_card_design_tokens_title": "Design tokens",
 	"page_foundations_card_design_tokens_description": "Design tokens are the single source of truth to name and store design decisions.",
 	"common_coming_soon": "Coming soon",
-	"page_design_tokens_card_design_token_libary_title": "Design token libary",
-	"page_design_tokens_card_design_token_libary_description": "View all the design tokens",
-	"page_design_tokens_libary_header_heading": "Design token libary",
-	"page_design_tokens_libary_header_paragraph": "This page shows all design tokens.",
+	"page_design_tokens_card_design_token_library_title": "Design token library",
+	"page_design_tokens_card_design_token_library_description": "View all the design tokens",
+	"page_design_tokens_library_header_heading": "Design token library",
+	"page_design_tokens_library_header_paragraph": "This page shows all design tokens.",
 	"page_card_foundations_title": "Foundations",
 	"page_card_foundations_description": "View guidelines"
 }
