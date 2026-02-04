@@ -79,6 +79,19 @@
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
 
+		// Vite connection
+		if (import.meta.hot) {
+			import.meta.hot.on("vite:ws:disconnect", () => {
+				appState.viteConnected = false;
+			});
+
+			import.meta.hot.on("vite:ws:connect", () => {
+				appState.viteConnected = true;
+			});
+		} else {
+			appState.viteConnected = false;
+		}
+
 		// Is mobile
 		const mediaQuery = window.matchMedia("(max-width: 768px)");
 		appState.isMobile = mediaQuery.matches;
@@ -105,6 +118,7 @@
 
 	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
 	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
+	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 </script>
 
 <svelte:head>
@@ -121,6 +135,12 @@
 <div class="appshell {currentTheme.themeObject} {styles.base}" id="appshell">
 	<div class={styles.container}>
 		<div class={styles.maincontainer}>
+			{#if appState.isDevelopmentBuild && !appState.viteConnected}
+				<Banner icon="sync_problem" appearance="danger">
+					<b>Vite connection lost.</b>
+					Hot Module Reloading will be unavailable until reconnected.
+				</Banner>
+			{/if}
 			{@render banners?.()}
 
 			<Flex height="100%" width="100%" direction="column">
