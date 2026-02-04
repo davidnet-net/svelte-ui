@@ -9,12 +9,12 @@
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
+	import { appState, initTrackers } from "$lib/engines/appStateEngine.svelte.ts";
+	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
+	import { currentTheme, setTheme } from "$lib/engines/themeEngine.svelte.ts";
+	import { createTranslationEngine } from "$lib/engines/translationEngine.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 
-	import { useShortcut } from "../../../../lib/engines/shortcutEngine.svelte.ts";
-	import { appState } from "../../../engines/appStateEngine.svelte.ts";
-	import { currentTheme, setTheme } from "../../../engines/themeEngine.svelte.ts";
-	import { createTranslationEngine } from "../../../engines/translationEngine.svelte.ts";
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";
@@ -64,9 +64,12 @@
 		console.log("buildTime: " + __DDS_INFO__.buildTime);
 		console.groupEnd();
 
-		// Some notes:
-		// Read caches first of engines after rerun after auth completed???
-		// Keep lastcommunicated value or smth that you dont refresh if newer then 10m
+		// Multi-Account Auth:
+		// - Storage: HttpOnly cookies named `token_${accountId}`.
+		// - Request: Frontend sends `x-active-account: ${accountId}` header.
+		// - Backend: Reads header, pulls the matching cookie, and validates that specific JWT.
+
+		// We dont need cache bcs we can just use the JWT and after refresh it.
 
 		try {
 			console.debug("[AppShell] Configuring translationEngine.");
@@ -79,31 +82,8 @@
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
 
-		// Vite connection
-		if (import.meta.hot) {
-			import.meta.hot.on("vite:ws:disconnect", () => {
-				appState.viteConnected = false;
-			});
-
-			import.meta.hot.on("vite:ws:connect", () => {
-				appState.viteConnected = true;
-			});
-		} else {
-			appState.viteConnected = false;
-		}
-
-		// Is mobile
-		const mediaQuery = window.matchMedia("(max-width: 768px)");
-		appState.isMobile = mediaQuery.matches;
-
-		const handler = (e: MediaQueryListEvent) => {
-			appState.isMobile = e.matches;
-		};
-		mediaQuery.addEventListener("change", handler);
-
-		return () => {
-			mediaQuery.removeEventListener("change", handler);
-		};
+		// AppStateEngine trackers
+		initTrackers();
 	});
 
 	const toggleSidebar = useShortcut(
@@ -135,10 +115,16 @@
 <div class="appshell {currentTheme.themeObject} {styles.base}" id="appshell">
 	<div class={styles.container}>
 		<div class={styles.maincontainer}>
-			{#if appState.isDevelopmentBuild && !appState.viteConnected}
+			{#if import.meta.env.DEV && !appState.viteConnected}
 				<Banner icon="sync_problem" appearance="danger">
 					<b>Vite connection lost.</b>
 					Hot Module Reloading will be unavailable until reconnected.
+				</Banner>
+			{/if}
+			{#if appState.isOffline}
+				<Banner icon="cloud_alert" appearance="danger">
+					<b>Connection lost.</b>
+					We have lost the connection with Davidnet. Please check your internet connection.
 				</Banner>
 			{/if}
 			{@render banners?.()}
