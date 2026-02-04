@@ -5,6 +5,7 @@ import { token } from "$lib/styles/designTokens.ts";
 const baseHeader = style({
 	backgroundColor: token.theme.color.surface.sunken.normal,
 	height: "20rem",
+	maxHeight: "fit-content",
 	width: "100%",
 	padding: token.global.spacing.xlarge,
 	display: "flex",

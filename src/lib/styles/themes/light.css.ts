@@ -67,8 +67,8 @@ export const lightTheme = createTheme(token.theme, {
 
 			subtle: {
 				normal: "transparent",
-				hover: "rgba(0, 0, 0, 0.04)",
-				pressed: "rgba(0, 0, 0, 0.08)"
+				hover: "rgba(9, 30, 66, 0.04)",
+				pressed: "rgba(9, 30, 66, 0.08)"
 			},
 			selected: {
 				normal: "#0c66e486",
@@ -79,22 +79,26 @@ export const lightTheme = createTheme(token.theme, {
 
 		surface: {
 			sunken: {
-				normal: "#f8f8f8"
+				// Darkest surface (inputs, wells, sidebars)
+				normal: "#edeff2"
 			},
 			default: {
-				normal: "##ffffff",
-				hover: "#f0f0f0",
-				pressed: "#e6e6e6"
+				// The Body/Background color (Soft off-white, easier on eyes)
+				normal: "#f7f8fa",
+				hover: "#eff1f3",
+				pressed: "#e5e8eb"
 			},
 			raised: {
-				normal: "#ffffffff",
-				hover: "#f9f9f9",
-				pressed: "#f0f0f0"
+				// Card color (Pure white to pop against the body)
+				normal: "#ffffff",
+				hover: "#fbfbfc",
+				pressed: "#f4f5f7"
 			},
 			overlay: {
-				normal: "#ffffffff",
-				hover: "#e6e6e6",
-				pressed: "#d9d9d9"
+				// Modals/Dropdowns (Brightest surface)
+				normal: "#fcfcfd",
+				hover: "#ffffff",
+				pressed: "#eff1f3"
 			},
 			inversed: {
 				sunken: {
@@ -125,6 +129,6 @@ export const lightTheme = createTheme(token.theme, {
 			highlighted: "#1d212583"
 		},
 
-		blanket: "rgba(0, 0, 0, 0.6);"
+		blanket: "rgba(0, 0, 0, 0.6)"
 	}
 });
