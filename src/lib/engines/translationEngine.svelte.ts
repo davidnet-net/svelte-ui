@@ -71,3 +71,7 @@ export function createTranslationEngine<T extends string>(
 		}
 	};
 }
+
+export const libaryStrings = $state({
+	modal_close_modal: "Close modal"
+});

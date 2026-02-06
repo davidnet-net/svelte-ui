@@ -82,8 +82,20 @@
 		console.debug("[AppShell] Configuring theme engine.");
 		setTheme("dark");
 
-		// AppStateEngine trackers
 		initTrackers();
+
+		// Is tiny mobile
+		const tinyMediaQuery = window.matchMedia("(max-width: 480px)");
+		appState.isTinyMobile = tinyMediaQuery.matches;
+
+		const tinyHandler = (e: MediaQueryListEvent) => {
+			appState.isTinyMobile = e.matches;
+		};
+		tinyMediaQuery.addEventListener("change", tinyHandler);
+
+		return () => {
+			tinyMediaQuery.removeEventListener("change", tinyHandler);
+		};
 	});
 
 	const toggleSidebar = useShortcut(

@@ -1,12 +1,14 @@
 interface sidebarOpen {
 	sidebarOpen: boolean;
 	isMobile: boolean;
+	isTinyMobile: boolean;
 	viteConnected: boolean;
 	isOffline: boolean;
 }
 
 export const appState: sidebarOpen = $state({
 	sidebarOpen: false,
+	isTinyMobile: false,
 	isMobile: false,
 	viteConnected: true,
 	isOffline: false
