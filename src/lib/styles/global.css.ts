@@ -11,6 +11,10 @@ globalStyle("*", {
 	padding: 0
 });
 
+globalStyle("b", {
+	fontWeight: token.global.font.weight.bold
+});
+
 globalStyle(".appshell", {
 	backgroundColor: token.theme.color.surface.default.normal,
 

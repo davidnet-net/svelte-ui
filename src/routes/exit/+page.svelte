@@ -29,6 +29,10 @@
 			We are not responsible for the content or availability of external sites.
 		</p>
 		<br />
+		<p class={styles.paragraph}>
+			You are going to <b>{href}</b>
+		</p>
+		<br />
 		<Flex
 			height="fit-content"
 			width="fit-content"
