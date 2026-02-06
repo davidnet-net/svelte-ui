@@ -25,8 +25,8 @@
 	<Flex justifyContent="center" alignItems="center" direction="column" gap="small">
 		<h1 class={styles.heading}>You are now leaving Davidnet</h1>
 		<p class={styles.paragraph}>
-			This link is taking you to an website that is not controlled or operated by us. We are not
-			responsible for the content or availability of external sites.
+			This link is taking you to an website that is not controlled or operated by us. <br />
+			We are not responsible for the content or availability of external sites.
 		</p>
 		<br />
 		<Flex
