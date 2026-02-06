@@ -45,7 +45,7 @@
 				}}>
 				Cancel
 			</Button>
-			<LinkButton rel="noopener noreferrer" appearance="danger" {href}>Continue</LinkButton>
+			<LinkButton rel="noopener noreferrer" appearance="primary" {href}>Continue</LinkButton>
 		</Flex>
 	</Flex>
 {/if}
