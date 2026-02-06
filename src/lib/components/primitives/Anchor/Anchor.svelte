@@ -31,7 +31,16 @@
 
 <!-- LINK element for decoration. Anchor as primitive -->
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a href={disabled ? undefined : href} {target} {rel} aria-disabled={disabled} {...rest}>
+<a
+	href={disabled
+		? undefined
+		: external
+			? `https://design.davidnet.net/exit?href=${encodeURIComponent(href ?? "")}`
+			: href}
+	{target}
+	{rel}
+	aria-disabled={disabled}
+	{...rest}>
 	{@render children()}
 </a>
 

@@ -4,6 +4,7 @@ interface sidebarOpen {
 	isTinyMobile: boolean;
 	viteConnected: boolean;
 	isOffline: boolean;
+	hideNavigation: boolean;
 }
 
 export const appState: sidebarOpen = $state({
@@ -11,7 +12,8 @@ export const appState: sidebarOpen = $state({
 	isTinyMobile: false,
 	isMobile: false,
 	viteConnected: true,
-	isOffline: false
+	isOffline: false,
+	hideNavigation: false
 });
 
 export function initTrackers() {

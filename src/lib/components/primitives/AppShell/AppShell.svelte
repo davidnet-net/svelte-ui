@@ -129,69 +129,71 @@
 			{@render banners?.()}
 
 			<Flex height="100%" width="100%" direction="column">
-				<nav class={styles.nav}>
-					<div class={styles.navLeft}>
-						{#if sidebar && appState.sidebarOpen}
-							<IconButton
-								icon="left_panel_close"
-								tip="Close sidebar"
-								appearance="subtle"
-								keyboardTip={toggleSidebar.keys}
-								iconstyle="filled"
-								onclick={() => {
-									appState.sidebarOpen = !appState.sidebarOpen;
-								}} />
-						{:else if sidebar}
-							<IconButton
-								icon="left_panel_open"
-								tip="Open sidebar"
-								appearance="subtle"
-								keyboardTip={toggleSidebar.keys}
-								iconstyle="outlined"
-								onclick={() => {
-									appState.sidebarOpen = !appState.sidebarOpen;
-								}} />
-						{:else}
-							<IconLinkButton
-								icon="apps"
-								tip="Davidnet Home"
-								href="https://home.davidnet.net"
-								opennewtab
-								appearance="subtle" />
-						{/if}
-						<Anchor href="/">
-							{#if appState.isMobile}
-								{shortAppName}
+				{#if !appState.hideNavigation}
+					<nav class={styles.nav}>
+						<div class={styles.navLeft}>
+							{#if sidebar && appState.sidebarOpen}
+								<IconButton
+									icon="left_panel_close"
+									tip="Close sidebar"
+									appearance="subtle"
+									keyboardTip={toggleSidebar.keys}
+									iconstyle="filled"
+									onclick={() => {
+										appState.sidebarOpen = !appState.sidebarOpen;
+									}} />
+							{:else if sidebar}
+								<IconButton
+									icon="left_panel_open"
+									tip="Open sidebar"
+									appearance="subtle"
+									keyboardTip={toggleSidebar.keys}
+									iconstyle="outlined"
+									onclick={() => {
+										appState.sidebarOpen = !appState.sidebarOpen;
+									}} />
 							{:else}
-								{appName}
+								<IconLinkButton
+									icon="apps"
+									tip="Davidnet Home"
+									href="https://home.davidnet.net"
+									opennewtab
+									appearance="subtle" />
 							{/if}
-						</Anchor>
-					</div>
-					<div class={styles.navCenter}>
-						{#if !appState.isMobile}
-							<Anchor href="https://davidnet.net">
-								{#if import.meta.env.DEV}
-									<span
-										style="color: {token.theme.color.text
-											.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
-											.global.spacing.xsmall}">
-										<Icon icon="construction" />
-										Davidnet Development Build
-										<Icon icon="construction" />
-									</span>
+							<Anchor href="/">
+								{#if appState.isMobile}
+									{shortAppName}
 								{:else}
-									Davidnet
+									{appName}
 								{/if}
 							</Anchor>
-						{/if}
-					</div>
-					<div class={styles.navRight}>
-						<Button onclick={() => setTheme("dark")}>D - Temp</Button>
-						<Button onclick={() => setTheme("light")}>L - Temp</Button>
-					</div>
-				</nav>
+						</div>
+						<div class={styles.navCenter}>
+							{#if !appState.isMobile}
+								<Anchor href="https://davidnet.net">
+									{#if import.meta.env.DEV}
+										<span
+											style="color: {token.theme.color.text
+												.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
+												.global.spacing.xsmall}">
+											<Icon icon="construction" />
+											Davidnet Development Build
+											<Icon icon="construction" />
+										</span>
+									{:else}
+										Davidnet
+									{/if}
+								</Anchor>
+							{/if}
+						</div>
+						<div class={styles.navRight}>
+							<Button onclick={() => setTheme("dark")}>D - Temp</Button>
+							<Button onclick={() => setTheme("light")}>L - Temp</Button>
+						</div>
+					</nav>
+				{/if}
 				<div class={styles.contentRow}>
-					{#if appState.sidebarOpen}
+					{#if appState.sidebarOpen && !appState.hideNavigation}
 						{#if appState.isMobile}
 							<Blanket centerContent={false} onclick={() => (appState.sidebarOpen = false)}>
 								<div class={styles.sidebarWrapper}>
@@ -208,9 +210,11 @@
 						<main class={styles.childrenWrapper}>
 							{@render children()}
 						</main>
-						<div class={styles.footerWrapper}>
-							{@render footer?.()}
-						</div>
+						{#if !appState.hideNavigation}
+							<div class={styles.footerWrapper}>
+								{@render footer?.()}
+							</div>
+						{/if}
 					</div>
 				</div>
 			</Flex>
