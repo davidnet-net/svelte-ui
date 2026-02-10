@@ -1,5 +1,7 @@
 interface AppStateType {
 	sidebarOpen: boolean;
+	// Make sure isMobile stays true when isTinyMobile is true due logic that just checks for smaller screens
+	// is mobile just checks screenWidth
 	isMobile: boolean;
 	isTinyMobile: boolean;
 	viteConnected: boolean;

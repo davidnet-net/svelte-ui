@@ -7,7 +7,9 @@
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
-	import { useShortcut, useTrap } from "../../../engines/shortcutEngine.svelte.ts";
+	import { focusTrap } from "../../../engines/focusEngine.svelte.ts";
+	// Migrated: Import the new actions
+	import { shortcutTrap, useShortcut } from "../../../engines/shortcutEngine.svelte.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
 	let expandedItems = $state<string[]>([]);
@@ -25,20 +27,18 @@
 		await goto(item.href, { invalidateAll: true });
 	}
 
-	if (appState.isMobile) {
-		useTrap();
-		useShortcut(
-			"escape",
-			() => {
-				appState.sidebarOpen = !appState.sidebarOpen;
-			},
-			{
-				name: "Close overlay",
-				description: "",
-				preventDefault: true
-			}
-		);
-	}
+	useShortcut(
+		"escape",
+		() => {
+			appState.sidebarOpen = false;
+		},
+		{
+			name: "Close overlay",
+			description: "Closes the sidebar navigation on mobile",
+			preventDefault: true,
+			active: () => appState.isMobile
+		}
+	);
 </script>
 
 {#snippet navTree(items: NavigationItem[], depth: number)}
@@ -69,7 +69,10 @@
 	{/each}
 {/snippet}
 
-<aside class={styles.baseSidebarNavigation[appState.isMobile ? "mobile" : "desktop"]}>
+<aside
+	class={styles.baseSidebarNavigation[appState.isMobile ? "mobile" : "desktop"]}
+	use:focusTrap={appState.isMobile}
+	use:shortcutTrap={appState.isMobile}>
 	<div class={styles.navigation}>
 		<LinkButton opennewtab stretchwidth href="https://home.davidnet.net" alignContent="left">
 			Davidnet Home

@@ -19,7 +19,9 @@
 
 <div
 	class="{styles.baseBanner} {styles.appearance[appearance]}"
-	transition:slide={{ duration: 500, easing: quintOut }}>
+	transition:slide={{ duration: 500, easing: quintOut }}
+	role={appearance === "danger" ? "alert" : "status"}
+	aria-live={appearance === "danger" ? "assertive" : "polite"}>
 	<Flex width="100%" height="3rem" direction="row" alignItems="center" gap="small">
 		{#if icon}
 			<Icon {icon} size="large" />

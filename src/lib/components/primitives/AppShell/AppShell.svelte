@@ -11,6 +11,7 @@
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
+	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
 	import { init } from "$lib/engines/initEngine.svelte.ts";
@@ -122,6 +123,9 @@
 
 			<Flex height="100%" width="100%" direction="column">
 				{#if !appState.hideNavigation}
+					<VisuallyHidden>
+						Welcome to {appName} created by Davidnet. You are now in Navigation
+					</VisuallyHidden>
 					<nav class={styles.nav}>
 						<div class={styles.navLeft}>
 							{#if sidebar && appState.sidebarOpen}
@@ -158,6 +162,7 @@
 								{:else}
 									{appName}
 								{/if}
+								<VisuallyHidden>This link lets you go to the start of the domain.</VisuallyHidden>
 							</Anchor>
 						</div>
 						<div class={styles.navCenter}>

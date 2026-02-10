@@ -18,6 +18,14 @@ const normalScreen = style({
 	borderRadius: token.global.radius.xlarge
 });
 
+const mobileScreen = style({
+	maxWidth: "600px",
+	width: "80dvw",
+	maxHeight: "50vh",
+	minHeight: "12rem",
+	borderRadius: token.global.radius.xlarge
+});
+
 const tinyScreen = style({
 	width: "100dvw",
 	height: "100dvh",
@@ -58,6 +66,7 @@ const actions = style({
 export const styles = {
 	baseModal,
 	normalScreen,
+	mobileScreen,
 	tinyScreen,
 	header,
 	title,

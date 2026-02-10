@@ -16,6 +16,12 @@ export interface ShortcutOptions {
 	preventDefault?: boolean;
 	name?: string;
 	description?: string;
+	/**
+	 * Whether the shortcut is currently active.
+	 * Pass a function `() => boolean` for reactive toggling.
+	 * @default true
+	 */
+	active?: boolean | (() => boolean);
 }
 
 interface RegisteredShortcut {
@@ -142,7 +148,7 @@ export function useShortcut(
 	callback: Handler,
 	options: ShortcutOptions = {}
 ) {
-	const { preventDefault = true, name, description } = options;
+	const { preventDefault = true, name, description, active = true } = options;
 
 	const definition = $derived.by(() => {
 		const raw = typeof combo === "function" ? combo() : combo;
@@ -150,6 +156,10 @@ export function useShortcut(
 	});
 
 	$effect(() => {
+		const isEnabled = typeof active === "function" ? active() : active;
+
+		if (!isEnabled) return;
+
 		const entry: RegisteredShortcut = {
 			handler: (e) => {
 				if (preventDefault) e.preventDefault();
@@ -179,22 +189,41 @@ export function useShortcut(
 }
 
 /**
- * Registers a "Trap" that blocks any shortcuts registered prior to this trap.
- * Useful for modals or overlays where background shortcuts should be disabled.
- * Supports nesting (multiple traps).
+ * Action to trap shortcuts within the current context.
+ * Blocks any shortcuts registered prior to this element's activation.
+ * @param node - The HTML element (unused logic-wise, but ties lifecycle to DOM)
+ * @param active - Whether the trap is currently active
  */
-export function useTrap() {
-	$effect(() => {
-		const trapSequence = ++currentSequence;
-		trapStack.push(trapSequence);
+export function shortcutTrap(node: HTMLElement, active = true) {
+	let trapSequence: number | null = null;
 
-		return () => {
-			const index = trapStack.indexOf(trapSequence);
-			if (index !== -1) {
-				trapStack.splice(index, 1);
+	function activate() {
+		if (trapSequence !== null) return;
+		trapSequence = ++currentSequence;
+		trapStack.push(trapSequence);
+	}
+
+	function deactivate() {
+		if (trapSequence === null) return;
+		const index = trapStack.indexOf(trapSequence);
+		if (index !== -1) trapStack.splice(index, 1);
+		trapSequence = null;
+	}
+
+	if (active) activate();
+
+	return {
+		update(newActive: boolean) {
+			if (newActive && !trapSequence) {
+				activate();
+			} else if (!newActive && trapSequence) {
+				deactivate();
 			}
-		};
-	});
+		},
+		destroy() {
+			deactivate();
+		}
+	};
 }
 
 export function getShortcuts() {
