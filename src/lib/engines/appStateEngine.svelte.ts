@@ -46,7 +46,24 @@ export async function initAppState() {
 		appState.viteConnected = false;
 	}
 
-	const updateOnlineStatus = () => (appState.isOffline = !navigator.onLine);
+	let offlineTimer: ReturnType<typeof setTimeout> | null = null;
+	const updateOnlineStatus = () => {
+		if (navigator.onLine) {
+			if (offlineTimer) {
+				clearTimeout(offlineTimer);
+				offlineTimer = null;
+			}
+			appState.isOffline = false;
+		} else {
+			// 3 seconds to prevent micro drops.
+			if (!offlineTimer) {
+				offlineTimer = setTimeout(() => {
+					appState.isOffline = true;
+				}, 3000);
+			}
+		}
+	};
+
 	window.addEventListener("online", updateOnlineStatus);
 	window.addEventListener("offline", updateOnlineStatus);
 	updateOnlineStatus();
