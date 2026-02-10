@@ -1,1 +1,1 @@
-// Reexport your entry components here
+export const DDS_INFO = __DDS_INFO__;

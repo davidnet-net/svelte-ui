@@ -3,16 +3,19 @@
 
 	import { onMount, type Snippet } from "svelte";
 
+	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
+	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 	import DNLogo from "$lib/assets/images/DNLogo.png";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
+	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
-	import { appState, initTrackers } from "$lib/engines/appStateEngine.svelte.ts";
+	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
+	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme, setTheme } from "$lib/engines/themeEngine.svelte.ts";
-	import { createTranslationEngine } from "$lib/engines/translationEngine.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import Anchor from "../Anchor/Anchor.svelte";
@@ -47,42 +50,35 @@
 		shortAppName: string;
 
 		/**
+		 * Not recommended to turn off
+		 * @default true
+		 */
+		disableInit?: boolean;
+
+		/**
 		 * @remarks Make sure to import * as paraglideRuntime from "../paraglide/runtime.js"
+		 * @remarks pass as null or undefined when using disableInit
+		 *
 		 */
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		paraglideRuntime: any;
 	}
 
-	let { children, banners, sidebar, footer, appName, shortAppName, paraglideRuntime }: Props =
-		$props();
+	let {
+		children,
+		banners,
+		sidebar,
+		footer,
+		appName,
+		shortAppName,
+		disableInit = false,
+		paraglideRuntime
+	}: Props = $props();
 
 	onMount(() => {
-		console.groupCollapsed("Davidnet Design System - information");
-		console.log("version: " + __DDS_INFO__.version);
-		console.log("commitUrl: " + __DDS_INFO__.commitUrl);
-		console.log("commitHash: " + __DDS_INFO__.commitHash);
-		console.log("buildTime: " + __DDS_INFO__.buildTime);
-		console.groupEnd();
-
-		// Multi-Account Auth:
-		// - Storage: HttpOnly cookies named `token_${accountId}`.
-		// - Request: Frontend sends `x-active-account: ${accountId}` header.
-		// - Backend: Reads header, pulls the matching cookie, and validates that specific JWT.
-
-		// We dont need cache bcs we can just use the JWT and after refresh it.
-
-		try {
-			console.debug("[AppShell] Configuring translationEngine.");
-			createTranslationEngine(paraglideRuntime);
-		} catch (err: unknown) {
-			const error = err instanceof Error ? err : new Error(String(err));
-			console.error("[AppShell] Could not configure translationEngine \n\n", error);
+		if (!disableInit) {
+			init(paraglideRuntime);
 		}
-
-		console.debug("[AppShell] Configuring theme engine.");
-		setTheme("dark");
-
-		initTrackers();
 	});
 
 	const toggleSidebar = useShortcut(
@@ -94,10 +90,6 @@
 			preventDefault: true
 		}
 	);
-
-	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
-	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
-	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 </script>
 
 <svelte:head>

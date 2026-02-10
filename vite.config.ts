@@ -28,6 +28,10 @@ export default defineConfig({
 		vanillaExtractPlugin()
 	],
 
+	esbuild: {
+		drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : []
+	},
+
 	resolve: {
 		alias: {
 			$lib: path.resolve("./src/lib")
