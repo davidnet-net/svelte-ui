@@ -7,6 +7,10 @@ interface AppStateType {
 	viteConnected: boolean;
 	isOffline: boolean;
 	hideNavigation: boolean;
+	authState: {
+		loading: boolean;
+		loggedIn: boolean;
+	};
 	systemPreference: {
 		darkMode: boolean;
 		highContrast: boolean;
@@ -21,6 +25,10 @@ export const appState: AppStateType = $state({
 	viteConnected: true,
 	isOffline: false,
 	hideNavigation: false,
+	authState: {
+		loading: true,
+		loggedIn: false
+	},
 	systemPreference: {
 		darkMode: false,
 		highContrast: false,

@@ -20,6 +20,7 @@
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import Anchor from "../Anchor/Anchor.svelte";
+	import Avatar from "../Avatar/Avatar.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";
 	import { styles } from "./AppShell.css.ts";
@@ -91,6 +92,18 @@
 			preventDefault: true
 		}
 	);
+
+	let isAvatarLoading = $state(true);
+
+	// 2. Create the 10-second timeout effect
+	$effect(() => {
+		const timer = setTimeout(() => {
+			isAvatarLoading = false;
+		}, 5000);
+
+		// Cleanup function
+		return () => clearTimeout(timer);
+	});
 </script>
 
 <svelte:head>
@@ -186,6 +199,12 @@
 						<div class={styles.navRight}>
 							<Button onclick={() => setTheme("dark")}>D - Temp</Button>
 							<Button onclick={() => setTheme("light")}>L - Temp</Button>
+							<Avatar
+								src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
+								size="large"
+								external
+								href="https://account.davidnet.net"
+								loading={isAvatarLoading} />
 						</div>
 					</nav>
 				{/if}
