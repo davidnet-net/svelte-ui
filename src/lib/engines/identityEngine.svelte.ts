@@ -1,14 +1,14 @@
-type UUIDv7 = string;
+import type { UUIDv7Type } from "$lib/utils/crypto";
 
 interface jwt {
-	userID: UUIDv7 & { __brand: "userID" };
-	jwtID: UUIDv7 & { __brand: "jwtID" };
+	userID: UUIDv7Type & { __brand: "userID" };
+	jwtID: UUIDv7Type & { __brand: "jwtID" };
 	issuedAt: number;
 	expiresAt: number;
 }
 
 interface user {
-	userID: UUIDv7 & { __brand: "userID" };
+	userID: UUIDv7Type & { __brand: "userID" };
 	username: string;
 	displayName: string;
 	avatarURL: string;
@@ -63,3 +63,8 @@ export interface identityType {
 	preferences: preferences;
 	privacyPreferences: privacyPreferences;
 }
+
+export const authState = $state({
+	loading: true,
+	isLoggedIn: false
+});

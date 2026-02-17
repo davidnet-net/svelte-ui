@@ -1,3 +1,5 @@
+import { generateUUIDv7, type UUIDv7Type } from "$lib/utils/crypto";
+
 interface AppStateType {
 	sidebarOpen: boolean;
 	// Make sure isMobile stays true when isTinyMobile is true due logic that just checks for smaller screens
@@ -7,10 +9,7 @@ interface AppStateType {
 	viteConnected: boolean;
 	isOffline: boolean;
 	hideNavigation: boolean;
-	authState: {
-		loading: boolean;
-		loggedIn: boolean;
-	};
+	pageSessionID: (UUIDv7Type & { __brand: "pageSessionID" }) | undefined;
 	systemPreference: {
 		darkMode: boolean;
 		highContrast: boolean;
@@ -25,10 +24,7 @@ export const appState: AppStateType = $state({
 	viteConnected: true,
 	isOffline: false,
 	hideNavigation: false,
-	authState: {
-		loading: true,
-		loggedIn: false
-	},
+	pageSessionID: undefined,
 	systemPreference: {
 		darkMode: false,
 		highContrast: false,
@@ -38,6 +34,10 @@ export const appState: AppStateType = $state({
 
 export async function initAppState() {
 	if (typeof window === "undefined") return;
+
+	appState.pageSessionID = generateUUIDv7() as
+		| (UUIDv7Type & { __brand: "pageSessionID" })
+		| undefined;
 
 	if (import.meta.hot) {
 		import.meta.hot.on("vite:ws:disconnect", () => (appState.viteConnected = false));

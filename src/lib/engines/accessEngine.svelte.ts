@@ -1,13 +1,13 @@
 /* eslint-disable */
 
-type UUIDv7 = string;
+import type { UUIDv7Type } from "$lib/utils/crypto";
 
 interface teamMember {
-	userID: UUIDv7 & { __brand: "userID" };
+	userID: UUIDv7Type & { __brand: "userID" };
 }
 
 interface team {
-	teamID: UUIDv7 & { __brand: "teamID" };
+	teamID: UUIDv7Type & { __brand: "teamID" };
 	name: string;
 	description: string;
 	avatarURL: string;
@@ -16,19 +16,19 @@ interface team {
 }
 
 interface organizationRole {
-	roleID: UUIDv7 & { __brand: "roleID" };
+	roleID: UUIDv7Type & { __brand: "roleID" };
 	name: string;
 	level: number;
 	permissions: string[];
 }
 
 interface organizationMember {
-	userID: UUIDv7 & { __brand: "userID" };
+	userID: UUIDv7Type & { __brand: "userID" };
 	roles: organizationRole[];
 }
 
 interface organization {
-	organizationID: UUIDv7 & { __brand: "organizationID" };
+	organizationID: UUIDv7Type & { __brand: "organizationID" };
 	members: organizationMember[];
 	name: string;
 	description: string;

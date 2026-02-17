@@ -1,5 +1,5 @@
+import { getCookie, setCookie } from "../utils/cookies";
 import { initAppState } from "./appStateEngine.svelte";
-import { getCookie, setCookie } from "./cookieEngine";
 import { isValidTheme, setTheme, type themeNames } from "./themeEngine.svelte";
 import { createTranslationEngine, type ParaglideRuntimeType } from "./translationEngine.svelte";
 

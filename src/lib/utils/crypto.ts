@@ -1,8 +1,10 @@
+export type UUIDv7Type = string;
+
 /**
  * Generates a RFC 9562 compliant UUIDv7.
  * Layout: [48 bits timestamp] [4 bits version] [12 bits random] [2 bits variant] [62 bits random]
  */
-export function generateUUIDv7(): string {
+export function generateUUIDv7(): UUIDv7Type {
 	const bytes = new Uint8Array(16);
 	crypto.getRandomValues(bytes);
 

@@ -43,6 +43,7 @@ export function setTheme(themeName: themeNames) {
 	}
 	selectedTheme = themeName;
 }
+
 // Reason could be any input:
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isValidTheme(themeName: any): themeName is themeNames {

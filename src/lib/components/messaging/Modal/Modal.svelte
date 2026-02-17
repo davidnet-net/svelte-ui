@@ -4,10 +4,10 @@
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
-	import { generateUUIDv7 } from "$lib/engines/cryptoEngine.svelte";
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap } from "$lib/engines/shortcutEngine.svelte";
 	import { libaryStrings } from "$lib/engines/translationEngine.svelte";
+	import { generateUUIDv7 } from "$lib/utils/crypto";
 
 	import { styles } from "./Modal.css";
 

@@ -29,7 +29,6 @@
 	let imageLoaded = $state(false);
 	let isLoading = $derived(loading || !imageLoaded);
 
-	// Logic requested from TypeScript
 	$effect(() => {
 		const img = new Image();
 		img.src = src;
