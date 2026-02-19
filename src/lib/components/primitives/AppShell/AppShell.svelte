@@ -19,6 +19,7 @@
 	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
+	import { libaryStrings } from "$lib/engines/translationEngine.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 	import { focusring } from "$lib/styles/global.css.ts";
 
@@ -90,8 +91,8 @@
 		"ctrl+[",
 		() => (appState.sidebarOpen = !appState.sidebarOpen),
 		{
-			name: "Toggle sidebar",
-			description: "Closes or opens the sidebar.",
+			name: libaryStrings.shortcuts.toggle_sidebar.name,
+			description: libaryStrings.shortcuts.toggle_sidebar.description,
 			preventDefault: true
 		}
 	);
@@ -123,23 +124,20 @@
 			{/if}
 			{#if appState.isOffline}
 				<Banner icon="cloud_alert" appearance="danger">
-					<b>Connection lost.</b>
-					We have lost the connection with Davidnet. Please check your internet connection.
+					<b>{libaryStrings.banners.connection_lost.b}</b>
+					{libaryStrings.banners.connection_lost.content}
 				</Banner>
 			{/if}
 			{@render banners?.()}
 
 			<Flex height="100%" width="100%" direction="column">
 				{#if !appState.hideNavigation}
-					<VisuallyHidden>
-						Welcome to {appName} created by Davidnet. You are now in Navigation
-					</VisuallyHidden>
 					<nav class={styles.nav}>
 						<div class={styles.navLeft}>
 							{#if sidebar && appState.sidebarOpen}
 								<IconButton
 									icon="left_panel_close"
-									tip="Close sidebar"
+									tip={libaryStrings.close_sidebar}
 									appearance="subtle"
 									keyboardTip={toggleSidebar.keys}
 									iconstyle="filled"
@@ -149,7 +147,7 @@
 							{:else if sidebar}
 								<IconButton
 									icon="left_panel_open"
-									tip="Open sidebar"
+									tip={libaryStrings.open_sidebar}
 									appearance="subtle"
 									keyboardTip={toggleSidebar.keys}
 									iconstyle="outlined"
@@ -170,7 +168,7 @@
 								{:else}
 									{appName}
 								{/if}
-								<VisuallyHidden>This link lets you go to the start of the domain.</VisuallyHidden>
+								<VisuallyHidden>{libaryStrings.linkdomainScreenReader}</VisuallyHidden>
 							</Anchor>
 						</div>
 						<div class={styles.navCenter}>
@@ -198,7 +196,7 @@
 								onclick={() => {
 									feedbackOpen = !feedbackOpen;
 								}}
-								tip="Share your opinion about Davidnet"
+								tip={libaryStrings.share_opinion}
 								icon="feedback" />
 							<IconButton
 								onclick={() => {
@@ -211,7 +209,7 @@
 									<Avatar
 										src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
 										size="xlarge"
-										alt="Account menu panel"
+										alt={libaryStrings.account_menu_panel}
 										onclick={() => {
 											isAvatarOpened = !isAvatarOpened;
 										}}

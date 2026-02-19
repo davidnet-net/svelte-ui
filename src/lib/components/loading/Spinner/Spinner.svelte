@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { libaryStrings } from "$lib/engines/translationEngine.svelte.ts";
+
 	import { styles } from "./Spinner.css.ts";
 
 	interface Props {
@@ -8,4 +10,5 @@
 	let { size = "medium" }: Props = $props();
 </script>
 
-<span class="{styles.baseLoader} {styles.size[size]}" aria-label="Loading spinner"></span>
+<span class="{styles.baseLoader} {styles.size[size]}" aria-label={libaryStrings.loading_spinner}>
+</span>

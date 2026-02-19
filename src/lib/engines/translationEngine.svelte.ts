@@ -73,5 +73,23 @@ export function createTranslationEngine<T extends string>(
 }
 
 export const libaryStrings = $state({
-	modal_close_modal: "Close modal"
+	modal_close_modal: "Close modal",
+	loading_spinner: "Loading spinner",
+	close_sidebar: "Close sidebar",
+	open_sidebar: "Open sidebar",
+	linkdomainScreenReader: "This link lets you go to the start of the domain.",
+	shortcuts: {
+		toggle_sidebar: {
+			name: "Toggle sidebar",
+			description: "Closes or opens the sidebar."
+		}
+	},
+	banners: {
+		connection_lost: {
+			b: "Connection lost.",
+			content: "We have lost the connection with Davidnet. Please check your internet connection."
+		}
+	},
+	share_opinion: "Share your opinion about Davidnet",
+	account_menu_panel: "Account menu panel"
 });
