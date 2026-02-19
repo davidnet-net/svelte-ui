@@ -10,7 +10,7 @@ const baseDropdown = style({
 
 const dropdownContent = style({
 	position: "absolute",
-	borderRadius: token.global.radius.small,
+	borderRadius: token.global.radius.medium,
 	backgroundColor: token.theme.color.surface.raised.normal,
 	minWidth: "100%",
 	width: "fit-content",

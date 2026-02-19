@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { fly } from "svelte/transition";
 
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte";
@@ -47,9 +48,33 @@
 			active: () => isOpen
 		}
 	);
+
+	// Close on click somewhere else!
+	$effect(() => {
+		if (!isOpen) return;
+
+		/**
+		 * @param {MouseEvent} event
+		 */
+		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as Node;
+			if (triggerContainer && !triggerContainer.contains(target)) {
+				isOpen = false;
+			}
+		};
+
+		document.addEventListener("click", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("click", handleClickOutside);
+		};
+	});
 </script>
 
-<div class={styles.baseDropdown} bind:this={triggerContainer}>
+<div
+	class={styles.baseDropdown}
+	bind:this={triggerContainer}
+	transition:fly={{ y: -10, duration: 200 }}>
 	{@render trigger()}
 
 	{#if isOpen && triggerContainer}

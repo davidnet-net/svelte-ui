@@ -6,11 +6,11 @@
 	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
 	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 	import DNLogo from "$lib/assets/images/DNLogo.png";
-	import Button from "$lib/components/input/Button/Button.svelte";
 	import Dropdown from "$lib/components/input/Dropdown/Dropdown.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
-	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
+	import AccountPanel from "$lib/components/lib_internal/AccountPanel/AccountPanel.svelte";
+	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
@@ -24,7 +24,6 @@
 
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
-	import Divider from "../Divider/Divider.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";
 	import { styles } from "./AppShell.css.ts";
@@ -99,6 +98,7 @@
 
 	let isAvatarLoading = $state(false);
 	let isAvatarOpened = $state(false);
+	let feedbackOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -196,13 +196,13 @@
 							<Button onclick={() => setTheme("light")}>L - Temp</Button>-->
 							<IconButton
 								onclick={() => {
-									alert("feedback");
+									feedbackOpen = !feedbackOpen;
 								}}
 								tip="Share your opinion about Davidnet"
 								icon="feedback" />
 							<IconButton
 								onclick={() => {
-									alert("notification");
+									console.debug("Notification btn pressed");
 								}}
 								icon="notifications"
 								tip="Notifications panel" />
@@ -217,86 +217,11 @@
 										}}
 										loading={isAvatarLoading} />
 								{/snippet}
-								<div style="width: 100%; margin: {token.global.spacing.small}">
-									<Flex width="fit-content" direction="column" gap="small">
-										<span
-											style="color: {token.theme.color.text.tertiary}; font-weight: {token.global
-												.font.weight.bold}; font-size: {token.global.font.size.small}">
-											Account
-										</span>
-
-										<Flex alignItems="center" gap="medium" marginBottom="small">
-											<Avatar
-												src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
-												size="huge"
-												loading={isAvatarLoading} />
-											<Flex direction="column">
-												<span
-													style="font-size: {token.global.font.size.medium}; font-weight: {token
-														.global.font.weight.bold}">
-													USERNAME
-												</span>
-												<span
-													style="font-size: {token.global.font.size.small}; font-weight: {token
-														.global.font.weight.bold}; color: {token.theme.color.text.secondary}">
-													example@example.com
-												</span>
-											</Flex>
-										</Flex>
-
-										<LinkButton
-											alignContent="left"
-											opennewtab
-											stretchwidth
-											appearance="subtle"
-											href="https://account.davidnet.net">
-											Switch account
-										</LinkButton>
-										<LinkButton
-											alignContent="left"
-											opennewtab
-											stretchwidth
-											appearance="subtle"
-											href="https://account.davidnet.net">
-											Manage account
-										</LinkButton>
-										<LinkButton
-											alignContent="left"
-											opennewtab
-											stretchwidth
-											appearance="subtle"
-											href="https://account.davidnet.net">
-											Preferences
-										</LinkButton>
-										<Divider color="tertiary" thickness="standard" />
-										<LinkButton
-											alignContent="left"
-											opennewtab
-											stretchwidth
-											appearance="subtle"
-											href="https://davidnet.net/help">
-											Help
-										</LinkButton>
-										<Button
-											stretchwidth
-											alignContent="left"
-											appearance="subtle"
-											onclick={() => {
-												alert("Shortcuts");
-											}}>
-											Active shortcuts
-										</Button>
-										<Divider color="tertiary" thickness="standard" />
-										<LinkButton
-											alignContent="left"
-											opennewtab
-											stretchwidth
-											appearance="subtle"
-											href="https://account.davidnet.net/logout">
-											Logout
-										</LinkButton>
-									</Flex>
-								</div>
+								<AccountPanel
+									{isAvatarLoading}
+									username="USERNAME"
+									email="example@example.org"
+									profilePictureURL="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080" />
 							</Dropdown>
 						</div>
 					</nav>
@@ -318,6 +243,7 @@
 					<div class={styles.mainScrollArea}>
 						<main class={styles.childrenWrapper}>
 							{@render children()}
+							<Feedback bind:isOpen={feedbackOpen} />
 						</main>
 						{#if !appState.hideNavigation}
 							<div class={styles.footerWrapper}>

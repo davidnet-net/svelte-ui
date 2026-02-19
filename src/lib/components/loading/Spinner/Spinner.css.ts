@@ -41,6 +41,7 @@ const baseLoader = style({
 const sizeConfig = {
 	small: { tokenKey: "small", borderWidth: "2px" },
 	medium: { tokenKey: "medium", borderWidth: "2px" },
+	xmedium: { tokenKey: "xmedium", borderWidth: "3px" },
 	large: { tokenKey: "large", borderWidth: "4px" },
 	xlarge: { tokenKey: "xlarge", borderWidth: "5px" },
 	huge: { tokenKey: "huge", borderWidth: "6px" },
