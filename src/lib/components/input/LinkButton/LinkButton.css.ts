@@ -120,6 +120,19 @@ const appearance = styleVariants({
 			backgroundColor: token.theme.color.background.subtle.pressed,
 			color: token.theme.color.text.default
 		}
+	},
+	default: {
+		backgroundColor: token.theme.color.background.subtle.normal,
+		color: token.theme.color.text.default,
+		cursor: "pointer",
+		outline: `${token.global.borderWidth.thick} solid ${token.theme.color.border.default}`,
+		":hover": {
+			backgroundColor: token.theme.color.background.subtle.hover
+		},
+		":active": {
+			backgroundColor: token.theme.color.background.subtle.pressed,
+			color: token.theme.color.text.default
+		}
 	}
 });
 

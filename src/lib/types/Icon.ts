@@ -1325,6 +1325,7 @@ const ICON_NAMES = [
 	"featured_seasonal_and_gifts",
 	"featured_video",
 	"feed",
+	"feedback",
 	"female",
 	"femur",
 	"femur_alt",

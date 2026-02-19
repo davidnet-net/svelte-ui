@@ -33,12 +33,17 @@
 			appState.sidebarOpen = false;
 		},
 		{
-			name: "Close overlay",
-			description: "Closes the sidebar navigation on mobile",
+			name: "Close sidebar",
+			description: "Closes the sidebar navigation on tiny screens",
 			preventDefault: true,
 			active: () => appState.isMobile
 		}
 	);
+	useShortcut("ctrl+[", () => (appState.sidebarOpen = !appState.sidebarOpen), {
+		name: "Toggle sidebar",
+		description: "Closes or opens the sidebar.",
+		preventDefault: true
+	});
 </script>
 
 {#snippet navTree(items: NavigationItem[], depth: number)}
@@ -74,7 +79,12 @@
 	use:focusTrap={appState.isMobile}
 	use:shortcutTrap={appState.isMobile}>
 	<div class={styles.navigation}>
-		<LinkButton opennewtab stretchwidth href="https://home.davidnet.net" alignContent="left">
+		<LinkButton
+			opennewtab
+			appearance="subtle"
+			stretchwidth
+			href="https://home.davidnet.net"
+			alignContent="left">
 			Davidnet Home
 		</LinkButton>
 		{@render navTree(navigationData, 0)}

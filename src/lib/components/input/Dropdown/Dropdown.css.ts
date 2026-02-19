@@ -10,15 +10,13 @@ const baseDropdown = style({
 
 const dropdownContent = style({
 	position: "absolute",
-	top: "100%",
-	left: 0,
-	marginTop: token.global.spacing.small,
-	borderRadius: token.global.radius.medium,
+	borderRadius: token.global.radius.small,
 	backgroundColor: token.theme.color.surface.raised.normal,
 	minWidth: "100%",
 	width: "fit-content",
 	padding: token.global.spacing.xsmall,
-	outline: `${token.global.borderWidth.standard} solid ${token.theme.color.border.highlighted}`
+	outline: `${token.global.borderWidth.standard} solid ${token.theme.color.border.highlighted}`,
+	zIndex: token.global.zIndex.dropdown
 });
 
 export const styles = {

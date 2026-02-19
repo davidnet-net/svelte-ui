@@ -51,7 +51,7 @@
 
 	let {
 		children,
-		appearance = "subtle",
+		appearance = "default",
 		iconbefore,
 		iconafter,
 		stretchwidth,

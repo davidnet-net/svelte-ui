@@ -7,8 +7,10 @@
 	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 	import DNLogo from "$lib/assets/images/DNLogo.png";
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import Dropdown from "$lib/components/input/Dropdown/Dropdown.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
+	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
@@ -16,11 +18,13 @@
 	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
 	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
-	import { currentTheme, setTheme } from "$lib/engines/themeEngine.svelte.ts";
+	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
+	import { focusring } from "$lib/styles/global.css.ts";
 
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
+	import Divider from "../Divider/Divider.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";
 	import { styles } from "./AppShell.css.ts";
@@ -93,17 +97,8 @@
 		}
 	);
 
-	let isAvatarLoading = $state(true);
-
-	// 2. Create the 10-second timeout effect
-	$effect(() => {
-		const timer = setTimeout(() => {
-			isAvatarLoading = false;
-		}, 5000);
-
-		// Cleanup function
-		return () => clearTimeout(timer);
-	});
+	let isAvatarLoading = $state(false);
+	let isAvatarOpened = $state(false);
 </script>
 
 <svelte:head>
@@ -169,7 +164,7 @@
 									opennewtab
 									appearance="subtle" />
 							{/if}
-							<Anchor href="/">
+							<Anchor href="/" class={focusring}>
 								{#if appState.isMobile}
 									{shortAppName}
 								{:else}
@@ -180,7 +175,7 @@
 						</div>
 						<div class={styles.navCenter}>
 							{#if !appState.isMobile}
-								<Anchor href="https://davidnet.net">
+								<Anchor href="https://davidnet.net" class={focusring}>
 									{#if import.meta.env.DEV}
 										<span
 											style="color: {token.theme.color.text
@@ -197,14 +192,112 @@
 							{/if}
 						</div>
 						<div class={styles.navRight}>
-							<Button onclick={() => setTheme("dark")}>D - Temp</Button>
-							<Button onclick={() => setTheme("light")}>L - Temp</Button>
-							<Avatar
-								src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
-								size="large"
-								external
-								href="https://account.davidnet.net"
-								loading={isAvatarLoading} />
+							<!--<Button onclick={() => setTheme("dark")}>D - Temp</Button>
+							<Button onclick={() => setTheme("light")}>L - Temp</Button>-->
+							<IconButton
+								onclick={() => {
+									alert("feedback");
+								}}
+								tip="Share your opinion about Davidnet"
+								icon="feedback" />
+							<IconButton
+								onclick={() => {
+									alert("notification");
+								}}
+								icon="notifications"
+								tip="Notifications panel" />
+							<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
+								{#snippet trigger()}
+									<Avatar
+										src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
+										size="xlarge"
+										alt="Account menu panel"
+										onclick={() => {
+											isAvatarOpened = !isAvatarOpened;
+										}}
+										loading={isAvatarLoading} />
+								{/snippet}
+								<div style="width: 100%; margin: {token.global.spacing.small}">
+									<Flex width="fit-content" direction="column" gap="small">
+										<span
+											style="color: {token.theme.color.text.tertiary}; font-weight: {token.global
+												.font.weight.bold}; font-size: {token.global.font.size.small}">
+											Account
+										</span>
+
+										<Flex alignItems="center" gap="medium" marginBottom="small">
+											<Avatar
+												src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
+												size="huge"
+												loading={isAvatarLoading} />
+											<Flex direction="column">
+												<span
+													style="font-size: {token.global.font.size.medium}; font-weight: {token
+														.global.font.weight.bold}">
+													USERNAME
+												</span>
+												<span
+													style="font-size: {token.global.font.size.small}; font-weight: {token
+														.global.font.weight.bold}; color: {token.theme.color.text.secondary}">
+													example@example.com
+												</span>
+											</Flex>
+										</Flex>
+
+										<LinkButton
+											alignContent="left"
+											opennewtab
+											stretchwidth
+											appearance="subtle"
+											href="https://account.davidnet.net">
+											Switch account
+										</LinkButton>
+										<LinkButton
+											alignContent="left"
+											opennewtab
+											stretchwidth
+											appearance="subtle"
+											href="https://account.davidnet.net">
+											Manage account
+										</LinkButton>
+										<LinkButton
+											alignContent="left"
+											opennewtab
+											stretchwidth
+											appearance="subtle"
+											href="https://account.davidnet.net">
+											Preferences
+										</LinkButton>
+										<Divider color="tertiary" thickness="standard" />
+										<LinkButton
+											alignContent="left"
+											opennewtab
+											stretchwidth
+											appearance="subtle"
+											href="https://davidnet.net/help">
+											Help
+										</LinkButton>
+										<Button
+											stretchwidth
+											alignContent="left"
+											appearance="subtle"
+											onclick={() => {
+												alert("Shortcuts");
+											}}>
+											Active shortcuts
+										</Button>
+										<Divider color="tertiary" thickness="standard" />
+										<LinkButton
+											alignContent="left"
+											opennewtab
+											stretchwidth
+											appearance="subtle"
+											href="https://account.davidnet.net/logout">
+											Logout
+										</LinkButton>
+									</Flex>
+								</div>
+							</Dropdown>
 						</div>
 					</nav>
 				{/if}
