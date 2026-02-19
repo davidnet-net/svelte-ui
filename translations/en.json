@@ -35,5 +35,14 @@
 	"page_design_tokens_library_header_heading": "Design token library",
 	"page_design_tokens_library_header_paragraph": "This page shows all design tokens.",
 	"page_card_foundations_title": "Foundations",
-	"page_card_foundations_description": "View guidelines"
+	"page_card_foundations_description": "View guidelines",
+	"page_components_header_heading": "Components",
+	"page_components_header_paragraph": "Building blocks for the UI.",
+	"page_components_subheading_primitives": "Primitives",
+	"page_components_card_anchor_description": "An anchor is a primitive component for building custom links.",
+	"page_components_card_appshell_description": "A top level wrapper for the Design System.",
+	"page_components_card_avatar_description": "An avatar is a visual representation of a user or entity.",
+	"page_components_card_divider_description": "Divides sections",
+	"page_components_card_flex_description": "Flex is a primitive layout component that implements the CSS Flexbox API.",
+	"page_components_card_icon_description": "An icon is a symbol representing a command, device, directory, or common action."
 }

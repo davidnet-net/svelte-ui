@@ -32,9 +32,9 @@
 			title={m.page_card_foundations_title()}
 			description={m.page_card_foundations_description()} />
 		<Card
-			href="#"
+			href="/components"
 			title={m.page_card_components_title()}
 			description={m.page_card_components_description()} />
-		<Card href="#" title={m.page_card_tools_title()} />
+		<Card href="/tools" title={m.page_card_tools_title()} />
 	</Flex>
 </div>
