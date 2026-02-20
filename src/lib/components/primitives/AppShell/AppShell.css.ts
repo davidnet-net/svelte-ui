@@ -52,7 +52,7 @@ const nav = style({
 	backgroundColor: token.theme.color.surface.raised.normal,
 	height: "48px",
 	width: "100%",
-	padding: "1rem 0.5rem",
+	padding: "1rem 1rem",
 	display: "flex",
 	verticalAlign: "middle",
 	flexDirection: "row",

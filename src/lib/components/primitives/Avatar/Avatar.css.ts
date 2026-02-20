@@ -2,29 +2,47 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 import { token } from "$lib/styles/designTokens";
 
-const baseAvatar = style({
-	borderRadius: token.global.radius.full,
-	borderWidth: token.global.borderWidth.standard,
-	borderStyle: "solid",
-	borderColor: token.theme.color.border.default
+const avatarContainer = style({
+	display: "inline-flex",
+	justifyContent: "center",
+	alignItems: "center",
+	boxSizing: "border-box",
+	padding: token.global.spacing.xsmall, // Provides the inner gap between the square box and circular image
+	borderRadius: token.global.radius.medium,
+	backgroundColor: token.theme.color.background.subtle.normal,
+	color: token.theme.color.text.default,
+	flexShrink: 0,
+	verticalAlign: "middle",
+	textDecoration: "none",
+	transitionProperty: "background-color, color",
+	transitionDuration: token.global.transition.duration.standard,
+	transitionTimingFunction: token.global.transition.timing.ease
 });
 
-const clickable = style({
+const clickableContainer = style({
 	cursor: "pointer",
 	":hover": {
-		outlineWidth: token.global.borderWidth.thick,
-		outlineStyle: "solid",
-		outlineColor: token.theme.color.border.highlighted
+		backgroundColor: token.theme.color.background.subtle.hover
 	},
 	":active": {
-		outlineColor: token.theme.color.border.selected
+		backgroundColor: token.theme.color.background.subtle.pressed
 	},
-	":focus": {
+	":focus-visible": {
 		outlineWidth: token.global.borderWidth.thick,
 		outlineStyle: "solid",
 		outlineColor: token.theme.color.border.focus,
 		outlineOffset: token.global.spacing.none
 	}
+});
+
+const baseAvatar = style({
+	borderRadius: token.global.radius.full,
+	borderWidth: token.global.borderWidth.standard,
+	borderStyle: "solid",
+	borderColor: token.theme.color.border.default,
+	width: "100%",
+	height: "100%",
+	objectFit: "cover"
 });
 
 const size = styleVariants({
@@ -41,22 +59,14 @@ const buttonreset = style({
 	background: "none",
 	color: "inherit",
 	border: "none",
-	padding: 0,
 	font: "inherit",
-	cursor: "pointer",
-	outline: "inherit",
-	display: "inline-flex",
-	borderRadius: "50%",
-	verticalAlign: "middle",
-	":focus-visible": {
-		outline: "2px solid currentColor",
-		outlineOffset: "2px"
-	}
+	outline: "inherit"
 });
 
 export const styles = {
+	avatarContainer,
+	clickableContainer,
 	baseAvatar,
-	clickable,
 	size,
 	buttonreset
 };

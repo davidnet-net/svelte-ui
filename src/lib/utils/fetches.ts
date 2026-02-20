@@ -9,7 +9,7 @@ async function postFetch(url: string, data: Record<string, unknown>) {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			"x-Page-Session-ID": appState.pageSessionID as string,
+			"x-Tab-Session-ID": appState.tabSessionID as string,
 			"x-Correlation-ID": correlationID
 		},
 		body: JSON.stringify(data)

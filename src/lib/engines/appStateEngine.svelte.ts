@@ -9,7 +9,7 @@ interface AppStateType {
 	viteConnected: boolean;
 	isOffline: boolean;
 	hideNavigation: boolean;
-	pageSessionID: (UUIDv7Type & { __brand: "pageSessionID" }) | undefined;
+	tabSessionID: (UUIDv7Type & { __brand: "tabSessionID" }) | undefined;
 	systemPreference: {
 		darkMode: boolean;
 		highContrast: boolean;
@@ -24,7 +24,7 @@ export const appState: AppStateType = $state({
 	viteConnected: true,
 	isOffline: false,
 	hideNavigation: false,
-	pageSessionID: undefined,
+	tabSessionID: undefined,
 	systemPreference: {
 		darkMode: false,
 		highContrast: false,
@@ -35,8 +35,8 @@ export const appState: AppStateType = $state({
 export async function initAppState() {
 	if (typeof window === "undefined") return;
 
-	appState.pageSessionID = generateUUIDv7() as
-		| (UUIDv7Type & { __brand: "pageSessionID" })
+	appState.tabSessionID = generateUUIDv7() as
+		| (UUIDv7Type & { __brand: "tabSessionID" })
 		| undefined;
 
 	if (import.meta.hot) {

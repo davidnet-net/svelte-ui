@@ -52,34 +52,32 @@
 </script>
 
 {#if isLoading}
-	<Skeleton class="{styles.size[size]} {styles.baseAvatar}" noDefaults />
+	<span class="{styles.avatarContainer} {styles.size[size]}">
+		<Skeleton class={styles.baseAvatar} noDefaults />
+	</span>
 {:else if href}
 	<Anchor {href} {external} {opennewtab} aria-label={accessibleName}>
-		<img
-			in:fade={{ duration: 300 }}
-			class="{styles.baseAvatar} {focusring} {styles.size[size]} {styles.clickable}"
-			aria-hidden="true"
-			alt=""
-			{src} />
+		<span
+			class="{styles.avatarContainer} {styles.clickableContainer} {focusring} {styles.size[size]}">
+			<img in:fade={{ duration: 300 }} class={styles.baseAvatar} aria-hidden="true" alt="" {src} />
+		</span>
 	</Anchor>
 {:else if onclick}
 	<button
 		type="button"
-		class="{styles.buttonreset} {styles.size[size]}"
+		class="{styles.buttonreset} {styles.avatarContainer} {styles.clickableContainer} {focusring} {styles
+			.size[size]}"
 		{onclick}
 		aria-label={accessibleName}>
-		<img
-			in:fade={{ duration: 300 }}
-			class="{styles.baseAvatar} {focusring} {styles.size[size]} {styles.clickable}"
-			aria-hidden="true"
-			alt=""
-			{src} />
+		<img in:fade={{ duration: 300 }} class={styles.baseAvatar} aria-hidden="true" alt="" {src} />
 	</button>
 {:else}
-	<img
-		in:fade={{ duration: 300 }}
-		class="{styles.baseAvatar} {styles.size[size]}"
-		aria-hidden={decorative ? "true" : undefined}
-		alt={accessibleName}
-		{src} />
+	<span class="{styles.avatarContainer} {styles.size[size]}">
+		<img
+			in:fade={{ duration: 300 }}
+			class={styles.baseAvatar}
+			aria-hidden={decorative ? "true" : undefined}
+			alt={accessibleName}
+			{src} />
+	</span>
 {/if}
