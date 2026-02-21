@@ -13,7 +13,7 @@ const baseModal = style({
 const normalScreen = style({
 	maxWidth: "600px",
 	width: "60dvw",
-	maxHeight: "50vh",
+	maxHeight: "80vh",
 	minHeight: "12rem",
 	borderRadius: token.global.radius.xlarge
 });

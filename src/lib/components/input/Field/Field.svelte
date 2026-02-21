@@ -40,7 +40,9 @@
 <div class={styles.baseField}>
 	<label class={styles.label} for={fieldID}>
 		{label}
-		<span class={styles.requiredMark}>*</span>
+		{#if required}
+			<span class={styles.requiredMark}>*</span>
+		{/if}
 	</label>
 	{@render children()}
 	<div class={styles.statusbar}>

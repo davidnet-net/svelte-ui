@@ -25,10 +25,7 @@ export const lightTheme = createTheme(token.theme, {
 		link: {
 			default: "#0052CC",
 			pressed: "#0047B3",
-			visited: {
-				default: "#6554C0",
-				pressed: "#5243AA"
-			}
+			visited: "#6554C0"
 		},
 		skeleton: {
 			from: "#dfe1e6",

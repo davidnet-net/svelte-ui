@@ -68,3 +68,5 @@ export const authState = $state({
 	loading: true,
 	isLoggedIn: false
 });
+
+export const identity: identityType | undefined = undefined;

@@ -12,14 +12,16 @@ const size = styleVariants({
 	large: { fontSize: token.global.font.size.large },
 	xlarge: { fontSize: token.global.font.size.xlarge },
 	huge: { fontSize: token.global.font.size.huge },
-	xhuge: { fontSize: token.global.font.size.xhuge }
+	xhuge: { fontSize: token.global.font.size.xhuge },
+	giant: { fontSize: token.global.font.size.giant }
 });
 
 const color = styleVariants({
 	inherit: {},
 	default: { color: token.theme.color.text.default },
 	danger: { color: token.theme.color.text.danger },
-	warning: { color: token.theme.color.text.warning }
+	warning: { color: token.theme.color.text.warning },
+	success: { color: token.theme.color.text.success }
 });
 
 const iconType = icons;

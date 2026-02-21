@@ -2,6 +2,8 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLFormAttributes } from "svelte/elements";
 
+	import { styles } from "./Form.css";
+
 	interface Props extends HTMLFormAttributes {
 		children: Snippet;
 		/** *
@@ -13,6 +15,6 @@
 	let { children, width = "80%", ...rest }: Props = $props();
 </script>
 
-<form style="width: {width}" {...rest}>
+<form style="width: {width};" class={styles.baseForm} {...rest}>
 	{@render children()}
 </form>

@@ -25,10 +25,7 @@ export const darkTheme = createTheme(token.theme, {
 		link: {
 			default: "#4794ff",
 			pressed: "#85b8ff",
-			visited: {
-				default: "#b8acf6",
-				pressed: "#a292f3"
-			}
+			visited: "#b8acf6"
 		},
 		skeleton: {
 			from: "#22272b",

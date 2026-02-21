@@ -42,7 +42,7 @@
 		 */
 		selected?: boolean;
 
-		onclick: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+		onclick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		appearance?: keyof typeof styles.appearance;
 	}
 

@@ -16,6 +16,7 @@ export const global = createGlobalTheme(":root", {
 			heavy: "900"
 		},
 		size: {
+			giant: "5rem",
 			xhuge: "3rem",
 			huge: "2.5rem",
 			xlarge: "2rem",

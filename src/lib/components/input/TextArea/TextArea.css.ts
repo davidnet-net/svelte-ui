@@ -11,7 +11,10 @@ const baseTextArea = style({
 	fontFamily: token.global.font.family.sans,
 	fontSize: token.global.font.size.medium,
 	padding: token.global.spacing.xsmall,
-	lineHeight: token.global.font.lineHeight.normal
+	lineHeight: token.global.font.lineHeight.normal,
+	":disabled": {
+		cursor: "not-allowed"
+	}
 });
 
 const invalid = style({

@@ -23,10 +23,7 @@ export const theme = createThemeContract({
 		link: {
 			default: null,
 			pressed: null,
-			visited: {
-				default: null,
-				pressed: null
-			}
+			visited: null
 		},
 		skeleton: {
 			from: null,
