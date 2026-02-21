@@ -14,10 +14,14 @@
 		<Flex direction="row" width="100%" gap="large">
 			<Flex direction="column" gap="small" width="auto">
 				<h2 class={styles.heading}>{m.footer_get_started()}</h2>
-				<Anchor class={styles.footerLink} href="#">{m.footer_get_started_for_designers()}</Anchor>
-				<Anchor class={styles.footerLink} href="#">{m.footer_get_started_for_developers()}</Anchor>
-				<Anchor class={styles.footerLink} href="#">
-					{m.footer_get_started_for_content_designers()}
+				<Anchor class={styles.footerLink} href="/foundations">
+					{m.page_card_foundations_title()}
+				</Anchor>
+				<Anchor class={styles.footerLink} href="/components">
+					{m.page_card_components_title()}
+				</Anchor>
+				<Anchor class={styles.footerLink} href="/tools">
+					{m.page_card_tools_title()}
 				</Anchor>
 			</Flex>
 		</Flex>
