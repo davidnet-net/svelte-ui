@@ -123,7 +123,7 @@ export const lightTheme = createTheme(token.theme, {
 		},
 
 		border: {
-			focus: "rgba(255, 0, 0, 0.5)",
+			focus: "#0055cc",
 			default: "#dfe1e6",
 			selected: "#145fcc",
 			highlighted: "#1d212583"

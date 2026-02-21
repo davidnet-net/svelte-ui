@@ -20,7 +20,7 @@ const baseToolTip = style({
 	userSelect: "none",
 	WebkitUserSelect: "none",
 	lineHeight: token.global.font.lineHeight.none,
-	fontWeight: token.global.font.weight.regular,
+	fontWeight: token.global.font.weight.medium,
 	zIndex: token.global.zIndex.toolTip,
 	display: "flex",
 	flexDirection: "column",

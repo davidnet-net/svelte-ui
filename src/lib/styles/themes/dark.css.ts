@@ -119,7 +119,7 @@ export const darkTheme = createTheme(token.theme, {
 		},
 
 		border: {
-			focus: "rgba(255, 0, 0, 0.5)",
+			focus: "#85b8ff",
 			default: "#2f353a",
 			selected: "#145fcc",
 			highlighted: "#f8f9fb83"
