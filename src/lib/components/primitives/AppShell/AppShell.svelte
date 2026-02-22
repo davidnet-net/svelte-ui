@@ -16,6 +16,7 @@
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
+	import { authState } from "$lib/engines/identityEngine.svelte.ts";
 	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
@@ -97,7 +98,6 @@
 		}
 	);
 
-	let isAvatarLoading = $state(false);
 	let isAvatarOpened = $state(false);
 	let feedbackOpen = $state(false);
 </script>
@@ -213,10 +213,10 @@
 										onclick={() => {
 											isAvatarOpened = !isAvatarOpened;
 										}}
-										loading={isAvatarLoading} />
+										loading={authState.loading} />
 								{/snippet}
 								<AccountPanel
-									{isAvatarLoading}
+									isAvatarLoading={authState.loading}
 									username="USERNAME"
 									email="example@example.org"
 									profilePictureURL="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080" />

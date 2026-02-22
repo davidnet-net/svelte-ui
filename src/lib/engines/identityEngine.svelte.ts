@@ -66,7 +66,64 @@ export interface identityType {
 
 export const authState = $state({
 	loading: true,
+	isBeating: false,
 	isLoggedIn: false
 });
 
 export const identity: identityType | undefined = undefined;
+
+let authTimer: ReturnType<typeof setTimeout> | null = null;
+
+// Call authBeat instead do not touch refresh manually!
+async function refresh() {
+	console.debug("[identityEngine]: Refreshing...");
+
+	// Some fancy api calls here
+}
+
+async function authBeat() {
+	if (authState.isBeating) return;
+	authState.isBeating = true;
+	authState.loading = true;
+
+	try {
+		await refresh();
+	} catch (error) {
+		console.error("[identityEngine]: Auth beat failed", error);
+	} finally {
+		authState.isBeating = false;
+		authState.loading = false;
+		setupNextBeat();
+	}
+}
+
+function setupNextBeat() {
+	if (authTimer) clearTimeout(authTimer);
+
+	let delay = 5 * 60 * 1000;
+
+	if (identity?.jwt.expiresAt) {
+		const now = Date.now();
+		const expiresAtMs = identity.jwt.expiresAt * 1000; // Assuming Unix timestamp in seconds
+
+		const buffer = 2 * 60 * 1000;
+		delay = expiresAtMs - now - buffer;
+
+		if (delay <= 0) delay = 1000;
+	}
+
+	console.log(delay);
+	authTimer = setTimeout(() => {
+		authBeat();
+	}, delay);
+}
+
+export async function initIdentityEngine() {
+	document.addEventListener("visibilitychange", async () => {
+		if (document.visibilityState === "visible") {
+			await authBeat();
+		}
+	});
+
+	await authBeat();
+}

@@ -67,7 +67,7 @@
 
 		//isSubmitting = false;
 
-		await sleep(1000);
+		await sleep(500);
 
 		feedbackFinished = true; // If failure just show submit screen again with error!
 	}
@@ -87,7 +87,7 @@
 				</div>
 				<Field
 					required
-					label="Enter your feedback here:"
+					label="Enter your message here:"
 					name="message"
 					invalid={feedbackMessageInvalid}>
 					<TextArea bind:value={feedbackValue} maxlength={2000} disabled={isSubmitting} />

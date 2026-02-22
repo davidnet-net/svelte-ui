@@ -66,7 +66,7 @@
 			if (fieldContext.invalidOveride && maxlength) {
 				const diff = value.length - Number(maxlength);
 				if (diff > 0) {
-					fieldContext.invalidOveride.invalid = `Limit exceeded by ${diff} character${diff > 1 ? "s" : ""}.`;
+					fieldContext.invalidOveride.invalid = `Character limit exceeded by ${diff} character${diff > 1 ? "s" : ""}.`;
 				} else {
 					fieldContext.invalidOveride.invalid = undefined;
 				}
