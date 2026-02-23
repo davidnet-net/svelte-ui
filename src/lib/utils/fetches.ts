@@ -5,7 +5,7 @@ import { generateUUIDv7 } from "./crypto";
 async function postFetch(url: string, data: Record<string, unknown>) {
 	const correlationID = generateUUIDv7();
 
-	await fetch(url, {
+	const result = await fetch(url, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -14,6 +14,8 @@ async function postFetch(url: string, data: Record<string, unknown>) {
 		},
 		body: JSON.stringify(data)
 	});
+
+	return result;
 }
 
 postFetch("", { b: "a" });

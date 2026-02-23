@@ -17,7 +17,6 @@ interface user {
 	email: string;
 	countryCode: string;
 	location: string;
-
 	isAdmin: boolean;
 	isInternal: boolean;
 }
@@ -33,27 +32,27 @@ interface preferences {
 interface privacyPreferences {
 	languageVisibility:
 		| "private"
-		| "organization"
+		| "organizations"
 		| "connections"
-		| "organization_and_connections"
+		| "organizations_and_connections"
 		| "public";
 	timezoneVisibility:
 		| "private"
-		| "organization"
+		| "organizations"
 		| "connections"
-		| "organization_and_connections"
+		| "organizations_and_connections"
 		| "public";
 	locationVisibility:
 		| "private"
-		| "organization"
+		| "organizations"
 		| "connections"
-		| "organization_and_connections"
+		| "organizations_and_connections"
 		| "public";
 	emailVisibility:
 		| "private"
-		| "organization"
+		| "organizations"
 		| "connections"
-		| "organization_and_connections"
+		| "organizations_and_connections"
 		| "public";
 }
 
