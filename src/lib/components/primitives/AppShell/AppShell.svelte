@@ -192,6 +192,7 @@
 						<div class={styles.navRight}>
 							<!--<Button onclick={() => setTheme("dark")}>D - Temp</Button>
 							<Button onclick={() => setTheme("light")}>L - Temp</Button>-->
+							<!--TODO migrate to profile panel and switch it for an theme dropdown icon with the icon callled "routine"-->
 							<IconButton
 								onclick={() => {
 									feedbackOpen = !feedbackOpen;

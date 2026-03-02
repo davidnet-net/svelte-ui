@@ -53,6 +53,21 @@ export const navigationData: NavigationItem[] = [
 				]
 			}
 		]
+	},
+	{
+		pageName: "Tools",
+		href: "/tools",
+		priority: 0.8,
+		changefreq: "weekly",
+		description: "Tools for developers working with the Davidnet Design System.",
+		children: [
+			{
+				pageName: "LLM Resources",
+				href: "/tools/llm-resources",
+				priority: 0.7,
+				description: "Let AI write code that fits with our system design."
+			}
+		]
 	}
 ];
 
