@@ -86,7 +86,7 @@ export function getCurrentPage() {
 	const currentNavItem = $derived(findNavItem(navigationData, page.url.pathname));
 
 	const ogType = $derived(currentNavItem?.ogType ?? "website");
-	const title = $derived(currentNavItem?.pageName ?? "Davidnet Design System");
+	const title = $derived(currentNavItem?.pageName ?? "Davidnet Design System" + " | Davidnet");
 	const description = $derived(
 		currentNavItem?.description ?? "Documents the Davidnet Design System."
 	);
