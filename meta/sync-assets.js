@@ -1,0 +1,28 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const BASE_DIR = "src/lib/internal/assets/downloads";
+
+const scanDir = (subDir) => {
+	const fullPath = path.join(process.cwd(), BASE_DIR, subDir);
+	if (!fs.existsSync(fullPath)) return {};
+
+	return fs.readdirSync(fullPath).reduce((acc, name) => {
+		const stats = fs.statSync(path.join(fullPath, name));
+		// We map the filename to its size
+		acc[name] = stats.size;
+		return acc;
+	}, {});
+};
+
+const manifest = {
+	context: scanDir("llm-context"),
+	instructions: scanDir("llm-custom-instructions")
+};
+
+fs.writeFileSync(
+	path.join(process.cwd(), BASE_DIR, "manifest.json"),
+	JSON.stringify(manifest, null, 2)
+);
+
+console.log("✅ Asset manifest generated.");

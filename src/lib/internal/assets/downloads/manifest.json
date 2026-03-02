@@ -1,0 +1,12 @@
+{
+	"context": {
+		"llm-bun.txt": 1931237,
+		"llm-bundle.zip": 839315,
+		"llm-hono.txt": 342521,
+		"llm-paraglide.txt": 3063,
+		"llm-svelte.txt": 1096938
+	},
+	"instructions": {
+		"llm-custom-instructions.txt": 2150
+	}
+}
