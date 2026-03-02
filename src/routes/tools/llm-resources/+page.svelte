@@ -2,6 +2,7 @@
 	import { Flex } from "$lib";
 	import Card from "$lib/internal/components/Card/Card.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import NavigationData from "$lib/internal/components/NavigationData.svelte";
 
 	import { styles } from "./page.css.ts";
 
@@ -21,6 +22,7 @@
 	const instructionFiles = $derived(data.instructionFiles);
 </script>
 
+<NavigationData />
 <Header heading="LLM Resources" paragraph="Let AI write code that fits with our system design." />
 <div class={styles.pageContainer}>
 	<h2>LLM System Context files</h2>
