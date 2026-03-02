@@ -99,7 +99,7 @@ async function authBeat() {
 function setupNextBeat() {
 	if (authTimer) clearTimeout(authTimer);
 
-	let delay = 5 * 60 * 1000;
+	let delay = 5 * 60 * 1000; // Default to 5s minutes
 
 	if (identity?.jwt.expiresAt) {
 		const now = Date.now();
