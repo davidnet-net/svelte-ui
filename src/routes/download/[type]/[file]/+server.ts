@@ -9,7 +9,7 @@ import type { RequestHandler } from "./$types";
 export const GET: RequestHandler = async ({ params }: { params: Record<string, string> }) => {
 	const { type, file } = params;
 
-	const allowedTypes = ["llm-context", "llm-custom-instructions"];
+	const allowedTypes = ["llm-external-context", "llm-custom-instructions"];
 	if (!allowedTypes.includes(type)) {
 		throw error(400, "Invalid resource type");
 	}

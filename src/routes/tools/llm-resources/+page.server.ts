@@ -7,7 +7,7 @@ export const load: PageServerLoad = async () => {
 	const manifestPath = path.resolve("static/downloads/manifest.json");
 
 	if (!fs.existsSync(manifestPath)) {
-		return { contextFiles: [], instructionFiles: [] };
+		return { externalContextFiles: [], internalContextFiles: [], instructionFiles: [] };
 	}
 
 	const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
@@ -19,7 +19,8 @@ export const load: PageServerLoad = async () => {
 		}));
 
 	return {
-		contextFiles: mapFiles(manifest.context),
+		externalContextFiles: mapFiles(manifest.externalContext),
+		internalContextFiles: mapFiles(manifest.internalContext),
 		instructionFiles: mapFiles(manifest.instructions)
 	};
 };

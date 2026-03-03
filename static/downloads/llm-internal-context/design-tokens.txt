@@ -1,0 +1,135 @@
+
+# Design Tokens Documentation: @davidnet/svelte-ui
+
+This documentation provides the exact JSON structure and implementation rules for the `@davidnet/svelte-ui` design system.
+
+## 1. Integration
+
+Import the `token` constant for use in Svelte 5 components.
+
+```ts
+import { token } from "@davidnet/svelte-ui";
+
+```
+
+## 2. Token Manifest (JSON Structure)
+
+### Global Tokens (`token.global`)
+
+These values are static across all themes.
+
+```json
+{
+  "font": {
+    "family": {
+      "brand": "string",
+      "sans": "string",
+      "mono": "monospace"
+    },
+    "weight": {
+      "regular": "400",
+      "medium": "500",
+      "bold": "700",
+      "heavy": "900"
+    },
+    "size": {
+      "giant": "5rem",
+      "xhuge": "3rem",
+      "huge": "2.5rem",
+      "xlarge": "2rem",
+      "large": "1.5rem",
+      "xmedium": "1.25rem",
+      "medium": "1rem",
+      "small": "0.75rem"
+    },
+    "lineHeight": { "none": "1", "tight": "1.25", "normal": "1.5" }
+  },
+  "spacing": {
+    "none": "0",
+    "xsmall": "0.25rem",
+    "small": "0.5rem",
+    "medium": "1rem",
+    "large": "1.5rem",
+    "xlarge": "2rem"
+  },
+  "radius": {
+    "none": "0",
+    "small": "4px",
+    "medium": "6px",
+    "large": "8px",
+    "xlarge": "12px",
+    "huge": "16px",
+    "full": "9999px"
+  },
+  "borderWidth": { "standard": "1px", "thick": "2px" },
+  "transition": {
+    "duration": { "fast": "100ms", "standard": "200ms", "slow": "400ms", "xslow": "2s" },
+    "timing": { "linear": "linear", "ease": "ease", "easeIn": "ease-in", "easeOut": "ease-out", "easeInOut": "ease-in-out" }
+  },
+  "zIndex": { "noscript": "50", "toaster": "40", "toolTip": "30", "dropdown": "20", "blanket": "10" }
+}
+
+```
+
+### Theme Tokens (`token.theme`)
+
+The AI should use these keys; the underlying hex values switch automatically between Light and Dark modes.
+
+```json
+{
+  "color": {
+    "text": {
+      "default": "string",
+      "secondary": "string",
+      "tertiary": "string",
+      "inverse": "string",
+      "disabled": "string",
+      "selected": "string",
+      "danger": "string",
+      "warning": "string",
+      "success": "string",
+      "discover": "string",
+      "primary": "string"
+    },
+    "link": { "default": "string", "pressed": "string", "visited": "string" },
+    "background": {
+      "danger": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "warning": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "primary": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "success": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "discover": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "disabled": { "normal": "hex" },
+      "subtle": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "selected": { "normal": "hex", "hover": "hex", "pressed": "hex" }
+    },
+    "surface": {
+      "sunken": { "normal": "hex" },
+      "default": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "raised": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "overlay": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+      "inversed": { 
+         "sunken": { "normal": "hex" },
+         "default": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+         "raised": { "normal": "hex", "hover": "hex", "pressed": "hex" },
+         "overlay": { "normal": "hex", "hover": "hex", "pressed": "hex" }
+      }
+    },
+    "border": {
+      "focus": "string",
+      "default": "string",
+      "selected": "string",
+      "highlighted": "string"
+    },
+    "blanket": "rgba-string"
+  }
+}
+
+```
+
+## 3. Implementation Logic for AI
+
+* Mandatory Mapping: You MUST NOT invent new token keys or use raw CSS values (e.g., margin: 10px). Use the closest match from the manifest.
+* Existing Tokens Only: If you feel a specific UI element requires a new token that does not exist in the manifest above:
+    Action: Mention the recommendation for a new token to the user in your explanation.
+    Constraint: In the actual code you generate, you MUST NOT use that recommended token. You must fallback to the most appropriate existing token from the list above.
+* If you recommend making an new token tell it to the user but do not use the recommended new token and instead use an exiting one

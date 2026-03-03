@@ -16,7 +16,8 @@ const scanDir = (subDir) => {
 };
 
 const manifest = {
-	context: scanDir("llm-context"),
+	externalContext: scanDir("llm-external-context"),
+	internalContext: scanDir("llm-internal-context"),
 	instructions: scanDir("llm-custom-instructions")
 };
 

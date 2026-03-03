@@ -18,25 +18,37 @@
 		return `${unitValue} ${sizes[i]}`;
 	};
 
-	const contextFiles = $derived(data.contextFiles);
+	const externalContextFiles = $derived(data.externalContextFiles);
+	const internalContextFiles = $derived(data.internalContextFiles);
 	const instructionFiles = $derived(data.instructionFiles);
 </script>
 
 <NavigationData />
 <Header heading="LLM Resources" paragraph="Let AI write code that fits with our system design." />
 <div class={styles.pageContainer}>
-	<h2>LLM System Context files</h2>
+	<h2>LLM external system context files</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
-		{#each contextFiles as file (file.name)}
+		{#each externalContextFiles as file (file.name)}
 			<Card
-				href="/download/llm-context/{file.name}"
+				href="/download/llm-external-context/{file.name}"
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
 				download={true} />
 		{/each}
 	</Flex>
-	<h2>Prebuild AI Agents</h2>
+	<h2>LLM internal system context files</h2>
+	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
+		{#each internalContextFiles as file (file.name)}
+			<Card
+				href="/download/llm-internal-context/{file.name}"
+				title={file.name}
+				icon="files"
+				description={formatFileSize(file.size)}
+				download={true} />
+		{/each}
+	</Flex>
+	<h2>Prebuild AI agents</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		<Card
 			href="https://gemini.google.com/gem/1DSFaT-ND0ga3H7pNEnVXYqKFrMlID3ai?usp=sharing"

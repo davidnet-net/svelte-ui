@@ -11,7 +11,7 @@
 	<div class={styles.content}>
 		<p class={styles.brand}>Davidnet Design System</p>
 		<br />
-		<Flex direction="row" width="100%" gap="large">
+		<Flex direction="row" width="100%" gap="xlarge">
 			<Flex direction="column" gap="small" width="auto">
 				<h2 class={styles.heading}>{m.footer_get_started()}</h2>
 				<Anchor class={styles.footerLink} href="/foundations">
@@ -23,6 +23,21 @@
 				<Anchor class={styles.footerLink} href="/tools">
 					{m.page_card_tools_title()}
 				</Anchor>
+			</Flex>
+			<Flex direction="column" gap="small" width="auto">
+				<h2 class={styles.heading}>Socials</h2>
+				<Anchor external class={styles.footerLink} href="https://mastodon.social/@davidnet">
+					Mastodon
+					<Icon icon="open_in_new" />
+				</Anchor>
+				<Anchor external class={styles.footerLink} href="https://github.com/davidnet-net">
+					Github
+					<Icon icon="open_in_new" />
+				</Anchor>
+			</Flex>
+			<Flex direction="column" gap="small" width="auto">
+				<h2 class={styles.heading}>AI</h2>
+				<Anchor class={styles.footerLink} href="/tools/llm-resources">LLM Resources</Anchor>
 			</Flex>
 		</Flex>
 	</div>
