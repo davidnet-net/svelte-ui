@@ -26,7 +26,7 @@
 	}: Props = $props();
 </script>
 
-<Anchor {href} {download} {external}>
+<Anchor {href} download={download || undefined} {external}>
 	<div class={styles.baseCard}>
 		<div class={styles.illustrationContainer}>
 			<Icon size="xhuge" {icon} />
