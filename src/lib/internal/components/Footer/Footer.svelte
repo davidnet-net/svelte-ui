@@ -9,7 +9,7 @@
 
 <footer class={styles.baseFooter}>
 	<div class={styles.content}>
-		<p class={styles.brand}>Davidnet Design System</p>
+		<p class={styles.brand}>Davidnet Design System v{__DDS_INFO__.version.replaceAll('"', "")}</p>
 		<br />
 		<Flex direction="row" width="100%" gap="xlarge">
 			<Flex direction="column" gap="small" width="auto">
