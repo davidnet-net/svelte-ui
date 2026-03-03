@@ -29,7 +29,7 @@
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each contextFiles as file (file.name)}
 			<Card
-				href="/api/download/llm-context/{file.name}"
+				href="/download/llm-context/{file.name}"
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
@@ -49,7 +49,7 @@
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each instructionFiles as file (file.name)}
 			<Card
-				href="/api/download/llm-custom-instructions/{file.name}"
+				href="/download/llm-custom-instructions/{file.name}"
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}

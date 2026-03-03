@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const BASE_DIR = "src/lib/internal/assets/downloads";
+const BASE_DIR = "static/downloads";
 
 const scanDir = (subDir) => {
 	const fullPath = path.join(process.cwd(), BASE_DIR, subDir);
@@ -25,4 +25,4 @@ fs.writeFileSync(
 	JSON.stringify(manifest, null, 2)
 );
 
-console.log("✅ Asset manifest generated.");
+console.log("✅ Downloads manifest generated.");

@@ -1,37 +1,25 @@
-import manifest from "$lib/internal/assets/downloads/manifest.json";
+import fs from "node:fs";
+import path from "node:path";
 
 import type { PageServerLoad } from "./$types";
 
-const contextGlob = import.meta.glob("$lib/internal/assets/downloads/llm-context/*", {
-	eager: true,
-	query: "?url",
-	import: "default"
-});
+export const load: PageServerLoad = async () => {
+	const manifestPath = path.resolve("static/downloads/manifest.json");
 
-const instructionGlob = import.meta.glob(
-	"$lib/internal/assets/downloads/llm-custom-instructions/*",
-	{
-		eager: true,
-		query: "?url",
-		import: "default"
+	if (!fs.existsSync(manifestPath)) {
+		return { contextFiles: [], instructionFiles: [] };
 	}
-);
 
-export const load: PageServerLoad = () => {
-	const processGlob = (glob: Record<string, unknown>, sizes: Record<string, number>) => {
-		return Object.entries(glob).map(([filePath, url]) => {
-			const fileName = filePath.split("/").pop() ?? "";
-			return {
-				name: fileName,
-				path: String(url),
-				// Look up the size from our manifest
-				size: sizes[fileName] ?? 0
-			};
-		});
-	};
+	const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+
+	const mapFiles = (files: Record<string, number>) =>
+		Object.entries(files).map(([name, size]) => ({
+			name,
+			size
+		}));
 
 	return {
-		contextFiles: processGlob(contextGlob, manifest.context),
-		instructionFiles: processGlob(instructionGlob, manifest.instructions)
+		contextFiles: mapFiles(manifest.context),
+		instructionFiles: mapFiles(manifest.instructions)
 	};
 };
