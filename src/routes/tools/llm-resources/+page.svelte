@@ -30,7 +30,7 @@
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each externalContextFiles as file (file.name)}
 			<Card
-				href="/download/llm-external-context/{file.name}"
+				href="/api/download/llm-external-context/{file.name}"
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
@@ -41,7 +41,7 @@
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each internalContextFiles as file (file.name)}
 			<Card
-				href="/download/llm-internal-context/{file.name}"
+				href="/api/download/llm-internal-context/{file.name}"
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}

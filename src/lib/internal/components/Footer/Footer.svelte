@@ -34,6 +34,10 @@
 					Github
 					<Icon icon="open_in_new" />
 				</Anchor>
+				<Anchor external class={styles.footerLink} href="mailto:contact@davidnet.net">
+					Email
+					<Icon icon="open_in_new" />
+				</Anchor>
 			</Flex>
 			<Flex direction="column" gap="small" width="auto">
 				<h2 class={styles.heading}>AI</h2>
