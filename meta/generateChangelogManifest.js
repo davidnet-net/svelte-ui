@@ -1,5 +1,6 @@
 import { execSync } from "node:child_process";
-import { existsSync, mkdirSync,writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import path from "node:path";
 
 /**
  * TSDoc: Configuration for the Changelog Generator
