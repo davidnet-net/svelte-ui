@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { focusring } from "$lib/styles/global.css.ts";
 	import type { iconType } from "$lib/types/Icon.ts";
 
 	import { styles } from "./Card.css.ts";
@@ -27,7 +28,7 @@
 </script>
 
 <Anchor {href} download={download || undefined} {external}>
-	<div class={styles.baseCard}>
+	<div class="{styles.baseCard} {focusring}">
 		<div class={styles.illustrationContainer}>
 			<Icon size="xhuge" {icon} />
 		</div>

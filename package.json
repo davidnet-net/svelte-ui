@@ -20,8 +20,8 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright test",
-		"syncassets": "node meta/sync-assets.js",
-		"generatechangelog": "node meta/generateChangelog.js"
+		"syncassets": "node meta/generateDownloadManifest.js",
+		"generatechangelog": "node meta/generateChangelogManifest.js"
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [

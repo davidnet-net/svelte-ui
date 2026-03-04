@@ -20,12 +20,6 @@ const baseCard = style({
 		outlineWidth: token.global.borderWidth.thick,
 		outlineColor: token.theme.color.border.highlighted,
 		color: token.theme.color.text.secondary
-	},
-	":focus": {
-		outlineWidth: token.global.borderWidth.thick,
-		outlineStyle: "solid",
-		outlineColor: token.theme.color.border.focus,
-		outlineOffset: token.global.spacing.none
 	}
 });
 

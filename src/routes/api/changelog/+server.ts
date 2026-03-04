@@ -1,6 +1,6 @@
 import { error, json } from "@sveltejs/kit";
 
-import manifest from "$lib/changelog-manifest.json";
+import manifest from "$lib/internal/manifests/changelog-manifest.json";
 
 import type { RequestHandler } from "./$types";
 

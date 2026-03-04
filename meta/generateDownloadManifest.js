@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const BASE_DIR = "static/downloads";
+const resultDIR = "src/lib/internal/manifests";
 
 const scanDir = (subDir) => {
 	const fullPath = path.join(process.cwd(), BASE_DIR, subDir);
@@ -22,7 +23,7 @@ const manifest = {
 };
 
 fs.writeFileSync(
-	path.join(process.cwd(), BASE_DIR, "manifest.json"),
+	path.join(process.cwd(), resultDIR, "downloads-manifest.json"),
 	JSON.stringify(manifest, null, 2)
 );
 
