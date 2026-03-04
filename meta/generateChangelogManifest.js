@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { writeFileSync } from "node:fs";
+import { existsSync, mkdirSync,writeFileSync } from "node:fs";
 
 /**
  * TSDoc: Configuration for the Changelog Generator
@@ -60,6 +60,10 @@ const run = () => {
 			console.log(err);
 			// Skip files with no history (e.g., untracked new files)
 		}
+	}
+
+	if (existsSync(CONFIG.outputFile)) {
+		mkdirSync(path.dirname(CONFIG.outputFile), { recursive: true });
 	}
 
 	writeFileSync(CONFIG.outputFile, JSON.stringify(manifest));

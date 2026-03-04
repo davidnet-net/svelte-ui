@@ -22,6 +22,10 @@ const manifest = {
 	instructions: scanDir("llm-custom-instructions")
 };
 
+if (!fs.existsSync(resultDIR)) {
+	fs.mkdirSync(resultDIR, { recursive: true });
+}
+
 fs.writeFileSync(
 	path.join(process.cwd(), resultDIR, "downloads-manifest.json"),
 	JSON.stringify(manifest, null, 2)

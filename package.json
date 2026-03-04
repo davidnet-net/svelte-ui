@@ -6,8 +6,9 @@
 		"url": "https://github.com/davidnet-net/svelte-ui.git"
 	},
 	"scripts": {
-		"dev": "npm run syncassets && npm run generatechangelog && npm run paracompile && vite dev --host",
-		"build": "npm run syncassets && npm run generatechangelog && npm run paracompile && vite build && npm run prepack",
+		"setup": "npm run sync:assets && npm run generate:changelog && npm run compile:paraglide",
+		"dev": "npm run setup && vite dev --host",
+		"build": "npm run setup && vite build && npm run prepack",
 		"preview": "vite preview",
 		"prepare": "husky",
 		"prepack": "svelte-kit sync && svelte-package && publint",
@@ -15,13 +16,13 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"fmt": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"lintfix": "prettier --write .&& eslint . --fix",
-		"paracompile": "echo 'Compile paraglide thing' && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
-		"test:unit": "vitest",
+		"lint:fix": "prettier --write . && eslint . --fix",
+		"compile:paraglide": "echo 'Compile paraglide thing' && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:unit": "vitest",
 		"test:e2e": "playwright test",
-		"syncassets": "node meta/generateDownloadManifest.js",
-		"generatechangelog": "node meta/generateChangelogManifest.js"
+		"sync:assets": "node meta/generateDownloadManifest.js",
+		"generate:changelog": "node meta/generateChangelogManifest.js"
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
