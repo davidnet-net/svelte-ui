@@ -13,7 +13,7 @@
 
 <div class={styles.pageContainer}>
 	<h2>{m.page_components_subheading_primitives()}</h2>
-	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
+	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		<Card
 			href="/components/primitives/anchor"
 			title="Anchor"
