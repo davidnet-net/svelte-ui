@@ -28,6 +28,8 @@
 
 	const titleID = generateUUIDv7();
 	const contentID = generateUUIDv7();
+
+	//TODO: Add back button of mobile to close modal
 </script>
 
 <Blanket onclick={onclose}>
