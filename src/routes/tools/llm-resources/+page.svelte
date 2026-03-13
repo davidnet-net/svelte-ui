@@ -34,7 +34,7 @@
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
-				download={true} />
+				download={file.name} />
 		{/each}
 	</Flex>
 	<h2>LLM internal system context files</h2>
@@ -45,7 +45,7 @@
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
-				download={true} />
+				download />
 		{/each}
 	</Flex>
 	<h2>Prebuild AI agents</h2>
@@ -65,7 +65,7 @@
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
-				download={true} />
+				download />
 		{/each}
 	</Flex>
 </div>

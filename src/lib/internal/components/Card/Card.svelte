@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { HTMLAnchorAttributes } from "svelte/elements";
+
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { focusring } from "$lib/styles/global.css.ts";
@@ -6,11 +8,9 @@
 
 	import { styles } from "./Card.css.ts";
 
-	interface Props {
+	interface Props extends HTMLAnchorAttributes {
 		title: string;
 		description?: string;
-		href: string;
-		download?: boolean;
 		icon?: iconType;
 		//image?: string;
 		//darkimage?: string;
@@ -20,14 +20,13 @@
 	let {
 		title,
 		description = "",
-		href,
-		download = false,
 		external = false,
-		icon = "indeterminate_question_box"
+		icon = "indeterminate_question_box",
+		...rest
 	}: Props = $props();
 </script>
 
-<Anchor {href} download={download || undefined} {external}>
+<Anchor {external} {...rest}>
 	<div class="{styles.baseCard} {focusring}">
 		<div class={styles.illustrationContainer}>
 			<Icon size="xhuge" {icon} />

@@ -6,6 +6,8 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import { token } from "$lib/styles/designTokens";
 
+	import ShortcutsModal from "../ShortcutsModal/ShortcutsModal.svelte";
+
 	interface Props {
 		isAvatarLoading: boolean;
 		username: string;
@@ -14,6 +16,8 @@
 	}
 
 	let { isAvatarLoading, username, email, profilePictureURL }: Props = $props();
+
+	let isShortcutModalOpen = $state(false);
 </script>
 
 <div style="width: 100%; margin: {token.global.spacing.small}">
@@ -78,7 +82,7 @@
 			alignContent="left"
 			appearance="subtle"
 			onclick={() => {
-				alert("Shortcuts");
+				isShortcutModalOpen = !isShortcutModalOpen;
 			}}>
 			Active shortcuts
 		</Button>
@@ -93,3 +97,7 @@
 		</LinkButton>
 	</Flex>
 </div>
+
+{#if isShortcutModalOpen}
+	<ShortcutsModal onClose={() => (isShortcutModalOpen = false)} />
+{/if}

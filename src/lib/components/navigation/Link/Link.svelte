@@ -28,6 +28,7 @@
 		disabled?: boolean;
 
 		/**
+		 * @deprecated
 		 * @default false
 		 */
 		UNSAFE_showExitPage?: boolean;
@@ -38,6 +39,7 @@
 		opennewtab = false,
 		external = false,
 		disabled = false,
+		// eslint-disable-next-line @typescript-eslint/no-deprecated
 		UNSAFE_showExitPage = false,
 		href,
 		...rest
