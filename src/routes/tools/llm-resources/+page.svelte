@@ -45,7 +45,7 @@
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
-				download />
+				download={file.name} />
 		{/each}
 	</Flex>
 	<h2>Prebuild AI agents</h2>
@@ -65,7 +65,7 @@
 				title={file.name}
 				icon="files"
 				description={formatFileSize(file.size)}
-				download />
+				download={file.name} />
 		{/each}
 	</Flex>
 </div>
