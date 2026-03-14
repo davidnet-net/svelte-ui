@@ -6,7 +6,6 @@
 <h4 align="center">
   <a href="https://design.davidnet.net">Docs</a> ·
   <a href="https://github.com/davidnet-net/svelte-ui">Github</a> ·
-  <a href="https://npmjs.com/@davidnet/svelte-ui">NPM</a> ·
   <a href="https://davidnet.net">Davidnet</a>
 </h4>
 

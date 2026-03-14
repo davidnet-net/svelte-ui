@@ -1,0 +1,41 @@
+Copyright (c) 2026 David Bos
+
+ALL RIGHTS RESERVED.
+
+1. PROPRIETARY NOTICE
+   This software and all associated documentation are the sole property of
+   David Bos. This is not open-source software.
+
+2. PERMITTED USAGE
+   You are granted a limited, non-exclusive right to view the source code
+   contained in this repository for the following purposes only:
+   a) Personal education and private study.
+   b) Security auditing, vulnerability assessment, and peer review.
+
+3. RESTRICTIONS
+   Except as expressly permitted in Section 2, you may NOT:
+   a) Copy, redistribute, or publish the software in any form.
+   b) Modify, adapt, or create derivative works based on the software.
+   c) Compile, run, or use the software for any commercial or
+   production purposes.
+   d) Sublicense or sell the software.
+   e) NON-COMPETE: You may not use any part of this source code, its
+   logic, or its architecture to create, maintain, or contribute to
+   a product or service that competes, directly or indirectly, with
+   the software or any future commercial offerings by David Bos.
+
+4. REPORTING SECURITY VULNERABILITIES
+   If you discover a security vulnerability during an audit, the author
+   requests that you report it privately via contact@davidnet.net
+
+5. NO WARRANTY
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES
+   OR OTHER LIABILITY ARISING FROM THE OUT OF THE CONNECTION WITH THE SOFTWARE.
+
+6. OWNERSHIP OF CONTRIBUTIONS
+   By submitting a "Pull Request," suggestion, or any other contribution to
+   this repository, you agree to assign all rights, title, and interest in
+   said contribution to David Bos. You acknowledge that you have the right
+   to grant these rights and that your contribution will be governed by
+   this license, with David Bos retaining full ownership and commercial rights.
