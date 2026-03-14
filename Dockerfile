@@ -1,4 +1,4 @@
-FROM node:22 AS build
+FROM oven/bun:latest AS base
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ COPY . .
 
 RUN bun run build
 
-FROM node:22
+FROM oven/bun:latest AS base
 
 WORKDIR /app
 
