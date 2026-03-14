@@ -3,26 +3,18 @@
 	"version": "2.0.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/davidnet-net/svelte-ui.git"
+		"url": "git+https://github.com/davidnet-net/svelte-ui.git"
 	},
+	"license": "SEE LICENSE IN license",
+	"private": "true",
 	"scripts": {
-		"setup": "npm run sync:assets && npm run generate:changelog && npm run compile:paraglide",
-		"dev": "npm run setup && vite dev --host",
-		"build": "npm run setup && vite build && npm run prepack",
-		"preview": "vite preview",
-		"prepare": "husky",
-		"prepack": "svelte-kit sync && svelte-package && publint",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"fmt": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"lint:fix": "prettier --write . && eslint . --fix",
-		"compile:paraglide": "echo 'Compile paraglide thing' && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
-		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:unit": "vitest",
-		"test:e2e": "playwright test",
-		"sync:assets": "node meta/generateDownloadManifest.js",
-		"generate:changelog": "node meta/generateChangelogManifest.js"
+		"setup": "bun meta/scripts/setup.ts",
+		"dev": "bun run setup && bun x --bun vite dev --host",
+		"build": "bun run setup && bun x --bun vite build && bun run prepack",
+		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
+		"fmt": "bun x prettier --write . && bun x eslint . --fix",
+		"lint": "bun x prettier --check . && bun x eslint .",
+		"prepare": "husky"
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
@@ -50,7 +42,8 @@
 		}
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.0.0",
+		"@sveltejs/kit": "^2.49.1"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
@@ -58,7 +51,6 @@
 		"@inlang/paraglide-js": "^2.8.0",
 		"@playwright/test": "^1.57.0",
 		"@sveltejs/adapter-node": "^5.4.0",
-		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/node": "^22",
@@ -86,6 +78,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"@types/bun": "^1.3.10",
 		"@vanilla-extract/css": "^1.18.0",
 		"@vanilla-extract/recipes": "^0.5.7",
 		"@vanilla-extract/vite-plugin": "^5.1.4"

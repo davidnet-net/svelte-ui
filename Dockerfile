@@ -3,11 +3,11 @@ FROM node:22 AS build
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN bun ci
 
 COPY . .
 
-RUN npm run build
+RUN bun run build
 
 FROM node:22
 

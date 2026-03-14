@@ -21,10 +21,10 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: bun ci
 
       - name: TODO run tests
         run: echo "TODO run tests"
 
       - name: Run linter
-        run: npm run lint
+        run: bun run lint

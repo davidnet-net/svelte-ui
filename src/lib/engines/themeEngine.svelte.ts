@@ -66,11 +66,7 @@ export const fontState = $state({
  * @param delay - Delay before the next retry in milliseconds.
  * @returns A promise resolving to the function's result.
  */
-const withRetry = async <T>(
-	fn: () => Promise<T>,
-	retries = 3,
-	delay = 1000
-): Promise<T> => {
+const withRetry = async <T>(fn: () => Promise<T>, retries = 3, delay = 1000): Promise<T> => {
 	try {
 		return await fn();
 	} catch (error) {
