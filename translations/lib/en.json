@@ -1,3 +1,15 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format"
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"lib_component_spinner_alt": "Loading spinner",
+	"lib_component_modal_close_alt": "Close modal",
+	"lib_component_account_menu_alt": "Account menu",
+	"lib_common_cancel": "Cancel",
+	"lib_common_submit": "Submit",
+	"lib_component_appshell_open_sidebar_alt": "Open sidebar",
+	"lib_component_appshell_close_sidebar_alt": "Close sidebar",
+	"lib_component_appshell_feedback_alt": "Share feedback",
+	"lib_component_appshell_shortcuts_toggle_sidebar_name": "Toggle sidebar.",
+	"lib_component_appshell_shortcuts_toggle_sidebar_description": "Closes or opens the sidebar.",
+	"lib_banners_connection_lost_title": "Connection lost.",
+	"lib_banners_connection_lost_content": "We have lost the connection with Davidnet. Please check your internet connection."
 }

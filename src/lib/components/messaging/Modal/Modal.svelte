@@ -6,7 +6,7 @@
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap } from "$lib/engines/shortcutEngine.svelte";
-	import { libaryStrings } from "$lib/engines/translationEngine.svelte";
+	import { m as library_messages } from "$lib/paraglide/messages";
 	import { generateUUIDv7 } from "$lib/utils/crypto";
 
 	import { styles } from "./Modal.css";
@@ -44,7 +44,10 @@
 		<div class={styles.header}>
 			<h2 class={styles.title} id={titleID}>{title}</h2>
 			{#if onclose}
-				<IconButton icon="close" tip={libaryStrings.modal_close_modal} onclick={onclose} />
+				<IconButton
+					icon="close"
+					tip={library_messages.lib_component_modal_close_alt()}
+					onclick={onclose} />
 			{/if}
 		</div>
 		<div class={styles.content} id={contentID} tabindex="-1">

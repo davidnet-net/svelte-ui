@@ -34,5 +34,5 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 	console.debug("[AppShell] Inited identityEngine.");
 
 	// We give preference of database language with:
-	// await runTranslationCheck(databaseLanguagePreference);
+	//await runTranslationCheck("nl");
 }

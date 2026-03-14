@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { libaryStrings } from "$lib/engines/translationEngine.svelte.ts";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./Spinner.css.ts";
 
@@ -10,5 +10,7 @@
 	let { size = "medium" }: Props = $props();
 </script>
 
-<span class="{styles.baseLoader} {styles.size[size]}" aria-label={libaryStrings.loading_spinner}>
+<span
+	class="{styles.baseLoader} {styles.size[size]}"
+	aria-label={library_messages.lib_component_spinner_alt()}>
 </span>

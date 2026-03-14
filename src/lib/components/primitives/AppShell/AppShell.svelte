@@ -9,17 +9,17 @@
 	import Dropdown from "$lib/components/input/Dropdown/Dropdown.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
-	import AccountPanel from "$lib/components/lib_internal/AccountPanel/AccountPanel.svelte";
+	import AccountMenu from "$lib/components/lib_internal/AccountMenu/AccountMenu.svelte";
 	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
-	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
 	import { authState } from "$lib/engines/identityEngine.svelte.ts";
 	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens.ts";
 	import { focusring } from "$lib/styles/global.css.ts";
 
@@ -91,8 +91,8 @@
 		"ctrl+[",
 		() => (appState.sidebarOpen = !appState.sidebarOpen),
 		{
-			name: libaryStrings.shortcuts.toggle_sidebar.name,
-			description: libaryStrings.shortcuts.toggle_sidebar.description,
+			name: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_name(),
+			description: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_description(),
 			preventDefault: true
 		}
 	);
@@ -123,8 +123,8 @@
 			{/if}
 			{#if appState.isOffline}
 				<Banner icon="cloud_alert" appearance="danger">
-					<b>{libaryStrings.banners.connection_lost.b}</b>
-					{libaryStrings.banners.connection_lost.content}
+					<b>{library_messages.lib_banners_connection_lost_title()}</b>
+					{library_messages.lib_banners_connection_lost_content()}
 				</Banner>
 			{/if}
 			{@render banners?.()}
@@ -136,7 +136,7 @@
 							{#if sidebar && appState.sidebarOpen}
 								<IconButton
 									icon="left_panel_close"
-									tip={libaryStrings.close_sidebar}
+									tip={library_messages.lib_component_appshell_close_sidebar_alt()}
 									appearance="subtle"
 									keyboardTip={toggleSidebar.keys}
 									iconstyle="filled"
@@ -146,7 +146,7 @@
 							{:else if sidebar}
 								<IconButton
 									icon="left_panel_open"
-									tip={libaryStrings.open_sidebar}
+									tip={library_messages.lib_component_appshell_open_sidebar_alt()}
 									appearance="subtle"
 									keyboardTip={toggleSidebar.keys}
 									iconstyle="outlined"
@@ -167,7 +167,6 @@
 								{:else}
 									{appName}
 								{/if}
-								<VisuallyHidden>{libaryStrings.linkdomainScreenReader}</VisuallyHidden>
 							</Anchor>
 						</div>
 						<div class={styles.navCenter}>
@@ -196,26 +195,26 @@
 								onclick={() => {
 									feedbackOpen = !feedbackOpen;
 								}}
-								tip={libaryStrings.share_opinion}
+								tip={library_messages.lib_component_appshell_feedback_alt()}
 								icon="feedback" />
 							<IconButton
 								onclick={() => {
 									console.debug("Notification btn pressed");
 								}}
 								icon="notifications"
-								tip="Notifications panel" />
+								tip="Notifications" />
 							<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
 								{#snippet trigger()}
 									<Avatar
 										src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
 										size="xlarge"
-										alt={libaryStrings.account_menu_panel}
+										alt={library_messages.lib_component_account_menu_alt()}
 										onclick={() => {
 											isAvatarOpened = !isAvatarOpened;
 										}}
 										loading={authState.loading} />
 								{/snippet}
-								<AccountPanel
+								<AccountMenu
 									isAvatarLoading={authState.loading}
 									username="USERNAME"
 									email="example@example.org"

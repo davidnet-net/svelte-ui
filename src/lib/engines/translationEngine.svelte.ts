@@ -32,26 +32,29 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 	type Locale = T;
 
+	const handleLocaleChange = (newLocale: Locale) => {
+		//eslint-disable-next-line @typescript-eslint/no-explicit-any
+		internalSetLocale(newLocale as any);
+		if (typeof document !== "undefined") {
+			document.documentElement.lang = newLocale;
+		}
+		setCookie(LANGUAGE_CACHE_KEY, newLocale);
+	};
+
 	// --- Synchronization & Cache Updating ---
 	if (appRuntime.setLocale !== internalSetLocale) {
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
 		internalSetLocale(appRuntime.getLocale() as any);
 
-		const handleLocaleChange = (newLocale: Locale) => {
-			//eslint-disable-next-line @typescript-eslint/no-explicit-any
-			internalSetLocale(newLocale as any);
-			document.documentElement.lang = newLocale;
-			setCookie(LANGUAGE_CACHE_KEY, newLocale);
-		};
-
 		if (typeof appRuntime.onSetLocale === "function") {
+			// Leverage Paraglide's native subscriber pattern
 			appRuntime.onSetLocale(handleLocaleChange);
 		} else {
-			const originalAppSetLocale = appRuntime.setLocale;
-			appRuntime.setLocale = (locale: T) => {
-				handleLocaleChange(locale);
-				originalAppSetLocale(locale);
-			};
+			// We cannot mutate the read-only ES module namespace here.
+			// Warn the developer and fallback to manual sync during initialization.
+			console.warn(
+				"[i18n] onSetLocale not found on appRuntime. Side effects will only apply on boot."
+			);
 		}
 	}
 
@@ -92,8 +95,12 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 		// Apply findings
 		if (targetLocale && targetLocale !== getLocale()) {
-			setLocale(targetLocale); // This triggers the sync hook to update the cookie and DOM
-		} else {
+			// Guarantee side-effects are fired if Paraglide's subscriber is missing
+			if (typeof appRuntime.onSetLocale !== "function") {
+				handleLocaleChange(targetLocale);
+			}
+			setLocale(targetLocale);
+		} else if (typeof document !== "undefined") {
 			document.documentElement.lang = getLocale();
 		}
 	};
