@@ -1,9 +1,12 @@
 {
-	"name": "svelte-ui",
+	"name": "@davidnet-net/svelte-ui",
 	"version": "2.0.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/davidnet-net/svelte-ui.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
 	},
 	"license": "SEE LICENSE IN license",
 	"private": "true",
