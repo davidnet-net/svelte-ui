@@ -14,7 +14,7 @@
 		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
 		"fmt": "bun x prettier --write . && bun x eslint . --fix",
 		"lint": "bun x prettier --check . && bun x eslint .",
-		"prepare": "npm run build"
+		"prepare": "bun install && bun run build"
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
