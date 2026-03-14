@@ -26,8 +26,6 @@ jobs:
           script: |
             set -e
 
-            bun install
-
             REPO_NAME=$(basename "${{ github.repository }}")
             DEPLOY_PATH="/srv/$REPO_NAME"
 
