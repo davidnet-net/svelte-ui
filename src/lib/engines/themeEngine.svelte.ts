@@ -57,19 +57,64 @@ export const fontState = $state({
 	momoTrustDisplayFontLoaded: false
 });
 
+/**
+ * Executes an asynchronous function with exponential backoff retries.
+ * Useful for transient network errors during asset loading.
+ *
+ * @param fn - The async function to execute.
+ * @param retries - Number of remaining retry attempts.
+ * @param delay - Delay before the next retry in milliseconds.
+ * @returns A promise resolving to the function's result.
+ */
+const withRetry = async <T>(
+	fn: () => Promise<T>,
+	retries = 3,
+	delay = 1000
+): Promise<T> => {
+	try {
+		return await fn();
+	} catch (error) {
+		if (retries <= 0) throw error;
+		await new Promise((resolve) => setTimeout(resolve, delay));
+		return withRetry(fn, retries - 1, delay * 2);
+	}
+};
+
+/**
+ * Loads a single font family with a retry mechanism and updates the associated state key.
+ *
+ * @param fontName - The name of the font family to load.
+ * @param stateKey - The key within `fontState` to update upon success.
+ */
+const loadFontWithRetry = async (
+	fontName: string,
+	stateKey: keyof typeof fontState
+): Promise<void> => {
+	try {
+		await withRetry(() => document.fonts.load(`1em "${fontName}"`));
+		fontState[stateKey] = true;
+	} catch (error) {
+		console.error(`[themeEngine]: Failed to load font "${fontName}" after retries.`, error);
+	}
+};
+
+// Ensure font loading only executes on the client to prevent SSR reference errors
 if (typeof document !== "undefined") {
-	Promise.all([
-		document.fonts.load(`1em "${iconFontName}"`),
-		document.fonts.load(`1em "${iconFontRoundedName}"`)
-	]).then(() => {
-		fontState.iconFontsLoaded = true;
-	});
+	// Group icon fonts together to maintain the original Promise.all behavior,
+	// but wrap individual calls in the retry logic.
+	const loadIconFonts = async () => {
+		try {
+			await Promise.all([
+				withRetry(() => document.fonts.load(`1em "${iconFontName}"`)),
+				withRetry(() => document.fonts.load(`1em "${iconFontRoundedName}"`))
+			]);
+			fontState.iconFontsLoaded = true;
+		} catch (error) {
+			console.error(`[themeEngine]: Failed to load icon fonts after retries.`, error);
+		}
+	};
 
-	Promise.all([document.fonts.load(`1em "${interFontName}"`)]).then(() => {
-		fontState.interFontLoaded = true;
-	});
-
-	Promise.all([document.fonts.load(`1em "${momoTrustDisplayFontName}"`)]).then(() => {
-		fontState.momoTrustDisplayFontLoaded = true;
-	});
+	loadIconFonts();
+	loadFontWithRetry(interFontName, "interFontLoaded");
+	loadFontWithRetry(momoTrustDisplayFontName, "momoTrustDisplayFontLoaded");
 }
