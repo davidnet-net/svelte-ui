@@ -11,15 +11,15 @@
 <NavigationData />
 
 <Header
-	heading={m.page_design_tokens_header_heading()}
-	paragraph={m.page_design_tokens_header_paragraph()} />
+	heading={m.docs_page_design_tokens_header_heading()}
+	paragraph={m.docs_page_design_tokens_header_paragraph()} />
 
 <div class={styles.pageContainer}>
-	<h2>{m.page_foundations_subheading_design_tokens()}</h2>
+	<h2>{m.docs_page_foundations_subheading_design_tokens()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
 		<Card
 			href="/foundations/design-tokens/library"
-			title={m.page_design_tokens_card_design_token_library_title()}
-			description={m.page_design_tokens_card_design_token_library_description()} />
+			title={m.docs_page_design_tokens_card_design_token_library_title()}
+			description={m.docs_page_design_tokens_card_design_token_library_description()} />
 	</Flex>
 </div>

@@ -1,95 +1,100 @@
+//*
+//* Translation Engine for Davidnet
+//* Uses paraglide
+//*
+
+//! This module is AI generated and really messy. But if it works dont touch it!
+
+import { setLocale as internalSetLocale } from "$lib/paraglide/runtime.js";
+
+import { getCookie, setCookie } from "../utils/cookies";
+
 export interface ParaglideRuntimeType<T extends string> {
 	locales: readonly T[];
 	getLocale: () => T;
 	setLocale: (locale: T) => void;
+	onSetLocale?: (callback: (newLocale: T) => void) => void;
 }
 
+const LANGUAGE_CACHE_KEY = "language_cache";
+
 /**
- * Make sure to provide paraglide functions.
- *
- * @example
- * import * as runtime from "../paraglide/runtime.js";
- * createTranslationEngine(runtime);
+ * Initializes the translation engine.
+ * * @param appRuntime - The Paraglide runtime from the consuming project.
+ * @returns An async initialization function that accepts an optional database preference.
  */
-export function createTranslationEngine<T extends string>(
-	paraglideRuntime: ParaglideRuntimeType<T>
-) {
-	const { locales, getLocale, setLocale } = paraglideRuntime;
+export function createTranslationEngine<T extends string>(appRuntime: ParaglideRuntimeType<T>) {
+	const { locales, getLocale, setLocale } = appRuntime;
 
 	if (!Array.isArray(locales) || locales.length === 0) {
 		throw new Error("createTranslationEngine: 'locales' must be a non-empty array.");
 	}
 
-	if (typeof getLocale !== "function" || typeof setLocale !== "function") {
-		throw new Error("createTranslationEngine: 'getLocale' and 'setLocale' must be functions.");
-	}
-
-	/**
-	 * Type generated dynamically with "locales" from the injected runtime
-	 */
 	type Locale = T;
 
-	/**
-	 * Validates and normalizes a language string against the supported locales.
-	 *
-	 * @param lang - The language string to validate, typically from a header.
-	 * @returns The matching {@link Locale} if valid, otherwise `null`.
-	 */
-	async function validateLanguage(lang: string | null): Promise<Locale | null> {
-		if (!lang) {
-			return null;
-		}
+	// --- Synchronization & Cache Updating ---
+	if (appRuntime.setLocale !== internalSetLocale) {
+		//eslint-disable-next-line @typescript-eslint/no-explicit-any
+		internalSetLocale(appRuntime.getLocale() as any);
 
-		const candidate = lang.split(",")[0].split("-")[0].trim().toLowerCase();
+		const handleLocaleChange = (newLocale: Locale) => {
+			//eslint-disable-next-line @typescript-eslint/no-explicit-any
+			internalSetLocale(newLocale as any);
+			document.documentElement.lang = newLocale;
+			setCookie(LANGUAGE_CACHE_KEY, newLocale);
+		};
 
-		// Check if the candidate exists in the injected locales list
-		if ((locales as readonly string[]).includes(candidate)) {
-			return candidate as Locale;
+		if (typeof appRuntime.onSetLocale === "function") {
+			appRuntime.onSetLocale(handleLocaleChange);
 		} else {
-			return null;
+			const originalAppSetLocale = appRuntime.setLocale;
+			appRuntime.setLocale = (locale: T) => {
+				handleLocaleChange(locale);
+				originalAppSetLocale(locale);
+			};
 		}
 	}
 
-	return async function translationEngine() {
-		//TODO JWT Session language preference
-		document.documentElement.lang = getLocale();
+	async function validateLanguage(lang: string | null): Promise<Locale | null> {
+		if (!lang) return null;
+		const candidate = lang.split(",")[0].split("-")[0].trim().toLowerCase();
+		return (locales as readonly string[]).includes(candidate) ? (candidate as Locale) : null;
+	}
 
-		// Check if on the most best navigator language.
-		let navigatorLanguageBestMatch: Locale | null = null;
-		for (const lang of navigator.languages) {
-			const validated = await validateLanguage(lang);
-			if (validated) {
-				navigatorLanguageBestMatch = validated;
-				break;
+	/**
+	 * Resolves the best language match based on DB, Cache, or Browser.
+	 * * @param databasePreference - The language string fetched from the database API.
+	 */
+	return async function initializeTranslationEngine(databasePreference?: string | null) {
+		let targetLocale: Locale | null = null;
+
+		// 1. Database Priority (if provided after DB fetch)
+		if (databasePreference) {
+			targetLocale = await validateLanguage(databasePreference);
+		}
+
+		// 2. Cache Priority (Cookie check, replaces localStorage concept)
+		if (!targetLocale) {
+			const cachedLanguage = getCookie(LANGUAGE_CACHE_KEY);
+			targetLocale = await validateLanguage(cachedLanguage);
+		}
+
+		// 3. Browser Navigator Fallback
+		if (!targetLocale && typeof window !== "undefined") {
+			for (const lang of navigator.languages) {
+				const validated = await validateLanguage(lang);
+				if (validated) {
+					targetLocale = validated;
+					break;
+				}
 			}
 		}
 
-		if (navigatorLanguageBestMatch && navigatorLanguageBestMatch !== getLocale()) {
-			setLocale(navigatorLanguageBestMatch);
+		// Apply findings
+		if (targetLocale && targetLocale !== getLocale()) {
+			setLocale(targetLocale); // This triggers the sync hook to update the cookie and DOM
+		} else {
 			document.documentElement.lang = getLocale();
-			return;
 		}
 	};
 }
-
-export const libaryStrings = $state({
-	modal_close_modal: "Close modal",
-	loading_spinner: "Loading spinner",
-	close_sidebar: "Close sidebar",
-	open_sidebar: "Open sidebar",
-	linkdomainScreenReader: "This link lets you go to the start of the domain.",
-	shortcuts: {
-		toggle_sidebar: {
-			name: "Toggle sidebar",
-			description: "Closes or opens the sidebar."
-		}
-	},
-	banners: {
-		connection_lost: {
-			b: "Connection lost.",
-			content: "We have lost the connection with Davidnet. Please check your internet connection."
-		}
-	},
-	share_opinion: "Share your opinion about Davidnet",
-	account_menu_panel: "Account menu panel"
-});

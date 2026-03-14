@@ -15,7 +15,7 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 	await initAppState();
 	console.debug("[AppShell] Inited appStateEngine.");
 
-	// Theme Cache
+	// --- Theme Setup (Cache Phase) ---
 	let theme_cache = getCookie("theme_cache");
 	if (!isValidTheme(theme_cache)) {
 		console.debug("[AppShell] Created new theme_cache.");
@@ -25,16 +25,14 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 	setTheme(theme_cache as themeNames);
 	console.debug(`[AppShell] Set theme ${theme_cache} based on theme_cache`);
 
-	await initIdentityEngine();
+	// --- Translation Engine Setup (Cache Phase) ---
+	const runTranslationCheck = createTranslationEngine(paraglideRuntime);
+	await runTranslationCheck();
+	console.debug("[AppShell] Inited translationEngine (Cache Phase).");
 
-	try {
-		console.debug("[AppShell] Inited translationEngine.");
-		createTranslationEngine(paraglideRuntime);
-		//! Change language with:
-		//! language localstorage key
-	} catch (err: unknown) {
-		const error =
-			err instanceof Error ? err : new Error("An unexpected error occurred", { cause: err });
-		console.error("[AppShell] Could not configure translationEngine \n\n", error);
-	}
+	await initIdentityEngine();
+	console.debug("[AppShell] Inited identityEngine.");
+
+	// We give preference of database language with:
+	// await runTranslationCheck(databaseLanguagePreference);
 }

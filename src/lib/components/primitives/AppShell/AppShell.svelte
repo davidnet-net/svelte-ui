@@ -20,7 +20,6 @@
 	import { init } from "$lib/engines/initEngine.svelte.ts";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
-	import { libaryStrings } from "$lib/engines/translationEngine.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 	import { focusring } from "$lib/styles/global.css.ts";
 

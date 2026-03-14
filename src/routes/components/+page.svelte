@@ -8,35 +8,35 @@
 </script>
 
 <Header
-	heading={m.page_components_header_heading()}
-	paragraph={m.page_components_header_paragraph()} />
+	heading={m.docs_page_components_header_heading()}
+	paragraph={m.docs_page_components_header_paragraph()} />
 
 <div class={styles.pageContainer}>
-	<h2>{m.page_components_subheading_primitives()}</h2>
+	<h2>{m.docs_page_components_subheading_primitives()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		<Card
 			href="/components/primitives/anchor"
 			title="Anchor"
-			description={m.page_components_card_anchor_description()} />
+			description={m.docs_page_components_card_anchor_description()} />
 		<Card
 			href="/components/primitives/appshell"
 			title="AppShell"
-			description={m.page_components_card_appshell_description()} />
+			description={m.docs_page_components_card_appshell_description()} />
 		<Card
 			href="/components/primitives/avatar"
 			title="Avatar"
-			description={m.page_components_card_avatar_description()} />
+			description={m.docs_page_components_card_avatar_description()} />
 		<Card
 			href="/components/primitives/divider"
 			title="Divider"
-			description={m.page_components_card_divider_description()} />
+			description={m.docs_page_components_card_divider_description()} />
 		<Card
 			href="/components/primitives/flex"
 			title="Flex"
-			description={m.page_components_card_flex_description()} />
+			description={m.docs_page_components_card_flex_description()} />
 		<Card
 			href="/components/primitives/icon"
 			title="Icon"
-			description={m.page_components_card_icon_description()} />
+			description={m.docs_page_components_card_icon_description()} />
 	</Flex>
 </div>
