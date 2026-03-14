@@ -1,13 +1,9 @@
 name: Deploy SRV
 
-#!
-#? WARNING: USING V2 BRANCH AS DEPLOYMENT ALSO IN THE GIT CODE BELOW!
-#!
-
 on:
   push:
     branches:
-      - v2
+      - main
 
 jobs:
   deploy:
@@ -35,8 +31,8 @@ jobs:
             # If folder does not exist, clone the repo
             if [ ! -d "$DEPLOY_PATH" ]; then
               echo "Folder does not exist, cloning repo..."
-              # Added -b v2 to ensure the initial clone tracks the correct branch
-              git clone -b v2 https://github.com/${{ github.repository }}.git "$DEPLOY_PATH"
+              # Added -b main to ensure the initial clone tracks the correct branch
+              git clone -b main https://github.com/${{ github.repository }}.git "$DEPLOY_PATH"
             fi
 
             cd "$DEPLOY_PATH"
@@ -44,15 +40,15 @@ jobs:
             if [ -d ".git" ]; then
               echo "Repo exists, fetching latest changes..."
               git fetch --all
-              # Updated to reset to origin/v2
-              git reset --hard origin/v2
+              # Updated to reset to origin/main
+              git reset --hard origin/main
             else
               echo "No Git repo found, initializing..."
               git init
               git remote add origin https://github.com/${{ github.repository }}.git
               git fetch --all
-              # Updated to reset to origin/v2
-              git reset --hard origin/v2
+              # Updated to reset to origin/main
+              git reset --hard origin/main
             fi
 
             echo "Building updated containers..."

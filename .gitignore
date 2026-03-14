@@ -26,3 +26,4 @@ vite.config.ts.timestamp-*
 
 # Custom
 src/lib/internal/manifests/
+bunfig.toml
