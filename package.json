@@ -13,8 +13,7 @@
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",
 		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
 		"fmt": "bun x prettier --write . && bun x eslint . --fix",
-		"lint": "bun x prettier --check . && bun x eslint .",
-		"prepare": "bun install && bun run build"
+		"lint": "bun x prettier --check . && bun x eslint ."
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
