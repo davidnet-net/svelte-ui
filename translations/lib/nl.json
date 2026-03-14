@@ -1,0 +1,13 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"lib_component_spinner_alt": "Laad spinner",
+	"lib_component_modal_close_alt": "Sluit modal",
+	"lib_component_account_menu_alt": "Account menu",
+	"lib_common_cancel": "Annuleer",
+	"lib_common_submit": "Verstuur",
+	"lib_component_appshell_feedback_alt": "Deel feedback",
+	"lib_component_appshell_shortcuts_toggle_sidebar_name": "Schakel zijbalk.",
+	"lib_component_appshell_shortcuts_toggle_sidebar_description": "Sluit of opent de zijbalk.",
+	"lib_banners_connection_lost_title": "Verbinding verloren.",
+	"lib_banners_connection_lost_content": "We hebben de verbinding met Davidnet verloren. Controleer je internet verbinding!"
+}

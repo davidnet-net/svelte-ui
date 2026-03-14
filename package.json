@@ -1,49 +1,33 @@
 {
-	"name": "@davidnet/svelte-ui",
-	"version": "1.13.13",
-	"author": {
-		"name": "davidnet",
-		"email": "contact@davidnet.net"
-	},
-	"license": "MIT",
-	"contributors": [
-		{
-			"name": "David @dedestem",
-			"email": "david@davidnet.net"
-		}
-	],
+	"name": "@davidnet-net/svelte-ui",
+	"version": "2.0.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/davidnet-net/svelte-ui.git"
 	},
-	"bugs": {
-		"url": "https://github.com/davidnet-net/svelte-ui/issues"
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
 	},
-	"homepage": "https://design.davidnet.net",
+	"license": "SEE LICENSE IN license",
+	"private": "true",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package && publint",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"fmt": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"genthemes": "node meta/scripts/GenerateThemes.js",
-		"genmetadata": "node meta/scripts/GenerateMetaData.js",
-		"release-patch": "npm run lint && npm version patch && npm run genthemes && npm run fmt --write && npm run genmetadata && npm run prepack &&  npm publish --access public",
-		"release-minor": "npm run lint && npm run genthemes && npm run genmetadata && npm run fmt --write && npm run prepack && npm version minor && npm publish --access public",
-		"release-legacy": "npm run lint && npm run genthemes && npm run genmetadata && npm run fmt --write && npm run prepack && npm publish --access public",
-		"dev-release": "npm run genmetadata && npm run genthemes && npm run prepack",
-		"clean": "rm -rf node_modules package-lock.json .svelte-kit build src/lib/metadata.ts themes/gen dist"
+		"setup": "bun meta/scripts/setup.ts",
+		"dev": "bun run setup && bun x --bun vite dev --host",
+		"build": "bun run setup && bun x --bun vite build && bun run prepack",
+		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
+		"fmt": "bun x prettier --write . && bun x eslint . --fix",
+		"lint": "bun x prettier --check . && bun x eslint ."
+	},
+	"lint-staged": {
+		"**/*.{js,ts,svelte,json,css}": [
+			"prettier --write",
+			"eslint --fix"
+		]
 	},
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*",
-		"themes",
-		"fonts"
+		"!dist/**/*.spec.*"
 	],
 	"sideEffects": [
 		"**/*.css"
@@ -54,39 +38,51 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
+			"svelte": "./dist/index.js",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
 		}
 	},
 	"peerDependencies": {
-		"@sveltejs/kit": "^2.16.0",
-		"svelte": "^5.0.0"
+		"svelte": "^5.0.0",
+		"@sveltejs/kit": "^2.49.1"
 	},
 	"devDependencies": {
-		"@eslint/compat": "^1.2.5",
-		"@eslint/js": "^9.18.0",
-		"@sveltejs/adapter-auto": "^6.0.0",
-		"@sveltejs/kit": "^2.16.0",
-		"@sveltejs/package": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^5.0.0",
-		"@types/crypto-js": "^4.2.2",
-		"eslint": "^9.18.0",
-		"eslint-config-prettier": "^10.0.1",
-		"eslint-plugin-svelte": "^3.0.0",
-		"globals": "^16.0.0",
-		"mdsvex": "^0.12.3",
-		"prettier": "^3.4.2",
-		"prettier-plugin-svelte": "^3.3.3",
-		"publint": "^0.3.2",
-		"svelte": "^5.0.0",
-		"svelte-check": "^4.0.0",
-		"typescript": "^5.0.0",
-		"typescript-eslint": "^8.20.0",
-		"vite": "^6.2.6"
+		"@eslint/compat": "^1.4.0",
+		"@eslint/js": "^9.39.1",
+		"@inlang/paraglide-js": "^2.8.0",
+		"@playwright/test": "^1.57.0",
+		"@sveltejs/adapter-node": "^5.4.0",
+		"@sveltejs/package": "^2.5.7",
+		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"@types/node": "^22",
+		"@vitest/browser-playwright": "^4.0.15",
+		"eslint": "^9.39.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"eslint-plugin-svelte": "^3.13.1",
+		"globals": "^16.5.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"playwright": "^1.57.0",
+		"prettier": "^3.7.4",
+		"prettier-plugin-svelte": "^3.4.0",
+		"publint": "^0.3.15",
+		"svelte": "^5.45.6",
+		"svelte-check": "^4.3.4",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.48.1",
+		"vite": "^7.2.6",
+		"vitest": "^4.0.15",
+		"vitest-browser-svelte": "^2.0.1"
 	},
 	"keywords": [
 		"svelte"
 	],
 	"dependencies": {
-		"crypto-js": "^4.2.0"
+		"@types/bun": "^1.3.10",
+		"@vanilla-extract/css": "^1.18.0",
+		"@vanilla-extract/recipes": "^0.5.7",
+		"@vanilla-extract/vite-plugin": "^5.1.4"
 	}
 }

@@ -1,0 +1,64 @@
+name: Deploy SRV
+
+#!
+#? WARNING: USING V2 BRANCH AS DEPLOYMENT ALSO IN THE GIT CODE BELOW!
+#!
+
+on:
+  push:
+    branches:
+      - v2
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_SRV_HOST }}
+          username: ${{ secrets.DEPLOY_SRV_USER }}
+          key: ${{ secrets.DEPLOY_SRV_KEY }}
+          script: |
+            set -e
+
+            REPO_NAME=$(basename "${{ github.repository }}")
+            DEPLOY_PATH="/srv/$REPO_NAME"
+
+            echo "Deployment path: $DEPLOY_PATH"
+            git config --global --add safe.directory $DEPLOY_PATH
+
+            # If folder does not exist, clone the repo
+            if [ ! -d "$DEPLOY_PATH" ]; then
+              echo "Folder does not exist, cloning repo..."
+              # Added -b v2 to ensure the initial clone tracks the correct branch
+              git clone -b v2 https://github.com/${{ github.repository }}.git "$DEPLOY_PATH"
+            fi
+
+            cd "$DEPLOY_PATH"
+
+            if [ -d ".git" ]; then
+              echo "Repo exists, fetching latest changes..."
+              git fetch --all
+              # Updated to reset to origin/v2
+              git reset --hard origin/v2
+            else
+              echo "No Git repo found, initializing..."
+              git init
+              git remote add origin https://github.com/${{ github.repository }}.git
+              git fetch --all
+              # Updated to reset to origin/v2
+              git reset --hard origin/v2
+            fi
+
+            echo "Building updated containers..."
+            docker compose build --pull --no-cache
+
+            echo "Recreating services..."
+            docker compose up -d --remove-orphans
+
+            echo "Deployment finished successfully!"
