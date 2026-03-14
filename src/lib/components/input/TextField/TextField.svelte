@@ -2,11 +2,11 @@
 	import { getContext } from "svelte";
 	import type { HTMLInputAttributes } from "svelte/elements";
 
+	import { m as library_messages } from "$lib/paraglide/messages";
 	import { focusring } from "$lib/styles/global.css";
 	import type { fieldContextType } from "$lib/types/Form";
 
 	import { styles } from "./TextField.css";
-
 	interface Props extends HTMLInputAttributes {
 		value?: string;
 		invalid?: string;
@@ -57,7 +57,11 @@
 			if (fieldContext.invalidOveride && maxlength) {
 				const diff = value.length - Number(maxlength);
 				if (diff > 0) {
-					fieldContext.invalidOveride.invalid = `Limit exceeded by ${diff} character${diff > 1 ? "s" : ""}.`;
+					// Route to the correct Paraglide function based on the exact difference
+					fieldContext.invalidOveride.invalid =
+						diff === 1
+							? library_messages.lib_common_characterlimit_one()
+							: library_messages.lib_common_characterlimit_other({ diff });
 				} else {
 					fieldContext.invalidOveride.invalid = undefined;
 				}

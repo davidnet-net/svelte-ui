@@ -10,7 +10,6 @@
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 	import AccountMenu from "$lib/components/lib_internal/AccountMenu/AccountMenu.svelte";
-	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
@@ -98,7 +97,6 @@
 	);
 
 	let isAvatarOpened = $state(false);
-	let feedbackOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -188,15 +186,12 @@
 							{/if}
 						</div>
 						<div class={styles.navRight}>
-							<!--<Button onclick={() => setTheme("dark")}>D - Temp</Button>
-							<Button onclick={() => setTheme("light")}>L - Temp</Button>-->
-							<!--TODO migrate to profile panel and switch it for an theme dropdown icon with the icon callled "routine"-->
 							<IconButton
+								icon="settings"
+								tip={library_messages.lib_component_appshell_settings_alt()}
 								onclick={() => {
-									feedbackOpen = !feedbackOpen;
-								}}
-								tip={library_messages.lib_component_appshell_feedback_alt()}
-								icon="feedback" />
+									console.log("");
+								}} />
 							<IconButton
 								onclick={() => {
 									console.debug("Notification btn pressed");
@@ -240,7 +235,6 @@
 					<div class={styles.mainScrollArea}>
 						<main class={styles.childrenWrapper}>
 							{@render children()}
-							<Feedback bind:isOpen={feedbackOpen} />
 						</main>
 						{#if !appState.hideNavigation}
 							<div class={styles.footerWrapper}>
