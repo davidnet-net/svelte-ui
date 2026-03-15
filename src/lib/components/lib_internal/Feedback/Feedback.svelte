@@ -118,7 +118,7 @@
 	<Modal title="Feedback">
 		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
 			<Icon icon="mark_chat_read" size="giant" color="success" />
-			<span style="font-size: {token.global.font.size.large}">
+			<span style="font-size: {token.global.font.size.large}; text-align: center">
 				Your feedback has been submitted!
 			</span>
 		</Flex>
