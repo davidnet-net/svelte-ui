@@ -126,3 +126,5 @@ export async function initIdentityEngine() {
 
 	await authBeat();
 }
+
+// idea: use free have i been pwnd api to tell if password is breached on password change or on signup
