@@ -21,8 +21,8 @@
 	},
 	"lint-staged": {
 		"**/*.{js,ts,svelte,json,css}": [
-			"bun run fmt",
-			"bun run lint"
+			"bun x prettier --write",
+			"bun x eslint . --fix"
 		]
 	},
 	"files": [
