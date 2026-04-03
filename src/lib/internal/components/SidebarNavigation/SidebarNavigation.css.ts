@@ -4,7 +4,7 @@ import { token } from "$lib/styles/designTokens.ts";
 
 const baseSidebar = style({
 	position: "relative",
-	width: "15rem",
+	width: "18rem",
 	padding: token.global.spacing.medium,
 	borderRightColor: token.theme.color.border.default,
 	borderRightWidth: token.global.borderWidth.thick,
