@@ -18,22 +18,34 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Check version changes
+      - name: Manual Version Check
         id: check
-        uses: EndBug/version-check@v2
-        with:
-          file-name: package.json
+        shell: bash
+        run: |
+          NEW_VERSION=$(node -p "require('./package.json').version")
+
+          OLD_VERSION=$(git show HEAD~1:package.json | node -p "JSON.parse(process.stdin.read()).version" || echo "0.0.0")
+
+          echo "Old version: $OLD_VERSION"
+          echo "New version: $NEW_VERSION"
+
+          if [ "$NEW_VERSION" != "$OLD_VERSION" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Setup Bun
         if: steps.check.outputs.changed == 'true'
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Install dependencies and Build
+      - name: Install & Build
         if: steps.check.outputs.changed == 'true'
         run: |
-          bun install
+          bun install --frozen-lockfile
           bun run build
 
       - name: Create GitHub Release
@@ -49,7 +61,8 @@ jobs:
       - name: Publish to GitHub Packages
         if: steps.check.outputs.changed == 'true'
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          echo "@davidnet-net:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
           bun publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
