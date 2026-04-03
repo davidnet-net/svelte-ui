@@ -28,7 +28,9 @@
 			</h1>
 		{/if}
 		<div class={styles.buttonContainer}>
-			<Button iconbefore="arrow_back" onclick={() => history.back()}>Back</Button>
+			<Button appearance="primary" iconbefore="arrow_back" onclick={() => history.back()}>
+				Back
+			</Button>
 		</div>
 	{:else}
 		<div class={styles.backgroundContainer}>
@@ -50,7 +52,7 @@
 		{/if}
 		<div class={styles.buttonContainer}>
 			<Button iconbefore="arrow_back" onclick={() => history.back()}>Back</Button>
-			<Button onclick={() => window.location.reload()}>Retry</Button>
+			<Button appearance="primary" onclick={() => window.location.reload()}>Retry</Button>
 		</div>
 	{/if}
 </div>

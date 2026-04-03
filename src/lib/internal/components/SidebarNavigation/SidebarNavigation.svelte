@@ -2,25 +2,38 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import { navigationData, type NavigationItem } from "$lib/internal/navigationData.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import { appState } from "../../../engines/appStateEngine.svelte.ts";
 	import { focusTrap } from "../../../engines/focusEngine.svelte.ts";
-	// Migrated: Import the new actions
 	import { shortcutTrap, useShortcut } from "../../../engines/shortcutEngine.svelte.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
 	let expandedItems = $state<string[]>([]);
 
+	/**
+	 * Toggles the expanded/collapsed state of a navigation item
+	 * @param href The navigation target URL serving as the unique identifier
+	 */
+	function toggleExpand(href: string) {
+		if (expandedItems.includes(href)) {
+			expandedItems = expandedItems.filter((h) => h !== href);
+		} else {
+			expandedItems = [...expandedItems, href];
+		}
+	}
+
+	/**
+	 * Handles the click on the main navigation button, expanding its children
+	 * and navigating to the specified URL.
+	 * @param item The navigation item triggered
+	 */
 	async function handleItemClick(item: NavigationItem) {
 		if (item.children) {
-			if (expandedItems.includes(item.href)) {
-				expandedItems = expandedItems.filter((h) => h !== item.href);
-			} else {
-				expandedItems = [...expandedItems, item.href];
-			}
+			toggleExpand(item.href);
 		}
 
 		// eslint-disable-next-line svelte/no-navigation-without-resolve
@@ -52,17 +65,24 @@
 		{@const isExpanded = expandedItems.includes(item.href)}
 		{@const isActive = page.url.pathname === item.href}
 
-		<div style="padding-left: {depth * 1}rem; padding-top: {token.global.spacing.small}">
+		<div
+			class={styles.navItemWrapper}
+			style="padding-left: {depth * 1}rem; padding-top: {token.global.spacing.small}">
+			{#if hasChildren}
+				<IconButton
+					tip={isExpanded ? "Collapse" : "Expand"}
+					icon={isExpanded ? "keyboard_arrow_down" : "keyboard_arrow_right"}
+					onclick={(e) => {
+						e.stopPropagation();
+						toggleExpand(item.href);
+					}}></IconButton>
+			{/if}
+
 			<Button
 				type="button"
 				stretchwidth
 				alignContent="left"
 				appearance={isActive ? "primary" : "subtle"}
-				iconbefore={hasChildren
-					? isExpanded
-						? "keyboard_arrow_down"
-						: "keyboard_arrow_right"
-					: undefined}
 				onclick={() => handleItemClick(item)}>
 				{item.pageName}
 			</Button>

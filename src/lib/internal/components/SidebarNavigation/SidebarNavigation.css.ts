@@ -28,8 +28,15 @@ const bottom = style({
 	flex: 1
 });
 
+const navItemWrapper = style({
+	display: "flex",
+	alignItems: "center",
+	gap: token.global.spacing.xsmall
+});
+
 export const styles = {
 	baseSidebarNavigation,
 	navigation,
-	bottom
+	bottom,
+	navItemWrapper
 };
