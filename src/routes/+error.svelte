@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Icon } from "$lib";
-	import { styles } from "./error.css";
-
 	import { page } from "$app/state";
+	import { Icon } from "$lib";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { token } from "$lib/styles/designTokens";
+
+	import { styles } from "./error.css";
 </script>
 
 <div class={styles.pageContainer}>
