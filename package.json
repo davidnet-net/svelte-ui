@@ -11,6 +11,7 @@
 	"license": "SEE LICENSE IN license",
 	"private": "true",
 	"scripts": {
+		"postinstall": "husky install && bun install",
 		"setup": "bun meta/scripts/setup.ts",
 		"dev": "bun run setup && bun x --bun vite dev --host",
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",
