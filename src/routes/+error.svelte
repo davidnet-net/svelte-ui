@@ -52,7 +52,7 @@
 		{/if}
 		<div class={styles.buttonContainer}>
 			<Button iconbefore="arrow_back" onclick={() => history.back()}>Back</Button>
-			<Button appearance="primary" onclick={() => window.location.reload()}>Retry</Button>
+			<Button appearance="primary" onclick={() => window.location.reload()}>Reload</Button>
 		</div>
 	{/if}
 </div>
