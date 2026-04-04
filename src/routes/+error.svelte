@@ -2,6 +2,7 @@
 	import { page } from "$app/state";
 	import { Icon } from "$lib";
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { token } from "$lib/styles/designTokens";
 
@@ -31,6 +32,7 @@
 			<Button appearance="primary" iconbefore="arrow_back" onclick={() => history.back()}>
 				Back
 			</Button>
+			<LinkButton href="/">Home</LinkButton>
 		</div>
 	{:else}
 		<div class={styles.backgroundContainer}>
@@ -53,6 +55,7 @@
 		<div class={styles.buttonContainer}>
 			<Button iconbefore="arrow_back" onclick={() => history.back()}>Back</Button>
 			<Button appearance="primary" onclick={() => window.location.reload()}>Reload</Button>
+			<LinkButton href="/">Home</LinkButton>
 		</div>
 	{/if}
 </div>
