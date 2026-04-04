@@ -4,9 +4,9 @@
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { focusring } from "$lib/styles/global.css.ts";
+	import type { iconType } from "$lib/types/Icon.ts";
 
-	import { focusring } from "../../../styles/global.css.ts";
-	import type { iconType } from "../../../types/Icon.ts";
 	import { styles as iconStyles } from "../../primitives/Icon/Icon.css.ts";
 	import { styles } from "./IconButton.css.ts";
 

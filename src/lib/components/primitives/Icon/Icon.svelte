@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { fontState } from "../../../engines/themeEngine.svelte.ts";
-	import type { iconType } from "../../../types/Icon.ts";
+	import { fontState } from "$lib/engines/themeEngine.svelte.ts";
+	import type { iconType } from "$lib/types/Icon.ts";
+
 	import { styles } from "./Icon.css.ts";
 
 	interface Props {

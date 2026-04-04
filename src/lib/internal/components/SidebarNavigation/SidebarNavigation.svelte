@@ -4,12 +4,12 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
+	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
+	import { focusTrap } from "$lib/engines/focusEngine.svelte.ts";
+	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { navigationData, type NavigationItem } from "$lib/internal/navigationData.svelte.ts";
 	import { token } from "$lib/styles/designTokens.ts";
 
-	import { appState } from "../../../engines/appStateEngine.svelte.ts";
-	import { focusTrap } from "../../../engines/focusEngine.svelte.ts";
-	import { shortcutTrap, useShortcut } from "../../../engines/shortcutEngine.svelte.ts";
 	import { styles } from "./SidebarNavigation.css.ts";
 
 	let expandedItems = $state<string[]>([]);

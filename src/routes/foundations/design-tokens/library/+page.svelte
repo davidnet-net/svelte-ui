@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { token } from "$lib//styles/designTokens.ts";
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import NavigationData from "$lib/internal/components/NavigationData.svelte";
 	import TokenTree from "$lib/internal/components/TokenTree/TokenTree.svelte";
 
-	import { token } from "../../../../lib/styles/designTokens.ts";
 	import * as m from "../../../../paraglide/messages.js";
 	import { styles } from "./page.css.ts";
 
