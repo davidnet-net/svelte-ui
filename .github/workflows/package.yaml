@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Manual Version Check
+      - name: Manual Version Check (REQUIRES THE LATEST COMMIT IN THE PUSH TO BUMP VERSION! Otherwise it wont run)
         id: check
         shell: bash
         run: |
