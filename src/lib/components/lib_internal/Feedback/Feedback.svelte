@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { DDS_INFO } from "$lib";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import Field from "$lib/components/input/Field/Field.svelte";
 	import Form from "$lib/components/input/Form/Form.svelte";
@@ -10,6 +9,7 @@
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { authState, identity } from "$lib/engines/identityEngine.svelte";
+	import manifest from "$lib/internal/manifests/version-manifest.json";
 	import { token } from "$lib/styles/designTokens";
 	import { sleep } from "$lib/utils/sleep";
 
@@ -49,7 +49,7 @@
 		const data = {
 			message: message.toString(),
 			appState: $state.snapshot(appState),
-			DDS_INFO: DDS_INFO,
+			DDS_INFO: manifest,
 			safeIdentity: safeIdentity,
 			referrer: document.referrer,
 			authState: $state.snapshot(authState),
