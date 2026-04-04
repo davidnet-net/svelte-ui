@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { token } from "$lib/styles/designTokens.ts";
+import { token } from "$lib/styles/designTokens";
 
 const baseIconLinkButton = style({
 	display: "inline-flex",

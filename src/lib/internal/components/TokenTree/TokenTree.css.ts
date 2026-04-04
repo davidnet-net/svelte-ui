@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { token } from "$lib//styles/designTokens.ts";
+import { token } from "$lib//styles/designTokens";
 
 export const tokenLevel = style({
 	paddingLeft: token.global.spacing.medium,

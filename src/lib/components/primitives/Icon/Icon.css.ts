@@ -1,6 +1,6 @@
 import { styleVariants } from "@vanilla-extract/css";
 
-import { token } from "$lib/styles/designTokens.ts";
+import { token } from "$lib/styles/designTokens";
 import { iconLoadedStyle, icons } from "$lib/styles/icons.css";
 
 const size = styleVariants({

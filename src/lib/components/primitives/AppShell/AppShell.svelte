@@ -61,7 +61,7 @@
 		disableInit?: boolean;
 
 		/**
-		 * @remarks Make sure to import * as paraglideRuntime from "../paraglide/runtime.js"
+		 * @remarks Make sure to import * as paraglideRuntime from "$lib/paraglide/runtime.js"
 		 * @remarks pass as null or undefined when using disableInit
 		 *
 		 */

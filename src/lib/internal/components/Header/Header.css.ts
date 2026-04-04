@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { token } from "$lib/styles/designTokens.ts";
+import { token } from "$lib/styles/designTokens";
 
 const s = "179px";
 const c1 = token.theme.color.surface.default.normal;

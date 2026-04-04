@@ -2,8 +2,7 @@
 	import AppShell from "$lib/components/primitives/AppShell/AppShell.svelte";
 	import Footer from "$lib/internal/components/Footer/Footer.svelte";
 	import SidebarNavigation from "$lib/internal/components/SidebarNavigation/SidebarNavigation.svelte";
-
-	import * as paraglideRuntime from "../paraglide/runtime.js";
+	import * as paraglideRuntime from "$lib/paraglide/runtime.js";
 
 	let { children } = $props();
 </script>

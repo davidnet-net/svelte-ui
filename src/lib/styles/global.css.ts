@@ -1,6 +1,6 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
-import { token } from "./designTokens.ts";
+import { token } from "./designTokens";
 
 globalStyle("*, *::before, *::after", {
 	boxSizing: "border-box"

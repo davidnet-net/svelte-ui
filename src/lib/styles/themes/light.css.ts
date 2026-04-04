@@ -1,6 +1,6 @@
 import { createTheme } from "@vanilla-extract/css";
 
-import { token } from "../designTokens.ts";
+import { token } from "../designTokens";
 
 export const lightTheme = createTheme(token.theme, {
 	color: {

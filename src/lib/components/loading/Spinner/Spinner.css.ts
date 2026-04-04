@@ -1,6 +1,6 @@
 import { keyframes, style, styleVariants } from "@vanilla-extract/css";
 
-import { token } from "$lib/styles/designTokens.ts";
+import { token } from "$lib/styles/designTokens";
 
 const rotate = keyframes({
 	"0%": { transform: "rotate(0deg)" },
