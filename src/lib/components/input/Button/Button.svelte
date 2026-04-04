@@ -4,10 +4,10 @@
 
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
-	import { focusring } from "$lib/styles/global.css.ts";
+	import { focusring } from "$lib/styles/global.css";
 	import type { iconType } from "$lib/types/Icon.ts";
 
-	import { styles } from "./Button.css.ts";
+	import { styles } from "./Button.css";
 
 	interface Props extends HTMLButtonAttributes {
 		children: Snippet;

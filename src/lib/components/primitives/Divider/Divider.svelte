@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HTMLAttributes } from "svelte/elements";
 
-	import { styles } from "./Divider.css.ts";
+	import { styles } from "./Divider.css";
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		thickness?: keyof typeof styles.thickness;

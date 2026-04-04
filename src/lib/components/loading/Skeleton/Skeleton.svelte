@@ -3,7 +3,7 @@
 
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 
-	import { styles } from "./Skeleton.css.ts";
+	import { styles } from "./Skeleton.css";
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		width?: string;

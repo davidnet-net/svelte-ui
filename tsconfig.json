@@ -10,7 +10,7 @@
 		"strict": true,
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
-		"allowImportingTsExtensions": true,
+		"allowImportingTsExtensions": false, // Gives errors if true!
 		"noEmit": true
 	},
 	"include": [

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { styles } from "./KeyboardTip.css.ts";
+	import { styles } from "./KeyboardTip.css";
 
 	interface Props {
 		keyboardTip: string[];

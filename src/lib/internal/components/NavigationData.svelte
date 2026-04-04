@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentPage } from "$lib/internal/navigationData.svelte.ts";
+	import { getCurrentPage } from "$lib/internal/navigationData.svelte";
 	const navigationPageData = getCurrentPage();
 </script>
 

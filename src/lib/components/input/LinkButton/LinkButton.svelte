@@ -5,10 +5,10 @@
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
-	import { focusring } from "$lib/styles/global.css.ts";
+	import { focusring } from "$lib/styles/global.css";
 	import type { iconType } from "$lib/types/Icon.ts";
 
-	import { styles } from "./LinkButton.css.ts";
+	import { styles } from "./LinkButton.css";
 
 	interface Props extends HTMLAnchorAttributes {
 		children: Snippet;

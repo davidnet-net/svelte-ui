@@ -3,7 +3,7 @@
 
 	import KeyboardTip from "$lib/components/messaging/KeyboardTip/KeyboardTip.svelte";
 
-	import { styles } from "./ToolTip.css.ts";
+	import { styles } from "./ToolTip.css";
 
 	let tooltipElement: HTMLDivElement | undefined = $state();
 	let nudgeX = $state(0);

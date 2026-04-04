@@ -1,15 +1,15 @@
 /**
- * @file themeEngine.svelte.ts
+ * @file themeEngine.svelte
  */
 import {
 	iconFontName,
 	iconFontRoundedName,
 	interFontName,
 	momoTrustDisplayFontName
-} from "../styles/fonts.css.ts";
-import { darkTheme } from "../styles/themes/dark.css.ts";
-import { lightTheme } from "../styles/themes/light.css.ts";
-import { appState } from "./appStateEngine.svelte.ts";
+} from "../styles/fonts.css";
+import { darkTheme } from "../styles/themes/dark.css";
+import { lightTheme } from "../styles/themes/light.css";
+import { appState } from "./appStateEngine.svelte";
 
 export type themeNames = "light" | "dark" | "system" | "contrast";
 

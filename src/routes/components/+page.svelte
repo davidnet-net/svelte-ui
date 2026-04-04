@@ -4,7 +4,7 @@
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import * as m from "$lib/paraglide/messages.js";
 
-	import { styles } from "./page.css.ts";
+	import { styles } from "./page.css";
 </script>
 
 <Header

@@ -4,7 +4,7 @@
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import NavigationData from "$lib/internal/components/NavigationData.svelte";
 
-	import { styles } from "./page.css.ts";
+	import { styles } from "./page.css";
 
 	const { data } = $props();
 

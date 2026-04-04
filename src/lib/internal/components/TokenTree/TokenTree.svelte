@@ -3,7 +3,7 @@
 
 	import Button from "$lib/components/input/Button/Button.svelte";
 
-	import * as styles from "./TokenTree.css.ts";
+	import * as styles from "./TokenTree.css";
 	import TokenTree from "./TokenTree.svelte";
 
 	interface Props {

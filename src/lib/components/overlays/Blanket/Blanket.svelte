@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 
-	import { styles } from "./Blanket.css.ts";
+	import { styles } from "./Blanket.css";
 
 	interface Props {
 		children: Snippet;

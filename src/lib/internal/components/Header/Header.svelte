@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 
-	import { styles } from "./Header.css.ts";
+	import { styles } from "./Header.css";
 
 	interface Props {
 		heading: string;

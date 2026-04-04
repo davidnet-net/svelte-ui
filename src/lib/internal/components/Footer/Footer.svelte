@@ -4,7 +4,7 @@
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { m } from "$lib/paraglide/messages.js";
 
-	import { styles } from "./Footer.css.ts";
+	import { styles } from "./Footer.css";
 </script>
 
 <footer class={styles.baseFooter}>

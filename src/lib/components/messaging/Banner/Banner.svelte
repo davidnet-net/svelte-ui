@@ -7,7 +7,7 @@
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import type { iconType } from "$lib/types/Icon.ts";
 
-	import { styles } from "./Banner.css.ts";
+	import { styles } from "./Banner.css";
 
 	interface Props {
 		appearance: keyof typeof styles.appearance;

@@ -3,7 +3,7 @@
 	import NavigationData from "$lib/internal/components/NavigationData.svelte";
 	import * as m from "$lib/paraglide/messages.js";
 
-	import { styles } from "./page.css.ts";
+	import { styles } from "./page.css";
 </script>
 
 <NavigationData />

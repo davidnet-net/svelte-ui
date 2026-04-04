@@ -6,7 +6,7 @@ Button.svelte
 <Changelog
 	gitpath="src/lib/components/input/Button/Button.svelte"
 	repoUrl="https://github.com/davidnet-net/svelte-ui" />
-Button.css.ts
+Button.css
 <Changelog
-	gitpath="src/lib/components/input/Button/Button.css.ts"
+	gitpath="src/lib/components/input/Button/Button.css"
 	repoUrl="https://github.com/davidnet-net/svelte-ui" />

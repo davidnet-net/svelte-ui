@@ -1,5 +1,5 @@
 <script lang="ts">
-	import "$lib/styles/global.css.ts";
+	import "$lib/styles/global.css";
 
 	import { onMount, type Snippet } from "svelte";
 
@@ -13,20 +13,20 @@
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
-	import { appState } from "$lib/engines/appStateEngine.svelte.ts";
-	import { authState } from "$lib/engines/identityEngine.svelte.ts";
-	import { init } from "$lib/engines/initEngine.svelte.ts";
-	import { useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
-	import { currentTheme } from "$lib/engines/themeEngine.svelte.ts";
+	import { appState } from "$lib/engines/appStateEngine.svelte";
+	import { authState } from "$lib/engines/identityEngine.svelte";
+	import { init } from "$lib/engines/initEngine.svelte";
+	import { useShortcut } from "$lib/engines/shortcutEngine.svelte";
+	import { currentTheme } from "$lib/engines/themeEngine.svelte";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
-	import { token } from "$lib/styles/designTokens.ts";
-	import { focusring } from "$lib/styles/global.css.ts";
+	import { token } from "$lib/styles/designTokens";
+	import { focusring } from "$lib/styles/global.css";
 
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import Icon from "../Icon/Icon.svelte";
-	import { styles } from "./AppShell.css.ts";
+	import { styles } from "./AppShell.css";
 
 	interface Props {
 		children: Snippet;

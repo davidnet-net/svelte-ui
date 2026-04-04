@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 
-	import { styles } from "./Spinner.css.ts";
+	import { styles } from "./Spinner.css";
 
 	interface Props {
 		size?: keyof typeof styles.size;
