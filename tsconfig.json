@@ -10,7 +10,11 @@
 		"strict": true,
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
-		"allowImportingTsExtensions": false, // Gives errors if true!
+		"allowImportingTsExtensions": false,
+		"declaration": true,
+		"declarationMap": true,
+		"verbatimModuleSyntax": true,
+		"noUncheckedIndexedAccess": true,
 		"noEmit": true
 	},
 	"include": [
