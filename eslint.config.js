@@ -21,7 +21,7 @@ export default defineConfig(
 	prettier,
 	...svelte.configs.prettier,
 	{
-		ignores: ["src/paraglide/"]
+		ignores: ["src/lib/paraglide"]
 	},
 	{
 		languageOptions: {

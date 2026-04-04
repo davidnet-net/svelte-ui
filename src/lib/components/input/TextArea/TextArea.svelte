@@ -2,7 +2,7 @@
 	import { getContext } from "svelte";
 	import type { HTMLTextareaAttributes } from "svelte/elements";
 
-	import { m as library_messages } from "$lib/paraglide/messages";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { focusring } from "$lib/styles/global.css";
 	import type { fieldContextType } from "$lib/types/Form";
 

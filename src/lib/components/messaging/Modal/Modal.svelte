@@ -6,7 +6,7 @@
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap } from "$lib/engines/shortcutEngine.svelte";
-	import { m as library_messages } from "$lib/paraglide/messages";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { generateUUIDv7 } from "$lib/utils/crypto";
 
 	import { styles } from "./Modal.css";
