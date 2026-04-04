@@ -38,6 +38,10 @@ const tasks: Task[] = [
 		]
 	},
 	{
+		name: "Version Manifest",
+		command: ["bun", "meta/scripts/generateVersionManifest.ts"]
+	},
+	{
 		name: "Translations Manifest",
 		command: ["bun", "meta/scripts/generateTranslationManifest.ts"],
 		requires: ["Paraglide Compile"]

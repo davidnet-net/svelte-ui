@@ -2,6 +2,7 @@
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import manifest from "$lib/internal/manifests/version-manifest.json";
 	import { m } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./Footer.css";
@@ -9,7 +10,7 @@
 
 <footer class={styles.baseFooter}>
 	<div class={styles.content}>
-		<p class={styles.brand}>Davidnet Design System v{__DDS_INFO__.version.replaceAll('"', "")}</p>
+		<p class={styles.brand}>Davidnet Design System v{manifest.version.replaceAll('"', "")}</p>
 		<br />
 		<Flex direction="row" width="100%" gap="xlarge">
 			<Flex direction="column" gap="small" width="auto">

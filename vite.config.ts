@@ -2,17 +2,8 @@ import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { playwright } from "@vitest/browser-playwright";
-import { execSync } from "child_process";
 import path from "path";
 import { defineConfig } from "vitest/config";
-
-import pkg from "./package.json" with { type: "json" };
-
-const pkgVersion = pkg.version;
-const rawRepoUrl = typeof pkg.repository === "string" ? pkg.repository : pkg.repository.url;
-const repoUrl = rawRepoUrl.replace(/^git\+/, "").replace(/\.git$/, "");
-const commitHash = execSync("git rev-parse HEAD").toString().trim();
-const commitUrl = `${repoUrl}/commit/${commitHash}`;
 
 export default defineConfig({
 	plugins: [
@@ -35,15 +26,6 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			$lib: path.resolve("./src/lib")
-		}
-	},
-
-	define: {
-		__DDS_INFO__: {
-			version: JSON.stringify(pkgVersion),
-			commitHash: JSON.stringify(commitHash),
-			commitUrl: JSON.stringify(commitUrl),
-			buildTime: JSON.stringify(new Date().toISOString())
 		}
 	},
 

@@ -1,3 +1,5 @@
+import manifest from "$lib/internal/manifests/version-manifest.json";
+
 import { getCookie, setCookie } from "../utils/cookies";
 import { initAppState } from "./appStateEngine.svelte";
 import { initIdentityEngine } from "./identityEngine.svelte";
@@ -6,10 +8,10 @@ import { createTranslationEngine, type ParaglideRuntimeType } from "./translatio
 
 export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeType<T>) {
 	console.groupCollapsed("Davidnet Design System - information");
-	console.log("version: " + __DDS_INFO__.version);
-	console.log("commitUrl: " + __DDS_INFO__.commitUrl);
-	console.log("commitHash: " + __DDS_INFO__.commitHash);
-	console.log("buildTime: " + __DDS_INFO__.buildTime);
+	console.log("version: " + manifest.version);
+	console.log("commitUrl: " + manifest.commitUrl);
+	console.log("commitHash: " + manifest.commitHash);
+	console.log("buildTime: " + manifest.buildTime);
 	console.groupEnd();
 
 	await initAppState();

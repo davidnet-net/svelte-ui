@@ -10,13 +10,6 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
-
-	const __DDS_INFO__: {
-		commitHash: string;
-		commitUrl: string;
-		buildTime: string;
-		version: string;
-	};
 }
 
 export {};
