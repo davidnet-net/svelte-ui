@@ -8,6 +8,7 @@
 	import { focusTrap } from "$lib/engines/focusEngine.svelte.ts";
 	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte.ts";
 	import { navigationData, type NavigationItem } from "$lib/internal/navigationData.svelte.ts";
+	import { m } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens.ts";
 
 	import { styles } from "./SidebarNavigation.css.ts";
@@ -70,7 +71,7 @@
 			style="padding-left: {depth * 1}rem; padding-top: {token.global.spacing.small}">
 			{#if hasChildren}
 				<IconButton
-					tip={isExpanded ? "Collapse" : "Expand"}
+					tip={isExpanded ? m.docs_sidebar_collapse() : m.docs_sidebar_expand()}
 					icon={isExpanded ? "keyboard_arrow_down" : "keyboard_arrow_right"}
 					onclick={(e) => {
 						e.stopPropagation();
@@ -118,7 +119,7 @@
 				onclick={() => {
 					appState.sidebarOpen = !appState.sidebarOpen;
 				}}>
-				Close sidebar
+				{m.docs_sidebar_close()}
 			</Button>
 		</div>
 	{/if}

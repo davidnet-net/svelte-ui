@@ -43,5 +43,8 @@
 	"docs_page_components_card_avatar_description": "An avatar is a visual representation of a user or entity.",
 	"docs_page_components_card_divider_description": "Divides sections",
 	"docs_page_components_card_flex_description": "Flex is a primitive layout component that implements the CSS Flexbox API.",
-	"docs_page_components_card_icon_description": "An icon is a symbol representing a command, device, directory, or common action."
+	"docs_page_components_card_icon_description": "An icon is a symbol representing a command, device, directory, or common action.",
+	"docs_sidebar_close": "Close sidebar",
+	"docs_sidebar_collapse": "Collapse",
+	"docs_sidebar_expand": "Expand"
 }

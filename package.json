@@ -12,7 +12,7 @@
 	"private": "true",
 	"scripts": {
 		"init": "husky install && bun install",
-		"setup": "bun meta/scripts/setup.ts",
+		"setup": "bun meta/scripts/setup.ts && bun x svelte-kit sync",
 		"dev": "bun run setup && bun x --bun vite dev --host",
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",
 		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
