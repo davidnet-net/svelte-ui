@@ -37,7 +37,7 @@ paraglide/
 ## Usage
 
 ```js
-import * as m from "./paraglide/messages.js";
+import * as m from "$lib/paraglide/messages.js";
 
 // Messages are functions that return localized strings
 m.hello_world();             // "Hello, World!" (in current locale)

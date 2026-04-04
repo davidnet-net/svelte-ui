@@ -2,8 +2,8 @@
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
-	import { m } from "../../../../paraglide/messages.js";
 	import { styles } from "./Footer.css.ts";
 </script>
 
