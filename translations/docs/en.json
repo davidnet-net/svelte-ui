@@ -46,5 +46,7 @@
 	"docs_page_components_card_icon_description": "An icon is a symbol representing a command, device, directory, or common action.",
 	"docs_sidebar_close": "Close sidebar",
 	"docs_sidebar_collapse": "Collapse",
-	"docs_sidebar_expand": "Expand"
+	"docs_sidebar_expand": "Expand",
+	"docs_page_foundations_content_header_heading": "Content",
+	"docs_page_foundations_content_header_paragraph": "Content covers voice and tone, style, grammar, and punctuation. Craft clear, concise, and conversational language to help people get where they need to go."
 }
