@@ -1,6 +1,6 @@
 {
 	"name": "@davidnet-net/svelte-ui",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/davidnet-net/svelte-ui.git"
@@ -15,7 +15,7 @@
 		"setup": "bun meta/scripts/setup.ts",
 		"dev": "bun run setup && bun x --bun vite dev --host",
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",
-		"prepack": "bun x svelte-kit sync && bun x svelte-package && bun x publint",
+		"prepack": "bun x svelte-kit sync && bun x svelte-package && cp -r src/lib/paraglide dist/paraglide && bun x publint",
 		"fmt": "bun x prettier --write . && bun x eslint . --fix",
 		"lint": "bun x prettier --check . && bun x eslint ."
 	},

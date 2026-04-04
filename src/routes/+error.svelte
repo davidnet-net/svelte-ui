@@ -9,6 +9,10 @@
 	import { styles } from "./error.css";
 </script>
 
+<svelte:head>
+	<title>Davidnet Design System - {page.error?.message}</title>
+</svelte:head>
+
 <div class={styles.pageContainer}>
 	{#if page.status === 404}
 		<div class={styles.backgroundContainer}>
