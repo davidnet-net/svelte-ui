@@ -10,6 +10,9 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+	interface Window {
+		__hydration_start: number;
+	}
 }
 
 export {};

@@ -3,7 +3,7 @@ import { appState } from "$lib/engines/appStateEngine.svelte";
 import { generateUUIDv7 } from "./crypto";
 
 async function postFetch(url: string, data: Record<string, unknown>) {
-	const correlationID = generateUUIDv7();
+	const correlationID = generateUUIDv7(); // Replace with open telemetry traceID
 
 	const result = await fetch(url, {
 		method: "POST",
