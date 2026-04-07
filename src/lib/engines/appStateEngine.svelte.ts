@@ -1,3 +1,4 @@
+import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import { generateUUIDv7, type UUIDv7Type } from "$lib/utils/crypto";
 
 interface AppStateType {
@@ -8,6 +9,7 @@ interface AppStateType {
 	isTinyMobile: boolean;
 	viteConnected: boolean;
 	isOffline: boolean;
+	backendURL: string;
 	hideNavigation: boolean;
 	tabID: (UUIDv7Type & { __brand: "tabID" }) | undefined;
 	systemPreference: {
@@ -25,6 +27,7 @@ export const appState: AppStateType = $state({
 	isOffline: false,
 	hideNavigation: false,
 	tabID: undefined,
+	backendURL: PUBLIC_BACKEND_URL,
 	systemPreference: {
 		darkMode: false,
 		highContrast: false,
