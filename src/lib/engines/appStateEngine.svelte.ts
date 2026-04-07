@@ -1,4 +1,4 @@
-import { PUBLIC_BACKEND_URL } from "$env/dynamic/public";
+import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import { generateUUIDv7, type UUIDv7Type } from "$lib/utils/crypto";
 
 interface AppStateType {
