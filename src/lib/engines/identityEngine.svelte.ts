@@ -99,11 +99,11 @@ async function authBeat() {
 function setupNextBeat() {
 	if (authTimer) clearTimeout(authTimer);
 
-	let delay = 5 * 60 * 1000; // Default to 5s minutes
+	let delay = 5 * 60 * 1000; // 5 MIN
 
 	if (identity?.jwt.expiresAt) {
 		const now = Date.now();
-		const expiresAtMs = identity.jwt.expiresAt * 1000; // Assuming Unix timestamp in seconds
+		const expiresAtMs = identity.jwt.expiresAt * 1000; // Unix timestamp in seconds
 
 		const buffer = 2 * 60 * 1000;
 		delay = expiresAtMs - now - buffer;
@@ -111,7 +111,6 @@ function setupNextBeat() {
 		if (delay <= 0) delay = 1000;
 	}
 
-	console.log(delay);
 	authTimer = setTimeout(() => {
 		authBeat();
 	}, delay);
@@ -126,5 +125,3 @@ export async function initIdentityEngine() {
 
 	await authBeat();
 }
-
-// idea: use free have i been pwnd api to tell if password is breached on password change or on signup

@@ -23,7 +23,8 @@
 		"src/**/*.svelte",
 		"*.config.ts",
 		"*.config.js",
-		"meta/**/*.ts"
+		"meta/**/*.ts",
+		"./.svelte-kit/ambient.d.ts"
 	],
 	"exclude": ["node_modules", "src/lib/paraglide/**/*"]
 }
