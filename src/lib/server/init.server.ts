@@ -1,5 +1,5 @@
-import { INTERNAL_SECRET } from "$env/static/private";
-import { PUBLIC_BACKEND_URL } from "$env/static/public";
+import { INTERNAL_SECRET } from "$env/dynamic/private";
+import { PUBLIC_BACKEND_URL } from "$env/dynamic/public";
 import { isValidUrl } from "$lib/utils/networking";
 
 async function checkDDSEnvironmentVariables() {

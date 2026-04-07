@@ -58,6 +58,9 @@ jobs:
         run: |
           bun install --frozen-lockfile
           bun run build
+        env:
+          BACKEND_URL: "provided_by_consumer"
+          INTERNAL_SECRET: "provided_by_consumer"
 
       - name: Create GitHub Release
         if: steps.check.outputs.changed == 'true'
