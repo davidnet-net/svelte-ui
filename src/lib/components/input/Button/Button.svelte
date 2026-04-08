@@ -5,7 +5,7 @@
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { focusring } from "$lib/styles/global.css";
-	import type { iconType } from "$lib/types/Icon";
+	import type { iconType } from "$lib/types/Icon.ts";
 
 	import { styles } from "./Button.css";
 
@@ -72,16 +72,22 @@
 				? styles.selectedappearance
 				: styles.appearance[appearance]
 	);
+
+	const buttonClasses = $derived(
+		[
+			focusring,
+			styles.alignContent[alignContent],
+			styles.baseButton,
+			stretchwidth ? styles.stretchwidth : "",
+			state,
+			className
+		]
+			.filter(Boolean)
+			.join(" ")
+	);
 </script>
 
-<button
-	class="{focusring} {styles.alignContent[alignContent]} {styles.baseButton} {stretchwidth
-		? styles.stretchwidth
-		: ''} {state} {className}"
-	{type}
-	{onclick}
-	disabled={isDisabled}
-	{...rest}>
+<button class={buttonClasses} {type} {onclick} disabled={isDisabled} {...rest}>
 	{#if loading}
 		<Loader size="medium" />
 	{:else}
