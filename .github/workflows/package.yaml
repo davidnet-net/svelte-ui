@@ -57,7 +57,7 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: |
           bun install --frozen-lockfile
-          bun run build:package
+          bun run build
         env:
           PUBLIC_BACKEND_URL: "provided_by_consumer"
           INTERNAL_SECRET: "provided_by_consumer"
