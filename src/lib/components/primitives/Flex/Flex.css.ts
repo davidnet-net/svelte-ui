@@ -2,17 +2,17 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 import { token } from "$lib/styles/designTokens";
 
-const baseFlex = style({
+export const baseFlex = style({
 	display: "flex",
 	boxSizing: "border-box"
 });
 
-const direction = styleVariants({
+export const direction = styleVariants({
 	row: { flexDirection: "row" },
 	column: { flexDirection: "column" }
 });
 
-const justifyContent = styleVariants({
+export const justifyContent = styleVariants({
 	start: { justifyContent: "flex-start" },
 	center: { justifyContent: "center" },
 	between: { justifyContent: "space-between" },
@@ -22,7 +22,14 @@ const justifyContent = styleVariants({
 	spaceBetween: { justifyContent: "space-between" }
 });
 
-const alignItems = styleVariants({
+export const text = styleVariants({
+	left: { textAlign: "left" },
+	center: { textAlign: "center" },
+	right: { textAlign: "right" },
+	inherit: { textAlign: "inherit" }
+});
+
+export const alignItems = styleVariants({
 	start: { alignItems: "flex-start" },
 	center: { alignItems: "center" },
 	stretch: { alignItems: "stretch" },
@@ -32,7 +39,7 @@ const alignItems = styleVariants({
 	spaceBetween: { alignItems: "space-between" }
 });
 
-const gap = styleVariants({
+export const gap = styleVariants({
 	none: { gap: token.global.spacing.none },
 	xlarge: { gap: token.global.spacing.xlarge },
 	large: { gap: token.global.spacing.large },
@@ -41,14 +48,14 @@ const gap = styleVariants({
 	xsmall: { gap: token.global.spacing.xsmall }
 });
 
-const overflowX = styleVariants({
+export const overflowX = styleVariants({
 	visible: { overflowX: "visible" },
 	hidden: { overflowX: "hidden" },
 	scroll: { overflowX: "scroll" },
 	auto: { overflowX: "auto" }
 });
 
-const overflowY = styleVariants({
+export const overflowY = styleVariants({
 	visible: { overflowY: "visible" },
 	hidden: { overflowY: "hidden" },
 	scroll: { overflowY: "scroll" },
@@ -90,17 +97,3 @@ export const marginLeft = styleVariants({
 	small: { marginLeft: token.global.spacing.small },
 	xsmall: { marginLeft: token.global.spacing.xsmall }
 });
-
-export const styles = {
-	baseFlex,
-	direction,
-	justifyContent,
-	alignItems,
-	marginTop,
-	marginBottom,
-	marginRight,
-	marginLeft,
-	gap,
-	overflowX,
-	overflowY
-};

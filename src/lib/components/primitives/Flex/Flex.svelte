@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 
-	import { styles } from "./Flex.css";
+	import * as styles from "./Flex.css";
 
 	interface Props {
 		direction?: keyof typeof styles.direction;
@@ -17,6 +17,7 @@
 		children: Snippet;
 		overflowX?: keyof typeof styles.overflowX;
 		overflowY?: keyof typeof styles.overflowY;
+		text?: keyof typeof styles.text;
 	}
 
 	let {
@@ -32,6 +33,7 @@
 		marginLeft = "none",
 		overflowX = "visible",
 		overflowY = "visible",
+		text = "inherit",
 		children
 	}: Props = $props();
 </script>
@@ -49,6 +51,7 @@
         {styles.marginLeft[marginLeft]}
 		{styles.overflowX[overflowX]}
         {styles.overflowY[overflowY]}
+		{styles.text[text]}
     "
 	style:width
 	style:height>
