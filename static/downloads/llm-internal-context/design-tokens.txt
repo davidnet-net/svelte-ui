@@ -8,7 +8,7 @@ This documentation provides the exact JSON structure and implementation rules fo
 Import the `token` constant for use in Svelte 5 components.
 
 ```ts
-import { token } from "@davidnet/svelte-ui";
+import { token } from "@davidnet/svelte-ui/tokens";
 
 ```
 
