@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fontState } from "$lib/engines/themeEngine.svelte";
-	import type { iconType } from "$lib/types/Icon.ts";
+	import type { iconType } from "$lib/types/Icon";
 
 	import { styles } from "./Icon.css";
 

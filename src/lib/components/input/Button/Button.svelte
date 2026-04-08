@@ -5,7 +5,7 @@
 	import Loader from "$lib/components/loading/Spinner/Spinner.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { focusring } from "$lib/styles/global.css";
-	import type { iconType } from "$lib/types/Icon.ts";
+	import type { iconType } from "$lib/types/Icon";
 
 	import { styles } from "./Button.css";
 

@@ -5,7 +5,7 @@
 
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
-	import type { iconType } from "$lib/types/Icon.ts";
+	import type { iconType } from "$lib/types/Icon";
 
 	import { styles } from "./Banner.css";
 

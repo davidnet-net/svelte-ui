@@ -6,7 +6,7 @@
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { focusring } from "$lib/styles/global.css";
-	import type { iconType } from "$lib/types/Icon.ts";
+	import type { iconType } from "$lib/types/Icon";
 
 	import { styles } from "./IconLinkButton.css";
 

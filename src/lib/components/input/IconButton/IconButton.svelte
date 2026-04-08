@@ -5,7 +5,7 @@
 	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { focusring } from "$lib/styles/global.css";
-	import type { iconType } from "$lib/types/Icon.ts";
+	import type { iconType } from "$lib/types/Icon";
 
 	import { styles as iconStyles } from "../../primitives/Icon/Icon.css";
 	import { styles } from "./IconButton.css";
