@@ -1,2 +1,2 @@
-export * from "./Skeleton/Skeleton.svelte";
-export * from "./Spinner/Spinner.svelte";
+export { default as Skeleton } from "./Skeleton/Skeleton.svelte";
+export { default as Spinner } from "./Spinner/Spinner.svelte";

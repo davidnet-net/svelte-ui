@@ -25,7 +25,6 @@
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
 	import Flex from "../Flex/Flex.svelte";
-	import Icon from "../Icon/Icon.svelte";
 	import { styles } from "./AppShell.css";
 
 	interface Props {
@@ -175,9 +174,7 @@
 											style="color: {token.theme.color.text
 												.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
 												.global.spacing.xsmall}">
-											<Icon icon="construction" />
 											Davidnet Development Build
-											<Icon icon="construction" />
 										</span>
 									{:else}
 										Davidnet

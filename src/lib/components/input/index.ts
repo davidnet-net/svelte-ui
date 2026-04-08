@@ -1,9 +1,9 @@
-export * from "./Button/Button.svelte";
-export * from "./Dropdown/Dropdown.svelte";
-export * from "./Field/Field.svelte";
-export * from "./Form/Form.svelte";
-export * from "./IconButton/IconButton.svelte";
-export * from "./IconLinkButton/IconLinkButton.svelte";
-export * from "./LinkButton/LinkButton.svelte";
-export * from "./TextArea/TextArea.svelte";
-export * from "./TextField/TextField.svelte";
+export { default as Button } from "./Button/Button.svelte";
+export { default as Dropdown } from "./Dropdown/Dropdown.svelte";
+export { default as Field } from "./Field/Field.svelte";
+export { default as Form } from "./Form/Form.svelte";
+export { default as IconButton } from "./IconButton/IconButton.svelte";
+export { default as IconLinkButton } from "./IconLinkButton/IconLinkButton.svelte";
+export { default as LinkButton } from "./LinkButton/LinkButton.svelte";
+export { default as TextArea } from "./TextArea/TextArea.svelte";
+export { default as TextField } from "./TextField/TextField.svelte";
