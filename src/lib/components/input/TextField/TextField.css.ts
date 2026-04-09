@@ -2,12 +2,22 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 import { token } from "$lib/styles/designTokens";
 
-const baseTextField = style({
+const inputContainer = style({
+	display: "flex",
+	alignItems: "center",
 	borderRadius: token.global.radius.medium,
 	backgroundColor: token.theme.color.surface.sunken.normal,
+	outline: `${token.global.borderWidth.thick} solid ${token.theme.color.border.default}`,
+	width: "100%",
+	overflow: "hidden"
+});
+
+const baseTextField = style({
+	flex: 1,
+	backgroundColor: "transparent",
 	color: token.theme.color.text.default,
 	border: "none",
-	outline: `${token.global.borderWidth.thick} solid ${token.theme.color.border.default}`,
+	outline: "none",
 	fontFamily: token.global.font.family.sans,
 	fontSize: token.global.font.size.medium,
 	padding: token.global.spacing.xsmall,
@@ -17,6 +27,13 @@ const baseTextField = style({
 	":disabled": {
 		cursor: "not-allowed"
 	}
+});
+
+const suffix = style({
+	display: "flex",
+	alignItems: "center",
+
+	flexShrink: 0
 });
 
 const invalid = style({
@@ -36,7 +53,9 @@ const counter = styleVariants({
 });
 
 export const styles = {
+	inputContainer,
 	baseTextField,
+	suffix,
 	invalid,
 	counter
 };

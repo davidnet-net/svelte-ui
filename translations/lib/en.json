@@ -21,5 +21,7 @@
 	"lib_component_account_menu_logout": "Logout",
 	"lib_component_account_menu_acount": "Account",
 	"lib_common_characterlimit_one": "Character limit exceeded by 1 character.",
-	"lib_common_characterlimit_other": "Character limit exceeded by {diff} characters."
+	"lib_common_characterlimit_other": "Character limit exceeded by {diff} characters.",
+	"lib_common_show_password": "Show password.",
+	"lib_common_hide_password": "Hide password."
 }

@@ -6,7 +6,9 @@
 	import { focusring } from "$lib/styles/global.css";
 	import type { fieldContextType } from "$lib/types/Form";
 
+	import IconButton from "../IconButton/IconButton.svelte";
 	import { styles } from "./TextField.css";
+
 	interface Props extends HTMLInputAttributes {
 		value?: string;
 		invalid?: string;
@@ -15,6 +17,7 @@
 
 	let {
 		value = $bindable(""),
+		type = "text",
 		id = undefined,
 		name = undefined,
 		required = undefined,
@@ -37,6 +40,9 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
+	let showPassword = $state(false);
+	const currentType = $derived(type === "password" ? (showPassword ? "text" : "password") : type);
+
 	let counterState: "normal" | "near" | "max" = $derived.by(() => {
 		if (!maxlength) return "normal";
 
@@ -57,7 +63,6 @@
 			if (fieldContext.invalidOveride && maxlength) {
 				const diff = value.length - Number(maxlength);
 				if (diff > 0) {
-					// Route to the correct Paraglide function based on the exact difference
 					fieldContext.invalidOveride.invalid =
 						diff === 1
 							? library_messages.lib_common_characterlimit_one()
@@ -85,12 +90,28 @@
 	{/if}
 {/snippet}
 
-<input
-	bind:this={inputElement}
-	bind:value
-	id={finalID}
-	name={finalName}
-	required={finalRequired}
-	aria-invalid={isInvalid}
-	class="{styles.baseTextField} {isInvalid ? styles.invalid : ''} {focusring}"
-	{...restProps} />
+<div class="{styles.inputContainer} {isInvalid ? styles.invalid : ''} {focusring}">
+	<input
+		bind:this={inputElement}
+		bind:value
+		id={finalID}
+		name={finalName}
+		type={currentType}
+		required={finalRequired}
+		aria-invalid={isInvalid}
+		class={styles.baseTextField}
+		{...restProps} />
+
+	{#if type === "password"}
+		<div class={styles.suffix}>
+			<IconButton
+				icon={showPassword ? "visibility_off" : "visibility"}
+				onclick={() => (showPassword = !showPassword)}
+				tabindex={-1}
+				appearance="subtle"
+				tip={showPassword
+					? library_messages.lib_common_hide_password()
+					: library_messages.lib_common_show_password()} />
+		</div>
+	{/if}
+</div>
