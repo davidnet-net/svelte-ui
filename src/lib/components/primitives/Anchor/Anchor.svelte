@@ -54,7 +54,13 @@
 </script>
 
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
-<a href={finalHref} {target} {rel} aria-disabled={disabled} {...rest}>
+<a
+	href={finalHref}
+	{target}
+	{rel}
+	aria-disabled={disabled}
+	style={disabled ? "cursor: not-allowed" : ""}
+	{...rest}>
 	{@render children()}
 </a>
 
