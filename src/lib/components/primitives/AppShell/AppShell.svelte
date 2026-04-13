@@ -21,6 +21,7 @@
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 	import { focusring } from "$lib/styles/global.css";
+	import SettingsModal from "$lib/lib_internal/SettingsModal/SettingsModal.svelte";
 
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
@@ -96,6 +97,7 @@
 	);
 
 	let isAvatarOpened = $state(false);
+	let isQuickSettingsOpened = $state(false);
 </script>
 
 <svelte:head>
@@ -187,7 +189,7 @@
 								icon="settings"
 								tip={library_messages.lib_component_appshell_settings_alt()}
 								onclick={() => {
-									console.log("");
+									isQuickSettingsOpened = true;
 								}} />
 							<IconButton
 								onclick={() => {
@@ -254,4 +256,7 @@
 			</Flex>
 		</div>
 	</noscript>
+	{#if isQuickSettingsOpened}
+		<SettingsModal onClose={() => (isQuickSettingsOpened = false)}/>
+	{/if}
 </div>
