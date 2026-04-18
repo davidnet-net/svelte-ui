@@ -3,6 +3,8 @@
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
 	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
+	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
+	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 
 	import { styles } from "./Link.css";
 
@@ -54,5 +56,10 @@
 	{href}
 	class={styles.baseLink}
 	{...rest}>
-	{@render children()}
+	<Flex alignItems="center" justifyContent="center" verticalAlign="inherit" gap="xsmall">
+		{@render children()}
+		{#if opennewtab || external}
+			<Icon icon="open_in_new" />
+		{/if}
+	</Flex>
 </Anchor>

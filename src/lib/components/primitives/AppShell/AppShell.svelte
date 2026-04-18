@@ -10,6 +10,7 @@
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import IconLinkButton from "$lib/components/input/IconLinkButton/IconLinkButton.svelte";
 	import AccountMenu from "$lib/components/lib_internal/AccountMenu/AccountMenu.svelte";
+	import SettingsModal from "$lib/components/lib_internal/SettingsModal/SettingsModal.svelte";
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
@@ -21,7 +22,6 @@
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 	import { focusring } from "$lib/styles/global.css";
-	import SettingsModal from "$lib/lib_internal/SettingsModal/SettingsModal.svelte";
 
 	import Anchor from "../Anchor/Anchor.svelte";
 	import Avatar from "../Avatar/Avatar.svelte";
@@ -257,6 +257,6 @@
 		</div>
 	</noscript>
 	{#if isQuickSettingsOpened}
-		<SettingsModal onClose={() => (isQuickSettingsOpened = false)}/>
+		<SettingsModal onClose={() => (isQuickSettingsOpened = false)} />
 	{/if}
 </div>

@@ -12,6 +12,11 @@ export const direction = styleVariants({
 	column: { flexDirection: "column" }
 });
 
+export const verticalAlign = styleVariants({
+	inherit: { verticalAlign: "inherit" },
+	middle: { verticalAlign: "middle" }
+});
+
 export const justifyContent = styleVariants({
 	start: { justifyContent: "flex-start" },
 	center: { justifyContent: "center" },

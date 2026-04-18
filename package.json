@@ -11,7 +11,7 @@
 	"license": "SEE LICENSE IN license",
 	"private": "true",
 	"scripts": {
-		"init": "husky install && bun install",
+		"init": "bun install && husky install && bun run setup",
 		"setup": "bun meta/scripts/setup.ts",
 		"dev": "bun run setup && bun x --bun vite dev --host",
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",

@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 import { token } from "$lib/styles/designTokens";
 
 const baseLink = style({
+	display: "inline-flex",
 	color: token.theme.color.link.default,
 	textDecoration: "none",
 	selectors: {

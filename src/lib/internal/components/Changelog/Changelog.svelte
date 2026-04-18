@@ -1,5 +1,11 @@
 <script lang="ts">
-	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
+	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
+	import { Link } from "$lib/components/navigation";
+	import ToolTip from "$lib/components/overlays/ToolTip/ToolTip.svelte";
+	import Anchor from "$lib/components/primitives/Anchor/Anchor.svelte";
+	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
+
+	import * as styles from "./Changelog.css";
 
 	interface Commit {
 		h: string;
@@ -26,22 +32,47 @@
 				loading = false;
 			});
 	});
+
+	let hoveredHash = $state<string | null>(null);
 </script>
 
 <div class="changelog">
 	{#if loading}
-		<p>Loading history...</p>
+		<Flex direction="column" gap="small" width="80%">
+			<Skeleton height="1.5rem" width="100%" radius="full" />
+			<Skeleton height="1.5rem" width="100%" radius="full" />
+			<Skeleton height="1.5rem" width="100%" radius="full" />
+			<Skeleton height="1.5rem" width="100%" radius="full" />
+			<Skeleton height="1.5rem" width="100%" radius="full" />
+		</Flex>
 	{:else}
-		{#each history as commit (commit.h)}
-			{#if commit.s.length > 0}
-				<div class="item">
-					<span></span>
-					<LinkButton href="{repoUrl}/commit/{commit.h}" appearance="subtle" external opennewtab>
-						{commit.d} |
+		<Flex direction="column" gap="small">
+			{#each history as commit (commit.h)}
+				{#if commit.s.length > 0}
+					<Flex>
+						<Anchor
+							external
+							opennewtab
+							href="{repoUrl}/commit/{commit.h}"
+							onmouseenter={() => {
+								hoveredHash = commit.h;
+							}}
+							onmouseleave={() => {
+								hoveredHash = null;
+							}}>
+							<div class={styles.hashContainer}>
+								<Link external opennewtab href="{repoUrl}/commit/{commit.h}">
+									{commit.h.slice(0, 7)}
+									{#if hoveredHash === commit.h}
+										<ToolTip tip={new Date(commit.d).toUTCString()} />
+									{/if}
+								</Link>
+							</div>
+						</Anchor>
 						{commit.s}
-					</LinkButton>
-				</div>
-			{/if}
-		{/each}
+					</Flex>
+				{/if}
+			{/each}
+		</Flex>
 	{/if}
 </div>

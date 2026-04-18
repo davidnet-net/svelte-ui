@@ -14,6 +14,7 @@
 		marginRight?: keyof typeof styles.marginRight;
 		marginBottom?: keyof typeof styles.marginBottom;
 		marginLeft?: keyof typeof styles.marginLeft;
+		verticalAlign?: keyof typeof styles.verticalAlign;
 		children: Snippet;
 		overflowX?: keyof typeof styles.overflowX;
 		overflowY?: keyof typeof styles.overflowY;
@@ -32,6 +33,7 @@
 		marginBottom = "none",
 		marginLeft = "none",
 		overflowX = "visible",
+		verticalAlign = "inherit",
 		overflowY = "visible",
 		text = "inherit",
 		children
@@ -52,6 +54,7 @@
 		{styles.overflowX[overflowX]}
         {styles.overflowY[overflowY]}
 		{styles.text[text]}
+		{styles.verticalAlign[verticalAlign]}
     "
 	style:width
 	style:height>
