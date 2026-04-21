@@ -12,10 +12,19 @@
 		name: string;
 		required?: boolean;
 		invalid?: string;
+		overidelabel?: boolean;
+		fieldID?: string;
 	}
-	let { children, label, name, required, invalid }: Props = $props();
+	let {
+		children,
+		label,
+		name,
+		required,
+		invalid,
+		overidelabel,
+		fieldID = $bindable(generateUUIDv7() as string)
+	}: Props = $props();
 
-	const fieldID = generateUUIDv7() as string;
 	let statusbar = $state<{ snippet: Snippet | undefined }>({ snippet: undefined });
 	let invalidOveride = $state<{ invalid: string | undefined }>({ invalid: undefined });
 
@@ -38,12 +47,14 @@
 </script>
 
 <div class={styles.baseField}>
-	<label class={styles.label} for={fieldID}>
-		{label}
-		{#if required}
-			<span class={styles.requiredMark}>*</span>
-		{/if}
-	</label>
+	{#if !overidelabel}
+		<label class={styles.label} for={fieldID}>
+			{label}
+			{#if required}
+				<span class={styles.requiredMark}>*</span>
+			{/if}
+		</label>
+	{/if}
 	{@render children()}
 	<div class={styles.statusbar}>
 		{#if invalidOveride.invalid || invalid}
