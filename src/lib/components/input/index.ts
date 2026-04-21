@@ -1,4 +1,5 @@
 export { default as Button } from "./Button/Button.svelte";
+export { default as Checkbox } from "./Checkbox/Checkbox.svelte";
 export { default as Dropdown } from "./Dropdown/Dropdown.svelte";
 export { default as Field } from "./Field/Field.svelte";
 export { default as Form } from "./Form/Form.svelte";
