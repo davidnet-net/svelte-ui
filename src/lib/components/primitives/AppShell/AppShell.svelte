@@ -86,15 +86,21 @@
 		}
 	});
 
-	const toggleSidebar = useShortcut(
-		"ctrl+[",
-		() => (appState.sidebarOpen = !appState.sidebarOpen),
-		{
-			name: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_name(),
-			description: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_description(),
-			preventDefault: true
+	interface toggleSidebar {
+		readonly keys: string[];
+		readonly original: string;
+	}
+	let toggleSidebar: toggleSidebar | undefined;
+
+	$effect(() => {
+		if (sidebar) {
+			useShortcut("ctrl+[", () => (appState.sidebarOpen = !appState.sidebarOpen), {
+				name: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_name(),
+				description: library_messages.lib_component_appshell_shortcuts_toggle_sidebar_description(),
+				preventDefault: true
+			});
 		}
-	);
+	});
 
 	let isAvatarOpened = $state(false);
 	let isQuickSettingsOpened = $state(false);
@@ -137,7 +143,7 @@
 									icon="left_panel_close"
 									tip={library_messages.lib_component_appshell_close_sidebar_alt()}
 									appearance="subtle"
-									keyboardTip={toggleSidebar.keys}
+									keyboardTip={toggleSidebar?.keys}
 									iconstyle="filled"
 									onclick={() => {
 										appState.sidebarOpen = !appState.sidebarOpen;
@@ -147,7 +153,7 @@
 									icon="left_panel_open"
 									tip={library_messages.lib_component_appshell_open_sidebar_alt()}
 									appearance="subtle"
-									keyboardTip={toggleSidebar.keys}
+									keyboardTip={toggleSidebar?.keys}
 									iconstyle="outlined"
 									onclick={() => {
 										appState.sidebarOpen = !appState.sidebarOpen;
