@@ -1,6 +1,6 @@
 {
 	"name": "@davidnet-net/svelte-ui",
-	"version": "2.0.26",
+	"version": "2.0.27",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/davidnet-net/svelte-ui.git"

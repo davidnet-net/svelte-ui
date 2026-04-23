@@ -6,7 +6,6 @@ import { getCookie, setCookie } from "../utils/cookies";
 import { initAppState } from "./appStateEngine.svelte";
 import { initIdentityEngine } from "./identityEngine.svelte";
 import { isValidTheme, setTheme, type themeNames } from "./themeEngine.svelte";
-import { type Toast,toast } from "./toastEngine.svelte";
 import { createTranslationEngine, type ParaglideRuntimeType } from "./translationEngine.svelte";
 
 export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeType<T>) {
@@ -59,11 +58,4 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 	onINP(console.log);
 	onLCP(console.log);
 	console.debug("[AppShell] Telemetry observers attached.");
-
-	const toastar: Toast = {
-		icon: "check_circle",
-		title: "Toasted!",
-		content: "Big yapper"
-	};
-	toast(toastar);
 }
