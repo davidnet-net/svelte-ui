@@ -29,21 +29,29 @@
 	in:fly={flyParams}
 	out:fly={flyParams}
 	class="{styles.baseToast} {styles.appearance[toast.appearance ?? 'primary']}">
-	<Flex direction="column" gap="xsmall" justifyContent="start" alignItems="start">
-		<Flex alignItems="center" justifyContent="spaceBetween" direction="row" gap="xsmall">
-			<Flex alignItems="center" direction="row" gap="xsmall">
-				{#if toast.icon}
-					<Icon icon={toast.icon} />
-				{/if}
-				<span class={styles.title}>{toast.title}</span>
+	<Flex direction="row" gap="xsmall" alignItems="start" justifyContent="center">
+		{#if toast.icon}
+			<Flex height="32px" width="fit-content" justifyContent="center" alignItems="center">
+				<Icon size="inherit" icon={toast.icon} />
 			</Flex>
-			<IconButton
-				icon="close"
-				onclick={() => {
-					toast.dismiss();
-				}}
-				tip="" />
+		{/if}
+
+		<Flex direction="column" gap="xsmall" flexGrow="1">
+			<Flex alignItems="center" justifyContent="spaceBetween" direction="row">
+				<span class={styles.title}>{toast.title}</span>
+				<IconButton
+					icon="close"
+					onclick={() => {
+						toast.dismiss();
+					}}
+					tip="" />
+			</Flex>
+
+			{#if toast.appearance}
+				<div class={styles.appearance[toast.appearance]}>
+					{toast.content}
+				</div>
+			{/if}
 		</Flex>
-		{toast.content}
 	</Flex>
 </div>

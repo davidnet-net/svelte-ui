@@ -44,6 +44,11 @@ export const alignItems = styleVariants({
 	spaceBetween: { alignItems: "space-between" }
 });
 
+export const flexGrow = styleVariants({
+	"0": { flexGrow: 0 },
+	"1": { flexGrow: 1 }
+});
+
 export const gap = styleVariants({
 	none: { gap: token.global.spacing.none },
 	xlarge: { gap: token.global.spacing.xlarge },

@@ -53,7 +53,10 @@ const title = style({
 	maxWidth: "27ch",
 	whiteSpace: "nowrap",
 	overflow: "hidden",
-	textOverflow: "ellipsis"
+	textOverflow: "ellipsis",
+	fontSize: token.global.font.size.medium,
+	margin: "0px",
+	padding: "0px"
 });
 
 export const styles = {

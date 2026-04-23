@@ -7,6 +7,7 @@
 		direction?: keyof typeof styles.direction;
 		alignItems?: keyof typeof styles.alignItems;
 		justifyContent?: keyof typeof styles.justifyContent;
+		flexGrow?: keyof typeof styles.flexGrow;
 		width?: string;
 		height?: string;
 		gap?: keyof typeof styles.gap;
@@ -25,6 +26,7 @@
 		direction = "row",
 		alignItems = "start",
 		justifyContent = "start",
+		flexGrow = "0",
 		width = "100%",
 		height = "100%",
 		gap = "none",
@@ -46,15 +48,16 @@
         {styles.direction[direction]} 
         {styles.alignItems[alignItems]} 
         {styles.justifyContent[justifyContent]}
+        {styles.flexGrow[flexGrow]}
         {styles.gap[gap]}
         {styles.marginTop[marginTop]}
         {styles.marginRight[marginRight]}
         {styles.marginBottom[marginBottom]}
         {styles.marginLeft[marginLeft]}
-		{styles.overflowX[overflowX]}
+        {styles.overflowX[overflowX]}
         {styles.overflowY[overflowY]}
-		{styles.text[text]}
-		{styles.verticalAlign[verticalAlign]}
+        {styles.text[text]}
+        {styles.verticalAlign[verticalAlign]}
     "
 	style:width
 	style:height>
