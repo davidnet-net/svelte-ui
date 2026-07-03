@@ -5,6 +5,7 @@
 
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { icons } from "$lib/styles/icons.css";
 	import type { iconType } from "$lib/types/Icon";
 
 	import { styles } from "./Banner.css";
@@ -13,8 +14,9 @@
 		appearance: keyof typeof styles.appearance;
 		children: Snippet;
 		icon?: iconType;
+		iconVariant?: keyof typeof icons;
 	}
-	let { appearance, children, icon }: Props = $props();
+	let { appearance, children, icon, iconVariant = "filled" }: Props = $props();
 </script>
 
 <div
@@ -24,7 +26,7 @@
 	aria-live={appearance === "danger" ? "assertive" : "polite"}>
 	<Flex width="100%" height="3rem" direction="row" alignItems="center" gap="small">
 		{#if icon}
-			<Icon {icon} size="large" />
+			<Icon {icon} type={iconVariant} size="large" />
 		{/if}
 		<span class={styles.message}>
 			{@render children()}

@@ -15,7 +15,8 @@
 		"declarationMap": true,
 		"verbatimModuleSyntax": true,
 		"noUncheckedIndexedAccess": true,
-		"noEmit": true
+		"noEmit": true,
+		"types": ["bun"]
 	},
 	"include": [
 		"src/**/*.ts",

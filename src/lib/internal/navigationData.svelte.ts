@@ -66,6 +66,12 @@ export const navigationData: NavigationItem[] = [
 				href: "/tools/llm-resources",
 				priority: 0.7,
 				description: "Let AI write code that fits with our system design."
+			},
+			{
+				pageName: "Simulation",
+				href: "/tools/simulation",
+				priority: 0.7,
+				description: "Test components in isolation."
 			}
 		]
 	}

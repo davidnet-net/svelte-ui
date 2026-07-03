@@ -23,6 +23,9 @@
 			href="/components"
 			title={m.docs_page_card_components_title()}
 			description={m.docs_page_card_components_description()} />
-		<Card href="/tools" title={m.docs_page_card_tools_title()} />
+		<Card
+			href="/tools"
+			description={m.docs_page_card_tools_description()}
+			title={m.docs_page_card_tools_title()} />
 	</Flex>
 </div>
