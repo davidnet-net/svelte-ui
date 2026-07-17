@@ -10,18 +10,21 @@
 
 <NavigationData />
 
-<Header heading="Tools" paragraph="Utilities and resources for working with the design system." />
+<Header heading={m.docs_page_card_tools_title()} paragraph={m.docs_page_card_tools_description()} />
 
 <div class={styles.pageContainer}>
-	<h2>General purpose</h2>
+	<h2>{m.docs_page_tools_subheading_general_purpose()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
 		<Card
 			href="/tools/llm-resources"
-			title="LLM Resources"
-			description="Let AI write code that fits with our system design." />
-		<Card href="/tools/simulation" title="Simulation" description="Test components in isolation." />
+			title={m.docs_page_tools_card_llm_resources_title()}
+			description={m.docs_page_tools_card_llm_resources_description()} />
+		<Card
+			href="/tools/simulation"
+			title={m.docs_page_tools_card_simulation_title()}
+			description={m.docs_page_tools_card_simulation_description()} />
 	</Flex>
-	<h2>Design</h2>
+	<h2>{m.docs_page_tools_subheading_design()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium">
 		<Card
 			href="/foundations/design-tokens/library"

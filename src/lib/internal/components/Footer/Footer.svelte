@@ -11,7 +11,8 @@
 <footer class={styles.baseFooter}>
 	<div class={styles.content}>
 		<p class={styles.brand}>
-			Davidnet Design System {#if !import.meta.env.DEV}
+			{m.docs_footer_brand()}
+			{#if !import.meta.env.DEV}
 				v{manifest.version.replaceAll('"', "")}
 			{/if}
 		</p>
@@ -30,23 +31,25 @@
 				</Anchor>
 			</Flex>
 			<Flex direction="column" gap="small" width="auto">
-				<h2 class={styles.heading}>Socials</h2>
+				<h2 class={styles.heading}>{m.docs_footer_socials()}</h2>
 				<Anchor external class={styles.footerLink} href="https://mastodon.social/@davidnet">
-					Mastodon
+					{m.docs_footer_mastodon()}
 					<Icon icon="open_in_new" />
 				</Anchor>
 				<Anchor external class={styles.footerLink} href="https://github.com/davidnet-net">
-					Github
+					{m.docs_footer_github()}
 					<Icon icon="open_in_new" />
 				</Anchor>
 				<Anchor external class={styles.footerLink} href="mailto:contact@davidnet.net">
-					Email
+					{m.docs_footer_email()}
 					<Icon icon="open_in_new" />
 				</Anchor>
 			</Flex>
 			<Flex direction="column" gap="small" width="auto">
-				<h2 class={styles.heading}>AI</h2>
-				<Anchor class={styles.footerLink} href="/tools/llm-resources">LLM Resources</Anchor>
+				<h2 class={styles.heading}>{m.docs_footer_ai()}</h2>
+				<Anchor class={styles.footerLink} href="/tools/llm-resources">
+					{m.docs_footer_llm_resources()}
+				</Anchor>
 			</Flex>
 		</Flex>
 	</div>
@@ -54,7 +57,7 @@
 		<Flex width="100%" direction="row" justifyContent="spaceBetween">
 			<small>
 				&copy; 2025-{new Date().getFullYear()}
-				<Anchor href="https://davidnet.net">Davidnet</Anchor>
+				<Anchor href="https://davidnet.net">{m.docs_footer_brand_link()}</Anchor>
 			</small>
 			<Flex width="fit-content" direction="row" gap="medium">
 				<small style="vertical-align: middle">

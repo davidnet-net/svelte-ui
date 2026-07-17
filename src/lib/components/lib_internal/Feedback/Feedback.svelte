@@ -10,6 +10,7 @@
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { authState, identity } from "$lib/engines/identityEngine.svelte";
 	import manifest from "$lib/internal/manifests/version-manifest.json";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 	import { sleep } from "$lib/utils/sleep";
 
@@ -76,20 +77,19 @@
 </script>
 
 {#if isOpen && !feedbackFinished}
-	<Modal title="Feedback">
+	<Modal title={library_messages.lib_component_feedback_title()}>
 		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
 			<Form id="feedback-form" autocomplete="off" onsubmit={submitFeedback}>
 				<div
 					style="color: {token.theme.color.text.secondary}; font-size: {token.global.font.size
 						.small}">
-					Help us improve! Share your feedback, bugs or feature ideas below. Need help? Visit our <Link
-						href="https://davidnet.net/help">
-						help center
-					</Link> instead.
+					{library_messages.lib_component_feedback_intro()}<Link href="https://davidnet.net/help">
+						{library_messages.lib_component_feedback_help_center()}
+					</Link>{library_messages.lib_component_feedback_intro_suffix()}
 				</div>
 				<Field
 					required
-					label="Enter your message here:"
+					label={library_messages.lib_component_feedback_label_message()}
 					name="message"
 					invalid={feedbackMessageInvalid}>
 					<TextArea bind:value={feedbackValue} maxlength={2000} disabled={isSubmitting} />
@@ -102,7 +102,7 @@
 				onclick={() => {
 					isOpen = false;
 				}}>
-				Cancel
+				{library_messages.lib_common_cancel()}
 			</Button>
 			<Button
 				form="feedback-form"
@@ -110,16 +110,16 @@
 				appearance="primary"
 				loading={isSubmitting}
 				disabled={feedbackValue.length > 2000}>
-				Submit
+				{library_messages.lib_common_submit()}
 			</Button>
 		{/snippet}
 	</Modal>
 {:else if isOpen && feedbackFinished}
-	<Modal title="Feedback">
+	<Modal title={library_messages.lib_component_feedback_title()}>
 		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
 			<Icon icon="mark_chat_read" size="giant" color="success" />
 			<span style="font-size: {token.global.font.size.large}; text-align: center">
-				Your feedback has been submitted!
+				{library_messages.lib_component_feedback_success_message()}
 			</span>
 		</Flex>
 		{#snippet actions()}
@@ -131,7 +131,7 @@
 					isSubmitting = false;
 					feedbackValue = "";
 				}}>
-				Close
+				{library_messages.lib_common_close()}
 			</Button>
 		{/snippet}
 	</Modal>

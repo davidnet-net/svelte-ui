@@ -10,7 +10,7 @@
 
 <NavigationData />
 
-<Header heading="Davidnet Design System" paragraph={m.docs_page_header_paragraph()} />
+<Header heading={m.docs_page_header_heading()} paragraph={m.docs_page_header_paragraph()} />
 
 <div class={styles.pageContainer}>
 	<h2>{m.docs_page_subheading_get_started()}</h2>

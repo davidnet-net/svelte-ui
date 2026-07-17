@@ -6,6 +6,7 @@
 	import AppShell from "$lib/components/primitives/AppShell/AppShell.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { fontState, setTheme, type themeNames } from "$lib/engines/themeEngine.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 
 	let { children } = $props();
 	let hasRenderedAtleastOnce = $state(false);
@@ -98,15 +99,15 @@
 	{#snippet banners()}
 		{#if !isIframe}
 			<Banner appearance="warning" iconVariant="outlined" icon="computer">
-				Sandbox mode. Do not enter any sensitive information. <Link
-					opennewtab
-					href="/tools/simulation">
-					Learn more
+				{m.docs_page_simulation_runner_sandbox_warning()}<Link opennewtab href="/tools/simulation">
+					{m.docs_page_simulation_runner_learn_more()}
 				</Link>
 			</Banner>{/if}
 
 		{#if !hasRenderedAtleastOnce}
-			<Banner appearance="discover" icon="all_match">Ready to simulate. Select a component.</Banner>
+			<Banner appearance="discover" icon="all_match">
+				{m.docs_page_simulation_runner_ready()}
+			</Banner>
 		{/if}
 	{/snippet}
 

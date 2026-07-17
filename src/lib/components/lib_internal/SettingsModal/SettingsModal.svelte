@@ -4,6 +4,7 @@
 	import Modal from "$lib/components/messaging/Modal/Modal.svelte";
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 
 	interface Props {
 		onClose: () => void;
@@ -12,16 +13,17 @@
 	let { onClose }: Props = $props();
 </script>
 
-<Modal title="Quick settings" onclose={onClose}>
+<Modal title={library_messages.lib_component_settings_modal_title()} onclose={onClose}>
 	<Flex direction="column" gap="small">
-		<span>Example setting</span>
+		<span>{library_messages.lib_component_settings_modal_example_setting()}</span>
 	</Flex>
 	{#snippet actions()}
 		<LinkButton href="https://account.davidnet.net/account/settings/preferences">
-			All settings
+			{library_messages.lib_component_settings_modal_all_settings()}
 		</LinkButton>
 		<Button onclick={onClose} appearance="primary">
-			Close <VisuallyHidden>Quick settings modal</VisuallyHidden>
+			{library_messages.lib_common_close()}
+			<VisuallyHidden>{library_messages.lib_component_settings_modal_close_alt()}</VisuallyHidden>
 		</Button>
 	{/snippet}
 </Modal>

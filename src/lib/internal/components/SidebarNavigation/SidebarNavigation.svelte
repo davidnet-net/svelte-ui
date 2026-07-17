@@ -47,15 +47,15 @@
 			appState.sidebarOpen = false;
 		},
 		{
-			name: "Close sidebar",
-			description: "Closes the sidebar navigation on tiny screens",
+			name: m.docs_sidebar_shortcut_close_name(),
+			description: m.docs_sidebar_shortcut_close_description(),
 			preventDefault: true,
 			active: () => appState.isMobile
 		}
 	);
 	useShortcut("ctrl+[", () => (appState.sidebarOpen = !appState.sidebarOpen), {
-		name: "Toggle sidebar",
-		description: "Closes or opens the sidebar.",
+		name: m.docs_sidebar_shortcut_toggle_name(),
+		description: m.docs_sidebar_shortcut_toggle_description(),
 		preventDefault: true
 	});
 </script>
@@ -106,7 +106,7 @@
 			stretchwidth
 			href="https://home.davidnet.net"
 			alignContent="left">
-			Davidnet Home
+			{m.docs_sidebar_davidnet_home()}
 		</LinkButton>
 		{@render navTree(navigationData, 0)}
 	</div>

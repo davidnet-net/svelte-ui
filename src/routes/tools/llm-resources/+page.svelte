@@ -3,6 +3,7 @@
 	import Card from "$lib/internal/components/Card/Card.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import NavigationData from "$lib/internal/components/NavigationData.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 
 	import { styles } from "./page.css";
 
@@ -24,9 +25,11 @@
 </script>
 
 <NavigationData />
-<Header heading="LLM Resources" paragraph="Let AI write code that fits with our system design." />
+<Header
+	heading={m.docs_page_llm_resources_header_heading()}
+	paragraph={m.docs_page_llm_resources_header_paragraph()} />
 <div class={styles.pageContainer}>
-	<h2>LLM external system context files</h2>
+	<h2>{m.docs_page_llm_resources_subheading_external_context_files()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each externalContextFiles as file (file.name)}
 			<Card
@@ -37,7 +40,7 @@
 				download={file.name} />
 		{/each}
 	</Flex>
-	<h2>LLM internal system context files</h2>
+	<h2>{m.docs_page_llm_resources_subheading_internal_context_files()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each internalContextFiles as file (file.name)}
 			<Card
@@ -48,16 +51,16 @@
 				download={file.name} />
 		{/each}
 	</Flex>
-	<h2>Prebuild AI agents</h2>
+	<h2>{m.docs_page_llm_resources_subheading_prebuild_agents()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		<Card
 			href="https://gemini.google.com/gem/1DSFaT-ND0ga3H7pNEnVXYqKFrMlID3ai?usp=sharing"
-			title="Gemini GEM"
+			title={m.docs_page_llm_resources_card_gemini_gem_title()}
 			icon="robot_2"
 			external
-			description="Gemini gem that already contains all the System Context files and custom instructions." />
+			description={m.docs_page_llm_resources_card_gemini_gem_description()} />
 	</Flex>
-	<h2>Custom instructions</h2>
+	<h2>{m.docs_page_llm_resources_subheading_custom_instructions()}</h2>
 	<Flex direction="row" gap="medium" marginTop="medium" marginBottom="medium" overflowX="auto">
 		{#each instructionFiles as file (file.name)}
 			<Card

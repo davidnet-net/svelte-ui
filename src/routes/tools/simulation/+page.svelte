@@ -12,6 +12,7 @@
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import NavigationData from "$lib/internal/components/NavigationData.svelte";
 	import { getComponentRegistry } from "$lib/internal/utils/componentRegistery";
+	import * as m from "$lib/paraglide/messages.js";
 	import { sleep } from "$lib/utils/sleep";
 
 	import * as styles from "./page.css";
@@ -185,8 +186,9 @@
 </script>
 
 <NavigationData />
-
-<Header heading="Simulation" paragraph="Explore each aspect of the design system individually." />
+<Header
+	heading={m.docs_page_simulation_header_heading()}
+	paragraph={m.docs_page_simulation_header_paragraph()} />
 
 <Flex direction="column" height="80vh" width="100%" justifyContent="center" alignItems="center">
 	<div class={styles.simulationContainer}>
@@ -196,8 +198,7 @@
 					<Flex direction="column" justifyContent="center" alignItems="center" gap="medium">
 						<Icon icon="computer_cancel" size="giant" color="danger" />
 						<p style="text-align: center;">
-							Your device screen is too small to run the simulation environment. Please use a larger
-							screen or resize your browser window to continue.
+							{m.docs_page_simulation_too_small_screen_warning()}
 						</p>
 
 						<Button
@@ -205,7 +206,7 @@
 							onclick={() => {
 								bypassScreenCheck = true;
 							}}>
-							Proceed anyway
+							{m.docs_page_simulation_proceed_anyway()}
 						</Button>
 					</Flex>
 				</div>
@@ -215,7 +216,7 @@
 					<Flex direction="column" justifyContent="center" alignItems="center" gap="medium">
 						<Spinner size="huge" />
 						<p style="text-align: center;">
-							Hang thight, we are preparing the simulation environment.
+							{m.docs_page_simulation_preparing_environment()}
 						</p>
 					</Flex>
 				</div>
@@ -234,7 +235,7 @@
 							gap="small"
 							width="fit-content">
 							<Icon type="outlined" icon="computer" />
-							<p>Simulation &rsaquo; {activeComponentId}</p>
+							<p>{m.docs_page_simulation_title({ activeComponentId })}</p>
 						</Flex>
 						<Flex
 							direction="row"
@@ -246,12 +247,16 @@
 								appearance="default"
 								icon={codeCopiedFeedback ? "check" : "content_copy"}
 								onclick={copyComponentCode}
-								tip={codeCopiedFeedback ? "Copied!" : "Copy implementation code"} />
+								tip={codeCopiedFeedback
+									? m.docs_page_simulation_copied()
+									: m.docs_page_simulation_copy_code_tip()} />
 							<IconButton
 								appearance="default"
 								icon={linkCopiedFeedback ? "check" : "open_in_new"}
 								onclick={copyStandaloneLink}
-								tip={linkCopiedFeedback ? "Copied!" : "Copy standalone link"} />
+								tip={linkCopiedFeedback
+									? m.docs_page_simulation_copied()
+									: m.docs_page_simulation_copy_link_tip()} />
 							<IconButton
 								appearance="default"
 								icon={simulationTheme === "light"
@@ -260,12 +265,12 @@
 										? "dark_mode"
 										: "contrast"}
 								onclick={cycleTheme}
-								tip={`Cycle - Current theme: ${simulationTheme}`} />
+								tip={m.docs_page_simulation_theme_cycle_tip({ theme: simulationTheme })} />
 							<IconButton
 								appearance="default"
 								icon="refresh"
 								onclick={handleRestart}
-								tip="Restart Simulation" />
+								tip={m.docs_page_simulation_restart_tip()} />
 						</Flex>
 					</Flex>
 				</div>

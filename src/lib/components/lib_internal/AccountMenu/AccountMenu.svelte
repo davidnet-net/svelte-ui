@@ -28,7 +28,7 @@
 		<span
 			style="color: {token.theme.color.text.tertiary}; font-weight: {token.global.font.weight
 				.bold}; font-size: {token.global.font.size.small}">
-			{library_messages.lib_component_account_menu_acount()}
+			{library_messages.lib_component_account_menu_account()}
 		</span>
 
 		<Flex alignItems="center" gap="medium" marginBottom="small">

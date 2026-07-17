@@ -122,8 +122,8 @@
 		<div class={styles.maincontainer}>
 			{#if import.meta.env.DEV && !appState.viteConnected}
 				<Banner icon="sync_problem" appearance="danger">
-					<b>Vite connection lost.</b>
-					Hot Module Reloading will be unavailable until reconnected.
+					<b>{library_messages.lib_component_appshell_vite_connection_lost()}</b>
+					{library_messages.lib_component_appshell_hmr_unavailable()}
 				</Banner>
 			{/if}
 			{#if appState.isOffline}
@@ -161,7 +161,7 @@
 							{:else}
 								<IconLinkButton
 									icon="apps"
-									tip="Davidnet Home"
+									tip={library_messages.lib_component_appshell_davidnet_home()}
 									href="https://home.davidnet.net"
 									opennewtab
 									appearance="subtle" />
@@ -182,10 +182,10 @@
 											style="color: {token.theme.color.text
 												.warning}; vertical-align: middle; display: flex; align-items: center; gap: {token
 												.global.spacing.xsmall}">
-											Davidnet Development Build
+											{library_messages.lib_component_appshell_dev_build()}
 										</span>
 									{:else}
-										Davidnet
+										{library_messages.lib_component_appshell_brand()}
 									{/if}
 								</Anchor>
 							{/if}
@@ -202,7 +202,7 @@
 									console.debug("Notification btn pressed");
 								}}
 								icon="notifications"
-								tip="Notifications" />
+								tip={library_messages.lib_component_appshell_notifications_alt()} />
 							{#if authState.loading || authState.isLoggedIn}
 								<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
 									{#snippet trigger()}
@@ -224,7 +224,7 @@
 							{:else}
 								<IconButton
 									icon="login"
-									tip="Todo"
+									tip={library_messages.lib_component_appshell_todo()}
 									onclick={() => {
 										console.log("Todo");
 									}} />
@@ -265,8 +265,8 @@
 		<div class={styles.noscriptoverlay}>
 			<Flex direction="column" alignItems="center" justifyContent="center" gap="medium">
 				<div style="text-align: center;">
-					<h1>Javascript is disabled</h1>
-					<p>Please enable javascript to use Davidnet.</p>
+					<h1>{library_messages.lib_component_appshell_js_disabled_title()}</h1>
+					<p>{library_messages.lib_component_appshell_js_disabled_content()}</p>
 				</div>
 			</Flex>
 		</div>

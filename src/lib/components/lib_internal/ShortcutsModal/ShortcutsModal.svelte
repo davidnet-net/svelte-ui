@@ -5,6 +5,7 @@
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import { getShortcuts } from "$lib/engines/shortcutEngine.svelte";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 
 	interface Props {
 		onClose: () => void;
@@ -15,7 +16,7 @@
 	let { onClose }: Props = $props();
 </script>
 
-<Modal title="Shortcuts" onclose={onClose}>
+<Modal title={library_messages.lib_component_shortcuts_modal_title()} onclose={onClose}>
 	<Flex direction="column" gap="small">
 		{#each shortcuts as shortcut (shortcut.id)}
 			<Flex gap="small">
@@ -25,6 +26,9 @@
 		{/each}
 	</Flex>
 	{#snippet actions()}
-		<Button onclick={onClose}>Close <VisuallyHidden>shortcuts modal</VisuallyHidden></Button>
+		<Button onclick={onClose}>
+			{library_messages.lib_common_close()}
+			<VisuallyHidden>{library_messages.lib_component_shortcuts_modal_close_alt()}</VisuallyHidden>
+		</Button>
 	{/snippet}
 </Modal>
