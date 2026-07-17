@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 
 	import Banner from "$lib/components/messaging/Banner/Banner.svelte";
+	import Link from "$lib/components/navigation/Link/Link.svelte";
 	import AppShell from "$lib/components/primitives/AppShell/AppShell.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { fontState, setTheme, type themeNames } from "$lib/engines/themeEngine.svelte";
@@ -97,7 +98,11 @@
 	{#snippet banners()}
 		{#if !isIframe}
 			<Banner appearance="warning" iconVariant="outlined" icon="computer">
-				Sandbox mode. Do not enter any sensitive information.
+				Sandbox mode. Do not enter any sensitive information. <Link
+					opennewtab
+					href="/tools/simulation">
+					Learn more
+				</Link>
 			</Banner>{/if}
 
 		{#if !hasRenderedAtleastOnce}

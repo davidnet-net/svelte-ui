@@ -64,6 +64,7 @@
 			linkCopiedFeedback = false;
 		} catch (err) {
 			console.error("[Simulation Control] Failed to copy standalone link:", err);
+			// TODO: Show toast
 		}
 	}
 
@@ -118,6 +119,7 @@
 			codeCopiedFeedback = false;
 		} catch (err) {
 			console.error("[Simulation Control] System browser clipboard access denied:", err);
+			// TODO: Show toast
 		}
 	}
 

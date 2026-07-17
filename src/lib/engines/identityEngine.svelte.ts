@@ -90,6 +90,7 @@ async function authBeat() {
 	} catch (error) {
 		console.error("[identityEngine]: Auth beat failed", error);
 	} finally {
+		console.debug("[identityEngine]: Auth beat finished");
 		authState.isBeating = false;
 		authState.loading = false;
 		setupNextBeat();

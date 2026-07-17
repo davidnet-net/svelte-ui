@@ -203,23 +203,32 @@
 								}}
 								icon="notifications"
 								tip="Notifications" />
-							<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
-								{#snippet trigger()}
-									<Avatar
-										src="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080"
-										size="xlarge"
-										alt={library_messages.lib_component_account_menu_alt()}
-										onclick={() => {
-											isAvatarOpened = !isAvatarOpened;
-										}}
-										loading={authState.loading} />
-								{/snippet}
-								<AccountMenu
-									isAvatarLoading={authState.loading}
-									username="USERNAME"
-									email="example@example.org"
-									profilePictureURL="https://auth.davidnet.net/profile-picture/1_5865b2b5-45fe-4d44-bfed-23d24fa7ca76.jpg?v=1765968725080" />
-							</Dropdown>
+							{#if authState.loading || authState.isLoggedIn}
+								<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
+									{#snippet trigger()}
+										<Avatar
+											src=""
+											size="xlarge"
+											alt={library_messages.lib_component_account_menu_alt()}
+											onclick={() => {
+												isAvatarOpened = !isAvatarOpened;
+											}}
+											loading={authState.loading} />
+									{/snippet}
+									<AccountMenu
+										isAvatarLoading={authState.loading}
+										username="USERNAME"
+										email="example@example.org"
+										profilePictureURL="" />
+								</Dropdown>
+							{:else}
+								<IconButton
+									icon="login"
+									tip="Todo"
+									onclick={() => {
+										console.log("Todo");
+									}} />
+							{/if}
 						</div>
 					</nav>
 				{/if}
