@@ -1,0 +1,1102 @@
+{
+	"$schema": "./scenario.schema.json",
+	"scenarios": [
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-default-light",
+			"props": {
+				"appearance": "default",
+				"children": "Default Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-default-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Default Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-default-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Default Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-primary-light",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-primary-dark",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-primary-contrast",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-success-light",
+			"props": {
+				"appearance": "success",
+				"children": "Success Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-success-dark",
+			"props": {
+				"appearance": "success",
+				"children": "Success Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-success-contrast",
+			"props": {
+				"appearance": "success",
+				"children": "Success Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-warning-light",
+			"props": {
+				"appearance": "warning",
+				"children": "Warning Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-warning-dark",
+			"props": {
+				"appearance": "warning",
+				"children": "Warning Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-warning-contrast",
+			"props": {
+				"appearance": "warning",
+				"children": "Warning Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-danger-light",
+			"props": {
+				"appearance": "danger",
+				"children": "Danger Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-danger-dark",
+			"props": {
+				"appearance": "danger",
+				"children": "Danger Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-danger-contrast",
+			"props": {
+				"appearance": "danger",
+				"children": "Danger Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-discover-light",
+			"props": {
+				"appearance": "discover",
+				"children": "Discover Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-discover-dark",
+			"props": {
+				"appearance": "discover",
+				"children": "Discover Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-discover-contrast",
+			"props": {
+				"appearance": "discover",
+				"children": "Discover Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-subtle-light",
+			"props": {
+				"appearance": "subtle",
+				"children": "Subtle Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-subtle-dark",
+			"props": {
+				"appearance": "subtle",
+				"children": "Subtle Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-subtle-contrast",
+			"props": {
+				"appearance": "subtle",
+				"children": "Subtle Button",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-selected-light",
+			"props": {
+				"appearance": "default",
+				"children": "Selected Button",
+				"selected": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-selected-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Selected Button",
+				"selected": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-selected-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Selected Button",
+				"selected": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-disabled-light",
+			"props": {
+				"appearance": "default",
+				"children": "Disabled Button",
+				"disabled": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-disabled-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Disabled Button",
+				"disabled": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-disabled-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Disabled Button",
+				"disabled": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-loading-light",
+			"props": {
+				"appearance": "default",
+				"children": "Loading Button",
+				"loading": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-loading-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Loading Button",
+				"loading": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-loading-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Loading Button",
+				"loading": true
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-align-left-stretched-light",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Left Stretched",
+				"stretchwidth": true,
+				"alignContent": "left"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-align-center-stretched-light",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Center Stretched",
+				"stretchwidth": true,
+				"alignContent": "center"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-align-right-stretched-light",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Right Stretched",
+				"stretchwidth": true,
+				"alignContent": "right"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-align-left-stretched-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Left Stretched",
+				"stretchwidth": true,
+				"alignContent": "left"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-align-center-stretched-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Center Stretched",
+				"stretchwidth": true,
+				"alignContent": "center"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-align-right-stretched-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Right Stretched",
+				"stretchwidth": true,
+				"alignContent": "right"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-align-left-stretched-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Left Stretched",
+				"stretchwidth": true,
+				"alignContent": "left"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-align-center-stretched-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Center Stretched",
+				"stretchwidth": true,
+				"alignContent": "center"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-align-right-stretched-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Aligned Right Stretched",
+				"stretchwidth": true,
+				"alignContent": "right"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-icon-before-light",
+			"props": {
+				"appearance": "default",
+				"children": "Icon Before",
+				"iconbefore": "add"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-icon-after-light",
+			"props": {
+				"appearance": "default",
+				"children": "Icon After",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-icon-both-light",
+			"props": {
+				"appearance": "default",
+				"children": "Both Icons",
+				"iconbefore": "add",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-icon-before-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Icon Before",
+				"iconbefore": "add"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-icon-after-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Icon After",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-icon-both-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Both Icons",
+				"iconbefore": "add",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-icon-before-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Icon Before",
+				"iconbefore": "add"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-icon-after-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Icon After",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "contrast",
+			"name": "button-icon-both-contrast",
+			"props": {
+				"appearance": "default",
+				"children": "Both Icons",
+				"iconbefore": "add",
+				"iconafter": "check"
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": true,
+					"reduceMotion": false
+				}
+			}
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-default-hover-light",
+			"props": {
+				"appearance": "default",
+				"children": "Default Hovered",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "hover"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-default-pressed-light",
+			"props": {
+				"appearance": "default",
+				"children": "Default Pressed",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "pressed"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-primary-hover-light",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Hovered",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "hover"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-primary-pressed-light",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Pressed",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "pressed"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-success-hover-light",
+			"props": {
+				"appearance": "success",
+				"children": "Success Hovered",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "hover"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-success-pressed-light",
+			"props": {
+				"appearance": "success",
+				"children": "Success Pressed",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "pressed"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-danger-hover-light",
+			"props": {
+				"appearance": "danger",
+				"children": "Danger Hovered",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "hover"
+		},
+		{
+			"id": "Button",
+			"theme": "light",
+			"name": "button-danger-pressed-light",
+			"props": {
+				"appearance": "danger",
+				"children": "Danger Pressed",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": false,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "pressed"
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-default-hover-dark",
+			"props": {
+				"appearance": "default",
+				"children": "Default Hovered",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "hover"
+		},
+		{
+			"id": "Button",
+			"theme": "dark",
+			"name": "button-primary-pressed-dark",
+			"props": {
+				"appearance": "primary",
+				"children": "Primary Pressed",
+				"stretchwidth": false,
+				"loading": false
+			},
+			"appState": {
+				"hideNavigation": true,
+				"systemPreference": {
+					"darkMode": true,
+					"highContrast": false,
+					"reduceMotion": false
+				}
+			},
+			"action": "pressed"
+		}
+	]
+}

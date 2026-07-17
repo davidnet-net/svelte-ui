@@ -25,6 +25,7 @@
 		"*.config.ts",
 		"*.config.js",
 		"meta/**/*.ts",
+		"e2e/**/*.ts",
 		"./.svelte-kit/ambient.d.ts"
 	],
 	"exclude": ["node_modules", "src/lib/paraglide/**/*"]

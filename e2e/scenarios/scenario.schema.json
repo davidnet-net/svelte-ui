@@ -1,0 +1,70 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Visual Regression Scenarios Configuration",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"scenarios": {
+			"type": "array",
+			"description": "List of regression scenarios for the component(s)",
+			"items": {
+				"type": "object",
+				"required": ["id", "theme", "name"],
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "The component identifier/name."
+					},
+					"theme": {
+						"type": "string",
+						"enum": ["light", "dark", "contrast"],
+						"description": "The theme to apply to the scenario."
+					},
+					"name": {
+						"type": "string",
+						"description": "Unique identifier for the scenario (used for the screenshot filename)."
+					},
+					"props": {
+						"type": "object",
+						"description": "Key-value pairs of properties to pass to the component."
+					},
+					"appState": {
+						"type": "object",
+						"description": "The simulator's application state.",
+						"properties": {
+							"hideNavigation": {
+								"type": "boolean"
+							},
+							"systemPreference": {
+								"type": "object",
+								"properties": {
+									"darkMode": {
+										"type": "boolean"
+									},
+									"highContrast": {
+										"type": "boolean"
+									},
+									"reduceMotion": {
+										"type": "boolean"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"additionalProperties": false
+					},
+					"action": {
+						"type": "string",
+						"enum": ["hover", "pressed"],
+						"description": "Optional user action to perform on the component before taking the screenshot."
+					}
+				},
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": ["scenarios"],
+	"additionalProperties": false
+}

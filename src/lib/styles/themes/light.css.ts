@@ -77,7 +77,7 @@ export const lightTheme = createTheme(token.theme, {
 		surface: {
 			sunken: {
 				// Darkest surface (inputs, wells, sidebars)
-				normal: "#edeff2"
+				normal: "#F8F8FF"
 			},
 			default: {
 				// The Body/Background color (Soft off-white, easier on eyes)

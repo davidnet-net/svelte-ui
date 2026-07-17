@@ -16,6 +16,10 @@
 		"dev": "bun run setup && bun x --bun vite dev --host",
 		"build": "bun run setup && bun x --bun vite build && bun run prepack",
 		"prepack": "bun x svelte-kit sync && bun x svelte-package && rm -f dist/paraglide/.gitignore && bun x publint",
+		"preview": "bun x --bun vite preview --port 4173",
+		"test:visual": "playwright test",
+		"test:visual:update": "playwright test --update-snapshots",
+		"test:visual:ui": "playwright test --ui",
 		"fmt": "bun x prettier --write . && bun x eslint . --fix",
 		"lint": "bun x prettier --check . && bun x eslint ."
 	},
