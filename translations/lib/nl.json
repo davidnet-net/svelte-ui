@@ -44,7 +44,7 @@
 	"lib_component_appshell_dev_build": "Davidnet Ontwikkelingsversie",
 	"lib_component_appshell_brand": "Davidnet",
 	"lib_component_appshell_notifications_alt": "Meldingen",
-	"lib_component_appshell_todo": "Todo",
+	"lib_component_appshell_login_alt": "Inloggen",
 	"lib_component_appshell_js_disabled_title": "Javascript is uitgeschakeld",
 	"lib_component_appshell_js_disabled_content": "Schakel javascript in om Davidnet te gebruiken.",
 	"lib_common_close": "Sluiten"

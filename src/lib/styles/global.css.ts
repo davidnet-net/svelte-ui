@@ -11,6 +11,10 @@ globalStyle("*", {
 	padding: 0
 });
 
+globalStyle("h1, h2, h3, h4, h5", {
+	marginBottom: token.global.spacing.xsmall
+});
+
 globalStyle("b", {
 	fontWeight: token.global.font.weight.bold
 });

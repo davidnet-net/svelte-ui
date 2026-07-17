@@ -1,0 +1,10 @@
+import { count, increment } from "./counterState.svelte.ts";
+
+// Simple Svelte 5 component example
+let { name = "World" } = $props();
+let doubleCount = $derived(count * 2);
+
+function handleClick() {
+	increment();
+	console.log(`Count updated: ${count}`);
+}

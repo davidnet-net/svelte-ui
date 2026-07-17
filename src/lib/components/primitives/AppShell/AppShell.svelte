@@ -222,12 +222,10 @@
 										profilePictureURL="" />
 								</Dropdown>
 							{:else}
-								<IconButton
+								<IconLinkButton
 									icon="login"
-									tip={library_messages.lib_component_appshell_todo()}
-									onclick={() => {
-										console.log("Todo");
-									}} />
+									tip={library_messages.lib_component_appshell_login_alt()}
+									href={appState.accountFrontendURL + "/login"} />
 							{/if}
 						</div>
 					</nav>

@@ -12,10 +12,13 @@ const baseHeader = style({
 	height: "20rem",
 	maxHeight: "fit-content",
 	width: "100%",
-	padding: token.global.spacing.xlarge,
+	// Use individual padding properties to safely mix with tokens and zero out the bottom
+	paddingTop: token.global.spacing.xlarge,
+	paddingLeft: token.global.spacing.xlarge,
+	paddingRight: token.global.spacing.xlarge,
+	paddingBottom: token.global.spacing.medium,
 	display: "flex",
-	alignContent: "center",
-	flexDirection: "row",
+	flexDirection: "column", // Changed from 'row' to 'column'
 	lineHeight: token.global.font.lineHeight.normal,
 	fontSize: token.global.font.size.xmedium,
 	vars: {
@@ -41,12 +44,28 @@ const baseHeader = style({
   `
 });
 
+// New wrapper to keep text and illustration side-by-side
+const topContent = style({
+	display: "flex",
+	flexDirection: "row",
+	flexGrow: 1, // Forces this container to take up all empty space, pushing tabs down
+	alignItems: "center" // Vertically centers the text and illustration
+});
+
 const header = style({
 	fontFamily: token.global.font.family.brand,
 	fontSize: token.global.font.size.xhuge
 });
 
+// New wrapper to ensure tabs stay perfectly at the bottom
+const tabsWrapper = style({
+	marginTop: "auto",
+	width: "100%"
+});
+
 export const styles = {
 	baseHeader,
-	header
+	topContent,
+	header,
+	tabsWrapper
 };

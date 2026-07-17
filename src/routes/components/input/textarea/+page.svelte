@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
 	import Field from "$lib/components/input/Field/Field.svelte";
 	import Form from "$lib/components/input/Form/Form.svelte";
 	import TextArea from "$lib/components/input/TextArea/TextArea.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
+	import Header from "$lib/internal/components/Header/Header.svelte";
 </script>
+
+<Header heading="TextArea" paragraph="A textarea allows entering multi-line text." />
 
 <Flex justifyContent="center" alignItems="center">
 	<Form>

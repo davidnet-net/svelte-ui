@@ -1,4 +1,4 @@
-import { PUBLIC_BACKEND_URL } from "$env/static/public";
+import { PUBLIC_ACCOUNT_FRONTEND_URL, PUBLIC_BACKEND_URL } from "$env/static/public";
 import { generateUUIDv7, type UUIDv7Type } from "$lib/utils/crypto";
 
 interface AppStateType {
@@ -10,6 +10,7 @@ interface AppStateType {
 	viteConnected: boolean;
 	isOffline: boolean;
 	backendURL: string;
+	accountFrontendURL: string;
 	hideNavigation: boolean;
 	tabID: (UUIDv7Type & { __brand: "tabID" }) | undefined;
 	systemPreference: {
@@ -28,6 +29,7 @@ export const appState: AppStateType = $state({
 	hideNavigation: false,
 	tabID: undefined,
 	backendURL: PUBLIC_BACKEND_URL,
+	accountFrontendURL: PUBLIC_ACCOUNT_FRONTEND_URL,
 	systemPreference: {
 		darkMode: false,
 		highContrast: false,

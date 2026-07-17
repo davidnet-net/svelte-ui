@@ -12,6 +12,8 @@ export const hashContainer = style({
 	paddingRight: token.global.spacing.medium,
 	paddingTop: token.global.spacing.xsmall,
 	paddingBottom: token.global.spacing.xsmall,
+	fontFamily: token.global.font.family.mono,
+	fontWeight: token.global.font.weight.medium,
 	minWidth: "8rem",
 	textAlign: "center",
 	":hover": {

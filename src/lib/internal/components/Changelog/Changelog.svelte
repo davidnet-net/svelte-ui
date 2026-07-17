@@ -49,7 +49,7 @@
 		<Flex direction="column" gap="small">
 			{#each history as commit (commit.h)}
 				{#if commit.s.length > 0}
-					<Flex>
+					<Flex gap="small" verticalAlign="middle" alignItems="center">
 						<Anchor
 							external
 							opennewtab
