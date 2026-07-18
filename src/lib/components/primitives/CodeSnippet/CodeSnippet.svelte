@@ -1,19 +1,4 @@
 <script lang="ts">
-	// Import PrismJS grammars for common languages
-	import "prismjs/components/prism-markup"; // HTML, XML, SVG
-	import "prismjs/components/prism-css";
-	import "prismjs/components/prism-clike";
-	import "prismjs/components/prism-javascript";
-	import "prismjs/components/prism-typescript";
-	import "prismjs/components/prism-json";
-	import "prismjs/components/prism-bash";
-	import "prismjs/components/prism-python";
-	import "prismjs/components/prism-rust";
-	import "prismjs/components/prism-go";
-	import "prismjs/components/prism-sql";
-	import "prismjs/components/prism-markdown";
-	import "prismjs/components/prism-yaml";
-
 	import Prism from "prismjs";
 	import { onDestroy } from "svelte";
 
@@ -100,26 +85,54 @@
 		}
 	};
 
-	// Derive highlighted HTML code
-	const highlightedCode = $derived.by(() => {
-		const cleanLang = mapLanguage(language);
-		const grammar = Prism.languages[cleanLang];
-
-		if (grammar) {
-			try {
-				return Prism.highlight(rawCode, grammar, cleanLang);
-			} catch (e) {
-				console.error(`[CodeSnippet]: Syntax highlighting failed for language "${language}"`, e);
-			}
-		}
-
-		// Fallback: safe HTML escaping for plain text
-		return rawCode
+	// 1. SSR-Safe Fallback: Plain HTML escaping for initial page load
+	const fallbackCode = $derived(
+		rawCode
 			.replace(/&/g, "&amp;")
 			.replace(/</g, "&lt;")
 			.replace(/>/g, "&gt;")
 			.replace(/"/g, "&quot;")
-			.replace(/'/g, "&#039;");
+			.replace(/'/g, "&#039;")
+	);
+
+	// 2. Local state for the client-side highlighted result
+	let highlightedResult = $state<string | null>(null);
+
+	// 3. The actual HTML we render (uses fallback until Prism finishes)
+	const htmlToRender = $derived(highlightedResult ?? fallbackCode);
+
+	// 4. Client-side highlighting logic
+	$effect(() => {
+		const cleanLang = mapLanguage(language);
+		let isActive = true; // Prevents race conditions if props change quickly
+
+		async function applyHighlight() {
+			// Dynamically import the grammar if not loaded
+			if (!Prism.languages[cleanLang]) {
+				try {
+					// Vite automatically code-splits these files!
+					await import(`prismjs/components/prism-${cleanLang}.js`);
+				} catch (e) {
+					console.error(`[CodeSnippet]: Syntax highlighting failed for language "${language}"`, e);
+					if (isActive) highlightedResult = null;
+					return;
+				}
+			}
+
+			if (isActive) {
+				if (Prism.languages[cleanLang]) {
+					highlightedResult = Prism.highlight(rawCode, Prism.languages[cleanLang], cleanLang);
+				} else {
+					highlightedResult = null;
+				}
+			}
+		}
+
+		applyHighlight();
+
+		return () => {
+			isActive = false; // Cleanup if `rawCode` or `language` changes before import finishes
+		};
 	});
 
 	function handleCopy(event: MouseEvent) {
@@ -138,7 +151,6 @@
 			});
 	}
 
-	// Clean up timers on component destruction
 	onDestroy(() => {
 		clearTimeout(copyTimeout);
 	});
@@ -179,6 +191,6 @@
 			</div>
 		{/if}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		<pre class={styles.codeArea}><code>{@html highlightedCode}</code></pre>
+		<pre class={styles.codeArea}><code>{@html htmlToRender}</code></pre>
 	</div>
 </div>
