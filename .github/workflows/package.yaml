@@ -60,6 +60,7 @@ jobs:
           bun run build
         env:
           PUBLIC_BACKEND_URL: "provided_by_consumer"
+          PUBLIC_ACCOUNT_FRONTEND_URL: "provided_by_consumer"
           INTERNAL_SECRET: "provided_by_consumer"
 
       - name: Create GitHub Release
