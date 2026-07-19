@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_ACCOUNT_FRONTEND_URL } from "$env/static/public";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Modal from "$lib/components/messaging/Modal/Modal.svelte";
@@ -18,7 +19,7 @@
 		<span>{library_messages.lib_component_settings_modal_example_setting()}</span>
 	</Flex>
 	{#snippet actions()}
-		<LinkButton href="https://account.davidnet.net/account/settings/preferences">
+		<LinkButton href={PUBLIC_ACCOUNT_FRONTEND_URL + "/account/settings/preferences"}>
 			{library_messages.lib_component_settings_modal_all_settings()}
 		</LinkButton>
 		<Button onclick={onClose} appearance="primary">

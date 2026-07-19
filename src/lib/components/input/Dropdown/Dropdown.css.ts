@@ -20,7 +20,10 @@ const dropdownContent = style({
 	zIndex: token.global.zIndex.dropdown,
 	display: "flex",
 	flexDirection: "column",
-	gap: token.global.spacing.xsmall
+	gap: token.global.spacing.xsmall,
+	maxHeight: "50vh",
+	overflowY: "auto",
+	overscrollBehavior: "contain"
 });
 
 export const styles = {
