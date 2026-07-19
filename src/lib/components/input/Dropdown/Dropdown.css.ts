@@ -3,9 +3,10 @@ import { style } from "@vanilla-extract/css";
 import { token } from "$lib/styles/designTokens";
 
 const baseDropdown = style({
-	display: "flex",
+	display: "inline-flex",
 	position: "relative",
-	flexDirection: "column"
+	flexDirection: "column",
+	width: "max-content"
 });
 
 const dropdownContent = style({
@@ -13,10 +14,13 @@ const dropdownContent = style({
 	borderRadius: token.global.radius.medium,
 	backgroundColor: token.theme.color.surface.raised.normal,
 	minWidth: "100%",
-	width: "fit-content",
+	width: "max-content",
 	padding: token.global.spacing.xsmall,
 	outline: `${token.global.borderWidth.standard} solid ${token.theme.color.border.highlighted}`,
-	zIndex: token.global.zIndex.dropdown
+	zIndex: token.global.zIndex.dropdown,
+	display: "flex",
+	flexDirection: "column",
+	gap: token.global.spacing.xsmall
 });
 
 export const styles = {
