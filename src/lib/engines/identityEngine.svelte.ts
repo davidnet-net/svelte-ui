@@ -1,10 +1,12 @@
 import type { UUIDv7Type } from "$lib/utils/crypto";
 
-interface jwt {
+// Access token! --- Refresh Token is HTTP ONLY
+interface accessToken {
 	userID: UUIDv7Type & { __brand: "userID" };
 	jwtID: UUIDv7Type & { __brand: "jwtID" };
 	issuedAt: number;
 	expiresAt: number;
+	raw: string;
 }
 
 interface user {
@@ -57,7 +59,7 @@ interface privacyPreferences {
 }
 
 export interface identityType {
-	jwt: jwt;
+	accessToken: accessToken;
 	user: user;
 	preferences: preferences;
 	privacyPreferences: privacyPreferences;
@@ -80,7 +82,7 @@ async function refresh() {
 	// Some fancy api calls here
 }
 
-async function authBeat() {
+export async function authBeat() {
 	if (authState.isBeating) return;
 	authState.isBeating = true;
 	authState.loading = true;
@@ -102,9 +104,9 @@ function setupNextBeat() {
 
 	let delay = 5 * 60 * 1000; // 5 MIN
 
-	if (identity?.jwt.expiresAt) {
+	if (identity?.accessToken.expiresAt) {
 		const now = Date.now();
-		const expiresAtMs = identity.jwt.expiresAt * 1000; // Unix timestamp in seconds
+		const expiresAtMs = identity.accessToken.expiresAt * 1000; // Unix timestamp in seconds
 
 		const buffer = 2 * 60 * 1000;
 		delay = expiresAtMs - now - buffer;

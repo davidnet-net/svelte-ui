@@ -1,4 +1,5 @@
 import { appState } from "$lib/engines/appStateEngine.svelte";
+import { identity } from "$lib/engines/identityEngine.svelte";
 
 import { generateUUIDv7 } from "./crypto";
 
@@ -29,7 +30,11 @@ async function baseFetch(
 	};
 
 	if (sendAuth) {
-		// TODO Send auth!!!
+		if (identity?.accessToken.raw) {
+			headers["Authorization"] = `Bearer ${identity.accessToken.raw}`;
+		} else {
+			console.warn("[baseFetch]: sendAuth requested, but no token is in memory.");
+		}
 	}
 
 	const options: RequestInit = {
