@@ -15,7 +15,7 @@
 	import Toaster from "$lib/components/messaging/Toaster/Toaster.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
-	import { authState } from "$lib/engines/identityEngine.svelte";
+	import { authState, identityState } from "$lib/engines/identityEngine.svelte";
 	import { init } from "$lib/engines/initEngine.svelte";
 	import { useShortcut } from "$lib/engines/shortcutEngine.svelte";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte";
@@ -217,9 +217,9 @@
 									{/snippet}
 									<AccountMenu
 										isAvatarLoading={authState.loading}
-										username="USERNAME"
-										email="example@example.org"
-										profilePictureURL="" />
+										username={identityState.user!.username}
+										email={identityState.user!.email}
+										profilePictureURL={identityState.user!.avatarURL} />
 								</Dropdown>
 							{:else}
 								<IconLinkButton
