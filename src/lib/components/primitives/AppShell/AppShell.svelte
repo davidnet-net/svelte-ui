@@ -207,7 +207,7 @@
 								<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
 									{#snippet trigger()}
 										<Avatar
-											src=""
+											src={identityState.user!.avatarURL}
 											size="xlarge"
 											alt={library_messages.lib_component_account_menu_alt()}
 											onclick={() => {
