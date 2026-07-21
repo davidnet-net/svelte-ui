@@ -39,7 +39,8 @@ async function baseFetch(
 
 	const options: RequestInit = {
 		method,
-		headers
+		headers,
+		credentials: "include"
 	};
 
 	let finalUrl = url;
