@@ -1,6 +1,7 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { UUIDv7Type } from "$lib/utils/crypto";
-import { postFetch } from "$lib/utils/fetches";
+import { getFetch, postFetch } from "$lib/utils/fetches";
+
 // Access token! --- Refresh Token is HTTP ONLY
 export interface accessToken {
 	userID: UUIDv7Type & { __brand: "userID" };
@@ -79,12 +80,53 @@ export const identityState = $state<{
 
 let authTimer: ReturnType<typeof setTimeout> | null = null;
 
+export function clearIdentityData() {
+	console.debug("[identityEngine]: Clearing identity data...");
+	identityState.token = undefined;
+	identityState.user = undefined;
+	identityState.preferences = undefined;
+	identityState.privacy = undefined;
+}
+
+export async function syncProfileData() {
+	if (!identityState.token?.raw) {
+		console.warn("[identityEngine]: Cannot sync profile data without a token.");
+		return;
+	}
+
+	console.debug("[identityEngine]: Syncing user profile data...");
+
+	try {
+		// Fetch all three endpoints concurrently using the new getFetch wrapper
+		const [userRes, prefRes, privacyRes] = await Promise.allSettled([
+			getFetch(`${PUBLIC_BACKEND_URL}/auth/me`, undefined, undefined, true),
+			getFetch(`${PUBLIC_BACKEND_URL}/auth/preferences`, undefined, undefined, true),
+			getFetch(`${PUBLIC_BACKEND_URL}/auth/privacy/preferences`, undefined, undefined, true)
+		]);
+
+		if (userRes.status === "fulfilled" && userRes.value) {
+			identityState.user = userRes.value as user;
+		}
+
+		if (prefRes.status === "fulfilled" && prefRes.value) {
+			identityState.preferences = prefRes.value as preferences;
+		}
+
+		if (privacyRes.status === "fulfilled" && privacyRes.value) {
+			identityState.privacy = privacyRes.value as privacyPreferences;
+		}
+	} catch (error) {
+		console.error("[identityEngine]: Critical error syncing profile data", error);
+	}
+}
+
 // Call authBeat instead do not touch refresh manually!
 async function refresh() {
 	console.debug("[identityEngine]: Refreshing...");
 
 	try {
 		const result = await postFetch(`${PUBLIC_BACKEND_URL}/auth/session/refresh`, {});
+
 		if (result && result.accessToken) {
 			identityState.token = {
 				raw: result.accessToken,
@@ -93,13 +135,20 @@ async function refresh() {
 				issuedAt: result.issuedAt,
 				expiresAt: result.expiresAt
 			};
+
 			authState.isLoggedIn = true;
+
+			// Fetch profile data on EVERY successful refresh
+			await syncProfileData();
 		} else {
+			console.warn("[identityEngine]: Refresh succeeded but no access token returned.");
 			authState.isLoggedIn = false;
+			clearIdentityData();
 		}
 	} catch (error) {
 		console.warn("[identityEngine]: Refresh failed or session expired", error);
 		authState.isLoggedIn = false;
+		clearIdentityData();
 	}
 }
 
