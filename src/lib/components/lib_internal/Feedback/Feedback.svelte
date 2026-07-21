@@ -8,13 +8,7 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
-	import {
-		authState,
-		currentPreferences,
-		currentPrivacyPreferences,
-		currentToken,
-		currentUser
-	} from "$lib/engines/identityEngine.svelte";
+	import { authState, identityState } from "$lib/engines/identityEngine.svelte";
 	import manifest from "$lib/internal/manifests/version-manifest.json";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
@@ -49,14 +43,14 @@
 		}
 
 		// Remove sensitive data from token snapshot
-		const tokenSnapshot = $state.snapshot(currentToken);
+		const tokenSnapshot = $state.snapshot(identityState.token);
 		const safeToken = tokenSnapshot ? { ...tokenSnapshot, raw: undefined } : undefined;
 
 		const safeIdentity = {
 			token: safeToken,
-			user: $state.snapshot(currentUser),
-			preferences: $state.snapshot(currentPreferences),
-			privacy: $state.snapshot(currentPrivacyPreferences)
+			user: $state.snapshot(identityState.user),
+			preferences: $state.snapshot(identityState.preferences),
+			privacy: $state.snapshot(identityState.privacy)
 		};
 
 		const data = {

@@ -65,10 +65,17 @@ export const authState = $state({
 	isLoggedIn: false
 });
 
-export let currentToken: accessToken | undefined = $state(undefined);
-export const currentUser: user | undefined = $state(undefined);
-export const currentPreferences: preferences | undefined = $state(undefined);
-export const currentPrivacyPreferences: privacyPreferences | undefined = $state(undefined);
+export const identityState = $state<{
+	token: accessToken | undefined;
+	user: user | undefined;
+	preferences: preferences | undefined;
+	privacy: privacyPreferences | undefined;
+}>({
+	token: undefined,
+	user: undefined,
+	preferences: undefined,
+	privacy: undefined
+});
 
 let authTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -79,7 +86,7 @@ async function refresh() {
 	try {
 		const result = await postFetch(`${PUBLIC_BACKEND_URL}/auth/session/refresh`, {});
 		if (result && result.accessToken) {
-			currentToken = {
+			identityState.token = {
 				raw: result.accessToken,
 				userID: result.userID,
 				jwtID: result.jwtID,
@@ -118,9 +125,9 @@ function setupNextBeat() {
 
 	let delay = 5 * 60 * 1000; // 5 MIN
 
-	if (currentToken?.expiresAt) {
+	if (identityState.token?.expiresAt) {
 		const now = Date.now();
-		const expiresAtMs = currentToken.expiresAt * 1000; // Unix timestamp in seconds
+		const expiresAtMs = identityState.token.expiresAt * 1000; // Unix timestamp in seconds
 
 		const buffer = 2 * 60 * 1000;
 		delay = expiresAtMs - now - buffer;
