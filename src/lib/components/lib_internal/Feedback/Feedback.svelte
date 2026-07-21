@@ -8,7 +8,13 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
-	import { authState, identity } from "$lib/engines/identityEngine.svelte";
+	import {
+		authState,
+		currentPreferences,
+		currentPrivacyPreferences,
+		currentToken,
+		currentUser
+	} from "$lib/engines/identityEngine.svelte";
 	import manifest from "$lib/internal/manifests/version-manifest.json";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
@@ -42,10 +48,16 @@
 			return;
 		}
 
-		// Remove sensitive data from identity snapshot
-		const identitySnapshot = $state.snapshot(identity);
-		const { jwt, ...safeIdentity } = identitySnapshot || {};
-		void jwt;
+		// Remove sensitive data from token snapshot
+		const tokenSnapshot = $state.snapshot(currentToken);
+		const safeToken = tokenSnapshot ? { ...tokenSnapshot, raw: undefined } : undefined;
+
+		const safeIdentity = {
+			token: safeToken,
+			user: $state.snapshot(currentUser),
+			preferences: $state.snapshot(currentPreferences),
+			privacy: $state.snapshot(currentPrivacyPreferences)
+		};
 
 		const data = {
 			message: message.toString(),

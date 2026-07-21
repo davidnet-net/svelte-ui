@@ -1,7 +1,8 @@
+import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { UUIDv7Type } from "$lib/utils/crypto";
-
+import { postFetch } from "$lib/utils/fetches";
 // Access token! --- Refresh Token is HTTP ONLY
-interface accessToken {
+export interface accessToken {
 	userID: UUIDv7Type & { __brand: "userID" };
 	jwtID: UUIDv7Type & { __brand: "jwtID" };
 	issuedAt: number;
@@ -9,7 +10,7 @@ interface accessToken {
 	raw: string;
 }
 
-interface user {
+export interface user {
 	userID: UUIDv7Type & { __brand: "userID" };
 	username: string;
 	displayName: string;
@@ -23,7 +24,7 @@ interface user {
 	isInternal: boolean;
 }
 
-interface preferences {
+export interface preferences {
 	theme: "dark" | "light" | "contrast" | "system";
 	language: string;
 	timezone: string;
@@ -31,7 +32,7 @@ interface preferences {
 	dateFormat: string;
 }
 
-interface privacyPreferences {
+export interface privacyPreferences {
 	languageVisibility:
 		| "private"
 		| "organizations"
@@ -58,20 +59,16 @@ interface privacyPreferences {
 		| "public";
 }
 
-export interface identityType {
-	accessToken: accessToken;
-	user: user;
-	preferences: preferences;
-	privacyPreferences: privacyPreferences;
-}
-
 export const authState = $state({
 	loading: true,
 	isBeating: false,
 	isLoggedIn: false
 });
 
-export const identity: identityType | undefined = undefined;
+export let currentToken: accessToken | undefined = $state(undefined);
+export const currentUser: user | undefined = $state(undefined);
+export const currentPreferences: preferences | undefined = $state(undefined);
+export const currentPrivacyPreferences: privacyPreferences | undefined = $state(undefined);
 
 let authTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -79,7 +76,24 @@ let authTimer: ReturnType<typeof setTimeout> | null = null;
 async function refresh() {
 	console.debug("[identityEngine]: Refreshing...");
 
-	// Some fancy api calls here
+	try {
+		const result = await postFetch(`${PUBLIC_BACKEND_URL}/auth/session/refresh`, {});
+		if (result && result.accessToken) {
+			currentToken = {
+				raw: result.accessToken,
+				userID: result.userID,
+				jwtID: result.jwtID,
+				issuedAt: result.issuedAt,
+				expiresAt: result.expiresAt
+			};
+			authState.isLoggedIn = true;
+		} else {
+			authState.isLoggedIn = false;
+		}
+	} catch (error) {
+		console.warn("[identityEngine]: Refresh failed or session expired", error);
+		authState.isLoggedIn = false;
+	}
 }
 
 export async function authBeat() {
@@ -104,9 +118,9 @@ function setupNextBeat() {
 
 	let delay = 5 * 60 * 1000; // 5 MIN
 
-	if (identity?.accessToken.expiresAt) {
+	if (currentToken?.expiresAt) {
 		const now = Date.now();
-		const expiresAtMs = identity.accessToken.expiresAt * 1000; // Unix timestamp in seconds
+		const expiresAtMs = currentToken.expiresAt * 1000; // Unix timestamp in seconds
 
 		const buffer = 2 * 60 * 1000;
 		delay = expiresAtMs - now - buffer;
