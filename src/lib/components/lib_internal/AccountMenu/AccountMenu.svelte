@@ -13,11 +13,12 @@
 	interface Props {
 		isAvatarLoading: boolean;
 		username: string;
+		displayName: string;
 		email: string;
 		profilePictureURL: string;
 	}
 
-	let { isAvatarLoading, username, email, profilePictureURL }: Props = $props();
+	let { isAvatarLoading, username, displayName, email, profilePictureURL }: Props = $props();
 
 	let isShortcutModalOpen = $state(false);
 	let feedbackOpen = $state(false);
@@ -37,8 +38,15 @@
 				<span
 					style="font-size: {token.global.font.size.medium}; font-weight: {token.global.font.weight
 						.bold}">
-					{username}
+					{displayName}
 				</span>
+				{#if username !== displayName}
+					<span
+						style="font-size: {token.global.font.size.small}; font-weight: {token.global.font.weight
+							.bold}; color: {token.theme.color.text.secondary}">
+						{username}
+					</span>
+				{/if}
 				<span
 					style="font-size: {token.global.font.size.small}; font-weight: {token.global.font.weight
 						.bold}; color: {token.theme.color.text.secondary}">

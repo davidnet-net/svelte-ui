@@ -218,6 +218,7 @@
 									<AccountMenu
 										isAvatarLoading={authState.loading}
 										username={identityState.user!.username}
+										displayName={identityState.user!.displayName}
 										email={identityState.user!.email}
 										profilePictureURL={identityState.user!.avatarURL} />
 								</Dropdown>
