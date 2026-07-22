@@ -44,7 +44,7 @@
 					<span
 						style="font-size: {token.global.font.size.small}; font-weight: {token.global.font.weight
 							.bold}; color: {token.theme.color.text.secondary}">
-						{username}
+						@{username}
 					</span>
 				{/if}
 				<span
