@@ -155,6 +155,11 @@ async function refresh() {
 			// Fetch profile data on EVERY successful refresh
 			await syncProfileData();
 			await afterIdentityInit();
+
+			if (isInitialLoad) {
+				isInitialLoad = false;
+				resolveReady();
+			}
 		} else {
 			console.warn("[identityEngine]: Refresh succeeded but no access token returned.");
 			authState.isLoggedIn = false;
@@ -180,11 +185,6 @@ export async function authBeat() {
 		console.debug("[identityEngine]: Auth beat finished");
 		authState.isBeating = false;
 		authState.loading = false;
-
-		if (isInitialLoad) {
-			isInitialLoad = false;
-			resolveReady();
-		}
 
 		setupNextBeat();
 	}
