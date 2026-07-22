@@ -7,7 +7,10 @@ const baseModal = style({
 	display: "flex",
 	flexDirection: "column",
 	gap: token.global.spacing.small,
-	padding: token.global.spacing.medium
+	padding: token.global.spacing.medium,
+	// Enables smooth container resizing when dynamic content height changes
+	transition:
+		"height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
 });
 
 const normalScreen = style({
@@ -37,7 +40,8 @@ const header = style({
 	borderBottomWidth: token.global.borderWidth.thick,
 	borderBottomStyle: "solid",
 	display: "flex",
-	justifyContent: "space-between"
+	justifyContent: "space-between",
+	flex: "0 0 auto" // Fixed header height
 });
 
 const title = style({
@@ -47,10 +51,9 @@ const title = style({
 const content = style({
 	padding: token.global.spacing.xsmall,
 	overflowY: "auto",
-	flex: 1,
-	flexBasis: "auto",
+	flex: "1 1 auto", // Dynamic main content container
 	lineHeight: token.global.font.lineHeight.normal,
-	minHeight: "fit-content"
+	minHeight: "0" // Critical for dynamic flex scrolling
 });
 
 const actions = style({
@@ -59,7 +62,7 @@ const actions = style({
 	justifyContent: "end",
 	alignItems: "center",
 	gap: token.global.spacing.small,
-	flex: 1,
+	flex: "0 0 auto", // Prevents action buttons from expanding vertically
 	height: "fit-content"
 });
 

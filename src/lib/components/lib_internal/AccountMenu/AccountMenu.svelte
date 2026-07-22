@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { PUBLIC_ACCOUNT_FRONTEND_URL } from "$env/static/public";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import Avatar from "$lib/components/primitives/Avatar/Avatar.svelte";
 	import Divider from "$lib/components/primitives/Divider/Divider.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
+	import { logout } from "$lib/engines/identityEngine.svelte";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 
@@ -60,7 +62,7 @@
 			opennewtab
 			stretchwidth
 			appearance="subtle"
-			href="https://account.davidnet.net">
+			href={PUBLIC_ACCOUNT_FRONTEND_URL}>
 			{library_messages.lib_component_account_menu_switch_account()}
 		</LinkButton>
 		<LinkButton
@@ -68,7 +70,7 @@
 			opennewtab
 			stretchwidth
 			appearance="subtle"
-			href="https://account.davidnet.net">
+			href={PUBLIC_ACCOUNT_FRONTEND_URL}>
 			{library_messages.lib_component_account_menu_manage_account()}
 		</LinkButton>
 		<LinkButton
@@ -76,7 +78,7 @@
 			opennewtab
 			stretchwidth
 			appearance="subtle"
-			href="https://account.davidnet.net">
+			href={PUBLIC_ACCOUNT_FRONTEND_URL}>
 			{library_messages.lib_component_account_menu_preferences()}
 		</LinkButton>
 		<Divider color="tertiary" thickness="standard" />
@@ -107,14 +109,9 @@
 			{library_messages.lib_component_account_menu_active_shortcuts()}
 		</Button>
 		<Divider color="tertiary" thickness="standard" />
-		<LinkButton
-			alignContent="left"
-			opennewtab
-			stretchwidth
-			appearance="subtle"
-			href="https://account.davidnet.net/logout">
+		<Button alignContent="left" stretchwidth appearance="subtle" onclick={logout}>
 			{library_messages.lib_component_account_menu_logout()}
-		</LinkButton>
+		</Button>
 	</Flex>
 </div>
 

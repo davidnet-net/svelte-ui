@@ -7,8 +7,15 @@
 	const tabs = getContext("tabs");
 
 	let isActive = $derived(tabs.selected === value);
+
+	import * as styles from "./Tab.css";
 </script>
 
-<Button role="tab" appearance="subtle" selected={isActive} onclick={() => (tabs.selected = value)}>
+<Button
+	role="tab"
+	appearance="subtle"
+	selected={isActive}
+	class={styles.underline}
+	onclick={() => (tabs.selected = value)}>
 	{@render children()}
 </Button>

@@ -1,6 +1,8 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { UUIDv7Type } from "$lib/utils/crypto";
-import { getFetch, postFetch } from "$lib/utils/fetches";
+import { deleteFetch, getFetch, postFetch } from "$lib/utils/fetches";
+
+import { afterIdentityInit } from "./initEngine.svelte";
 
 // Access token! --- Refresh Token is HTTP ONLY
 export interface accessToken {
@@ -79,13 +81,25 @@ export const identityState = $state<{
 });
 
 let authTimer: ReturnType<typeof setTimeout> | null = null;
+let isInitialLoad = true;
 
-export function clearIdentityData() {
+let resolveReady: () => void;
+const readyPromise = new Promise<void>((resolve) => {
+	resolveReady = resolve;
+});
+
+export async function clearIdentityData() {
 	console.debug("[identityEngine]: Clearing identity data...");
 	identityState.token = undefined;
 	identityState.user = undefined;
 	identityState.preferences = undefined;
 	identityState.privacy = undefined;
+}
+
+export async function logout() {
+	await clearIdentityData();
+	await deleteFetch(PUBLIC_BACKEND_URL + "/auth/session");
+	await authBeat();
 }
 
 export async function syncProfileData() {
@@ -140,6 +154,7 @@ async function refresh() {
 
 			// Fetch profile data on EVERY successful refresh
 			await syncProfileData();
+			await afterIdentityInit();
 		} else {
 			console.warn("[identityEngine]: Refresh succeeded but no access token returned.");
 			authState.isLoggedIn = false;
@@ -165,6 +180,12 @@ export async function authBeat() {
 		console.debug("[identityEngine]: Auth beat finished");
 		authState.isBeating = false;
 		authState.loading = false;
+
+		if (isInitialLoad) {
+			isInitialLoad = false;
+			resolveReady();
+		}
+
 		setupNextBeat();
 	}
 }
@@ -197,4 +218,8 @@ export async function initIdentityEngine() {
 	});
 
 	await authBeat();
+}
+
+export function whenAuthReady(): Promise<void> {
+	return readyPromise;
 }

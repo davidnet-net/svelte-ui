@@ -3,6 +3,7 @@
 
 	import { onMount, type Snippet } from "svelte";
 
+	import { page } from "$app/state";
 	import interUrl from "$lib/assets/fonts/Inter-4.1/InterVariable.woff2";
 	import momoTrustDisplayUrl from "$lib/assets/fonts/Momo_Trust_Display/MomoTrustDisplay-Regular.woff2";
 	import DNLogo from "$lib/assets/images/DNLogo.png";
@@ -226,7 +227,9 @@
 								<IconLinkButton
 									icon="login"
 									tip={library_messages.lib_component_appshell_login_alt()}
-									href={appState.accountFrontendURL + "/login"} />
+									href="{appState.accountFrontendURL}/login?continue={encodeURIComponent(
+										page.url.href
+									)}" />
 							{/if}
 						</div>
 					</nav>

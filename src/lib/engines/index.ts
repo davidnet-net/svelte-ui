@@ -5,3 +5,4 @@ export * from "./identityEngine.svelte";
 export * from "./shortcutEngine.svelte";
 export * from "./themeEngine.svelte";
 export * from "./toastEngine.svelte";
+export * from "./translationEngine.svelte";

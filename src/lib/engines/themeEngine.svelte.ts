@@ -1,6 +1,8 @@
 /**
  * @file themeEngine.svelte
  */
+import { setCookie } from "$lib/utils/cookies";
+
 import {
 	iconFontName,
 	iconFontRoundedName,
@@ -42,6 +44,7 @@ export function setTheme(themeName: themeNames) {
 		console.warn("[themeEngine]: High Contrast not yet supported!");
 	}
 	selectedTheme = themeName;
+	setCookie("theme_cache", themeName);
 }
 
 // Reason could be any input:

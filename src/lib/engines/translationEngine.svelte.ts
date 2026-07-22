@@ -16,7 +16,43 @@ export interface ParaglideRuntimeType<T extends string> {
 	onSetLocale?: (callback: (newLocale: T) => void) => void;
 }
 
-const LANGUAGE_CACHE_KEY = "language_cache";
+export const LANGUAGE_CACHE_KEY = "language_cache";
+export const TIMEZONE_CACHE_KEY = "timezone_cache";
+export const FIRSTDAYOFWEEK_CACHE_KEY = "first_day_of_week_cache";
+export const DATEFORMAT_CACHE_KEY = "date_format_cache";
+
+// We will store the consumer's setLocale function here when the engine boots
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let consumerSetLocale: ((locale: any) => void) | null = null;
+
+/**
+ * Master function to update the language across the consumer app, library components, and cache.
+ * @param newLocale - The locale to switch to (e.g., 'en', 'nl')
+ */
+export function setLanguage(newLocale: string) {
+	// 1. FORCE THE CACHE UPDATE FIRST
+	setCookie(LANGUAGE_CACHE_KEY, newLocale);
+
+	if (typeof document !== "undefined") {
+		document.documentElement.lang = newLocale;
+	}
+
+	// 2. Trigger the Paraglide runtimes
+	if (consumerSetLocale) {
+		consumerSetLocale(newLocale);
+	} else {
+		console.warn("[i18n] Consumer engine not booted, falling back to internal setter.");
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		internalSetLocale(newLocale as any);
+	}
+
+	// 3. Force a hard browser reload so the SvelteKit server catches the new cookie
+	if (typeof window !== "undefined") {
+		setTimeout(() => {
+			window.location.reload();
+		}, 100);
+	}
+}
 
 /**
  * Initializes the translation engine.
@@ -25,6 +61,9 @@ const LANGUAGE_CACHE_KEY = "language_cache";
  */
 export function createTranslationEngine<T extends string>(appRuntime: ParaglideRuntimeType<T>) {
 	const { locales, getLocale, setLocale } = appRuntime;
+
+	// Save the consumer's setter so our UI components can reach it via setLanguage()
+	consumerSetLocale = setLocale;
 
 	if (!Array.isArray(locales) || locales.length === 0) {
 		throw new Error("createTranslationEngine: 'locales' must be a non-empty array.");
@@ -60,8 +99,10 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 	async function validateLanguage(lang: string | null): Promise<Locale | null> {
 		if (!lang) return null;
-		const candidate = lang.split(",")[0].split("-")[0].trim().toLowerCase();
-		return (locales as readonly string[]).includes(candidate) ? (candidate as Locale) : null;
+		const candidate = lang.split(",")[0]?.split("-")[0]?.trim().toLowerCase();
+		return candidate && (locales as readonly string[]).includes(candidate)
+			? (candidate as Locale)
+			: null;
 	}
 
 	/**
@@ -83,7 +124,8 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 		}
 
 		// 3. Browser Navigator Fallback
-		if (!targetLocale && typeof window !== "undefined") {
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		if (!targetLocale && typeof window !== "undefined" && navigator?.languages) {
 			for (const lang of navigator.languages) {
 				const validated = await validateLanguage(lang);
 				if (validated) {
@@ -104,4 +146,98 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 			document.documentElement.lang = getLocale();
 		}
 	};
+}
+
+// --- Formatting & Regional Settings Engine ---
+
+// In-memory state so we don't spam the cookie parser on every request
+let currentTimezone: string | null = null;
+let currentFirstDayOfWeek: string | null = null;
+let currentDateFormat: string | null = null;
+
+// Valid reference lists based on your inputs
+export const validDaysOfWeek = [
+	{ value: "monday", label: "Monday" },
+	{ value: "tuesday", label: "Tuesday" },
+	{ value: "wednesday", label: "Wednesday" },
+	{ value: "thursday", label: "Thursday" },
+	{ value: "friday", label: "Friday" },
+	{ value: "saturday", label: "Saturday" },
+	{ value: "sunday", label: "Sunday" }
+];
+
+export const validDateFormats = ["YYYY-MM-DD", "DD-MM-YYYY", "MM-DD-YYYY"];
+
+export const validTimezones =
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	typeof Intl !== "undefined" && Intl.supportedValuesOf
+		? Intl.supportedValuesOf("timeZone")
+		: ["UTC"];
+
+// --- 1. TIMEZONE ---
+
+export function setTimezone(tz: string) {
+	if (validTimezones.includes(tz)) {
+		currentTimezone = tz;
+		setCookie(TIMEZONE_CACHE_KEY, tz);
+	} else {
+		console.warn(`[i18n] Invalid timezone attempted: ${tz}`);
+	}
+}
+
+export function getTimezone(): string {
+	if (!currentTimezone) {
+		// Read from cache, fallback to browser's native timezone, final fallback to UTC
+		const cached = getCookie(TIMEZONE_CACHE_KEY);
+		const browserTz =
+			typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "UTC";
+
+		const candidate = cached || browserTz;
+		currentTimezone = validTimezones.includes(candidate) ? candidate : "UTC";
+	}
+	return currentTimezone;
+}
+
+// --- 2. FIRST DAY OF WEEK ---
+
+export function setFirstDayOfWeek(dayValue: string) {
+	const isValid = validDaysOfWeek.some((day) => day.value === dayValue.toLowerCase());
+	if (isValid) {
+		currentFirstDayOfWeek = dayValue.toLowerCase();
+		setCookie(FIRSTDAYOFWEEK_CACHE_KEY, currentFirstDayOfWeek);
+	} else {
+		console.warn(`[i18n] Invalid day of week attempted: ${dayValue}`);
+	}
+}
+
+export function getFirstDayOfWeek(): string {
+	if (!currentFirstDayOfWeek) {
+		const cached = getCookie(FIRSTDAYOFWEEK_CACHE_KEY);
+		const isValid = cached && validDaysOfWeek.some((day) => day.value === cached.toLowerCase());
+
+		// Defaults to monday if cache is empty or invalid
+		currentFirstDayOfWeek = isValid ? cached.toLowerCase() : "monday";
+	}
+	return currentFirstDayOfWeek;
+}
+
+// --- 3. DATE FORMAT ---
+
+export function setDateFormat(format: string) {
+	if (validDateFormats.includes(format)) {
+		currentDateFormat = format;
+		setCookie(DATEFORMAT_CACHE_KEY, format);
+	} else {
+		console.warn(`[i18n] Invalid date format attempted: ${format}`);
+	}
+}
+
+export function getDateFormat(): string {
+	if (!currentDateFormat) {
+		const cached = getCookie(DATEFORMAT_CACHE_KEY);
+
+		// Defaults to YYYY-MM-DD if cache is empty or invalid
+		currentDateFormat = cached && validDateFormats.includes(cached) ? cached : "YYYY-MM-DD";
+	}
+	return currentDateFormat;
 }

@@ -1,12 +1,18 @@
-import { onCLS, onINP, onLCP } from "web-vitals";
-
 import manifest from "$lib/internal/manifests/version-manifest.json";
 
 import { getCookie, setCookie } from "../utils/cookies";
 import { initAppState } from "./appStateEngine.svelte";
-import { initIdentityEngine } from "./identityEngine.svelte";
+import { identityState, initIdentityEngine } from "./identityEngine.svelte";
 import { isValidTheme, setTheme, type themeNames } from "./themeEngine.svelte";
-import { createTranslationEngine, type ParaglideRuntimeType } from "./translationEngine.svelte";
+import {
+	createTranslationEngine,
+	LANGUAGE_CACHE_KEY,
+	type ParaglideRuntimeType,
+	setDateFormat,
+	setFirstDayOfWeek,
+	setLanguage,
+	setTimezone
+} from "./translationEngine.svelte";
 
 export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeType<T>) {
 	// TODO: Init phases that are based on caches should be moved to SSR to prevent flashes of wrong styles or languages!
@@ -41,9 +47,6 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 	await initIdentityEngine();
 	console.debug("[AppShell] Inited identityEngine.");
 
-	// We give preference of database language with:
-	// await runTranslationCheck("nl");
-
 	// Monitoring
 	if (window.__hydration_start) {
 		const hydrationTime = hydrationEnd - window.__hydration_start;
@@ -54,8 +57,19 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 		);
 	}
 
-	onCLS(console.log);
-	onINP(console.log);
-	onLCP(console.log);
-	console.debug("[AppShell] Telemetry observers attached.");
+	//onCLS(console.log);
+	//onINP(console.log);
+	//onLCP(console.log);
+	//console.debug("[AppShell] Telemetry observers attached.");
+}
+
+export async function afterIdentityInit() {
+	setDateFormat(identityState!.preferences!.dateFormat);
+	setFirstDayOfWeek(identityState!.preferences!.firstDayOfWeek);
+	const LANGUAGE = getCookie(LANGUAGE_CACHE_KEY) || "en-us";
+	if (LANGUAGE !== identityState!.preferences!.language) {
+		setLanguage(identityState!.preferences!.language);
+	}
+	setTheme(identityState!.preferences!.theme);
+	setTimezone(identityState!.preferences!.timezone);
 }
