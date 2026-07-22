@@ -40,7 +40,8 @@ export const global = createGlobalTheme(":root", {
 		small: "0.5rem", // 8px
 		medium: "1rem", // 16px
 		large: "1.5rem", // 24px
-		xlarge: "2rem" // 32px
+		xlarge: "2rem", // 32px
+		giant: "3rem" // ?px
 	},
 
 	radius: {

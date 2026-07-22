@@ -51,6 +51,7 @@ export const flexGrow = styleVariants({
 
 export const gap = styleVariants({
 	none: { gap: token.global.spacing.none },
+	giant: { gap: token.global.spacing.giant },
 	xlarge: { gap: token.global.spacing.xlarge },
 	large: { gap: token.global.spacing.large },
 	medium: { gap: token.global.spacing.medium },
@@ -74,6 +75,7 @@ export const overflowY = styleVariants({
 
 export const marginTop = styleVariants({
 	none: { marginTop: token.global.spacing.none },
+	giant: { marginTop: token.global.spacing.giant },
 	xlarge: { marginTop: token.global.spacing.xlarge },
 	large: { marginTop: token.global.spacing.large },
 	medium: { marginTop: token.global.spacing.medium },
@@ -83,6 +85,7 @@ export const marginTop = styleVariants({
 
 export const marginRight = styleVariants({
 	none: { marginRight: token.global.spacing.none },
+	giant: { marginRight: token.global.spacing.giant },
 	xlarge: { marginRight: token.global.spacing.xlarge },
 	large: { marginRight: token.global.spacing.large },
 	medium: { marginRight: token.global.spacing.medium },
@@ -92,6 +95,7 @@ export const marginRight = styleVariants({
 
 export const marginBottom = styleVariants({
 	none: { marginBottom: token.global.spacing.none },
+	giant: { marginBottom: token.global.spacing.giant },
 	xlarge: { marginBottom: token.global.spacing.xlarge },
 	large: { marginBottom: token.global.spacing.large },
 	medium: { marginBottom: token.global.spacing.medium },
@@ -101,6 +105,7 @@ export const marginBottom = styleVariants({
 
 export const marginLeft = styleVariants({
 	none: { marginLeft: token.global.spacing.none },
+	giant: { marginLeft: token.global.spacing.giant },
 	xlarge: { marginLeft: token.global.spacing.xlarge },
 	large: { marginLeft: token.global.spacing.large },
 	medium: { marginLeft: token.global.spacing.medium },
