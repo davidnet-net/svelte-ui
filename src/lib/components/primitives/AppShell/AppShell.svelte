@@ -218,10 +218,10 @@
 									{/snippet}
 									<AccountMenu
 										isAvatarLoading={authState.loading}
-										username={identityState.user!.username}
-										displayName={identityState.user!.displayName}
-										email={identityState.user!.email}
-										profilePictureURL={identityState.user!.avatarURL} />
+										username={identityState.user?.username || ""}
+										displayName={identityState.user?.displayName || ""}
+										email={identityState.user?.email || ""}
+										profilePictureURL={identityState.user?.avatarURL || ""} />
 								</Dropdown>
 							{:else}
 								<IconLinkButton
