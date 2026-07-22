@@ -29,7 +29,7 @@
 <Anchor {external} {...rest}>
 	<div class="{styles.baseCard} {focusring}">
 		<div class={styles.illustrationContainer}>
-			<Icon size="xhuge" {icon} />
+			<Icon size="giant" {icon} />
 		</div>
 		<div class={styles.contentContainer}>
 			<h3>{title}</h3>

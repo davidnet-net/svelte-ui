@@ -155,20 +155,20 @@ async function refresh() {
 			// Fetch profile data on EVERY successful refresh
 			await syncProfileData();
 			await afterIdentityInit();
-
-			if (isInitialLoad) {
-				isInitialLoad = false;
-				resolveReady();
-			}
 		} else {
-			console.warn("[identityEngine]: Refresh succeeded but no access token returned.");
+			console.warn("[identityEngine]: Session expired or never logged in.");
 			authState.isLoggedIn = false;
 			clearIdentityData();
 		}
 	} catch (error) {
-		console.warn("[identityEngine]: Refresh failed or session expired", error);
+		console.warn("[identityEngine]: Refresh request failed.", error);
 		authState.isLoggedIn = false;
 		clearIdentityData();
+	}
+
+	if (isInitialLoad) {
+		isInitialLoad = false;
+		resolveReady();
 	}
 }
 
