@@ -1,3 +1,5 @@
+import { afterNavigate, goto } from "$app/navigation";
+import { resolve } from "$app/paths";
 import { PUBLIC_ACCOUNT_FRONTEND_URL, PUBLIC_BACKEND_URL } from "$env/static/public";
 import { generateUUIDv7, type UUIDv7Type } from "$lib/utils/crypto";
 
@@ -18,6 +20,8 @@ interface AppStateType {
 		highContrast: boolean;
 		reduceMotion: boolean;
 	};
+	previousPage: string | undefined;
+	historyStack: string[];
 }
 
 export const appState: AppStateType = $state({
@@ -34,7 +38,9 @@ export const appState: AppStateType = $state({
 		darkMode: false,
 		highContrast: false,
 		reduceMotion: false
-	}
+	},
+	previousPage: undefined,
+	historyStack: []
 });
 
 export async function initAppState() {
@@ -89,4 +95,39 @@ export async function initAppState() {
 	watchMedia("(prefers-reduced-motion: reduce)", (matches) => {
 		appState.systemPreference.reduceMotion = matches;
 	});
+
+	afterNavigate((navigation) => {
+		const toUrl = navigation.to?.url.pathname;
+		if (!toUrl) return;
+
+		const currentStack = appState.historyStack;
+		if (currentStack[currentStack.length - 1] !== toUrl) {
+			appState.historyStack.push(toUrl);
+			if (appState.historyStack.length > 1) {
+				appState.previousPage = appState.historyStack[appState.historyStack.length - 2];
+			}
+		}
+	});
+}
+
+/**
+ * Navigates back to the previous page internally using `goto`.
+ * Falls back to browser `history.back()` or a default path if no internal history exists.
+ */
+export async function navigateBack(defaultFallback = "/") {
+	if (appState.historyStack.length > 1) {
+		appState.historyStack.pop();
+		const targetPath = appState.historyStack.pop();
+
+		if (targetPath) {
+			await goto(resolve(targetPath, {}));
+			return;
+		}
+	}
+
+	if (typeof window !== "undefined" && window.history.length > 1) {
+		window.history.back();
+	} else {
+		await goto(resolve(defaultFallback, {}));
+	}
 }
