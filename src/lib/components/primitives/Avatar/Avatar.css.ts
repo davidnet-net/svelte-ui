@@ -52,7 +52,10 @@ const size = styleVariants({
 	large: { height: token.global.font.size.large, width: token.global.font.size.large },
 	xlarge: { height: token.global.font.size.xlarge, width: token.global.font.size.xlarge },
 	huge: { height: token.global.font.size.huge, width: token.global.font.size.huge },
-	xhuge: { height: token.global.font.size.xhuge, width: token.global.font.size.xhuge }
+	xhuge: { height: token.global.font.size.xhuge, width: token.global.font.size.xhuge },
+	giant: { height: token.global.font.size.xhuge, width: token.global.font.size.giant },
+	xgiant: { height: token.global.font.size.xhuge, width: token.global.font.size.xgiant },
+	xxgiant: { height: token.global.font.size.xhuge, width: token.global.font.size.xxgiant }
 });
 
 const buttonreset = style({
