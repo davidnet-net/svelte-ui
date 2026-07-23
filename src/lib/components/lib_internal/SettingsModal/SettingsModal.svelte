@@ -220,7 +220,7 @@
 			</TabPanel>
 		</Flex>
 		{#snippet actions()}
-			<LinkButton href={PUBLIC_ACCOUNT_FRONTEND_URL + "/account/settings/preferences"}>
+			<LinkButton href={PUBLIC_ACCOUNT_FRONTEND_URL + "/manage/preferences"}>
 				{library_messages.lib_component_settings_modal_all_settings()}
 			</LinkButton>
 			<Button onclick={onClose} appearance="primary">

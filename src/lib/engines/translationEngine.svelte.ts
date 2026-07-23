@@ -241,3 +241,74 @@ export function getDateFormat(): string {
 	}
 	return currentDateFormat;
 }
+
+// -------------------------------------------------
+//  UTILS - UTILS - UTILS - UTILS - UTILS - UTILS
+// -------------------------------------------------
+
+/**
+ * Internal helper to handle the actual timezone and formatting logic.
+ * Expects milliseconds.
+ */
+function _formatUnix(ms: number, includeTime: boolean): string {
+	if (!ms || isNaN(ms)) return "";
+
+	const date = new Date(ms);
+	const tz = getTimezone();
+	const dateFormat = getDateFormat();
+
+	// Use Intl.DateTimeFormat to lock in the correct timezone offsets
+	const options: Intl.DateTimeFormatOptions = {
+		timeZone: tz,
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		...(includeTime && { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
+	};
+
+	// We use 'en-US' as the base locale just to get predictable parts we can parse,
+	// but the actual time calculated is strictly bound to the target timezone.
+	const formatter = new Intl.DateTimeFormat("en-US", options);
+	const parts = formatter.formatToParts(date);
+
+	// Safely extract the timezone-adjusted values
+	const year = parts.find((p) => p.type === "year")?.value ?? "1970";
+	const month = parts.find((p) => p.type === "month")?.value ?? "01";
+	const day = parts.find((p) => p.type === "day")?.value ?? "01";
+
+	// Swap out the user's preferred format string (e.g., YYYY-MM-DD -> 2024-05-14)
+	let result = dateFormat.replace("YYYY", year).replace("MM", month).replace("DD", day);
+
+	// Append the exact time if requested
+	if (includeTime) {
+		const hour = parts.find((p) => p.type === "hour")?.value ?? "00";
+		const minute = parts.find((p) => p.type === "minute")?.value ?? "00";
+		const second = parts.find((p) => p.type === "second")?.value ?? "00";
+
+		// Formats as "YYYY-MM-DD HH:MM:SS"
+		result += ` ${hour}:${minute}:${second}`;
+	}
+
+	return result;
+}
+
+/**
+ * Converts a Unix timestamp in MILLISECONDS to a formatted string
+ * respecting the user's cached timezone and date format.
+ * @param ms - The Unix timestamp in milliseconds.
+ * @param includeTime - Whether to append the time (HH:MM:SS) to the output.
+ */
+export function formatUnixMsToPreferred(ms: number, includeTime = false): string {
+	return _formatUnix(ms, includeTime);
+}
+
+/**
+ * Converts a Unix timestamp in SECONDS to a formatted string
+ * respecting the user's cached timezone and date format.
+ * @param seconds - The Unix timestamp in seconds.
+ * @param includeTime - Whether to append the time (HH:MM:SS) to the output.
+ */
+export function formatUnixSecToPreferred(seconds: number, includeTime = false): string {
+	if (!seconds || isNaN(seconds)) return "";
+	return _formatUnix(seconds * 1000, includeTime);
+}
