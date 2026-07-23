@@ -165,11 +165,6 @@ async function refresh() {
 		authState.isLoggedIn = false;
 		clearIdentityData();
 	}
-
-	if (isInitialLoad) {
-		isInitialLoad = false;
-		resolveReady();
-	}
 }
 
 export async function authBeat() {
@@ -185,6 +180,11 @@ export async function authBeat() {
 		console.debug("[identityEngine]: Auth beat finished");
 		authState.isBeating = false;
 		authState.loading = false;
+
+		if (isInitialLoad) {
+			isInitialLoad = false;
+			resolveReady();
+		}
 
 		setupNextBeat();
 	}
