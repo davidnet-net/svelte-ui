@@ -14,7 +14,6 @@
 	"lib_banners_connection_lost_title": "Connection lost.",
 	"lib_banners_connection_lost_content": "We have lost the connection with Davidnet. Please check your internet connection.",
 	"lib_component_account_menu_help": "Help",
-	"lib_component_account_menu_preferences": "Preferences",
 	"lib_component_account_menu_switch_account": "Switch account",
 	"lib_component_account_menu_manage_account": "Manage account",
 	"lib_component_account_menu_active_shortcuts": "Active shortcuts",

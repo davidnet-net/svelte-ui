@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-	import { fly } from "svelte/transition";
 
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte";
@@ -71,10 +70,7 @@
 	});
 </script>
 
-<div
-	class={styles.baseDropdown}
-	bind:this={triggerContainer}
-	transition:fly={{ y: -10, duration: 200 }}>
+<div class={styles.baseDropdown} bind:this={triggerContainer}>
 	{@render trigger()}
 
 	{#if isOpen && triggerContainer}

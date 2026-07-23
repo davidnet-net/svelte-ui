@@ -14,7 +14,7 @@ const baseModal = style({
 });
 
 const normalScreen = style({
-	maxWidth: "600px",
+	maxWidth: "700px",
 	width: "60dvw",
 	maxHeight: "80vh",
 	minHeight: "12rem",
