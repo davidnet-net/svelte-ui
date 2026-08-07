@@ -58,6 +58,7 @@
 		</Flex>
 
 		<LinkButton
+			disabled
 			alignContent="left"
 			opennewtab
 			stretchwidth
