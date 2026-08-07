@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Lozenge from "$lib/components/messaging/Lozenge/Lozenge.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Card from "$lib/internal/components/Card/Card.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
@@ -28,4 +29,5 @@
 			description={m.docs_page_card_tools_description()}
 			title={m.docs_page_card_tools_title()} />
 	</Flex>
+	<Lozenge appearance="success">Test</Lozenge>
 </div>

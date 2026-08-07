@@ -1,4 +1,3 @@
-import { INTERNAL_SECRET } from "$env/static/private";
 import { PUBLIC_ACCOUNT_FRONTEND_URL, PUBLIC_BACKEND_URL } from "$env/static/public";
 import { isValidUrl } from "$lib/utils/networking";
 
@@ -8,11 +7,6 @@ async function checkDDSEnvironmentVariables() {
 	}
 	if (!isValidUrl(PUBLIC_ACCOUNT_FRONTEND_URL)) {
 		throw new Error(`Invalid PUBLIC_ACCOUNT_FRONTEND_URL: ${PUBLIC_ACCOUNT_FRONTEND_URL}.`);
-	}
-	if (INTERNAL_SECRET.length !== 64) {
-		throw new Error(
-			`Invalid INTERNAL_SECRET: ${INTERNAL_SECRET}. Please ensure it is a 64-character RANDOM string.`
-		);
 	}
 }
 
