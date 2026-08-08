@@ -96,7 +96,7 @@
 <Tabs bind:selected={activeTab}>
 	<Modal title={library_messages.lib_component_settings_modal_title()} onclose={onClose}>
 		<Flex direction="column" gap="small">
-			<Flex direction="row" gap="small">
+			<Flex direction="row" gap="small" height="fit-content">
 				<Tab value="general">General</Tab>
 				<Tab value="locales">Locales</Tab>
 			</Flex>

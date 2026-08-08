@@ -29,5 +29,4 @@
 			description={m.docs_page_card_tools_description()}
 			title={m.docs_page_card_tools_title()} />
 	</Flex>
-	<Lozenge appearance="success">Test</Lozenge>
 </div>

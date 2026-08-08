@@ -23,8 +23,6 @@ export interface user {
 	email: string;
 	countryCode: string;
 	location: string;
-	isAdmin: boolean;
-	isInternal: boolean;
 }
 
 export interface preferences {
