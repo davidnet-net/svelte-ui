@@ -70,6 +70,10 @@ async function baseFetch(
 		toast("Not so fast!", "You are going to fast slow down.", "acute", 4000, "warning");
 		return { code: "RATELIMIT", success: false };
 	}
+	if (result.status >= 500 && result.status <= 599) {
+		toast("Sorry!", "Something went wrong on our side.", "error", 4000, "danger");
+		return { code: "SERVER_ERROR", success: false };
+	}
 	return result.json();
 }
 
