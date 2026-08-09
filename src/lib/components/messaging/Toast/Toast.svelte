@@ -8,6 +8,7 @@
 	import type { ToastItem } from "$lib/engines/toastEngine.svelte";
 
 	import { styles } from "./Toast.css";
+	import { token } from "$lib/styles";
 
 	interface Props {
 		toast: ToastItem;
@@ -29,15 +30,19 @@
 	in:fly={flyParams}
 	out:fly={flyParams}
 	class="{styles.baseToast} {styles.appearance[toast.appearance ?? 'primary']}">
-	<Flex direction="row" gap="xsmall" alignItems="start" justifyContent="center">
+	<Flex direction="row" gap="small" alignItems="start" justifyContent="center">
 		{#if toast.icon}
-			<Flex height="32px" width="fit-content" justifyContent="center" alignItems="center">
-				<Icon size="inherit" icon={toast.icon} />
+			<Flex
+				height={token.global.font.size.large}
+				width="fit-content"
+				justifyContent="center"
+				alignItems="center">
+				<Icon size="large" icon={toast.icon} />
 			</Flex>
 		{/if}
 
 		<Flex direction="column" gap="xsmall" flexGrow="1">
-			<Flex alignItems="center" justifyContent="spaceBetween" direction="row">
+			<Flex alignItems="center" justifyContent="spaceBetween" direction="row" gap="none">
 				<span class={styles.title}>{toast.title}</span>
 				<IconButton
 					icon="close"

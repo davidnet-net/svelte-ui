@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { toast } from "$lib";
+	import Button from "$lib/components/input/Button/Button.svelte";
 	import Lozenge from "$lib/components/messaging/Lozenge/Lozenge.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Card from "$lib/internal/components/Card/Card.svelte";
@@ -31,3 +33,19 @@
 	</Flex>
 	<Lozenge appearance="success">Test</Lozenge>
 </div>
+
+<Button
+	onclick={() => {
+		console.log("Attempting to toast.");
+		toast("Not so fast!", "You are going to fast slow down.", "acute", 4000, "warning");
+	}}>
+	Generate toast
+</Button>
+
+<Button
+	onclick={() => {
+		console.log("Attempting to toast.");
+		toast("Sorry!", "Something went wrong. Try again later | UNKNOWN", "error", 4000, "danger");
+	}}>
+	Generate toast
+</Button>

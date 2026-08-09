@@ -23,7 +23,14 @@ export interface ToastItem extends Toast {
 
 const toastList = $state<ToastItem[]>([]);
 
-export function toast(toast: Toast) {
+export function toast(
+	title: string,
+	content?: string,
+	icon?: iconType,
+	durationMS?: number,
+	appearance?: keyof typeof toastStyles.appearance,
+	location?: keyof typeof toasterStyles.toasterLocation
+) {
 	const id = crypto.randomUUID();
 
 	const dismiss = () => {
@@ -33,22 +40,25 @@ export function toast(toast: Toast) {
 		}
 	};
 
-	if (toast.durationMS && toast.durationMS > 0) {
-		setTimeout(dismiss, toast.durationMS);
+	if (durationMS && durationMS > 0) {
+		setTimeout(dismiss, durationMS);
 	}
 
 	const newToast: ToastItem = {
-		...DEFAULT_CONFIG,
-		...toast,
+		title,
+		content,
+		icon,
+		durationMS,
+		appearance: appearance ?? DEFAULT_CONFIG.appearance,
+		location: location ?? DEFAULT_CONFIG.location,
 		id,
 		dismiss
 	};
 
 	toastList.push(newToast);
 
-	if (toast.title.length > 29) {
+	if (title.length > 29) {
 		console.warn("[Toast]: Title length exceeds 29 characters.");
 	}
 }
-
 export const getToasts = () => toastList;

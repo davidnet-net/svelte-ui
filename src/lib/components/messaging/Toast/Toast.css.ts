@@ -27,7 +27,7 @@ const appearance = styleVariants({
 	},
 	warning: {
 		backgroundColor: token.theme.color.background.warning.normal,
-		color: token.theme.color.text.UNSAFE.white_default
+		color: token.theme.color.text.default
 	},
 	primary: {
 		backgroundColor: token.theme.color.background.primary.normal,
