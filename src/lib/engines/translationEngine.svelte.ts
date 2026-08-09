@@ -8,6 +8,7 @@
 import { setLocale as internalSetLocale } from "$lib/paraglide/runtime.js";
 
 import { getCookie, setCookie } from "../utils/cookies";
+import { toast } from "./toastEngine.svelte";
 
 export interface ParaglideRuntimeType<T extends string> {
 	locales: readonly T[];
@@ -30,6 +31,13 @@ let consumerSetLocale: ((locale: any) => void) | null = null;
  * @param newLocale - The locale to switch to (e.g., 'en', 'nl')
  */
 export function setLanguage(newLocale: string) {
+	toast(
+		"Reloading page!",
+		"To apply the language we need to reload the page.",
+		"translate",
+		4000,
+		"subtle"
+	);
 	// 1. FORCE THE CACHE UPDATE FIRST
 	setCookie(LANGUAGE_CACHE_KEY, newLocale);
 
