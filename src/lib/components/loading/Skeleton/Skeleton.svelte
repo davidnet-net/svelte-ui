@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
@@ -10,6 +11,7 @@
 		height?: string;
 		radius?: keyof typeof styles.radius;
 		noDefaults?: boolean;
+		children?: Snippet | undefined;
 	}
 
 	let {
@@ -17,6 +19,7 @@
 		width = "100%",
 		height = "100%",
 		radius = "small",
+		children = undefined,
 		class: className,
 		...rest
 	}: Props = $props();
@@ -28,6 +31,10 @@
 	class="{styles.baseSkeleton} {noDefaults ? '' : styles.radius[radius]} {className ?? ''}"
 	aria-hidden="true"
 	{...rest}>
-	<div class={styles.shimmer}></div>
+	<div class={styles.shimmer}>
+		{#if children}
+			{@render children()}
+		{/if}
+	</div>
 	<VisuallyHidden>Loading</VisuallyHidden>
 </div>
