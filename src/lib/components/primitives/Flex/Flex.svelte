@@ -8,6 +8,7 @@
 		alignItems?: keyof typeof styles.alignItems;
 		justifyContent?: keyof typeof styles.justifyContent;
 		flexGrow?: keyof typeof styles.flexGrow;
+		flexWrap?: keyof typeof styles.flexWrap;
 		width?: string;
 		height?: string;
 		gap?: keyof typeof styles.gap;
@@ -27,6 +28,7 @@
 		alignItems = "start",
 		justifyContent = "start",
 		flexGrow = "0",
+		flexWrap = "nowrap",
 		width = "100%",
 		height = "100%",
 		gap = "none",
@@ -49,6 +51,7 @@
         {styles.alignItems[alignItems]} 
         {styles.justifyContent[justifyContent]}
         {styles.flexGrow[flexGrow]}
+        {styles.flexWrap[flexWrap]} 
         {styles.gap[gap]}
         {styles.marginTop[marginTop]}
         {styles.marginRight[marginRight]}

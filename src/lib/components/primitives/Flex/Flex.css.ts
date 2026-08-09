@@ -112,3 +112,9 @@ export const marginLeft = styleVariants({
 	small: { marginLeft: token.global.spacing.small },
 	xsmall: { marginLeft: token.global.spacing.xsmall }
 });
+
+export const flexWrap = styleVariants({
+	nowrap: { flexWrap: "nowrap" },
+	wrap: { flexWrap: "wrap" },
+	wrapReverse: { flexWrap: "wrap-reverse" }
+});

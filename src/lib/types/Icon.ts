@@ -14,6 +14,7 @@ const ICON_NAMES = [
 	"_18mp",
 	"_19mp",
 	"_1k",
+	"location_on",
 	"_1k_plus",
 	"_1x_mobiledata",
 	"_1x_mobiledata_badge",
