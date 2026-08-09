@@ -100,6 +100,7 @@ export async function logout() {
 	await clearIdentityData();
 	await deleteFetch(PUBLIC_BACKEND_URL + "/auth/session");
 	await authBeat();
+	window.location.reload();
 }
 
 export async function syncProfileData() {
