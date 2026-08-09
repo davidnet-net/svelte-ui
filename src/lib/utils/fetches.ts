@@ -1,3 +1,4 @@
+import { toast } from "$lib/engines";
 import { appState } from "$lib/engines/appStateEngine.svelte";
 import { identityState } from "$lib/engines/identityEngine.svelte";
 
@@ -64,6 +65,11 @@ async function baseFetch(
 	}
 
 	const result = await fetch(finalUrl, options);
+
+	if (result.status === 429) {
+		toast("Not so fast!", "You are going to fast slow down.", "acute", 4000, "warning");
+		return { code: "RATELIMIT", success: false };
+	}
 	return result.json();
 }
 
