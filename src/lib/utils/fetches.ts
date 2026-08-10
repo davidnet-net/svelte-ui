@@ -6,25 +6,23 @@ import { generateUUIDv7 } from "./crypto";
 
 /**
  * Core internal fetching utility that standardizes API requests across the application.
- * Automatically handles correlation IDs, session tracking, JSON formatting, and query parameter conversion.
- * * @param url - The fully qualified URL or path to the API endpoint.
- * @param method - The HTTP method to use (e.g., "GET", "POST").
- * @param data - Optional data payload. Converted to query parameters for GET/HEAD, and a JSON body for others.
- * @param customHeaders - Optional dictionary of additional headers to merge with the default headers.
- * @param sendAuth - If true, attaches the user's authentication token to the request headers.
- * @returns A promise that resolves to the parsed JSON response from the server.
+ * Automatically handles correlation IDs, session tracking, JSON/FormData formatting, and query parameter conversion.
  */
 async function baseFetch(
 	url: string,
 	method: string,
-	data?: Record<string, unknown>,
+	data?: Record<string, unknown> | FormData,
 	customHeaders: Record<string, string> = {},
 	sendAuth = false
 ) {
 	const correlationID = generateUUIDv7();
 
+	// Check if the payload is FormData
+	const isFormData = data instanceof FormData;
+
+	// Dynamically set content-type: omit it for FormData so the browser handles the boundary string automatically
 	const headers: Record<string, string> = {
-		"Content-Type": "application/json",
+		...(isFormData ? {} : { "Content-Type": "application/json" }),
 		"x-Tab-Session-ID": appState.tabID as string,
 		"x-Correlation-ID": correlationID,
 		...customHeaders
@@ -59,6 +57,9 @@ async function baseFetch(
 			if (queryString) {
 				finalUrl += `?${queryString}`;
 			}
+		} else if (isFormData) {
+			// Pass FormData directly as the body without JSON stringification
+			options.body = data;
 		} else {
 			options.body = JSON.stringify(data);
 		}
@@ -67,7 +68,7 @@ async function baseFetch(
 	const result = await fetch(finalUrl, options);
 
 	if (result.status === 429) {
-		toast("Not so fast!", "You are going to fast slow down.", "acute", 4000, "warning");
+		toast("Not so fast!", "You are going too fast, slow down.", "acute", 4000, "warning");
 		return { code: "RATELIMIT", success: false };
 	}
 	if (result.status >= 500 && result.status <= 599) {
@@ -79,11 +80,6 @@ async function baseFetch(
 
 /**
  * Performs an HTTP GET request.
- * * @param url - The endpoint URL.
- * @param data - Optional data to be appended to the URL as query string parameters.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
  */
 export async function getFetch(
 	url: string,
@@ -96,15 +92,10 @@ export async function getFetch(
 
 /**
  * Performs an HTTP POST request.
- * * @param url - The endpoint URL.
- * @param data - The data payload to be serialized as a JSON body.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
  */
 export async function postFetch(
 	url: string,
-	data: Record<string, unknown>,
+	data: Record<string, unknown> | FormData,
 	headers?: Record<string, string>,
 	sendAuth = false
 ) {
@@ -113,15 +104,10 @@ export async function postFetch(
 
 /**
  * Performs an HTTP PATCH request to apply partial modifications to a resource.
- * * @param url - The endpoint URL.
- * @param data - The partial data payload to be serialized as a JSON body.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
  */
 export async function patchFetch(
 	url: string,
-	data: Record<string, unknown>,
+	data: Record<string, unknown> | FormData,
 	headers?: Record<string, string>,
 	sendAuth = false
 ) {
@@ -130,15 +116,10 @@ export async function patchFetch(
 
 /**
  * Performs an HTTP PUT request to replace a target resource.
- * * @param url - The endpoint URL.
- * @param data - The complete data payload to be serialized as a JSON body.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
  */
 export async function putFetch(
 	url: string,
-	data: Record<string, unknown>,
+	data: Record<string, unknown> | FormData,
 	headers?: Record<string, string>,
 	sendAuth = false
 ) {
@@ -147,15 +128,10 @@ export async function putFetch(
 
 /**
  * Performs an HTTP DELETE request to remove a specified resource.
- * * @param url - The endpoint URL.
- * @param data - Optional data payload to be serialized as a JSON body.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
  */
 export async function deleteFetch(
 	url: string,
-	data?: Record<string, unknown>,
+	data?: Record<string, unknown> | FormData,
 	headers?: Record<string, string>,
 	sendAuth = false
 ) {
@@ -163,13 +139,7 @@ export async function deleteFetch(
 }
 
 /**
- * Performs an HTTP HEAD request. Identical to GET, but the server does not return a message body.
- * Useful for checking if a resource exists or reading its headers.
- * * @param url - The endpoint URL.
- * @param data - Optional data to be appended to the URL as query string parameters.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
+ * Performs an HTTP HEAD request.
  */
 export async function headFetch(
 	url: string,
@@ -181,16 +151,11 @@ export async function headFetch(
 }
 
 /**
- * Performs an HTTP OPTIONS request to describe the communication options for the target resource.
- * * @param url - The endpoint URL.
- * @param data - Optional data payload to be serialized as a JSON body.
- * @param headers - Optional custom headers to include in the request.
- * @param sendAuth - Whether to include the authentication token. Defaults to false.
- * @returns A promise resolving to the JSON response.
+ * Performs an HTTP OPTIONS request.
  */
 export async function optionsFetch(
 	url: string,
-	data?: Record<string, unknown>,
+	data?: Record<string, unknown> | FormData,
 	headers?: Record<string, string>,
 	sendAuth = false
 ) {

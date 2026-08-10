@@ -58,15 +58,6 @@
 		</Flex>
 
 		<LinkButton
-			disabled
-			alignContent="left"
-			opennewtab
-			stretchwidth
-			appearance="subtle"
-			href={PUBLIC_ACCOUNT_FRONTEND_URL}>
-			{library_messages.lib_component_account_menu_switch_account()}
-		</LinkButton>
-		<LinkButton
 			alignContent="left"
 			opennewtab
 			stretchwidth
