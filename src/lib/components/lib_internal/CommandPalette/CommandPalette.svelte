@@ -292,7 +292,7 @@
 						title: profile.displayName ?? profile.username,
 						description: "@" + profile.username,
 						avatar: profile.avatarUrl,
-						href: `${PUBLIC_ACCOUNT_FRONTEND_URL}profile/${profile.userId}`
+						href: `${PUBLIC_ACCOUNT_FRONTEND_URL}/profile/${profile.userId}`
 					} as Result;
 				}
 				return null;
