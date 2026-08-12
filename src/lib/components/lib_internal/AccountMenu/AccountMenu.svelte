@@ -6,7 +6,7 @@
 	import Avatar from "$lib/components/primitives/Avatar/Avatar.svelte";
 	import Divider from "$lib/components/primitives/Divider/Divider.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
-	import { logout } from "$lib/engines/identityEngine.svelte";
+	import { identityState, logout } from "$lib/engines/identityEngine.svelte";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 
@@ -64,6 +64,14 @@
 			appearance="subtle"
 			href={PUBLIC_ACCOUNT_FRONTEND_URL}>
 			{library_messages.lib_component_account_menu_manage_account()}
+		</LinkButton>
+		<LinkButton
+			alignContent="left"
+			opennewtab
+			stretchwidth
+			appearance="subtle"
+			href={PUBLIC_ACCOUNT_FRONTEND_URL + `/profile/${identityState.user?.userID}`}>
+			{library_messages.lib_component_account_menu_view_profile()}
 		</LinkButton>
 		<Divider color="tertiary" thickness="standard" />
 		<LinkButton

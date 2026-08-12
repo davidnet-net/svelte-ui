@@ -198,12 +198,14 @@
 								onclick={() => {
 									isQuickSettingsOpened = true;
 								}} />
-							<IconButton
-								onclick={() => {
-									console.debug("Notification btn pressed");
-								}}
-								icon="notifications"
-								tip={library_messages.lib_component_appshell_notifications_alt()} />
+							{#if authState.isLoggedIn && !authState.loading}
+								<IconButton
+									onclick={() => {
+										console.debug("Notification btn pressed");
+									}}
+									icon="notifications"
+									tip={library_messages.lib_component_appshell_notifications_alt()} />
+							{/if}
 							{#if authState.loading || authState.isLoggedIn}
 								<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
 									{#snippet trigger()}
