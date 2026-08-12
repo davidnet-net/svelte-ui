@@ -46,16 +46,16 @@ const baseAvatar = style({
 });
 
 const size = styleVariants({
-	small: { height: token.global.font.size.small, width: token.global.font.size.small },
-	medium: { height: token.global.font.size.medium, width: token.global.font.size.medium },
-	xmedium: { height: token.global.font.size.xmedium, width: token.global.font.size.xmedium },
-	large: { height: token.global.font.size.large, width: token.global.font.size.large },
-	xlarge: { height: token.global.font.size.xlarge, width: token.global.font.size.xlarge },
-	huge: { height: token.global.font.size.huge, width: token.global.font.size.huge },
-	xhuge: { height: token.global.font.size.xhuge, width: token.global.font.size.xhuge },
-	giant: { height: token.global.font.size.giant, width: token.global.font.size.giant },
-	xgiant: { height: token.global.font.size.xgiant, width: token.global.font.size.xgiant },
-	xxgiant: { height: token.global.font.size.xxgiant, width: token.global.font.size.xxgiant }
+	small: { height: "1.5rem", width: "1.5rem" },
+	medium: { height: "2rem", width: "2rem" },
+	xmedium: { height: "2.5rem", width: "2.5rem" },
+	large: { height: "3rem", width: "3rem" },
+	xlarge: { height: "4rem", width: "4rem" },
+	huge: { height: "5rem", width: "5rem" },
+	xhuge: { height: "6rem", width: "6rem" },
+	giant: { height: "7rem", width: "7rem" },
+	xgiant: { height: "10rem", width: "10rem" },
+	xxgiant: { height: "15rem", width: "15rem" }
 });
 
 const buttonreset = style({
