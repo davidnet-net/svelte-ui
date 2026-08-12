@@ -77,7 +77,7 @@
 			opennewtab
 			stretchwidth
 			appearance="subtle"
-			href={PUBLIC_ACCOUNT_FRONTEND_URL + `profile/${identityState.user?.userID}`}>
+			href={PUBLIC_ACCOUNT_FRONTEND_URL + `/profile/${identityState.user?.userID}`}>
 			{library_messages.lib_component_account_menu_view_profile()}
 		</LinkButton>
 		<Divider color="tertiary" thickness="standard" />
