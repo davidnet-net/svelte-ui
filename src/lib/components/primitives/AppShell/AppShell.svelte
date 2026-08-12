@@ -211,7 +211,7 @@
 									{#snippet trigger()}
 										<Avatar
 											src={identityState.user?.avatarURL || ""}
-											size="xlarge"
+											size="medium"
 											alt={library_messages.lib_component_account_menu_alt()}
 											onclick={() => {
 												isAvatarOpened = !isAvatarOpened;
