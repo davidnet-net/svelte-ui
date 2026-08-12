@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import type { Snippet } from "svelte";
 
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import Blanket from "$lib/components/overlays/Blanket/Blanket.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
-	import { shortcutTrap } from "$lib/engines/shortcutEngine.svelte";
+	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { generateUUIDv7 } from "$lib/utils/crypto";
 
@@ -29,7 +30,40 @@
 	const titleID = generateUUIDv7();
 	const contentID = generateUUIDv7();
 
-	//TODO: Add back button of mobile to close modal
+	// Close with Escape key
+	useShortcut(
+		"escape",
+		() => {
+			if (onclose) onclose();
+		},
+		{
+			active: () => !!onclose,
+			name: "Close Modal"
+		}
+	);
+
+	// Close with mobile back button
+	onMount(() => {
+		if (!onclose) return;
+
+		// Push a dummy history state so the back button triggers popstate instead of leaving the page
+		history.pushState({ modalOpen: true }, "");
+
+		const handlePopState = () => {
+			onclose();
+		};
+
+		window.addEventListener("popstate", handlePopState);
+
+		return () => {
+			window.removeEventListener("popstate", handlePopState);
+			// If the modal is closed via code/buttons rather than the back button,
+			// clean up the history entry we pushed.
+			if (history.state?.modalOpen) {
+				history.back();
+			}
+		};
+	});
 </script>
 
 <Blanket onclick={onclose}>

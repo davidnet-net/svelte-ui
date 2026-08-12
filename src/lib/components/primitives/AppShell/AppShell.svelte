@@ -28,6 +28,7 @@
 	import Avatar from "../Avatar/Avatar.svelte";
 	import Flex from "../Flex/Flex.svelte";
 	import { styles } from "./AppShell.css";
+	import CommandPalette from "$lib/components/lib_internal/CommandPalette/CommandPalette.svelte";
 
 	interface Props {
 		children: Snippet;
@@ -278,4 +279,5 @@
 	{#if isQuickSettingsOpened}
 		<SettingsModal onClose={() => (isQuickSettingsOpened = false)} />
 	{/if}
+	<CommandPalette />
 </div>

@@ -68,6 +68,29 @@
 			document.removeEventListener("click", handleClickOutside);
 		};
 	});
+
+	// Close with mobile back button when open
+	$effect(() => {
+		if (!isOpen) return;
+
+		// Push history state so the back button triggers popstate and closes the dropdown
+		history.pushState({ dropdownOpen: true }, "");
+
+		const handlePopState = () => {
+			isOpen = false;
+		};
+
+		window.addEventListener("popstate", handlePopState);
+
+		return () => {
+			window.removeEventListener("popstate", handlePopState);
+			// If closed via click-outside, escape key, or toggle instead of the back button,
+			// clean up the history entry we pushed.
+			if (history.state?.dropdownOpen) {
+				history.back();
+			}
+		};
+	});
 </script>
 
 <div class={styles.baseDropdown} bind:this={triggerContainer}>

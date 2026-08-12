@@ -31,21 +31,4 @@
 			description={m.docs_page_card_tools_description()}
 			title={m.docs_page_card_tools_title()} />
 	</Flex>
-	<Lozenge appearance="success">Test</Lozenge>
 </div>
-
-<Button
-	onclick={() => {
-		console.log("Attempting to toast.");
-		toast("Not so fast!", "You are going to fast slow down.", "acute", 4000, "warning");
-	}}>
-	Generate toast
-</Button>
-
-<Button
-	onclick={() => {
-		console.log("Attempting to toast.");
-		toast("Sorry!", "Something went wrong. Try again later | UNKNOWN", "error", 4000, "danger");
-	}}>
-	Generate toast
-</Button>
