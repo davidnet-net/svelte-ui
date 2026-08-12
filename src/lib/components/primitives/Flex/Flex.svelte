@@ -11,6 +11,9 @@
 		flexWrap?: keyof typeof styles.flexWrap;
 		width?: string;
 		height?: string;
+		maxWidth?: string;
+		maxHeight?: string;
+		padding?: keyof typeof styles.padding;
 		gap?: keyof typeof styles.gap;
 		marginTop?: keyof typeof styles.marginTop;
 		marginRight?: keyof typeof styles.marginRight;
@@ -31,6 +34,9 @@
 		flexWrap = "nowrap",
 		width = "100%",
 		height = "100%",
+		maxWidth = undefined,
+		maxHeight = undefined,
+		padding = "none",
 		gap = "none",
 		marginTop = "none",
 		marginRight = "none",
@@ -52,6 +58,7 @@
         {styles.justifyContent[justifyContent]}
         {styles.flexGrow[flexGrow]}
         {styles.flexWrap[flexWrap]} 
+        {styles.padding[padding]}
         {styles.gap[gap]}
         {styles.marginTop[marginTop]}
         {styles.marginRight[marginRight]}
@@ -63,6 +70,8 @@
         {styles.verticalAlign[verticalAlign]}
     "
 	style:width
-	style:height>
+	style:height
+	style:max-width={maxWidth}
+	style:max-height={maxHeight}>
 	{@render children()}
 </div>

@@ -118,3 +118,27 @@ export const flexWrap = styleVariants({
 	wrap: { flexWrap: "wrap" },
 	wrapReverse: { flexWrap: "wrap-reverse" }
 });
+
+export const maxWidth = styleVariants({
+	none: { maxWidth: "none" },
+	"100%": { maxWidth: "100%" },
+	"48rem": { maxWidth: "48rem" },
+	"36rem": { maxWidth: "36rem" },
+	"12rem": { maxWidth: "12rem" },
+	"8rem": { maxWidth: "8rem" }
+});
+
+export const maxHeight = styleVariants({
+	none: { maxHeight: "none" },
+	"100%": { maxHeight: "100%" }
+});
+
+export const padding = styleVariants({
+	none: { padding: token.global.spacing.none },
+	giant: { padding: token.global.spacing.giant },
+	xlarge: { padding: token.global.spacing.xlarge },
+	large: { padding: token.global.spacing.large },
+	medium: { padding: token.global.spacing.medium },
+	small: { padding: token.global.spacing.small },
+	xsmall: { padding: token.global.spacing.xsmall }
+});
