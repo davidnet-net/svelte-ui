@@ -477,11 +477,18 @@
 			height="100dvh"
 			width="100dvw"
 			marginTop="giant">
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<div
 				use:focusTrap={true}
 				use:shortcutTrap
 				role="dialog"
 				aria-modal="true"
+				tabindex="-1"
+				onclick={(e) => {
+					if (e.target === e.currentTarget) {
+						onclose();
+					}
+				}}
 				class={styles.wrapper}>
 				<div class={styles.inputContainer}>
 					<input
