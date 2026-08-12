@@ -185,6 +185,12 @@
 			href: "https://davidnet.net/legal"
 		},
 		{
+			title: "Connections",
+			description: "Manage your connections",
+			icon: "emoji_people",
+			href: "https://account.davidnet.net/profile/connections"
+		},
+		{
 			title: "Docs",
 			description: "Navigates to the docs app",
 			icon: "docs",
