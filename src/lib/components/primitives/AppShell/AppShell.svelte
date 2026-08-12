@@ -29,6 +29,9 @@
 	import Flex from "../Flex/Flex.svelte";
 	import { styles } from "./AppShell.css";
 	import CommandPalette from "$lib/components/lib_internal/CommandPalette/CommandPalette.svelte";
+	import { type NavigationItem } from "$lib/internal/navigationData.svelte";
+	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
+	import ShortcutsModal from "$lib/components/lib_internal/ShortcutsModal/ShortcutsModal.svelte";
 
 	interface Props {
 		children: Snippet;
@@ -69,6 +72,9 @@
 		 */
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		paraglideRuntime: any;
+
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		navigationData?: NavigationItem[];
 	}
 
 	let {
@@ -79,7 +85,8 @@
 		appName,
 		shortAppName,
 		disableInit = false,
-		paraglideRuntime
+		paraglideRuntime,
+		navigationData
 	}: Props = $props();
 
 	onMount(() => {
@@ -106,6 +113,9 @@
 
 	let isAvatarOpened = $state(false);
 	let isQuickSettingsOpened = $state(false);
+	let commandPalleteOpen = $state(false);
+	let feedbackOpen = $state(false);
+	let isShortcutModalOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -194,6 +204,12 @@
 						</div>
 						<div class={styles.navRight}>
 							<IconButton
+								icon="search"
+								tip={library_messages.lib_component_appshell_search_alt()}
+								onclick={() => {
+									commandPalleteOpen = true;
+								}} />
+							<IconButton
 								icon="settings"
 								tip={library_messages.lib_component_appshell_settings_alt()}
 								onclick={() => {
@@ -224,6 +240,8 @@
 										username={identityState.user?.username || ""}
 										displayName={identityState.user?.displayName || ""}
 										email={identityState.user?.email || ""}
+										bind:feedbackOpen
+										bind:isShortcutModalOpen
 										profilePictureURL={identityState.user?.avatarURL || ""} />
 								</Dropdown>
 							{:else}
@@ -279,5 +297,19 @@
 	{#if isQuickSettingsOpened}
 		<SettingsModal onClose={() => (isQuickSettingsOpened = false)} />
 	{/if}
-	<CommandPalette />
+
+	{#if feedbackOpen}
+		<Feedback bind:isOpen={feedbackOpen} />
+	{/if}
+
+	{#if isShortcutModalOpen}
+		<ShortcutsModal onClose={() => (isShortcutModalOpen = false)} />
+	{/if}
+
+	<CommandPalette
+		{navigationData}
+		bind:isOpen={commandPalleteOpen}
+		bind:feedbackOpen
+		bind:isShortcutModalOpen
+		bind:isQuickSettingsOpen={isQuickSettingsOpened} />
 </div>

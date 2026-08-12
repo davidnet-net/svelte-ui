@@ -3,6 +3,7 @@
 	import AppShell from "$lib/components/primitives/AppShell/AppShell.svelte";
 	import Footer from "$lib/internal/components/Footer/Footer.svelte";
 	import SidebarNavigation from "$lib/internal/components/SidebarNavigation/SidebarNavigation.svelte";
+	import { navigationData } from "$lib/internal/navigationData.svelte";
 	import * as paraglideRuntime from "$lib/paraglide/runtime.js";
 
 	let { children } = $props();
@@ -13,7 +14,7 @@
 {#if isRunner}
 	{@render children()}
 {:else}
-	<AppShell appName="Davidnet Design System" shortAppName="DDS" {paraglideRuntime}>
+	<AppShell appName="Davidnet Design System" shortAppName="DDS" {paraglideRuntime} {navigationData}>
 		{#snippet banners()}{/snippet}
 		<!--<Banner appearance="warning" icon="frame_source">Davidnet development mode active!</Banner>-->
 		{#snippet sidebar()}

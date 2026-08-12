@@ -24,6 +24,7 @@
 	let feedbackValue = $state("");
 	let isSubmitting = $state(false);
 	let feedbackFinished = $state(false);
+
 	async function submitFeedback(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
 		event.preventDefault();
 		isSubmitting = true;
@@ -73,8 +74,6 @@
 		console.debug(data);
 
 		// Do some magic fetches
-
-		//isSubmitting = false;
 
 		await sleep(500);
 
@@ -132,10 +131,10 @@
 			<Button
 				appearance="primary"
 				onclick={() => {
-					isOpen = false;
 					feedbackFinished = false;
 					isSubmitting = false;
 					feedbackValue = "";
+					isOpen = false;
 				}}>
 				{library_messages.lib_common_close()}
 			</Button>

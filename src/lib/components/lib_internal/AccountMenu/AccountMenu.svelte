@@ -18,12 +18,19 @@
 		displayName: string;
 		email: string;
 		profilePictureURL: string;
+		feedbackOpen?: boolean;
+		isShortcutModalOpen?: boolean;
 	}
 
-	let { isAvatarLoading, username, displayName, email, profilePictureURL }: Props = $props();
-
-	let isShortcutModalOpen = $state(false);
-	let feedbackOpen = $state(false);
+	let {
+		isAvatarLoading,
+		username,
+		displayName,
+		email,
+		profilePictureURL,
+		feedbackOpen = $bindable(false),
+		isShortcutModalOpen = $bindable(false)
+	}: Props = $props();
 </script>
 
 <div style="width: 100%; margin: {token.global.spacing.small}">
@@ -70,7 +77,7 @@
 			opennewtab
 			stretchwidth
 			appearance="subtle"
-			href={PUBLIC_ACCOUNT_FRONTEND_URL + `/profile/${identityState.user?.userID}`}>
+			href={PUBLIC_ACCOUNT_FRONTEND_URL + `profile/${identityState.user?.userID}`}>
 			{library_messages.lib_component_account_menu_view_profile()}
 		</LinkButton>
 		<Divider color="tertiary" thickness="standard" />
@@ -106,11 +113,3 @@
 		</Button>
 	</Flex>
 </div>
-
-{#if isShortcutModalOpen}
-	<ShortcutsModal onClose={() => (isShortcutModalOpen = false)} />
-{/if}
-
-{#if feedbackOpen}
-	<Feedback bind:isOpen={feedbackOpen} />
-{/if}
