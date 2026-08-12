@@ -175,7 +175,7 @@
 		{
 			title: "Davidnet",
 			description: "Navigates to the davidnet.net",
-			icon: "design_services",
+			icon: "arrow_outward",
 			href: "https://davidnet.net"
 		},
 		{
@@ -187,13 +187,13 @@
 		{
 			title: "Docs",
 			description: "Navigates to the docs app",
-			icon: "policy",
+			icon: "docs",
 			href: "https://docs.davidnet.net"
 		},
 		{
 			title: "Kanban",
 			description: "Navigates to the kanban app",
-			icon: "policy",
+			icon: "view_kanban",
 			href: "https://kanban.davidnet.net"
 		}
 	];
