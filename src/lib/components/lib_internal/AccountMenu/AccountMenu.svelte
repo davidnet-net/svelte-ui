@@ -42,7 +42,7 @@
 		</span>
 
 		<Flex alignItems="center" gap="medium" marginBottom="small">
-			<Avatar src={profilePictureURL} size="medium" loading={isAvatarLoading} />
+			<Avatar src={profilePictureURL} size="large" loading={isAvatarLoading} />
 			<Flex direction="column">
 				<span
 					style="font-size: {token.global.font.size.medium}; font-weight: {token.global.font.weight

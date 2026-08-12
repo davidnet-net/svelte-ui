@@ -32,6 +32,7 @@
 	import { type NavigationItem } from "$lib/internal/navigationData.svelte";
 	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import ShortcutsModal from "$lib/components/lib_internal/ShortcutsModal/ShortcutsModal.svelte";
+	import NotificationMenu from "$lib/components/lib_internal/NotificationMenu/NotificationMenu.svelte";
 
 	interface Props {
 		children: Snippet;
@@ -116,6 +117,7 @@
 	let commandPalleteOpen = $state(false);
 	let feedbackOpen = $state(false);
 	let isShortcutModalOpen = $state(false);
+	let isNotifcationsMenuOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -216,19 +218,25 @@
 									isQuickSettingsOpened = true;
 								}} />
 							{#if authState.isLoggedIn && !authState.loading}
-								<IconButton
-									onclick={() => {
-										console.debug("Notification btn pressed");
-									}}
-									icon="notifications"
-									tip={library_messages.lib_component_appshell_notifications_alt()} />
+								<Dropdown bind:isOpen={isNotifcationsMenuOpen} offset={20}>
+									{#snippet trigger()}
+										<IconButton
+											onclick={() => {
+												isNotifcationsMenuOpen = !isNotifcationsMenuOpen;
+											}}
+											icon="notifications"
+											tip={library_messages.lib_component_appshell_notifications_alt()} />
+									{/snippet}
+
+									<NotificationMenu />
+								</Dropdown>
 							{/if}
 							{#if authState.loading || authState.isLoggedIn}
 								<Dropdown bind:isOpen={isAvatarOpened} offset={20}>
 									{#snippet trigger()}
 										<Avatar
 											src={identityState.user?.avatarURL || ""}
-											size="medium"
+											size="xmedium"
 											alt={library_messages.lib_component_account_menu_alt()}
 											onclick={() => {
 												isAvatarOpened = !isAvatarOpened;
