@@ -478,6 +478,7 @@
 {#if isOpen}
 	<Blanket centerContent={false} onclick={onclose}>
 		<Flex
+			onclick={onclose}
 			alignItems="start"
 			justifyContent="center"
 			height="100dvh"

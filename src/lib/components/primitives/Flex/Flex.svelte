@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-
 	import * as styles from "./Flex.css";
+	import type { HTMLAttributes } from "svelte/elements";
 
-	interface Props {
+	interface Props extends HTMLAttributes<HTMLDivElement> {
 		direction?: keyof typeof styles.direction;
 		alignItems?: keyof typeof styles.alignItems;
 		justifyContent?: keyof typeof styles.justifyContent;
@@ -46,7 +46,8 @@
 		verticalAlign = "inherit",
 		overflowY = "visible",
 		text = "inherit",
-		children
+		children,
+		...rest
 	}: Props = $props();
 </script>
 
@@ -72,6 +73,7 @@
 	style:width
 	style:height
 	style:max-width={maxWidth}
-	style:max-height={maxHeight}>
+	style:max-height={maxHeight}
+	{...rest}>
 	{@render children()}
 </div>
