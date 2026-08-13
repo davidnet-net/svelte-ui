@@ -45,25 +45,25 @@
 	let dateFormatDropdownOpen = $state(false);
 
 	const languages = [
-		{ value: "en-us", label: "English - US" },
-		{ value: "nl", label: "Nederlands" }
+		{ value: "en-us", get label() { return library_messages.lib_component_settings_modal_language_en_us(); } },
+		{ value: "nl", get label() { return library_messages.lib_component_settings_modal_language_nl(); } }
 	];
 
 	const themes = [
-		{ value: "system", label: "System" },
-		{ value: "dark", label: "Dark" },
-		{ value: "light", label: "Light" },
-		{ value: "contrast", label: "Contrast" }
+		{ value: "system", get label() { return library_messages.lib_component_settings_modal_theme_system(); } },
+		{ value: "dark", get label() { return library_messages.lib_component_settings_modal_theme_dark(); } },
+		{ value: "light", get label() { return library_messages.lib_component_settings_modal_theme_light(); } },
+		{ value: "contrast", get label() { return library_messages.lib_component_settings_modal_theme_contrast(); } }
 	];
 
 	const daysOfWeek = [
-		{ value: "monday", label: "Monday" },
-		{ value: "tuesday", label: "Tuesday" },
-		{ value: "wednesday", label: "Wednesday" },
-		{ value: "thursday", label: "Thursday" },
-		{ value: "friday", label: "Friday" },
-		{ value: "saturday", label: "Saturday" },
-		{ value: "sunday", label: "Sunday" }
+		{ value: "monday", get label() { return library_messages.lib_component_settings_modal_day_monday(); } },
+		{ value: "tuesday", get label() { return library_messages.lib_component_settings_modal_day_tuesday(); } },
+		{ value: "wednesday", get label() { return library_messages.lib_component_settings_modal_day_wednesday(); } },
+		{ value: "thursday", get label() { return library_messages.lib_component_settings_modal_day_thursday(); } },
+		{ value: "friday", get label() { return library_messages.lib_component_settings_modal_day_friday(); } },
+		{ value: "saturday", get label() { return library_messages.lib_component_settings_modal_day_saturday(); } },
+		{ value: "sunday", get label() { return library_messages.lib_component_settings_modal_day_sunday(); } }
 	];
 
 	const dateFormats = ["YYYY-MM-DD", "DD-MM-YYYY", "MM-DD-YYYY"];
@@ -97,11 +97,11 @@
 	<Modal title={library_messages.lib_component_settings_modal_title()} onclose={onClose}>
 		<Flex direction="column" gap="small">
 			<Flex direction="row" gap="small" height="fit-content" width="fit-content">
-				<Tab value="general">General</Tab>
-				<Tab value="locales">Locales</Tab>
+				<Tab value="general">{library_messages.lib_component_settings_modal_tab_general()}</Tab>
+				<Tab value="locales">{library_messages.lib_component_settings_modal_tab_locales()}</Tab>
 			</Flex>
 			<TabPanel value="general">
-				<h2 style="font-size: {token.global.font.size.medium}">Select the theme you prefer:</h2>
+				<h2 style="font-size: {token.global.font.size.medium}">{library_messages.lib_component_settings_modal_theme_description()}</h2>
 				<Dropdown isOpen={themeDropdownOpen}>
 					{#snippet trigger()}
 						<Button iconbefore="palette" onclick={() => (themeDropdownOpen = !themeDropdownOpen)}>
@@ -124,7 +124,7 @@
 			</TabPanel>
 
 			<TabPanel value="locales">
-				<h2 style="font-size: {token.global.font.size.medium}">Select the language you prefer:</h2>
+				<h2 style="font-size: {token.global.font.size.medium}">{library_messages.lib_component_settings_modal_language_description()}</h2>
 				<Dropdown isOpen={languageDropdownOpen}>
 					{#snippet trigger()}
 						<Button
@@ -147,7 +147,7 @@
 					{/each}
 				</Dropdown>
 
-				<h2 style="font-size: {token.global.font.size.medium}">Select your timezone:</h2>
+				<h2 style="font-size: {token.global.font.size.medium}">{library_messages.lib_component_settings_modal_timezone_description()}</h2>
 				<Dropdown isOpen={timezoneDropdownOpen}>
 					{#snippet trigger()}
 						<Button
@@ -171,7 +171,7 @@
 				</Dropdown>
 
 				<h2 style="font-size: {token.global.font.size.medium}">
-					Select the first day of the week:
+					{library_messages.lib_component_settings_modal_first_day_description()}
 				</h2>
 				<Dropdown isOpen={firstDayDropdownOpen}>
 					{#snippet trigger()}
@@ -195,7 +195,7 @@
 					{/each}
 				</Dropdown>
 
-				<h2 style="font-size: {token.global.font.size.medium}">Select your date format:</h2>
+				<h2 style="font-size: {token.global.font.size.medium}">{library_messages.lib_component_settings_modal_date_format_description()}</h2>
 				<Dropdown isOpen={dateFormatDropdownOpen}>
 					{#snippet trigger()}
 						<Button

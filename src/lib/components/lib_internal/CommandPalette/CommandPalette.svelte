@@ -12,6 +12,7 @@
 	import type { iconType } from "$lib/types";
 	import { getFetch } from "$lib/utils";
 	import * as styles from "./CommandPalette.css";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 
 	interface Props {
 		navigationData?: NavigationItem[];
@@ -37,7 +38,7 @@
 	let mentionSearchQuery = $state("");
 	let selectedIndex = $state(0);
 
-	const MENTION_OPTIONS = [{ id: "user", label: "@user", description: "Mention a user" }] as const;
+	const MENTION_OPTIONS = [{ id: "user", label: "@user", get description() { return library_messages.lib_component_command_palette_mention_user(); } }] as const;
 
 	interface Result {
 		title: string;
@@ -115,8 +116,8 @@
 	// Static pool of quick actions available in the command palette
 	const QUICK_ACTION_POOL: Result[] = [
 		{
-			title: "Quick Settings",
-			description: "Theme & Locales",
+			get title() { return library_messages.lib_component_command_palette_action_quick_settings_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_quick_settings_description(); },
 			icon: "settings",
 			action: () => {
 				isQuickSettingsOpen = true;
@@ -124,8 +125,8 @@
 			}
 		},
 		{
-			title: "Send Feedback",
-			description: "Submit bug reports or feature suggestions",
+			get title() { return library_messages.lib_component_command_palette_action_feedback_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_feedback_description(); },
 			icon: "feedback",
 			action: () => {
 				feedbackOpen = true;
@@ -133,8 +134,8 @@
 			}
 		},
 		{
-			title: "Active shortcuts",
-			description: "View active keyboard shortcuts",
+			get title() { return library_messages.lib_component_command_palette_action_shortcuts_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_shortcuts_description(); },
 			icon: "keyboard_capslock_badge",
 			action: () => {
 				isShortcutModalOpen = true;
@@ -142,12 +143,12 @@
 			}
 		},
 		{
-			title: "Log in",
+			get title() { return library_messages.lib_component_command_palette_action_login_title(); },
 			icon: "login",
 			href: "https://account.davidnet.net/login"
 		},
 		{
-			title: "Log out",
+			get title() { return library_messages.lib_component_command_palette_action_logout_title(); },
 			icon: "logout",
 			action: () => {
 				logout();
@@ -155,50 +156,50 @@
 			}
 		},
 		{
-			title: "Account",
-			description: "Navigates to the account page",
+			get title() { return library_messages.lib_component_command_palette_action_account_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_account_description(); },
 			icon: "for_you",
 			href: "https://account.davidnet.net"
 		},
 		{
-			title: "Home",
-			description: "One overview for everything",
+			get title() { return library_messages.lib_component_command_palette_action_home_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_home_description(); },
 			icon: "home",
 			href: "https://home.davidnet.net"
 		},
 		{
-			title: "Davidnet design",
-			description: "Navigates to the davidnet design page",
+			get title() { return library_messages.lib_component_command_palette_action_design_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_design_description(); },
 			icon: "design_services",
 			href: "https://design.davidnet.net"
 		},
 		{
-			title: "Davidnet",
-			description: "Navigates to the davidnet.net",
+			get title() { return library_messages.lib_component_command_palette_action_davidnet_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_davidnet_description(); },
 			icon: "arrow_outward",
 			href: "https://davidnet.net"
 		},
 		{
-			title: "Privacy & Policies",
-			description: "Navigates to the legal pages",
+			get title() { return library_messages.lib_component_command_palette_action_privacy_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_privacy_description(); },
 			icon: "policy",
 			href: "https://davidnet.net/legal"
 		},
 		{
-			title: "Connections",
-			description: "Manage your connections",
+			get title() { return library_messages.lib_component_command_palette_action_connections_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_connections_description(); },
 			icon: "emoji_people",
 			href: "https://account.davidnet.net/profile/connections"
 		},
 		{
-			title: "Docs",
-			description: "Navigates to the docs app",
+			get title() { return library_messages.lib_component_command_palette_action_docs_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_docs_description(); },
 			icon: "docs",
 			href: "https://docs.davidnet.net"
 		},
 		{
-			title: "Kanban",
-			description: "Navigates to the kanban app",
+			get title() { return library_messages.lib_component_command_palette_action_kanban_title(); },
+			get description() { return library_messages.lib_component_command_palette_action_kanban_description(); },
 			icon: "view_kanban",
 			href: "https://kanban.davidnet.net"
 		}
@@ -503,7 +504,7 @@
 						bind:value={query}
 						oninput={handleInput}
 						onkeydown={handleKeydown}
-						placeholder="Search pages, actions, or type '@'..."
+						placeholder={library_messages.lib_component_command_palette_search_placeholder()}
 						class={styles.baseCommandPallete} />
 				</div>
 
@@ -537,7 +538,7 @@
 					{#if showResults}
 						<div class={styles.dropdownContainer}>
 							<Flex padding="medium" direction="column" gap="small">
-								<span style="font-weight: bold; font-size: 0.9rem;">Search Results:</span>
+								<span style="font-weight: bold; font-size: 0.9rem;">{library_messages.lib_component_command_palette_search_results()}</span>
 								<br />
 								{#if quickActionResults.length > 0}
 									{#each quickActionResults as action}
@@ -637,7 +638,7 @@
 											<p
 												style="font-size: {token.global.font.size.xmedium}; font-weight: {token
 													.global.font.weight.bold}">
-												No results for
+												{library_messages.lib_component_command_palette_no_results()}
 											</p>
 											<p>{query}</p>
 										</Flex>

@@ -3,6 +3,7 @@
 	import type { HTMLAttributes } from "svelte/elements";
 
 	import VisuallyHidden from "$lib/components/messaging/VisuallyHidden/VisuallyHidden.svelte";
+	import { m as library_messages } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./Skeleton.css";
 
@@ -36,5 +37,5 @@
 			{@render children()}
 		{/if}
 	</div>
-	<VisuallyHidden>Loading</VisuallyHidden>
+	<VisuallyHidden>{library_messages.lib_common_loading()}</VisuallyHidden>
 </div>
