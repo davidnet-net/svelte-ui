@@ -9,6 +9,11 @@ const baseDropdown = style({
 	width: "max-content"
 });
 
+const stretchWidth = style({
+	width: "100%",
+	display: "flex"
+});
+
 const dropdownContent = style({
 	position: "absolute",
 	borderRadius: token.global.radius.medium,
@@ -28,5 +33,6 @@ const dropdownContent = style({
 
 export const styles = {
 	baseDropdown,
+	stretchWidth,
 	dropdownContent
 };

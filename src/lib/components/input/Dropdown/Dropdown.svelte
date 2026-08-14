@@ -23,6 +23,10 @@
 		forcePlacement?: boolean;
 
 		offset?: number;
+		/**
+		 * If true, makes the trigger's container 100% width.
+		 */
+		stretchWidthTrigger?: boolean;
 	}
 
 	let {
@@ -31,7 +35,8 @@
 		isOpen = $bindable(false),
 		placement = "bottom-start",
 		forcePlacement = false,
-		offset = 12
+		offset = 12,
+		stretchWidthTrigger = false
 	}: Props = $props();
 
 	let triggerContainer = $state<HTMLElement | null>(null);
@@ -93,7 +98,9 @@
 	});
 </script>
 
-<div class={styles.baseDropdown} bind:this={triggerContainer}>
+<div
+	class={`${styles.baseDropdown} ${stretchWidthTrigger ? styles.stretchWidth : ""}`}
+	bind:this={triggerContainer}>
 	{@render trigger()}
 
 	{#if isOpen && triggerContainer}

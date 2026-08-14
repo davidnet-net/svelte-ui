@@ -33,6 +33,7 @@
 	import Feedback from "$lib/components/lib_internal/Feedback/Feedback.svelte";
 	import ShortcutsModal from "$lib/components/lib_internal/ShortcutsModal/ShortcutsModal.svelte";
 	import NotificationMenu from "$lib/components/lib_internal/NotificationMenu/NotificationMenu.svelte";
+	import AppMenu from "$lib/components/lib_internal/AppMenu/AppMenu.svelte";
 
 	interface Props {
 		children: Snippet;
@@ -118,6 +119,7 @@
 	let feedbackOpen = $state(false);
 	let isShortcutModalOpen = $state(false);
 	let isNotifcationsMenuOpen = $state(false);
+	let isAppMenuOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -172,14 +174,21 @@
 									onclick={() => {
 										appState.sidebarOpen = !appState.sidebarOpen;
 									}} />
-							{:else}
-								<IconLinkButton
-									icon="apps"
-									tip={library_messages.lib_component_appshell_davidnet_home()}
-									href="https://home.davidnet.net"
-									opennewtab
-									appearance="subtle" />
 							{/if}
+
+							<Dropdown bind:isOpen={isAppMenuOpen} offset={20}>
+								{#snippet trigger()}
+									<IconButton
+										icon="apps"
+										tip="Apps"
+										onclick={() => {
+											isAppMenuOpen = !isAppMenuOpen;
+										}}
+										appearance="subtle" />
+								{/snippet}
+
+								<AppMenu />
+							</Dropdown>
 							<Anchor href="/" class={focusring}>
 								{#if appState.isMobile}
 									{shortAppName}

@@ -100,14 +100,6 @@
 	use:focusTrap={appState.isMobile}
 	use:shortcutTrap={appState.isMobile}>
 	<div class={styles.navigation}>
-		<LinkButton
-			opennewtab
-			appearance="subtle"
-			stretchwidth
-			href="https://home.davidnet.net"
-			alignContent="left">
-			{m.docs_sidebar_davidnet_home()}
-		</LinkButton>
 		{@render navTree(navigationData, 0)}
 	</div>
 	{#if appState.isMobile}
