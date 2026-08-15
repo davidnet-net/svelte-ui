@@ -25,6 +25,15 @@ export interface user {
 	location: string;
 	isAdmin: boolean;
 	isInternal: boolean;
+	lastActiveWorkspaceId: (UUIDv7Type & { __brand: "workspaceID" }) | null;
+}
+
+export interface workspace {
+	id: UUIDv7Type & { __brand: "workspaceID" };
+	ownerId: UUIDv7Type & { __brand: "userID" };
+	type: "personal" | "organization";
+	name: string;
+	createdAt: string;
 }
 
 export interface preferences {
@@ -71,11 +80,13 @@ export const authState = $state({
 export const identityState = $state<{
 	token: accessToken | undefined;
 	user: user | undefined;
+	workspaces: workspace[] | undefined;
 	preferences: preferences | undefined;
 	privacy: privacyPreferences | undefined;
 }>({
 	token: undefined,
 	user: undefined,
+	workspaces: undefined,
 	preferences: undefined,
 	privacy: undefined
 });
@@ -92,6 +103,7 @@ export async function clearIdentityData() {
 	console.debug("[identityEngine]: Clearing identity data...");
 	identityState.token = undefined;
 	identityState.user = undefined;
+	identityState.workspaces = undefined;
 	identityState.preferences = undefined;
 	identityState.privacy = undefined;
 }
@@ -112,7 +124,6 @@ export async function syncProfileData() {
 	console.debug("[identityEngine]: Syncing user profile data...");
 
 	try {
-		// Fetch all three endpoints concurrently using the new getFetch wrapper
 		const [userRes, prefRes, privacyRes] = await Promise.allSettled([
 			getFetch(`${PUBLIC_BACKEND_URL}/auth/me`, undefined, undefined, true),
 			getFetch(`${PUBLIC_BACKEND_URL}/auth/preferences`, undefined, undefined, true),
@@ -120,7 +131,24 @@ export async function syncProfileData() {
 		]);
 
 		if (userRes.status === "fulfilled" && userRes.value) {
-			identityState.user = userRes.value as user;
+			const data = userRes.value as any;
+
+			identityState.user = {
+				userID: data.userID,
+				username: data.username,
+				displayName: data.displayName,
+				avatarURL: data.avatarURL,
+				bannerURL: data.bannerURL,
+				description: data.description,
+				email: data.email,
+				countryCode: data.countryCode,
+				location: data.location,
+				isAdmin: data.isAdmin,
+				isInternal: data.isInternal,
+				lastActiveWorkspaceId: data.lastActiveWorkspaceId ?? null
+			};
+
+			identityState.workspaces = data.workspaces as workspace[];
 		}
 
 		if (prefRes.status === "fulfilled" && prefRes.value) {
