@@ -167,30 +167,24 @@ export async function syncProfileData() {
 async function refresh() {
 	console.debug("[identityEngine]: Refreshing...");
 
-	try {
-		const result = await postFetch(`${PUBLIC_BACKEND_URL}/auth/session/refresh`, {});
+	const result = await postFetch(`${PUBLIC_BACKEND_URL}/auth/session/refresh`, {});
 
-		if (result && result.accessToken) {
-			identityState.token = {
-				raw: result.accessToken,
-				userID: result.userID,
-				jwtID: result.jwtID,
-				issuedAt: result.issuedAt,
-				expiresAt: result.expiresAt
-			};
+	if (result && result.accessToken) {
+		identityState.token = {
+			raw: result.accessToken,
+			userID: result.userID,
+			jwtID: result.jwtID,
+			issuedAt: result.issuedAt,
+			expiresAt: result.expiresAt
+		};
 
-			authState.isLoggedIn = true;
+		authState.isLoggedIn = true;
 
-			// Fetch profile data on EVERY successful refresh
-			await syncProfileData();
-			await afterIdentityInit();
-		} else {
-			console.warn("[identityEngine]: Session expired or never logged in.");
-			authState.isLoggedIn = false;
-			clearIdentityData();
-		}
-	} catch (error) {
-		console.warn("[identityEngine]: Refresh request failed.", error);
+		// Fetch profile data on EVERY successful refresh
+		await syncProfileData();
+		await afterIdentityInit();
+	} else {
+		console.warn("[identityEngine]: Session expired or never logged in.");
 		authState.isLoggedIn = false;
 		clearIdentityData();
 	}
@@ -201,11 +195,21 @@ export async function authBeat() {
 	authState.isBeating = true;
 	authState.loading = true;
 
+	let timeoutId: ReturnType<typeof setTimeout>;
+	const timeoutPromise = new Promise((_, reject) => {
+		timeoutId = setTimeout(() => {
+			reject(new Error("[identityEngine]: Auth beat timed out after 10s"));
+		}, 10000);
+	});
+
 	try {
-		await refresh();
+		await Promise.race([refresh(), timeoutPromise]);
 	} catch (error) {
-		console.error("[identityEngine]: Auth beat failed", error);
+		console.warn("[identityEngine]: Auth beat failed or timed out.", error);
+		authState.isLoggedIn = false;
+		await clearIdentityData();
 	} finally {
+		clearTimeout(timeoutId!);
 		console.debug("[identityEngine]: Auth beat finished");
 		authState.isBeating = false;
 		authState.loading = false;

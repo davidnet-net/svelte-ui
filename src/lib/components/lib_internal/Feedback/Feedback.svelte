@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_BACKEND_URL } from "$env/static/public";
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import Field from "$lib/components/input/Field/Field.svelte";
 	import Form from "$lib/components/input/Form/Form.svelte";
@@ -12,6 +13,7 @@
 	import manifest from "$lib/internal/manifests/version-manifest.json";
 	import { m as library_messages } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
+	import { postFetch } from "$lib/utils";
 	import { sleep } from "$lib/utils/sleep";
 
 	interface Props {
@@ -24,6 +26,7 @@
 	let feedbackValue = $state("");
 	let isSubmitting = $state(false);
 	let feedbackFinished = $state(false);
+	let feedbackFailed = $state(false);
 
 	async function submitFeedback(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
 		event.preventDefault();
@@ -73,15 +76,25 @@
 
 		console.debug(data);
 
-		// Do some magic fetches
+		const result = await postFetch(
+			PUBLIC_BACKEND_URL + "/support/send-feedback",
+			data,
+			undefined,
+			true
+		);
 
 		await sleep(500);
 
-		feedbackFinished = true; // If failure just show submit screen again with error!
+		if (result.success) {
+			feedbackFinished = true;
+		} else {
+			feedbackFinished = true;
+			feedbackFailed = true;
+		}
 	}
 </script>
 
-{#if isOpen && !feedbackFinished}
+{#if isOpen && !feedbackFinished && authState.isLoggedIn}
 	<Modal title={library_messages.lib_component_feedback_title()}>
 		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
 			<Form id="feedback-form" autocomplete="off" onsubmit={submitFeedback}>
@@ -116,6 +129,48 @@
 				loading={isSubmitting}
 				disabled={feedbackValue.length > 2000}>
 				{library_messages.lib_common_submit()}
+			</Button>
+		{/snippet}
+	</Modal>
+{:else if isOpen && feedbackFailed}
+	<Modal title={library_messages.lib_component_feedback_title()}>
+		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
+			<Icon icon="chat_error" size="giant" color="danger" />
+			<span style="font-size: {token.global.font.size.large}; text-align: center">
+				Failed to send feedback.
+			</span>
+		</Flex>
+		{#snippet actions()}
+			<Button
+				appearance="primary"
+				onclick={() => {
+					feedbackFinished = false;
+					isSubmitting = false;
+					feedbackValue = "";
+					isOpen = false;
+				}}>
+				{library_messages.lib_common_close()}
+			</Button>
+		{/snippet}
+	</Modal>
+{:else if isOpen && !authState.isLoggedIn}
+	<Modal title={library_messages.lib_component_feedback_title()}>
+		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
+			<Icon icon="chat_error" size="giant" color="danger" />
+			<span style="font-size: {token.global.font.size.large}; text-align: center">
+				You must be logged in to send feedback.
+			</span>
+		</Flex>
+		{#snippet actions()}
+			<Button
+				appearance="primary"
+				onclick={() => {
+					feedbackFinished = false;
+					isSubmitting = false;
+					feedbackValue = "";
+					isOpen = false;
+				}}>
+				{library_messages.lib_common_close()}
 			</Button>
 		{/snippet}
 	</Modal>

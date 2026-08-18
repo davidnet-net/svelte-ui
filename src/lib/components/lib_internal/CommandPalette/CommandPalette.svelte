@@ -38,7 +38,15 @@
 	let mentionSearchQuery = $state("");
 	let selectedIndex = $state(0);
 
-	const MENTION_OPTIONS = [{ id: "user", label: "@user", get description() { return library_messages.lib_component_command_palette_mention_user(); } }] as const;
+	const MENTION_OPTIONS = [
+		{
+			id: "user",
+			label: "@user",
+			get description() {
+				return library_messages.lib_component_command_palette_mention_user();
+			}
+		}
+	] as const;
 
 	interface Result {
 		title: string;
@@ -116,8 +124,12 @@
 	// Static pool of quick actions available in the command palette
 	const QUICK_ACTION_POOL: Result[] = [
 		{
-			get title() { return library_messages.lib_component_command_palette_action_quick_settings_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_quick_settings_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_quick_settings_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_quick_settings_description();
+			},
 			icon: "settings",
 			action: () => {
 				isQuickSettingsOpen = true;
@@ -125,8 +137,12 @@
 			}
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_feedback_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_feedback_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_feedback_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_feedback_description();
+			},
 			icon: "feedback",
 			action: () => {
 				feedbackOpen = true;
@@ -134,8 +150,12 @@
 			}
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_shortcuts_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_shortcuts_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_shortcuts_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_shortcuts_description();
+			},
 			icon: "keyboard_capslock_badge",
 			action: () => {
 				isShortcutModalOpen = true;
@@ -143,12 +163,16 @@
 			}
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_login_title(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_login_title();
+			},
 			icon: "login",
 			href: "https://account.davidnet.net/login"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_logout_title(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_logout_title();
+			},
 			icon: "logout",
 			action: () => {
 				logout();
@@ -156,50 +180,82 @@
 			}
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_account_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_account_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_account_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_account_description();
+			},
 			icon: "for_you",
 			href: "https://account.davidnet.net"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_home_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_home_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_home_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_home_description();
+			},
 			icon: "home",
 			href: "https://home.davidnet.net"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_design_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_design_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_design_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_design_description();
+			},
 			icon: "design_services",
 			href: "https://design.davidnet.net"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_davidnet_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_davidnet_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_davidnet_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_davidnet_description();
+			},
 			icon: "arrow_outward",
 			href: "https://davidnet.net"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_privacy_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_privacy_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_privacy_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_privacy_description();
+			},
 			icon: "policy",
 			href: "https://davidnet.net/legal"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_connections_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_connections_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_connections_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_connections_description();
+			},
 			icon: "emoji_people",
 			href: "https://account.davidnet.net/profile/connections"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_docs_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_docs_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_docs_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_docs_description();
+			},
 			icon: "docs",
 			href: "https://docs.davidnet.net"
 		},
 		{
-			get title() { return library_messages.lib_component_command_palette_action_kanban_title(); },
-			get description() { return library_messages.lib_component_command_palette_action_kanban_description(); },
+			get title() {
+				return library_messages.lib_component_command_palette_action_kanban_title();
+			},
+			get description() {
+				return library_messages.lib_component_command_palette_action_kanban_description();
+			},
 			icon: "view_kanban",
 			href: "https://kanban.davidnet.net"
 		}
@@ -462,11 +518,7 @@
 		};
 
 		window.addEventListener("popstate", handlePopState);
-
-		if (query.length > 0) {
-			performSearch(query, mentionedUsers);
-		}
-
+		performSearch(query, mentionedUsers);
 		return () => {
 			window.removeEventListener("popstate", handlePopState);
 			if (history.state?.commandPaletteOpen) {
@@ -538,7 +590,9 @@
 					{#if showResults}
 						<div class={styles.dropdownContainer}>
 							<Flex padding="medium" direction="column" gap="small">
-								<span style="font-weight: bold; font-size: 0.9rem;">{library_messages.lib_component_command_palette_search_results()}</span>
+								<span style="font-weight: bold; font-size: 0.9rem;">
+									{library_messages.lib_component_command_palette_search_results()}
+								</span>
 								<br />
 								{#if quickActionResults.length > 0}
 									{#each quickActionResults as action}
