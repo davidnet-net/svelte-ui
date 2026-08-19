@@ -256,3 +256,10 @@ export async function initIdentityEngine() {
 export function whenAuthReady(): Promise<void> {
 	return readyPromise;
 }
+
+// Derived state to automatically track the current workspace
+export const currentWorkspace = $derived(
+	identityState.workspaces && identityState.user?.lastActiveWorkspaceId
+		? identityState.workspaces.find((w) => w.id === identityState.user?.lastActiveWorkspaceId)
+		: undefined
+);
