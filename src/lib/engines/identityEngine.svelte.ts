@@ -258,8 +258,8 @@ export function whenAuthReady(): Promise<void> {
 }
 
 // Derived state to automatically track the current workspace
-export const currentWorkspace = $derived(
-	identityState.workspaces && identityState.user?.lastActiveWorkspaceId
+export function getCurrentWorkspace() {
+	return identityState.workspaces && identityState.user?.lastActiveWorkspaceId
 		? identityState.workspaces.find((w) => w.id === identityState.user?.lastActiveWorkspaceId)
-		: undefined
-);
+		: undefined;
+}
