@@ -1,6 +1,6 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { UUIDv7Type } from "$lib/utils/crypto";
-import { deleteFetch, getFetch, postFetch } from "$lib/utils/fetches";
+import { deleteFetch, getFetch, postFetch, putFetch } from "$lib/utils/fetches";
 
 import { afterIdentityInit } from "./initEngine.svelte";
 
@@ -149,6 +149,29 @@ export async function syncProfileData() {
 			};
 
 			identityState.workspaces = data.workspaces as workspace[];
+
+			// Auto-select personal workspace in the backend database if none is active
+			if (!identityState.user.lastActiveWorkspaceId && identityState.workspaces) {
+				const personalWorkspace = identityState.workspaces.find((w) => w.type === "personal");
+
+				if (personalWorkspace) {
+					console.debug(
+						"[identityEngine]: No active workspace found. Auto-selecting personal workspace."
+					);
+
+					const selectRes = await putFetch(
+						`${PUBLIC_BACKEND_URL}/workspaces/select`,
+						{ workspaceId: personalWorkspace.id },
+						undefined,
+						true
+					);
+
+					if (selectRes && selectRes.success) {
+						identityState.user.lastActiveWorkspaceId = personalWorkspace.id;
+						console.debug("[identityEngine]: Personal workspace successfully auto-selected.");
+					}
+				}
+			}
 		}
 
 		if (prefRes.status === "fulfilled" && prefRes.value) {
@@ -257,9 +280,17 @@ export function whenAuthReady(): Promise<void> {
 	return readyPromise;
 }
 
-// Derived state to automatically track the current workspace
+// Derived state to automatically track the current workspace with personal fallback
 export function getCurrentWorkspace() {
-	return identityState.workspaces && identityState.user?.lastActiveWorkspaceId
+	if (!identityState.workspaces) return undefined;
+
+	let current = identityState.user?.lastActiveWorkspaceId
 		? identityState.workspaces.find((w) => w.id === identityState.user?.lastActiveWorkspaceId)
 		: undefined;
+
+	if (!current) {
+		current = identityState.workspaces.find((w) => w.type === "personal");
+	}
+
+	return current;
 }
