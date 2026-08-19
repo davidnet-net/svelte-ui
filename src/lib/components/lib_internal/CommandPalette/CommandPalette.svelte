@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from "svelte";
 	import { PUBLIC_ACCOUNT_FRONTEND_URL, PUBLIC_BACKEND_URL } from "$env/static/public";
 	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
 	import { Blanket } from "$lib/components/overlays";
@@ -17,7 +18,7 @@
 	interface Props {
 		navigationData?: NavigationItem[];
 		isQuickSettingsOpen?: boolean;
-		isOpen?: boolean; // Made optional so it can be bound using bind:isOpen
+		isOpen?: boolean;
 		feedbackOpen?: boolean;
 		isShortcutModalOpen?: boolean;
 	}
@@ -340,23 +341,27 @@
 				navResults = searchNavigationItems(navigationData, searchQuery);
 			}
 
-			// Fetch user profiles for all unique mentioned users
+			// Fetch user profiles for all unique mentioned users with safe error isolation
 			const profilePromises = usersList.map(async (username) => {
-				const profileResult = await getFetch(
-					`${PUBLIC_BACKEND_URL}/auth/profile`,
-					{ user: username.toLowerCase() },
-					undefined,
-					authState.isLoggedIn
-				);
+				try {
+					const profileResult = await getFetch(
+						`${PUBLIC_BACKEND_URL}/auth/profile`,
+						{ user: username.toLowerCase() },
+						undefined,
+						authState.isLoggedIn
+					);
 
-				if (profileResult.success && profileResult.profileResponse) {
-					const profile = profileResult.profileResponse;
-					return {
-						title: profile.displayName ?? profile.username,
-						description: "@" + profile.username,
-						avatar: profile.avatarUrl,
-						href: `${PUBLIC_ACCOUNT_FRONTEND_URL}/profile/${profile.userId}`
-					} as Result;
+					if (profileResult && profileResult.success && profileResult.profileResponse) {
+						const profile = profileResult.profileResponse;
+						return {
+							title: profile.displayName ?? profile.username,
+							description: "@" + profile.username,
+							avatar: profile.avatarUrl,
+							href: `${PUBLIC_ACCOUNT_FRONTEND_URL}/profile/${profile.userId}`
+						} as Result;
+					}
+				} catch (err) {
+					console.error("Failed to fetch profile for user:", username, err);
 				}
 				return null;
 			});
@@ -388,7 +393,9 @@
 			if (fetchId !== currentFetchId) return;
 			console.error("Search failed:", error);
 			fakeProcessing = false;
-			showResults = false;
+			showResults = true;
+			searchResults = [];
+			quickActionResults = [];
 		}
 	}
 
@@ -518,7 +525,13 @@
 		};
 
 		window.addEventListener("popstate", handlePopState);
-		performSearch(query, mentionedUsers);
+
+		untrack(() => {
+			query = "";
+			hideAllViews();
+			resetMentionState();
+		});
+
 		return () => {
 			window.removeEventListener("popstate", handlePopState);
 			if (history.state?.commandPaletteOpen) {
@@ -545,6 +558,7 @@
 				aria-modal="true"
 				tabindex="-1"
 				onclick={(e) => {
+					if (e.detail === 0) return;
 					if (e.target === e.currentTarget) {
 						onclose();
 					}
@@ -593,98 +607,102 @@
 								<span style="font-weight: bold; font-size: 0.9rem;">
 									{library_messages.lib_component_command_palette_search_results()}
 								</span>
-								<br />
 								{#if quickActionResults.length > 0}
-									{#each quickActionResults as action}
-										<Flex direction="row" gap="medium" alignItems="center" width="100%">
-											{#if action.href}
-												<Anchor href={action.href} style="width: 100%;">
-													<Flex direction="row" gap="medium" alignItems="center">
-														{#if action.icon}
-															<Icon icon={action.icon} size="xlarge" />
-														{/if}
-														<Flex direction="column">
-															<p
-																style="font-size: {token.global.font.size
-																	.medium}; font-weight: {token.global.font.weight.bold}">
-																{action.title}
-															</p>
-															{#if action.description}
-																<p style="font-size: {token.global.font.size.small}">
-																	{action.description}
+									<Flex direction="column" gap="small" width="100%">
+										{#each quickActionResults as action}
+											<Flex direction="row" gap="medium" alignItems="center" width="100%">
+												{#if action.href}
+													<Anchor href={action.href} style="width: 100%;">
+														<Flex direction="row" gap="medium" alignItems="center">
+															{#if action.icon}
+																<Icon icon={action.icon} size="xlarge" />
+															{/if}
+															<Flex direction="column">
+																<p
+																	style="font-size: {token.global.font.size
+																		.medium}; font-weight: {token.global.font.weight.bold}">
+																	{action.title}
 																</p>
-															{/if}
+																{#if action.description}
+																	<p style="font-size: {token.global.font.size.small}">
+																		{action.description}
+																	</p>
+																{/if}
+															</Flex>
 														</Flex>
-													</Flex>
-												</Anchor>
-											{:else}
-												<button
-													type="button"
-													style="cursor: pointer; width: 100%; display: flex; background: none; border: none; padding: 0; text-align: left; color: inherit;"
-													onclick={action.action}>
-													<Flex direction="row" gap="medium" alignItems="center">
-														{#if action.icon}
-															<Icon icon={action.icon} size="xlarge" />
-														{/if}
-														<Flex direction="column">
-															<p
-																style="font-size: {token.global.font.size
-																	.medium}; font-weight: {token.global.font.weight.bold}">
-																{action.title}
-															</p>
-															{#if action.description}
-																<p>{action.description}</p>
+													</Anchor>
+												{:else}
+													<button
+														type="button"
+														style="cursor: pointer; width: 100%; display: flex; background: none; border: none; padding: 0; text-align: left; color: inherit;"
+														onclick={action.action}>
+														<Flex direction="row" gap="medium" alignItems="center">
+															{#if action.icon}
+																<Icon icon={action.icon} size="xlarge" />
 															{/if}
+															<Flex direction="column">
+																<p
+																	style="font-size: {token.global.font.size
+																		.medium}; font-weight: {token.global.font.weight.bold}">
+																	{action.title}
+																</p>
+																{#if action.description}
+																	<p>{action.description}</p>
+																{/if}
+															</Flex>
 														</Flex>
-													</Flex>
-												</button>
-											{/if}
-										</Flex>
-									{/each}
-									<br />
+													</button>
+												{/if}
+											</Flex>
+										{/each}
+									</Flex>
 								{/if}
 
-								<br />
-								{#each searchResults as result}
-									<Flex direction="row" gap="medium" alignItems="center">
-										{#if result.href}
-											<Anchor href={result.href}>
-												<Flex direction="row" gap="medium" alignItems="center">
-													{#if result.icon}
-														<Icon icon={result.icon} size="xlarge" />
-													{/if}
-													{#if result.avatar}
-														<Avatar src={result.avatar} size="medium" />
-													{/if}
-													<Flex direction="column">
-														<p
-															style="font-size: {token.global.font.size.medium}; font-weight: {token
-																.global.font.weight.bold}">
-															{result.title}
-														</p>
-														<p style="font-size: {token.global.font.size.small}">
-															{result.description}
-														</p>
+								{#if searchResults.length > 0}
+									<Flex direction="column" gap="small" width="100%">
+										{#each searchResults as result}
+											<Flex direction="row" gap="medium" alignItems="center" width="100%">
+												{#if result.href}
+													<Anchor href={result.href} style="width: 100%;">
+														<Flex direction="row" gap="medium" alignItems="center">
+															{#if result.icon}
+																<Icon icon={result.icon} size="xlarge" />
+															{/if}
+															{#if result.avatar}
+																<Avatar src={result.avatar} size="medium" />
+															{/if}
+															<Flex direction="column">
+																<p
+																	style="font-size: {token.global.font.size
+																		.medium}; font-weight: {token.global.font.weight.bold}">
+																	{result.title}
+																</p>
+																<p style="font-size: {token.global.font.size.small}">
+																	{result.description}
+																</p>
+															</Flex>
+														</Flex>
+													</Anchor>
+												{:else}
+													<Flex direction="row" gap="medium" alignItems="center" width="100%">
+														{#if result.icon}
+															<Icon icon={result.icon} size="xlarge" />
+														{/if}
+														<Flex direction="column">
+															<p
+																style="font-size: {token.global.font.size
+																	.medium}; font-weight: {token.global.font.weight.bold}">
+																{result.title}
+															</p>
+															<p>{result.description}</p>
+														</Flex>
 													</Flex>
-												</Flex>
-											</Anchor>
-										{:else}
-											<Flex direction="row" gap="medium" alignItems="center">
-												{#if result.icon}
-													<Icon icon={result.icon} size="xlarge" />
 												{/if}
-												<Flex direction="column">
-													<p
-														style="font-size: {token.global.font.size.medium}; font-weight: {token
-															.global.font.weight.bold}">
-														{result.title}
-													</p>
-													<p>{result.description}</p>
-												</Flex>
 											</Flex>
-										{/if}
+										{/each}
 									</Flex>
-								{/each}
+								{/if}
+
 								{#if searchResults.length === 0 && quickActionResults.length === 0}
 									<Flex direction="row" gap="medium" alignItems="center">
 										<Icon icon="search_off" size="xlarge" />
