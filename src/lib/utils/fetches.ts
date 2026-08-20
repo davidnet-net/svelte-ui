@@ -75,6 +75,12 @@ async function baseFetch(
 		toast("Sorry!", "Something went wrong on our side.", "error", 4000, "danger");
 		return { code: "SERVER_ERROR", success: false };
 	}
+	if (result.status >= 401) {
+		const parsedResult = await result.json();
+		if (parsedResult.code !== "NO_PERMISSION") return;
+		toast("Sorry!", "Missing permission: " + parsedResult.permisson, "error", 4000, "danger");
+		return { code: "NO_PERMISSION", success: false };
+	}
 	return result.json();
 }
 
