@@ -53,10 +53,10 @@ m.greeting({ name: "Sam" }, { locale: "de" }); // "Hallo, Sam!"
 ```js
 import { getLocale, setLocale, locales, baseLocale } from "./paraglide/runtime.js";
 
-getLocale();    // Current locale, e.g., "en"
+getLocale();    // Current locale, e.g., "en-us"
 setLocale("de"); // Set locale
-locales;        // Available locales, e.g., ["en", "de", "fr"]
-baseLocale;     // Default locale, e.g., "en"
+locales;        // Available locales, e.g., ["en-us", "de", "fr"]
+baseLocale;     // Default locale, e.g., "en-us"
 ```
 
 ## Strategy

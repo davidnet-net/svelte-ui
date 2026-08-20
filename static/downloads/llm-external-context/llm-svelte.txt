@@ -22753,7 +22753,7 @@ You can customise the fallback error page by adding a `src/error.html` file:
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 	<head>
 		<meta charset="utf-8" />
 		<title>%sveltekit.error.message%</title>

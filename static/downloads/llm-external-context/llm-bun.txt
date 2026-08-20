@@ -27438,7 +27438,7 @@ Build a minimal HTTP server with `Bun.serve`, run it locally, then evolve it by 
 
     ```html index.html icon="file-code" theme={"theme":{"light":"github-light","dark":"dracula"}}
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en-us">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
