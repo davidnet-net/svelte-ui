@@ -3,6 +3,7 @@ import type { UUIDv7Type } from "$lib/utils/crypto";
 import { deleteFetch, getFetch, postFetch, putFetch } from "$lib/utils/fetches";
 
 import { afterIdentityInit } from "./initEngine.svelte";
+import { toast } from "./toastEngine.svelte";
 
 // Access token! --- Refresh Token is HTTP ONLY
 export interface accessToken {
@@ -91,6 +92,18 @@ export const identityState = $state<{
 	privacy: undefined
 });
 
+export const rbacState = $state<{
+	isOwner: boolean;
+	isPersonal: boolean;
+	workspacePermissions: Set<string>;
+	teamPermissions: Map<string, Set<string>>;
+}>({
+	isOwner: false,
+	isPersonal: false,
+	workspacePermissions: new Set(),
+	teamPermissions: new Map()
+});
+
 let authTimer: ReturnType<typeof setTimeout> | null = null;
 let isInitialLoad = true;
 
@@ -106,6 +119,11 @@ export async function clearIdentityData() {
 	identityState.workspaces = undefined;
 	identityState.preferences = undefined;
 	identityState.privacy = undefined;
+
+	rbacState.isOwner = false;
+	rbacState.isPersonal = false;
+	rbacState.workspacePermissions.clear();
+	rbacState.teamPermissions.clear();
 }
 
 export async function logout() {
@@ -113,6 +131,42 @@ export async function logout() {
 	await deleteFetch(PUBLIC_BACKEND_URL + "/auth/session");
 	await authBeat();
 	window.location.reload();
+}
+
+export async function syncWorkspaceAccess(workspaceId: string) {
+	console.debug(`[identityEngine]: Syncing RBAC for workspace ${workspaceId}`);
+	const rbacRes = await getFetch(
+		`${PUBLIC_BACKEND_URL}/workspaces/${workspaceId}/access`,
+		undefined,
+		undefined,
+		true
+	);
+
+	if (rbacRes && rbacRes.success) {
+		rbacState.isOwner = rbacRes.isOwner;
+		rbacState.isPersonal = rbacRes.isPersonal;
+		rbacState.workspacePermissions = new Set(rbacRes.workspacePermissions);
+
+		const teamMap = new Map<string, Set<string>>();
+		for (const [tId, perms] of Object.entries(rbacRes.teamPermissions)) {
+			teamMap.set(tId, new Set(perms as string[]));
+		}
+		rbacState.teamPermissions = teamMap;
+	}
+}
+
+export function hasPermission(permissionKey: string, teamId?: string): boolean {
+	if (rbacState.isOwner) return true;
+	if (rbacState.isPersonal) return false;
+
+	if (rbacState.workspacePermissions.has(permissionKey)) return true;
+
+	if (teamId) {
+		const teamPerms = rbacState.teamPermissions.get(teamId);
+		if (teamPerms?.has(permissionKey)) return true;
+	}
+
+	return false;
 }
 
 export async function syncProfileData() {
@@ -180,6 +234,10 @@ export async function syncProfileData() {
 
 		if (privacyRes.status === "fulfilled" && privacyRes.value) {
 			identityState.privacy = privacyRes.value as privacyPreferences;
+		}
+
+		if (identityState.user?.lastActiveWorkspaceId) {
+			await syncWorkspaceAccess(identityState.user.lastActiveWorkspaceId);
 		}
 	} catch (error) {
 		console.error("[identityEngine]: Critical error syncing profile data", error);
@@ -293,4 +351,51 @@ export function getCurrentWorkspace() {
 	}
 
 	return current;
+}
+
+export async function switchWorkspace(workspaceID: string, name: string) {
+	const result = await putFetch(
+		PUBLIC_BACKEND_URL + "/workspaces/select",
+		{
+			workspaceId: workspaceID
+		},
+		undefined,
+		true
+	);
+
+	if (result.code === "WORKSPACE_NOT_FOUND") {
+		await authBeat();
+		toast(
+			"Workspace doesn't exist",
+			"We reloaded your workspaces for you!",
+			undefined,
+			3000,
+			"danger"
+		);
+		return;
+	}
+
+	if (result.code === "FORBIDDEN") {
+		await authBeat();
+		toast(
+			"You don't have access to this workspace!",
+			"We reloaded your workspaces for you!",
+			undefined,
+			3000,
+			"danger"
+		);
+		return;
+	}
+
+	if (result.success) {
+		if (identityState.user) {
+			identityState.user.lastActiveWorkspaceId = workspaceID as UUIDv7Type & {
+				__brand: "workspaceID";
+			};
+		}
+
+		await syncWorkspaceAccess(workspaceID);
+
+		toast("Workspace switched!", name, undefined, 3000);
+	}
 }

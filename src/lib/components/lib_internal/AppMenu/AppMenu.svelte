@@ -1,68 +1,10 @@
 <script lang="ts">
-	import {
-		Flex,
-		Dropdown,
-		Button,
-		identityState,
-		putFetch,
-		authBeat,
-		toast,
-		type UUIDv7Type,
-		authState
-	} from "$lib";
+	import { Flex, Dropdown, Button, identityState, authState, switchWorkspace } from "$lib";
 	import { token } from "$lib/styles/designTokens";
 	import CompactHorizontalCard from "../CompactHorizontalCard/CompactHorizontalCard.svelte";
-	import { PUBLIC_BACKEND_URL } from "$env/static/public";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 
 	let workspaceSwitcherOpen = $state(false);
-
-	async function switchWorkspace(workspaceID: string, name: string) {
-		const result = await putFetch(
-			PUBLIC_BACKEND_URL + "/workspaces/select",
-			{
-				workspaceId: workspaceID
-			},
-			undefined,
-			true
-		);
-
-		if (result.code === "WORKSPACE_NOT_FOUND") {
-			await authBeat();
-			toast(
-				"Workspace doesn't exist",
-				"We reloaded your workspaces for you!",
-				undefined,
-				3000,
-				"danger"
-			);
-			workspaceSwitcherOpen = false;
-			return;
-		}
-
-		if (result.code === "FORBIDDEN") {
-			await authBeat();
-			toast(
-				"You don't have access to this workspace!",
-				"We reloaded your workspaces for you!",
-				undefined,
-				3000,
-				"danger"
-			);
-			workspaceSwitcherOpen = false;
-			return;
-		}
-
-		if (result.success) {
-			if (identityState.user) {
-				identityState.user.lastActiveWorkspaceId = workspaceID as UUIDv7Type & {
-					__brand: "workspaceID";
-				};
-			}
-			toast("Workspace switched!", name, undefined, 3000);
-			workspaceSwitcherOpen = false;
-		}
-	}
 </script>
 
 <div style="width: 100%; margin: {token.global.spacing.small}">
@@ -88,9 +30,10 @@
 						iconbefore={workspace.type === "personal" ? "for_you" : "enterprise"}
 						appearance="subtle"
 						selected={workspace.id === identityState.user?.lastActiveWorkspaceId}
-						onclick={() => {
+						onclick={async () => {
 							if (workspace.id === identityState.user?.lastActiveWorkspaceId) return;
-							switchWorkspace(workspace.id, workspace.name);
+							await switchWorkspace(workspace.id, workspace.name);
+							workspaceSwitcherOpen = false;
 						}}
 						stretchwidth
 						alignContent="left">
