@@ -106,5 +106,6 @@
 		<CompactHorizontalCard title="Account" icon="for_you" href="https://account.davidnet.net" />
 		<CompactHorizontalCard title="Docs" icon="docs" href="https://docs.davidnet.net" />
 		<CompactHorizontalCard title="Kanban" icon="view_kanban" href="https://kanban.davidnet.net" />
+		<CompactHorizontalCard title="Quiz" icon="quiz" href="https://quiz.davidnet.net" />
 	</Flex>
 </div>

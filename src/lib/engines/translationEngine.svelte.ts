@@ -1,15 +1,19 @@
-//*
-//* Translation Engine for Davidnet
-//* Uses paraglide
-//*
-
-//! This module is AI generated and really messy. But if it works dont touch it!
+/**
+ * Core Translation Engine
+ *
+ * Provides a unified wrapper around Paraglide JS to handle language switching,
+ * locale caching, and regional formatting (timezones, date formats, etc.)
+ * across the application.
+ */
 
 import { setLocale as internalSetLocale } from "$lib/paraglide/runtime.js";
-
 import { getCookie, setCookie } from "../utils/cookies";
 import { toast } from "./toastEngine.svelte";
 
+/**
+ * Defines the required shape of a Paraglide JS runtime module.
+ * @template T - A string literal union of supported locales (e.g., 'en' | 'nl').
+ */
 export interface ParaglideRuntimeType<T extends string> {
 	locales: readonly T[];
 	getLocale: () => T;
@@ -22,15 +26,25 @@ export const TIMEZONE_CACHE_KEY = "timezone_cache";
 export const FIRSTDAYOFWEEK_CACHE_KEY = "first_day_of_week_cache";
 export const DATEFORMAT_CACHE_KEY = "date_format_cache";
 
-// We will store the consumer's setLocale function here when the engine boots
+// Internal references to the consumer's Paraglide runtime functions,
+// populated once createTranslationEngine is invoked.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let consumerSetLocale: ((locale: any) => void) | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let consumerGetLocale: (() => any) | null = null;
 
 /**
- * Master function to update the language across the consumer app, library components, and cache.
- * @param newLocale - The locale to switch to (e.g., 'en', 'nl')
+ * Globally updates the application language, synchronizes local cache,
+ * and triggers a hard reload to apply routing changes.
+ *
+ * @param newLocale - The target locale string to switch to (e.g., 'en', 'nl').
  */
-export function setLanguage(newLocale: string) {
+export function setLanguage(newLocale: string): void {
+	// Guard clause: Prevent infinite loops if the language is already active
+	if (consumerGetLocale && consumerGetLocale() === newLocale) {
+		return;
+	}
+
 	toast(
 		"Reloading page!",
 		"To apply the language we need to reload the page.",
@@ -38,14 +52,15 @@ export function setLanguage(newLocale: string) {
 		4000,
 		"subtle"
 	);
-	// 1. FORCE THE CACHE UPDATE FIRST
+
+	// Update local cache priority
 	setCookie(LANGUAGE_CACHE_KEY, newLocale);
 
 	if (typeof document !== "undefined") {
 		document.documentElement.lang = newLocale;
 	}
 
-	// 2. Trigger the Paraglide runtimes
+	// Trigger the active Paraglide runtime
 	if (consumerSetLocale) {
 		consumerSetLocale(newLocale);
 	} else {
@@ -54,7 +69,7 @@ export function setLanguage(newLocale: string) {
 		internalSetLocale(newLocale as any);
 	}
 
-	// 3. Force a hard browser reload so the SvelteKit server catches the new cookie
+	// Force a hard browser reload to sync SvelteKit SSR with the new cookie
 	if (typeof window !== "undefined") {
 		setTimeout(() => {
 			window.location.reload();
@@ -63,15 +78,16 @@ export function setLanguage(newLocale: string) {
 }
 
 /**
- * Initializes the translation engine.
- * * @param appRuntime - The Paraglide runtime from the consuming project.
- * @returns An async initialization function that accepts an optional database preference.
+ * Initializes the translation engine by binding the consumer's Paraglide runtime.
+ *
+ * @param appRuntime - The Paraglide runtime object from the consuming project.
+ * @returns An asynchronous initialization function to resolve the initial locale.
  */
 export function createTranslationEngine<T extends string>(appRuntime: ParaglideRuntimeType<T>) {
 	const { locales, getLocale, setLocale } = appRuntime;
 
-	// Save the consumer's setter so our UI components can reach it via setLanguage()
 	consumerSetLocale = setLocale;
+	consumerGetLocale = getLocale;
 
 	if (!Array.isArray(locales) || locales.length === 0) {
 		throw new Error("createTranslationEngine: 'locales' must be a non-empty array.");
@@ -88,17 +104,13 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 		setCookie(LANGUAGE_CACHE_KEY, newLocale);
 	};
 
-	// --- Synchronization & Cache Updating ---
 	if (appRuntime.setLocale !== internalSetLocale) {
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
 		internalSetLocale(appRuntime.getLocale() as any);
 
 		if (typeof appRuntime.onSetLocale === "function") {
-			// Leverage Paraglide's native subscriber pattern
 			appRuntime.onSetLocale(handleLocaleChange);
 		} else {
-			// We cannot mutate the read-only ES module namespace here.
-			// Warn the developer and fallback to manual sync during initialization.
 			console.warn(
 				"[i18n] onSetLocale not found on appRuntime. Side effects will only apply on boot."
 			);
@@ -114,24 +126,26 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 	}
 
 	/**
-	 * Resolves the best language match based on DB, Cache, or Browser.
-	 * * @param databasePreference - The language string fetched from the database API.
+	 * Asynchronously resolves and applies the optimal locale based on local cache,
+	 * database preferences, and browser defaults.
+	 *
+	 * @param databasePreference - An optional language string fetched from the user's database profile.
 	 */
-	return async function initializeTranslationEngine(databasePreference?: string | null) {
+	return async function initializeTranslationEngine(
+		databasePreference?: string | null
+	): Promise<void> {
 		let targetLocale: Locale | null = null;
 
-		// 1. Database Priority (if provided after DB fetch)
-		if (databasePreference) {
+		// Priority 1: Local Cache (Cookie)
+		const cachedLanguage = getCookie(LANGUAGE_CACHE_KEY);
+		targetLocale = await validateLanguage(cachedLanguage);
+
+		// Priority 2: Database Preference (if no local cache exists)
+		if (!targetLocale && databasePreference) {
 			targetLocale = await validateLanguage(databasePreference);
 		}
 
-		// 2. Cache Priority (Cookie check, replaces localStorage concept)
-		if (!targetLocale) {
-			const cachedLanguage = getCookie(LANGUAGE_CACHE_KEY);
-			targetLocale = await validateLanguage(cachedLanguage);
-		}
-
-		// 3. Browser Navigator Fallback
+		// Priority 3: Browser Navigator Fallback
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!targetLocale && typeof window !== "undefined" && navigator?.languages) {
 			for (const lang of navigator.languages) {
@@ -143,9 +157,8 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 			}
 		}
 
-		// Apply findings
+		// Apply resolved locale
 		if (targetLocale && targetLocale !== getLocale()) {
-			// Guarantee side-effects are fired if Paraglide's subscriber is missing
 			if (typeof appRuntime.onSetLocale !== "function") {
 				handleLocaleChange(targetLocale);
 			}
@@ -156,14 +169,15 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 	};
 }
 
-// --- Formatting & Regional Settings Engine ---
+// -----------------------------------------------------------------------------
+// Regional Settings & Formatting Engine
+// -----------------------------------------------------------------------------
 
-// In-memory state so we don't spam the cookie parser on every request
+// In-memory state to prevent excessive cookie parsing during render cycles
 let currentTimezone: string | null = null;
 let currentFirstDayOfWeek: string | null = null;
 let currentDateFormat: string | null = null;
 
-// Valid reference lists based on your inputs
 export const validDaysOfWeek = [
 	{ value: "monday", label: "Monday" },
 	{ value: "tuesday", label: "Tuesday" },
@@ -182,9 +196,12 @@ export const validTimezones =
 		? Intl.supportedValuesOf("timeZone")
 		: ["UTC"];
 
-// --- 1. TIMEZONE ---
-
-export function setTimezone(tz: string) {
+/**
+ * Updates the active timezone and persists it to the local cache.
+ *
+ * @param tz - A valid IANA timezone string (e.g., 'Europe/Amsterdam').
+ */
+export function setTimezone(tz: string): void {
 	if (validTimezones.includes(tz)) {
 		currentTimezone = tz;
 		setCookie(TIMEZONE_CACHE_KEY, tz);
@@ -193,9 +210,14 @@ export function setTimezone(tz: string) {
 	}
 }
 
+/**
+ * Retrieves the currently active timezone, falling back to the browser's
+ * native timezone or UTC if unresolvable.
+ *
+ * @returns A valid IANA timezone string.
+ */
 export function getTimezone(): string {
 	if (!currentTimezone) {
-		// Read from cache, fallback to browser's native timezone, final fallback to UTC
 		const cached = getCookie(TIMEZONE_CACHE_KEY);
 		const browserTz =
 			typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "UTC";
@@ -206,9 +228,12 @@ export function getTimezone(): string {
 	return currentTimezone;
 }
 
-// --- 2. FIRST DAY OF WEEK ---
-
-export function setFirstDayOfWeek(dayValue: string) {
+/**
+ * Updates the user's preferred first day of the week and persists it to the local cache.
+ *
+ * @param dayValue - The day of the week as a lowercase string (e.g., 'monday').
+ */
+export function setFirstDayOfWeek(dayValue: string): void {
 	const isValid = validDaysOfWeek.some((day) => day.value === dayValue.toLowerCase());
 	if (isValid) {
 		currentFirstDayOfWeek = dayValue.toLowerCase();
@@ -218,20 +243,26 @@ export function setFirstDayOfWeek(dayValue: string) {
 	}
 }
 
+/**
+ * Retrieves the user's preferred first day of the week, defaulting to 'monday'.
+ *
+ * @returns The day of the week as a lowercase string.
+ */
 export function getFirstDayOfWeek(): string {
 	if (!currentFirstDayOfWeek) {
 		const cached = getCookie(FIRSTDAYOFWEEK_CACHE_KEY);
 		const isValid = cached && validDaysOfWeek.some((day) => day.value === cached.toLowerCase());
-
-		// Defaults to monday if cache is empty or invalid
 		currentFirstDayOfWeek = isValid ? cached.toLowerCase() : "monday";
 	}
 	return currentFirstDayOfWeek;
 }
 
-// --- 3. DATE FORMAT ---
-
-export function setDateFormat(format: string) {
+/**
+ * Updates the user's preferred date format and persists it to the local cache.
+ *
+ * @param format - A valid date format string (e.g., 'YYYY-MM-DD').
+ */
+export function setDateFormat(format: string): void {
 	if (validDateFormats.includes(format)) {
 		currentDateFormat = format;
 		setCookie(DATEFORMAT_CACHE_KEY, format);
@@ -240,23 +271,25 @@ export function setDateFormat(format: string) {
 	}
 }
 
+/**
+ * Retrieves the user's preferred date format, defaulting to 'YYYY-MM-DD'.
+ *
+ * @returns The date format string.
+ */
 export function getDateFormat(): string {
 	if (!currentDateFormat) {
 		const cached = getCookie(DATEFORMAT_CACHE_KEY);
-
-		// Defaults to YYYY-MM-DD if cache is empty or invalid
 		currentDateFormat = cached && validDateFormats.includes(cached) ? cached : "YYYY-MM-DD";
 	}
 	return currentDateFormat;
 }
 
-// -------------------------------------------------
-//  UTILS - UTILS - UTILS - UTILS - UTILS - UTILS
-// -------------------------------------------------
-
 /**
- * Internal helper to handle the actual timezone and formatting logic.
- * Expects milliseconds.
+ * Internal helper to compute timezone-adjusted and formatted date strings.
+ *
+ * @param ms - Unix timestamp in milliseconds.
+ * @param includeTime - Whether to append HH:MM:SS to the output.
+ * @returns The formatted date/time string.
  */
 function _formatUnix(ms: number, includeTime: boolean): string {
 	if (!ms || isNaN(ms)) return "";
@@ -265,7 +298,6 @@ function _formatUnix(ms: number, includeTime: boolean): string {
 	const tz = getTimezone();
 	const dateFormat = getDateFormat();
 
-	// Use Intl.DateTimeFormat to lock in the correct timezone offsets
 	const options: Intl.DateTimeFormatOptions = {
 		timeZone: tz,
 		year: "numeric",
@@ -274,26 +306,19 @@ function _formatUnix(ms: number, includeTime: boolean): string {
 		...(includeTime && { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
 	};
 
-	// We use 'en-US' as the base locale just to get predictable parts we can parse,
-	// but the actual time calculated is strictly bound to the target timezone.
 	const formatter = new Intl.DateTimeFormat("en-US", options);
 	const parts = formatter.formatToParts(date);
 
-	// Safely extract the timezone-adjusted values
 	const year = parts.find((p) => p.type === "year")?.value ?? "1970";
 	const month = parts.find((p) => p.type === "month")?.value ?? "01";
 	const day = parts.find((p) => p.type === "day")?.value ?? "01";
 
-	// Swap out the user's preferred format string (e.g., YYYY-MM-DD -> 2024-05-14)
 	let result = dateFormat.replace("YYYY", year).replace("MM", month).replace("DD", day);
 
-	// Append the exact time if requested
 	if (includeTime) {
 		const hour = parts.find((p) => p.type === "hour")?.value ?? "00";
 		const minute = parts.find((p) => p.type === "minute")?.value ?? "00";
 		const second = parts.find((p) => p.type === "second")?.value ?? "00";
-
-		// Formats as "YYYY-MM-DD HH:MM:SS"
 		result += ` ${hour}:${minute}:${second}`;
 	}
 
@@ -301,20 +326,24 @@ function _formatUnix(ms: number, includeTime: boolean): string {
 }
 
 /**
- * Converts a Unix timestamp in MILLISECONDS to a formatted string
- * respecting the user's cached timezone and date format.
+ * Converts a Unix timestamp in milliseconds to a formatted string
+ * respecting the user's cached timezone and date format preferences.
+ *
  * @param ms - The Unix timestamp in milliseconds.
- * @param includeTime - Whether to append the time (HH:MM:SS) to the output.
+ * @param includeTime - Whether to append the time (HH:MM:SS) to the output (default: false).
+ * @returns The formatted date string.
  */
 export function formatUnixMsToPreferred(ms: number, includeTime = false): string {
 	return _formatUnix(ms, includeTime);
 }
 
 /**
- * Converts a Unix timestamp in SECONDS to a formatted string
- * respecting the user's cached timezone and date format.
+ * Converts a Unix timestamp in seconds to a formatted string
+ * respecting the user's cached timezone and date format preferences.
+ *
  * @param seconds - The Unix timestamp in seconds.
- * @param includeTime - Whether to append the time (HH:MM:SS) to the output.
+ * @param includeTime - Whether to append the time (HH:MM:SS) to the output (default: false).
+ * @returns The formatted date string.
  */
 export function formatUnixSecToPreferred(seconds: number, includeTime = false): string {
 	if (!seconds || isNaN(seconds)) return "";
