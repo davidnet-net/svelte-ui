@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { setContext, type Snippet } from "svelte";
+	import type { HTMLAttributes } from "svelte/elements";
 
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
 	import { generateUUIDv7 } from "$lib/utils/crypto";
 
 	import { styles } from "./Field.css";
 
-	interface Props {
+	// Extend HTMLAttributes so any div attribute (style, class, etc.) can be passed down
+	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
 		label: string;
 		name: string;
@@ -15,6 +17,7 @@
 		overidelabel?: boolean;
 		fieldID?: string;
 	}
+
 	let {
 		children,
 		label,
@@ -22,7 +25,8 @@
 		required,
 		invalid,
 		overidelabel,
-		fieldID = $bindable(generateUUIDv7() as string)
+		fieldID = $bindable(generateUUIDv7() as string),
+		...restProps // Capture remaining div attributes
 	}: Props = $props();
 
 	let statusbar = $state<{ snippet: Snippet | undefined }>({ snippet: undefined });
@@ -46,7 +50,8 @@
 	});
 </script>
 
-<div class={styles.baseField}>
+<!-- Spread restProps onto the root div -->
+<div class={styles.baseField} {...restProps}>
 	{#if !overidelabel}
 		<label class={styles.label} for={fieldID}>
 			{label}
