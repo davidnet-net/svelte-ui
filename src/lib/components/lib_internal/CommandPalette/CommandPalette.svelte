@@ -250,6 +250,7 @@
 			icon: "docs",
 			href: "https://docs.davidnet.net"
 		},
+		// Todo add QUIZ app
 		{
 			get title() {
 				return library_messages.lib_component_command_palette_action_kanban_title();

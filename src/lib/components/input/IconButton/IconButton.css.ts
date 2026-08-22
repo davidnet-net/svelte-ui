@@ -11,7 +11,7 @@ const baseIconButton = style({
 	position: "relative",
 	flexShrink: "0",
 
-	width: "auto",
+	width: "2rem",
 	height: "2rem",
 
 	paddingLeft: token.global.spacing.small,
