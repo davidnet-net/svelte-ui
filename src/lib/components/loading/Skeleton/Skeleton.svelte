@@ -10,6 +10,11 @@
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		width?: string;
 		height?: string;
+		minWidth?: string;
+		maxWidth?: string;
+		minHeight?: string;
+		maxHeight?: string;
+		aspectRatio?: string;
 		radius?: keyof typeof styles.radius;
 		noDefaults?: boolean;
 		children?: Snippet | undefined;
@@ -19,6 +24,11 @@
 		noDefaults = false,
 		width = "100%",
 		height = "100%",
+		minWidth = undefined,
+		maxWidth = undefined,
+		minHeight = undefined,
+		maxHeight = undefined,
+		aspectRatio = undefined,
 		radius = "small",
 		children = undefined,
 		class: className,
@@ -29,6 +39,11 @@
 <div
 	style:height={noDefaults ? undefined : height}
 	style:width={noDefaults ? undefined : width}
+	style:min-width={minWidth}
+	style:max-width={maxWidth}
+	style:min-height={minHeight}
+	style:max-height={maxHeight}
+	style:aspect-ratio={aspectRatio}
 	class="{styles.baseSkeleton} {noDefaults ? '' : styles.radius[radius]} {className ?? ''}"
 	aria-hidden="true"
 	{...rest}>
