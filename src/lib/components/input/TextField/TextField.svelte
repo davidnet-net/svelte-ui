@@ -13,6 +13,7 @@
 		value?: string;
 		invalid?: string;
 		maxlength?: number;
+		headless?: boolean; // <-- Added headless prop
 	}
 
 	let {
@@ -23,6 +24,7 @@
 		required = undefined,
 		invalid = undefined,
 		maxlength = undefined,
+		headless = false, // <-- Default to false
 		...restProps
 	}: Props = $props();
 
@@ -90,7 +92,8 @@
 	{/if}
 {/snippet}
 
-<div class="{styles.inputContainer} {isInvalid ? styles.invalid : ''} {focusring}">
+{#if headless}
+	<!-- Renders raw input while keeping state, binding, and maxlength logic intact -->
 	<input
 		bind:this={inputElement}
 		bind:value
@@ -99,19 +102,31 @@
 		type={currentType}
 		required={finalRequired}
 		aria-invalid={isInvalid}
-		class={styles.baseTextField}
 		{...restProps} />
+{:else}
+	<div class="{styles.inputContainer} {isInvalid ? styles.invalid : ''} {focusring}">
+		<input
+			bind:this={inputElement}
+			bind:value
+			id={finalID}
+			name={finalName}
+			type={currentType}
+			required={finalRequired}
+			aria-invalid={isInvalid}
+			class={styles.baseTextField}
+			{...restProps} />
 
-	{#if type === "password"}
-		<div class={styles.suffix}>
-			<IconButton
-				icon={showPassword ? "visibility_off" : "visibility"}
-				onclick={() => (showPassword = !showPassword)}
-				tabindex={-1}
-				appearance="subtle"
-				tip={showPassword
-					? library_messages.lib_common_hide_password()
-					: library_messages.lib_common_show_password()} />
-		</div>
-	{/if}
-</div>
+		{#if type === "password"}
+			<div class={styles.suffix}>
+				<IconButton
+					icon={showPassword ? "visibility_off" : "visibility"}
+					onclick={() => (showPassword = !showPassword)}
+					tabindex={-1}
+					appearance="subtle"
+					tip={showPassword
+						? library_messages.lib_common_hide_password()
+						: library_messages.lib_common_show_password()} />
+			</div>
+		{/if}
+	</div>
+{/if}
