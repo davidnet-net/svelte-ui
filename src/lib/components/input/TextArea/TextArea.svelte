@@ -13,7 +13,7 @@
 		invalid?: string;
 		maxlength?: number;
 		headless?: boolean;
-		maxRows?: number; // Optional prop to cap height dynamically only when specified
+		maxRows?: number;
 	}
 
 	let {
@@ -24,7 +24,7 @@
 		invalid = undefined,
 		maxlength = undefined,
 		headless = false,
-		maxRows = undefined, // Defaults to undefined (unlimited growth)
+		maxRows = undefined,
 		...restProps
 	}: Props = $props();
 
@@ -42,19 +42,30 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
-	// Auto-resize logic with optional row capping
+	// Robust auto-resize logic with safe line-height and padding handling
 	$effect(() => {
 		void value;
 
 		if (textareaElement) {
 			textareaElement.style.height = "auto";
 
-			const computedLineHeight =
-				parseFloat(window.getComputedStyle(textareaElement).lineHeight) || 22;
+			const computed = window.getComputedStyle(textareaElement);
+
+			// Safely parse line-height (handles "normal" returning NaN)
+			let lineHeight = parseFloat(computed.lineHeight);
+			if (isNaN(lineHeight)) {
+				lineHeight = parseFloat(computed.fontSize) * 1.2 || 20;
+			}
 
 			if (maxRows) {
-				const maxHeight = computedLineHeight * maxRows;
+				const paddingTop = parseFloat(computed.paddingTop) || 0;
+				const paddingBottom = parseFloat(computed.paddingBottom) || 0;
+				const verticalPadding = paddingTop + paddingBottom;
+
+				// Calculate max height based on line height * max rows + padding
+				const maxHeight = lineHeight * maxRows + verticalPadding;
 				const newHeight = Math.min(textareaElement.scrollHeight, maxHeight);
+
 				textareaElement.style.height = `${newHeight}px`;
 				textareaElement.style.overflowY =
 					textareaElement.scrollHeight > maxHeight ? "auto" : "hidden";
