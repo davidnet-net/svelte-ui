@@ -12,7 +12,8 @@
 		value?: string;
 		invalid?: string;
 		maxlength?: number;
-		headless?: boolean; // <-- Added headless prop
+		headless?: boolean;
+		maxRows?: number; // Optional prop to cap height dynamically only when specified
 	}
 
 	let {
@@ -22,7 +23,8 @@
 		required = undefined,
 		invalid = undefined,
 		maxlength = undefined,
-		headless = false, // <-- Default to false
+		headless = false,
+		maxRows = undefined, // Defaults to undefined (unlimited growth)
 		...restProps
 	}: Props = $props();
 
@@ -40,12 +42,26 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
+	// Auto-resize logic with optional row capping
 	$effect(() => {
 		void value;
 
 		if (textareaElement) {
 			textareaElement.style.height = "auto";
-			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
+
+			const computedLineHeight =
+				parseFloat(window.getComputedStyle(textareaElement).lineHeight) || 22;
+
+			if (maxRows) {
+				const maxHeight = computedLineHeight * maxRows;
+				const newHeight = Math.min(textareaElement.scrollHeight, maxHeight);
+				textareaElement.style.height = `${newHeight}px`;
+				textareaElement.style.overflowY =
+					textareaElement.scrollHeight > maxHeight ? "auto" : "hidden";
+			} else {
+				textareaElement.style.height = `${textareaElement.scrollHeight}px`;
+				textareaElement.style.overflowY = "hidden";
+			}
 		}
 	});
 
