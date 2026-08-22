@@ -6,16 +6,13 @@ const baseIconButton = style({
 	display: "inline-flex",
 	justifyContent: "center",
 	alignItems: "center",
-	gap: token.global.spacing.xsmall,
 	verticalAlign: "middle",
 	position: "relative",
 	flexShrink: "0",
 
 	width: "2rem",
 	height: "2rem",
-
-	paddingLeft: token.global.spacing.small,
-	paddingRight: token.global.spacing.small,
+	padding: "0",
 
 	lineHeight: token.global.font.lineHeight.none,
 	fontSize: token.global.font.size.medium,
@@ -31,7 +28,6 @@ const baseIconButton = style({
 	transitionDuration: token.global.transition.duration.standard,
 	transitionTimingFunction: token.global.transition.timing.ease
 });
-
 const appearance = styleVariants({
 	danger: {
 		backgroundColor: token.theme.color.background.danger.normal,
