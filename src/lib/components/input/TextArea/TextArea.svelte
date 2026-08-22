@@ -42,37 +42,56 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
-	// Robust auto-resize logic with safe line-height and padding handling
-	$effect(() => {
-		void value;
+	// Strict row enforcement on input (handles typing & pasting)
+	function handleInput(e: Event) {
+		const target = e.target as HTMLTextAreaElement;
+		let val = target.value;
 
+		if (maxRows) {
+			const lines = val.split("\n");
+			if (lines.length > maxRows) {
+				// Truncate excess lines if pasted or typed past limit
+				val = lines.slice(0, maxRows).join("\n");
+				value = val;
+				target.value = val;
+			} else {
+				value = val;
+			}
+		} else {
+			value = val;
+		}
+
+		// Auto-resize height
 		if (textareaElement) {
 			textareaElement.style.height = "auto";
+			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
+		}
 
-			const computed = window.getComputedStyle(textareaElement);
+		if (restProps.oninput) {
+			restProps.oninput(e);
+		}
+	}
 
-			// Safely parse line-height (handles "normal" returning NaN)
-			let lineHeight = parseFloat(computed.lineHeight);
-			if (isNaN(lineHeight)) {
-				lineHeight = parseFloat(computed.fontSize) * 1.2 || 20;
+	// Prevent pressing 'Enter' when maxRows limit is reached
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === "Enter" && maxRows) {
+			const lines = value.split("\n");
+			if (lines.length >= maxRows) {
+				e.preventDefault(); // Block adding a new line
 			}
+		}
 
-			if (maxRows) {
-				const paddingTop = parseFloat(computed.paddingTop) || 0;
-				const paddingBottom = parseFloat(computed.paddingBottom) || 0;
-				const verticalPadding = paddingTop + paddingBottom;
+		if (restProps.onkeydown) {
+			restProps.onkeydown(e);
+		}
+	}
 
-				// Calculate max height based on line height * max rows + padding
-				const maxHeight = lineHeight * maxRows + verticalPadding;
-				const newHeight = Math.min(textareaElement.scrollHeight, maxHeight);
-
-				textareaElement.style.height = `${newHeight}px`;
-				textareaElement.style.overflowY =
-					textareaElement.scrollHeight > maxHeight ? "auto" : "hidden";
-			} else {
-				textareaElement.style.height = `${textareaElement.scrollHeight}px`;
-				textareaElement.style.overflowY = "hidden";
-			}
+	// Initial height sync
+	$effect(() => {
+		void value;
+		if (textareaElement) {
+			textareaElement.style.height = "auto";
+			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
 		}
 	});
 
@@ -123,7 +142,9 @@
 
 <textarea
 	bind:this={textareaElement}
-	bind:value
+	{value}
+	oninput={handleInput}
+	onkeydown={handleKeydown}
 	id={finalID}
 	name={finalName}
 	required={finalRequired}
