@@ -12,6 +12,7 @@
 		value?: string;
 		invalid?: string;
 		maxlength?: number;
+		headless?: boolean; // <-- Added headless prop
 	}
 
 	let {
@@ -21,6 +22,7 @@
 		required = undefined,
 		invalid = undefined,
 		maxlength = undefined,
+		headless = false, // <-- Default to false
 		...restProps
 	}: Props = $props();
 
@@ -67,7 +69,6 @@
 			if (fieldContext.invalidOveride && maxlength) {
 				const diff = value.length - Number(maxlength);
 				if (diff > 0) {
-					// Route to the correct Paraglide function based on the exact difference
 					fieldContext.invalidOveride.invalid =
 						diff === 1
 							? library_messages.lib_common_characterlimit_one()
@@ -100,6 +101,8 @@
 	name={finalName}
 	required={finalRequired}
 	aria-invalid={isInvalid}
-	class="{styles.baseTextArea} {isInvalid ? styles.invalid : ''} {focusring} {styles.size.smart}"
+	class={headless
+		? undefined
+		: `${styles.baseTextArea} ${isInvalid ? styles.invalid : ""} ${focusring} ${styles.size.smart}`}
 	{...restProps}>
 </textarea>
