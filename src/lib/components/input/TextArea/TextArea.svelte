@@ -29,6 +29,7 @@
 	}: Props = $props();
 
 	let textareaElement: HTMLTextAreaElement | undefined = $state();
+	let lastValidValue = value;
 
 	const fieldContext = getContext<fieldContextType | undefined>("field-context");
 
@@ -42,56 +43,44 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
-	// Strict row enforcement on input (handles typing & pasting)
-	function handleInput(e: Event) {
-		const target = e.target as HTMLTextAreaElement;
-		let val = target.value;
+	// Strict visual height enforcement for maxRows.
+	// Typed to match Svelte's expected HTMLTextareaAttributes event signature.
+	function handleInput(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }) {
+		const target = e.currentTarget;
+		const currentVal = target.value;
 
-		if (maxRows) {
-			const lines = val.split("\n");
-			if (lines.length > maxRows) {
-				// Truncate excess lines if pasted or typed past limit
-				val = lines.slice(0, maxRows).join("\n");
-				value = val;
-				target.value = val;
-			} else {
-				value = val;
+		value = currentVal;
+
+		if (maxRows && textareaElement) {
+			const computed = window.getComputedStyle(textareaElement);
+			let lineHeight = parseFloat(computed.lineHeight);
+			if (isNaN(lineHeight)) {
+				lineHeight = parseFloat(computed.fontSize) * 1.2 || 20;
 			}
-		} else {
-			value = val;
+
+			const paddingTop = parseFloat(computed.paddingTop) || 0;
+			const paddingBottom = parseFloat(computed.paddingBottom) || 0;
+			const maxHeight = lineHeight * maxRows + paddingTop + paddingBottom;
+
+			// If the text exceeds the height of maxRows (due to wrapping or enters), revert it
+			if (textareaElement.scrollHeight > maxHeight) {
+				value = lastValidValue;
+				target.value = lastValidValue;
+				return;
+			}
 		}
 
-		// Auto-resize height
-		if (textareaElement) {
-			textareaElement.style.height = "auto";
-			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
-		}
+		lastValidValue = currentVal;
 
 		if (restProps.oninput) {
 			restProps.oninput(e);
 		}
 	}
 
-	// Prevent pressing 'Enter' when maxRows limit is reached
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === "Enter" && maxRows) {
-			const lines = value.split("\n");
-			if (lines.length >= maxRows) {
-				e.preventDefault(); // Block adding a new line
-			}
-		}
-
-		if (restProps.onkeydown) {
-			restProps.onkeydown(e);
-		}
-	}
-
-	// Initial height sync
+	// Sync valid value tracking
 	$effect(() => {
-		void value;
-		if (textareaElement) {
-			textareaElement.style.height = "auto";
-			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
+		if (value !== lastValidValue) {
+			lastValidValue = value;
 		}
 	});
 
@@ -140,17 +129,17 @@
 	{/if}
 {/snippet}
 
+<!-- prettier-ignore -->
 <textarea
-	bind:this={textareaElement}
-	{value}
-	oninput={handleInput}
-	onkeydown={handleKeydown}
-	id={finalID}
-	name={finalName}
-	required={finalRequired}
-	aria-invalid={isInvalid}
-	class={headless
-		? undefined
-		: `${styles.baseTextArea} ${isInvalid ? styles.invalid : ""} ${focusring} ${styles.size.smart}`}
-	{...restProps}>
-</textarea>
+    bind:this={textareaElement}
+    {value}
+    oninput={handleInput}
+    id={finalID}
+    name={finalName}
+    required={finalRequired}
+    aria-invalid={isInvalid}
+    class={headless
+        ? undefined
+        : `${styles.baseTextArea} ${isInvalid ? styles.invalid : ""} ${focusring} ${styles.size.smart}`}
+    style="resize: none; overflow: hidden; {restProps.style || ''}"
+    {...restProps}></textarea>
