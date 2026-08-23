@@ -43,41 +43,49 @@
 			: !!fieldContext?.invalid || !!fieldContext?.invalidOveride?.invalid
 	);
 
-	// Strict visual height enforcement for maxRows.
-	// Typed to match Svelte's expected HTMLTextareaAttributes event signature.
+	// Strict input block: rejects pasting or typing that causes physical overflow
 	function handleInput(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }) {
 		const target = e.currentTarget;
-		const currentVal = target.value;
 
-		value = currentVal;
-
-		if (maxRows && textareaElement) {
-			const computed = window.getComputedStyle(textareaElement);
-			let lineHeight = parseFloat(computed.lineHeight);
-			if (isNaN(lineHeight)) {
-				lineHeight = parseFloat(computed.fontSize) * 1.2 || 20;
-			}
-
-			const paddingTop = parseFloat(computed.paddingTop) || 0;
-			const paddingBottom = parseFloat(computed.paddingBottom) || 0;
-			const maxHeight = lineHeight * maxRows + paddingTop + paddingBottom;
-
-			// If the text exceeds the height of maxRows (due to wrapping or enters), revert it
-			if (textareaElement.scrollHeight > maxHeight) {
-				value = lastValidValue;
+		if (maxRows) {
+			// If the content is physically taller than the visual box (+2px for subpixel safety), revert it instantly
+			if (target.scrollHeight > target.clientHeight + 2) {
 				target.value = lastValidValue;
+				value = lastValidValue;
 				return;
 			}
 		}
 
+		const currentVal = target.value;
+		value = currentVal;
 		lastValidValue = currentVal;
+
+		// Auto-resize ONLY runs if maxRows is NOT active
+		if (!maxRows && textareaElement) {
+			textareaElement.style.height = "auto";
+			textareaElement.style.height = `${textareaElement.scrollHeight}px`;
+		}
 
 		if (restProps.oninput) {
 			restProps.oninput(e);
 		}
 	}
 
-	// Sync valid value tracking
+	// Intercepts holding "Enter" to strictly prevent adding more lines than allowed
+	function handleKeydown(e: KeyboardEvent & { currentTarget: EventTarget & HTMLTextAreaElement }) {
+		if (maxRows && e.key === "Enter") {
+			const newlines = (value.match(/\n/g) || []).length;
+			if (newlines >= maxRows - 1) {
+				e.preventDefault(); // Block the Enter key instantly
+			}
+		}
+
+		if (restProps.onkeydown) {
+			restProps.onkeydown(e);
+		}
+	}
+
+	// Sync valid value tracking safely
 	$effect(() => {
 		if (value !== lastValidValue) {
 			lastValidValue = value;
@@ -134,12 +142,14 @@
     bind:this={textareaElement}
     {value}
     oninput={handleInput}
+    onkeydown={handleKeydown}
     id={finalID}
     name={finalName}
     required={finalRequired}
     aria-invalid={isInvalid}
+    rows={maxRows ?? restProps.rows}
     class={headless
         ? undefined
         : `${styles.baseTextArea} ${isInvalid ? styles.invalid : ""} ${focusring} ${styles.size.smart}`}
-    style="resize: none; overflow: hidden; {restProps.style || ''}"
+    style="{maxRows ? 'resize: none; overflow: hidden; ' : ''}{restProps.style || ''}"
     {...restProps}></textarea>
