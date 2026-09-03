@@ -155,7 +155,11 @@ export async function syncWorkspaceAccess(workspaceId: string) {
 	}
 }
 
-export function hasPermission(permissionKey: string, teamId?: string): boolean {
+export function hasPermission(
+	permissionKey: string,
+	teamId?: string,
+	targetWorkspaceId?: string
+): boolean {
 	if (rbacState.isOwner) return true;
 	if (rbacState.isPersonal) return false;
 
