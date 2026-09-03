@@ -5,7 +5,6 @@ import { deleteFetch, getFetch, postFetch, putFetch } from "$lib/utils/fetches";
 import { afterIdentityInit } from "./initEngine.svelte";
 import { toast } from "./toastEngine.svelte";
 
-// Access token! --- Refresh Token is HTTP ONLY
 export interface accessToken {
 	userID: UUIDv7Type & { __brand: "userID" };
 	jwtID: UUIDv7Type & { __brand: "jwtID" };
@@ -72,6 +71,13 @@ export interface privacyPreferences {
 		| "public";
 }
 
+export interface WorkspaceAccess {
+	isOwner: boolean;
+	isPersonal: boolean;
+	workspacePermissions: Set<string>;
+	teamPermissions: Map<string, Set<string>>;
+}
+
 export const authState = $state({
 	loading: true,
 	isBeating: false,
@@ -93,15 +99,9 @@ export const identityState = $state<{
 });
 
 export const rbacState = $state<{
-	isOwner: boolean;
-	isPersonal: boolean;
-	workspacePermissions: Set<string>;
-	teamPermissions: Map<string, Set<string>>;
+	workspaceAccess: Map<string, WorkspaceAccess>;
 }>({
-	isOwner: false,
-	isPersonal: false,
-	workspacePermissions: new Set(),
-	teamPermissions: new Map()
+	workspaceAccess: new Map()
 });
 
 let authTimer: ReturnType<typeof setTimeout> | null = null;
@@ -120,10 +120,7 @@ export async function clearIdentityData() {
 	identityState.preferences = undefined;
 	identityState.privacy = undefined;
 
-	rbacState.isOwner = false;
-	rbacState.isPersonal = false;
-	rbacState.workspacePermissions.clear();
-	rbacState.teamPermissions.clear();
+	rbacState.workspaceAccess.clear();
 }
 
 export async function logout() {
@@ -134,6 +131,7 @@ export async function logout() {
 }
 
 export async function syncWorkspaceAccess(workspaceId: string) {
+	if (!workspaceId) return;
 	console.debug(`[identityEngine]: Syncing RBAC for workspace ${workspaceId}`);
 	const rbacRes = await getFetch(
 		`${PUBLIC_BACKEND_URL}/workspaces/${workspaceId}/access`,
@@ -143,15 +141,17 @@ export async function syncWorkspaceAccess(workspaceId: string) {
 	);
 
 	if (rbacRes && rbacRes.success) {
-		rbacState.isOwner = rbacRes.isOwner;
-		rbacState.isPersonal = rbacRes.isPersonal;
-		rbacState.workspacePermissions = new Set(rbacRes.workspacePermissions);
-
 		const teamMap = new Map<string, Set<string>>();
 		for (const [tId, perms] of Object.entries(rbacRes.teamPermissions)) {
 			teamMap.set(tId, new Set(perms as string[]));
 		}
-		rbacState.teamPermissions = teamMap;
+
+		rbacState.workspaceAccess.set(workspaceId, {
+			isOwner: rbacRes.isOwner,
+			isPersonal: rbacRes.isPersonal,
+			workspacePermissions: new Set(rbacRes.workspacePermissions),
+			teamPermissions: teamMap
+		});
 	}
 }
 
@@ -160,13 +160,19 @@ export function hasPermission(
 	teamId?: string,
 	targetWorkspaceId?: string
 ): boolean {
-	if (rbacState.isOwner) return true;
-	if (rbacState.isPersonal) return false;
+	const wsId = targetWorkspaceId || identityState.user?.lastActiveWorkspaceId;
+	if (!wsId) return false;
 
-	if (rbacState.workspacePermissions.has(permissionKey)) return true;
+	const access = rbacState.workspaceAccess.get(wsId);
+	if (!access) return false;
+
+	if (access.isOwner) return true;
+	if (access.isPersonal) return false;
+
+	if (access.workspacePermissions.has(permissionKey)) return true;
 
 	if (teamId) {
-		const teamPerms = rbacState.teamPermissions.get(teamId);
+		const teamPerms = access.teamPermissions.get(teamId);
 		if (teamPerms?.has(permissionKey)) return true;
 	}
 
@@ -208,7 +214,6 @@ export async function syncProfileData() {
 
 			identityState.workspaces = data.workspaces as workspace[];
 
-			// Auto-select personal workspace in the backend database if none is active
 			if (!identityState.user.lastActiveWorkspaceId && identityState.workspaces) {
 				const personalWorkspace = identityState.workspaces.find((w) => w.type === "personal");
 
@@ -248,7 +253,6 @@ export async function syncProfileData() {
 	}
 }
 
-// Call authBeat instead do not touch refresh manually!
 async function refresh() {
 	console.debug("[identityEngine]: Refreshing...");
 
@@ -265,7 +269,6 @@ async function refresh() {
 
 		authState.isLoggedIn = true;
 
-		// Fetch profile data on EVERY successful refresh
 		await syncProfileData();
 		await afterIdentityInit();
 	} else {
@@ -311,11 +314,11 @@ export async function authBeat() {
 function setupNextBeat() {
 	if (authTimer) clearTimeout(authTimer);
 
-	let delay = 5 * 60 * 1000; // 5 MIN
+	let delay = 5 * 60 * 1000;
 
 	if (identityState.token?.expiresAt) {
 		const now = Date.now();
-		const expiresAtMs = identityState.token.expiresAt * 1000; // Unix timestamp in seconds
+		const expiresAtMs = identityState.token.expiresAt * 1000;
 
 		const buffer = 2 * 60 * 1000;
 		delay = expiresAtMs - now - buffer;
@@ -342,7 +345,6 @@ export function whenAuthReady(): Promise<void> {
 	return readyPromise;
 }
 
-// Derived state to automatically track the current workspace with personal fallback
 export function getCurrentWorkspace() {
 	if (!identityState.workspaces) return undefined;
 
