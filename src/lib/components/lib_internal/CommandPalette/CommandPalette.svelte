@@ -250,7 +250,24 @@
 			icon: "docs",
 			href: "https://docs.davidnet.net"
 		},
-		// Todo add QUIZ app
+		{
+			title: "Games",
+			description: "Take a quick break",
+			icon: "joystick",
+			href: "https://home.davidnet.net/games"
+		},
+		{
+			title: "Edit profile",
+
+			icon: "for_you",
+			href: "https://account.davidnet.net/profile/edit"
+		},
+		{
+			title: "Quiz",
+			description: "Go to the quiz app",
+			icon: "quiz",
+			href: "https://quiz.davidnet.net"
+		},
 		{
 			get title() {
 				return library_messages.lib_component_command_palette_action_kanban_title();

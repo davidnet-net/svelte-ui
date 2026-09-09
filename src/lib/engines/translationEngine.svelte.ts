@@ -96,6 +96,9 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 	type Locale = T;
 
 	const handleLocaleChange = (newLocale: Locale) => {
+		// Prevent redundant state application if it matches current runtime locale
+		if (getLocale() === newLocale) return;
+
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
 		internalSetLocale(newLocale as any);
 		if (typeof document !== "undefined") {
@@ -157,7 +160,7 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 			}
 		}
 
-		// Apply resolved locale
+		// Apply resolved locale only if it differs from the current active runtime locale
 		if (targetLocale && targetLocale !== getLocale()) {
 			if (typeof appRuntime.onSetLocale !== "function") {
 				handleLocaleChange(targetLocale);
@@ -173,7 +176,6 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 // Regional Settings & Formatting Engine
 // -----------------------------------------------------------------------------
 
-// In-memory state to prevent excessive cookie parsing during render cycles
 let currentTimezone: string | null = null;
 let currentFirstDayOfWeek: string | null = null;
 let currentDateFormat: string | null = null;
@@ -196,11 +198,6 @@ export const validTimezones =
 		? Intl.supportedValuesOf("timeZone")
 		: ["UTC"];
 
-/**
- * Updates the active timezone and persists it to the local cache.
- *
- * @param tz - A valid IANA timezone string (e.g., 'Europe/Amsterdam').
- */
 export function setTimezone(tz: string): void {
 	if (validTimezones.includes(tz)) {
 		currentTimezone = tz;
@@ -210,12 +207,6 @@ export function setTimezone(tz: string): void {
 	}
 }
 
-/**
- * Retrieves the currently active timezone, falling back to the browser's
- * native timezone or UTC if unresolvable.
- *
- * @returns A valid IANA timezone string.
- */
 export function getTimezone(): string {
 	if (!currentTimezone) {
 		const cached = getCookie(TIMEZONE_CACHE_KEY);
@@ -228,11 +219,6 @@ export function getTimezone(): string {
 	return currentTimezone;
 }
 
-/**
- * Updates the user's preferred first day of the week and persists it to the local cache.
- *
- * @param dayValue - The day of the week as a lowercase string (e.g., 'monday').
- */
 export function setFirstDayOfWeek(dayValue: string): void {
 	const isValid = validDaysOfWeek.some((day) => day.value === dayValue.toLowerCase());
 	if (isValid) {
@@ -243,11 +229,6 @@ export function setFirstDayOfWeek(dayValue: string): void {
 	}
 }
 
-/**
- * Retrieves the user's preferred first day of the week, defaulting to 'monday'.
- *
- * @returns The day of the week as a lowercase string.
- */
 export function getFirstDayOfWeek(): string {
 	if (!currentFirstDayOfWeek) {
 		const cached = getCookie(FIRSTDAYOFWEEK_CACHE_KEY);
@@ -257,11 +238,6 @@ export function getFirstDayOfWeek(): string {
 	return currentFirstDayOfWeek;
 }
 
-/**
- * Updates the user's preferred date format and persists it to the local cache.
- *
- * @param format - A valid date format string (e.g., 'YYYY-MM-DD').
- */
 export function setDateFormat(format: string): void {
 	if (validDateFormats.includes(format)) {
 		currentDateFormat = format;
@@ -271,11 +247,6 @@ export function setDateFormat(format: string): void {
 	}
 }
 
-/**
- * Retrieves the user's preferred date format, defaulting to 'YYYY-MM-DD'.
- *
- * @returns The date format string.
- */
 export function getDateFormat(): string {
 	if (!currentDateFormat) {
 		const cached = getCookie(DATEFORMAT_CACHE_KEY);
@@ -284,13 +255,6 @@ export function getDateFormat(): string {
 	return currentDateFormat;
 }
 
-/**
- * Internal helper to compute timezone-adjusted and formatted date strings.
- *
- * @param ms - Unix timestamp in milliseconds.
- * @param includeTime - Whether to append HH:MM:SS to the output.
- * @returns The formatted date/time string.
- */
 function _formatUnix(ms: number, includeTime: boolean): string {
 	if (!ms || isNaN(ms)) return "";
 
@@ -325,26 +289,10 @@ function _formatUnix(ms: number, includeTime: boolean): string {
 	return result;
 }
 
-/**
- * Converts a Unix timestamp in milliseconds to a formatted string
- * respecting the user's cached timezone and date format preferences.
- *
- * @param ms - The Unix timestamp in milliseconds.
- * @param includeTime - Whether to append the time (HH:MM:SS) to the output (default: false).
- * @returns The formatted date string.
- */
 export function formatUnixMsToPreferred(ms: number, includeTime = false): string {
 	return _formatUnix(ms, includeTime);
 }
 
-/**
- * Converts a Unix timestamp in seconds to a formatted string
- * respecting the user's cached timezone and date format preferences.
- *
- * @param seconds - The Unix timestamp in seconds.
- * @param includeTime - Whether to append the time (HH:MM:SS) to the output (default: false).
- * @returns The formatted date string.
- */
 export function formatUnixSecToPreferred(seconds: number, includeTime = false): string {
 	if (!seconds || isNaN(seconds)) return "";
 	return _formatUnix(seconds * 1000, includeTime);
