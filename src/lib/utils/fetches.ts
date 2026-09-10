@@ -8,6 +8,10 @@ import { generateUUIDv7 } from "./crypto";
  * Core internal fetching utility that standardizes API requests across the application.
  * Automatically handles correlation IDs, session tracking, JSON/FormData formatting, and query parameter conversion.
  */
+/**
+ * Core internal fetching utility that standardizes API requests across the application.
+ * Automatically handles correlation IDs, session tracking, JSON/FormData formatting, and query parameter conversion.
+ */
 async function baseFetch(
 	url: string,
 	method: string,
@@ -77,7 +81,9 @@ async function baseFetch(
 	}
 	if (result.status >= 401) {
 		const parsedResult = await result.json();
-		if (parsedResult.code !== "NO_PERMISSION") return;
+		if (parsedResult.code !== "NO_PERMISSION") {
+			return parsedResult;
+		}
 		toast("Sorry!", "Missing permission: " + parsedResult.permisson, "error", 4000, "danger");
 		return { code: "NO_PERMISSION", success: false };
 	}
