@@ -40,7 +40,17 @@ let consumerGetLocale: (() => any) | null = null;
  * @param newLocale - The target locale string to switch to (e.g., 'en', 'nl').
  */
 export function setLanguage(newLocale: string): void {
-	// Guard clause: Prevent infinite loops if the language is already active
+	// 1. Immediately write to ALL storage mechanisms to prevent state mismatch on reload
+	// We pass 365 to keep the cache alive for a year. Your utility handles the path/domain!
+	setCookie(LANGUAGE_CACHE_KEY, newLocale, 365);
+
+	if (typeof window !== "undefined") {
+		// Sync Paraglide's configured localStorage key!
+		localStorage.setItem("language", newLocale);
+		document.documentElement.lang = newLocale;
+	}
+
+	// 2. Guard clause: Prevent infinite loops if the language is already active
 	if (consumerGetLocale && consumerGetLocale() === newLocale) {
 		return;
 	}
@@ -52,13 +62,6 @@ export function setLanguage(newLocale: string): void {
 		4000,
 		"subtle"
 	);
-
-	// Update local cache priority
-	setCookie(LANGUAGE_CACHE_KEY, newLocale);
-
-	if (typeof document !== "undefined") {
-		document.documentElement.lang = newLocale;
-	}
 
 	// Trigger the active Paraglide runtime
 	if (consumerSetLocale) {
@@ -101,10 +104,13 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
 		internalSetLocale(newLocale as any);
-		if (typeof document !== "undefined") {
+
+		// Keep storages synced on internal changes
+		setCookie(LANGUAGE_CACHE_KEY, newLocale, 365);
+		if (typeof window !== "undefined") {
+			localStorage.setItem("language", newLocale);
 			document.documentElement.lang = newLocale;
 		}
-		setCookie(LANGUAGE_CACHE_KEY, newLocale);
 	};
 
 	if (appRuntime.setLocale !== internalSetLocale) {
@@ -139,8 +145,10 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 	): Promise<void> {
 		let targetLocale: Locale | null = null;
 
-		// Priority 1: Local Cache (Cookie)
-		const cachedLanguage = getCookie(LANGUAGE_CACHE_KEY);
+		// Priority 1: Local Cache (Cookie first, then LocalStorage)
+		const cachedLanguage =
+			getCookie(LANGUAGE_CACHE_KEY) ||
+			(typeof window !== "undefined" ? localStorage.getItem("language") : null);
 		targetLocale = await validateLanguage(cachedLanguage);
 
 		// Priority 2: Database Preference (if no local cache exists)
@@ -201,7 +209,7 @@ export const validTimezones =
 export function setTimezone(tz: string): void {
 	if (validTimezones.includes(tz)) {
 		currentTimezone = tz;
-		setCookie(TIMEZONE_CACHE_KEY, tz);
+		setCookie(TIMEZONE_CACHE_KEY, tz, 365);
 	} else {
 		console.warn(`[i18n] Invalid timezone attempted: ${tz}`);
 	}
@@ -223,7 +231,7 @@ export function setFirstDayOfWeek(dayValue: string): void {
 	const isValid = validDaysOfWeek.some((day) => day.value === dayValue.toLowerCase());
 	if (isValid) {
 		currentFirstDayOfWeek = dayValue.toLowerCase();
-		setCookie(FIRSTDAYOFWEEK_CACHE_KEY, currentFirstDayOfWeek);
+		setCookie(FIRSTDAYOFWEEK_CACHE_KEY, currentFirstDayOfWeek, 365);
 	} else {
 		console.warn(`[i18n] Invalid day of week attempted: ${dayValue}`);
 	}
@@ -241,7 +249,7 @@ export function getFirstDayOfWeek(): string {
 export function setDateFormat(format: string): void {
 	if (validDateFormats.includes(format)) {
 		currentDateFormat = format;
-		setCookie(DATEFORMAT_CACHE_KEY, format);
+		setCookie(DATEFORMAT_CACHE_KEY, format, 365);
 	} else {
 		console.warn(`[i18n] Invalid date format attempted: ${format}`);
 	}
