@@ -12,7 +12,7 @@ import { toast } from "./toastEngine.svelte";
 
 /**
  * Defines the required shape of a Paraglide JS runtime module.
- * @template T - A string literal union of supported locales (e.g., 'en' | 'nl').
+ * @template T - A string literal union of supported locales (e.g., 'en-us' | 'nl').
  */
 export interface ParaglideRuntimeType<T extends string> {
 	locales: readonly T[];
@@ -37,11 +37,11 @@ let consumerGetLocale: (() => any) | null = null;
  * Globally updates the application language, synchronizes local cache,
  * and triggers a hard reload to apply routing changes.
  *
- * @param newLocale - The target locale string to switch to (e.g., 'en', 'nl').
+ * @param newLocale - The target locale string to switch to (e.g., 'en-us', 'nl').
  */
 export function setLanguage(newLocale: string): void {
 	// 1. Immediately write to ALL storage mechanisms to prevent state mismatch on reload
-	// We pass 365 to keep the cache alive for a year. Your utility handles the path/domain!
+	// Passes 365 days to your custom setCookie utility
 	setCookie(LANGUAGE_CACHE_KEY, newLocale, 365);
 
 	if (typeof window !== "undefined") {
@@ -128,10 +128,23 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 	async function validateLanguage(lang: string | null): Promise<Locale | null> {
 		if (!lang) return null;
-		const candidate = lang.split(",")[0]?.split("-")[0]?.trim().toLowerCase();
-		return candidate && (locales as readonly string[]).includes(candidate)
-			? (candidate as Locale)
-			: null;
+		const candidate = lang.split(",")[0]?.trim().toLowerCase();
+
+		if (!candidate) return null;
+
+		// 1. Try for an exact match first (e.g., "en-us" matches "en-us")
+		if ((locales as readonly string[]).includes(candidate)) {
+			return candidate as Locale;
+		}
+
+		// 2. Fallback: If no exact match, try matching just the base language
+		// Example: browser requests "en-GB", we match it to our base "en-us"
+		const baseCandidate = candidate.split("-")[0];
+		const looseMatch = (locales as readonly string[]).find(
+			(l) => l.split("-")[0] === baseCandidate
+		);
+
+		return looseMatch ? (looseMatch as Locale) : null;
 	}
 
 	/**
