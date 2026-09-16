@@ -11,8 +11,8 @@
 		postFetch,
 		sleep,
 		TextArea
-	} from "@davidnet-net/svelte-ui";
-	import { token } from "@davidnet-net/svelte-ui/tokens";
+	} from "$lib";
+	import { token } from "$lib/styles";
 
 	interface Props {
 		isOpen: boolean;
