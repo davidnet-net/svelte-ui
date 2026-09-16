@@ -318,3 +318,10 @@ export function formatUnixSecToPreferred(seconds: number, includeTime = false): 
 	if (!seconds || isNaN(seconds)) return "";
 	return _formatUnix(seconds * 1000, includeTime);
 }
+
+export function formatIsoToPreferred(isoString: string, includeTime = false): string {
+	if (!isoString) return "";
+	const ms = Date.parse(isoString);
+	if (isNaN(ms)) return "";
+	return _formatUnix(ms, includeTime);
+}
