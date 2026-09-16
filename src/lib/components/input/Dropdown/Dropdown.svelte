@@ -104,11 +104,14 @@
 	{@render trigger()}
 
 	{#if isOpen && triggerContainer}
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			use:shortcutTrap
 			use:focusTrap
 			class={styles.dropdownContent}
-			use:floatingPosition={{ trigger: triggerContainer, placement, forcePlacement, offset }}>
+			use:floatingPosition={{ trigger: triggerContainer, placement, forcePlacement, offset }}
+			onclick={(e) => e.stopPropagation()}
+			onkeydown={(e) => {}}>
 			{@render children()}
 		</div>
 	{/if}
