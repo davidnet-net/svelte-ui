@@ -40,6 +40,7 @@
 	}: Props = $props();
 
 	let triggerContainer = $state<HTMLElement | null>(null);
+	let dropdownContent = $state<HTMLElement | null>(null);
 
 	useShortcut(
 		"escape",
@@ -62,7 +63,10 @@
 		 */
 		const handleClickOutside = (event: MouseEvent) => {
 			const target = event.target as Node;
-			if (triggerContainer && !triggerContainer.contains(target)) {
+			const clickedInsideTrigger = triggerContainer?.contains(target);
+			const clickedInsideDropdown = dropdownContent?.contains(target);
+
+			if (!clickedInsideTrigger && !clickedInsideDropdown) {
 				isOpen = false;
 			}
 		};
@@ -110,6 +114,7 @@
 			use:focusTrap
 			class={styles.dropdownContent}
 			use:floatingPosition={{ trigger: triggerContainer, placement, forcePlacement, offset }}
+			bind:this={dropdownContent}
 			onclick={(e) => e.stopPropagation()}
 			onkeydown={(e) => {}}>
 			{@render children()}
