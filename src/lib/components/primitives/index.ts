@@ -5,3 +5,4 @@ export { default as CodeSnippet } from "./CodeSnippet/CodeSnippet.svelte";
 export { default as Divider } from "./Divider/Divider.svelte";
 export { default as Flex } from "./Flex/Flex.svelte";
 export { default as Icon } from "./Icon/Icon.svelte";
+export { default as ReportModal } from "./ReportModal/ReportModal.svelte";
