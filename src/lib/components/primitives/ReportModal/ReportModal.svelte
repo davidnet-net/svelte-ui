@@ -16,7 +16,7 @@
 
 	interface Props {
 		isOpen: boolean;
-		reportType: "profile" | "short";
+		reportType: "profile" | "short" | "game";
 		reportedId: string;
 	}
 
@@ -31,7 +31,6 @@
 	async function submitReport(event: SubmitEvent & { currentTarget: HTMLFormElement }) {
 		event.preventDefault();
 
-		// Validate reason
 		if (!reasonValue || reasonValue.trim().length === 0) {
 			reasonInvalid = "Please provide a reason for this report.";
 			return;
@@ -58,7 +57,7 @@
 			true
 		);
 
-		await sleep(500); // UI polish for loading state
+		await sleep(500);
 
 		if (result.success) {
 			reportFinished = true;
@@ -79,7 +78,12 @@
 </script>
 
 {#if isOpen && !reportFinished && authState.isLoggedIn}
-	<Modal title="Report {reportType === 'profile' ? 'User Profile' : 'Short'}">
+	<Modal
+		title="Report {reportType === 'profile'
+			? 'User Profile'
+			: reportType === 'short'
+				? 'Short'
+				: 'Game'}">
 		<Flex height="100%" gap="medium" justifyContent="center" alignItems="center" direction="column">
 			<Form id="report-form" autocomplete="off" onsubmit={submitReport}>
 				<div
