@@ -3,6 +3,7 @@ import manifest from "$lib/internal/manifests/version-manifest.json";
 import { getCookie, setCookie } from "../utils/cookies";
 import { initAppState } from "./appStateEngine.svelte";
 import { identityState, initIdentityEngine } from "./identityEngine.svelte";
+import { enforceLegalAcceptance } from "./legalEngine.svelte";
 import { isValidTheme, setTheme, type themeNames } from "./themeEngine.svelte";
 import {
 	createTranslationEngine,
@@ -66,10 +67,14 @@ export async function init<T extends string>(paraglideRuntime: ParaglideRuntimeT
 export async function afterIdentityInit() {
 	setDateFormat(identityState!.preferences!.dateFormat);
 	setFirstDayOfWeek(identityState!.preferences!.firstDayOfWeek);
+
 	const LANGUAGE = getCookie(LANGUAGE_CACHE_KEY) || "en-us";
 	if (LANGUAGE !== identityState!.preferences!.language) {
 		setLanguage(identityState!.preferences!.language);
 	}
+
 	setTheme(identityState!.preferences!.theme);
 	setTimezone(identityState!.preferences!.timezone);
+
+	await enforceLegalAcceptance();
 }

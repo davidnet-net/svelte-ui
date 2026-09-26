@@ -1,8 +1,10 @@
+import { page } from "$app/state";
 import { toast } from "$lib/engines";
 import { appState } from "$lib/engines/appStateEngine.svelte";
 import { identityState } from "$lib/engines/identityEngine.svelte";
 
 import { generateUUIDv7 } from "./crypto";
+import { sleep } from "./sleep";
 
 /**
  * Core internal fetching utility that standardizes API requests across the application.
@@ -85,6 +87,22 @@ async function baseFetch(
 			return parsedResult;
 		}
 		toast("Sorry!", "Missing permission: " + parsedResult.permisson, "error", 4000, "danger");
+		return { code: "NO_PERMISSION", success: false };
+	}
+	if (result.status === 403) {
+		const parsedResult = await result.json();
+		if (parsedResult.code !== "LEGAL_ACCEPTANCE_REQUIRED") {
+			return parsedResult;
+		}
+		toast(
+			"Policy change",
+			"You must accept the policy change. 30 days went by!!!",
+			"error",
+			4000,
+			"danger"
+		);
+		await sleep(4000);
+		window.location.href = `https://davidnet.net/legal/accept?continue=${encodeURIComponent(page.url.href)}`;
 		return { code: "NO_PERMISSION", success: false };
 	}
 	return result.json();
