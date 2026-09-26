@@ -4,7 +4,7 @@ import { authState } from "./identityEngine.svelte";
 
 export async function enforceLegalAcceptance() {
 	// 1. Alleen uitvoeren in de browser en als de gebruiker daadwerkelijk is ingelogd
-	if (typeof window === "undefined" || !authState.isLoggedIn) {
+	if (typeof window === "undefined" || !authState.isLoggedIn || import.meta.env.DEV) {
 		return;
 	}
 
