@@ -1,5 +1,24 @@
 <script lang="ts">
 	import Prism from "prismjs";
+	// Statically import the grammars we actually ship, in dependency order (markdown needs
+	// markup, typescript needs javascript, ...). A dynamic `import(`prismjs/components/prism-
+	// ${lang}.js`)` built from a runtime variable looks appealing for lazy-loading, but Vite/
+	// Rollup can't statically analyze a template-literal specifier into a bare (node_modules)
+	// package path, so it ships to the browser as a literal, unresolvable `import()` call that
+	// fails at runtime with "bare specifier" errors. Statically importing the common set here
+	// means they're always bundled correctly; the dynamic import below remains as a best-effort
+	// fallback for anything outside this list.
+	import "prismjs/components/prism-markup.js";
+	import "prismjs/components/prism-clike.js";
+	import "prismjs/components/prism-css.js";
+	import "prismjs/components/prism-javascript.js";
+	import "prismjs/components/prism-typescript.js";
+	import "prismjs/components/prism-json.js";
+	import "prismjs/components/prism-bash.js";
+	import "prismjs/components/prism-yaml.js";
+	import "prismjs/components/prism-python.js";
+	import "prismjs/components/prism-rust.js";
+	import "prismjs/components/prism-markdown.js";
 	import { onDestroy } from "svelte";
 
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
