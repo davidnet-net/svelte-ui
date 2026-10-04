@@ -140,7 +140,6 @@
 					props={{ iconbefore: "star", children: "Icon before button" }}
 					height="100px" />
 			</div>
-			paga
 
 			<div>
 				<h2>Icon after</h2>
