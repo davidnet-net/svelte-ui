@@ -83,6 +83,10 @@ async function baseFetch(
 	}
 	if (result.status >= 401) {
 		const parsedResult = await result.json();
+		if (parsedResult.code === "IP_BANNED") {
+			window.location.href = "https://davidnet.net/moderation/ip-banned";
+			return parsedResult;
+		}
 		if (parsedResult.code !== "NO_PERMISSION") {
 			return parsedResult;
 		}
