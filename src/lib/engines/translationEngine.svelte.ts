@@ -6,9 +6,12 @@
  * across the application.
  */
 
-import { setLocale as internalSetLocale } from "$lib/paraglide/runtime.js";
+import {
+	getLocale as internalGetLocale,
+	overwriteGetLocale,
+	setLocale as internalSetLocale
+} from "$lib/paraglide/runtime.js";
 import { getCookie, setCookie } from "../utils/cookies";
-import { toast } from "./toastEngine.svelte";
 
 /**
  * Defines the required shape of a Paraglide JS runtime module.
@@ -17,7 +20,7 @@ import { toast } from "./toastEngine.svelte";
 export interface ParaglideRuntimeType<T extends string> {
 	locales: readonly T[];
 	getLocale: () => T;
-	setLocale: (locale: T) => void;
+	setLocale: (locale: T, options?: { reload?: boolean }) => void;
 	onSetLocale?: (callback: (newLocale: T) => void) => void;
 }
 
@@ -29,18 +32,34 @@ export const DATEFORMAT_CACHE_KEY = "date_format_cache";
 // Internal references to the consumer's Paraglide runtime functions,
 // populated once createTranslationEngine is invoked.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let consumerSetLocale: ((locale: any) => void) | null = null;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let consumerGetLocale: (() => any) | null = null;
+let consumerSetLocale: ((locale: any, options?: { reload?: boolean }) => void) | null = null;
+
+// Reactive locale signal. Paraglide's own `getLocale()`/`m.*()` message functions
+// read a plain module variable, which Svelte's fine-grained reactivity can't track -
+// so components never re-rendered when the locale changed and a hard reload was the
+// only way to see new text. We overwrite Paraglide's locale resolution (client-side
+// only, so per-request SSR resolution stays untouched) to read from this rune instead,
+// the same mechanism Paraglide's own framework adapters use for reactivity.
+let activeLocale = $state<string>(typeof window !== "undefined" ? internalGetLocale() : "en-us");
+
+if (typeof window !== "undefined") {
+	overwriteGetLocale(() => activeLocale as never);
+}
+
+export const currentLocale = {
+	get value(): string {
+		return activeLocale;
+	}
+};
 
 /**
  * Globally updates the application language, synchronizes local cache,
- * and triggers a hard reload to apply routing changes.
+ * and reactively re-renders translated content - no page reload required.
  *
  * @param newLocale - The target locale string to switch to (e.g., 'en-us', 'nl').
  */
 export function setLanguage(newLocale: string): void {
-	// 1. Immediately write to ALL storage mechanisms to prevent state mismatch on reload
+	// 1. Immediately write to ALL storage mechanisms to prevent state mismatch on next load
 	// Passes 365 days to your custom setCookie utility
 	setCookie(LANGUAGE_CACHE_KEY, newLocale, 365);
 
@@ -50,33 +69,23 @@ export function setLanguage(newLocale: string): void {
 		document.documentElement.lang = newLocale;
 	}
 
-	// 2. Guard clause: Prevent infinite loops if the language is already active
-	if (consumerGetLocale && consumerGetLocale() === newLocale) {
+	// 2. Guard clause: Prevent redundant work if the language is already active
+	if (activeLocale === newLocale) {
 		return;
 	}
 
-	toast(
-		"Reloading page!",
-		"To apply the language we need to reload the page.",
-		"translate",
-		4000,
-		"subtle"
-	);
+	// 3. Update the reactive signal - every m.*() call made inside a template or
+	// $derived now re-evaluates against the new locale automatically.
+	activeLocale = newLocale;
 
-	// Trigger the active Paraglide runtime
+	// Keep the consumer's own Paraglide runtime in sync too (covers apps that bundle
+	// a separate generated runtime.js instance than this package does).
 	if (consumerSetLocale) {
-		consumerSetLocale(newLocale);
+		consumerSetLocale(newLocale, { reload: false });
 	} else {
 		console.warn("[i18n] Consumer engine not booted, falling back to internal setter.");
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		internalSetLocale(newLocale as any);
-	}
-
-	// Force a hard browser reload to sync SvelteKit SSR with the new cookie
-	if (typeof window !== "undefined") {
-		setTimeout(() => {
-			window.location.reload();
-		}, 100);
+		internalSetLocale(newLocale as any, { reload: false });
 	}
 }
 
@@ -90,7 +99,6 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 	const { locales, getLocale, setLocale } = appRuntime;
 
 	consumerSetLocale = setLocale;
-	consumerGetLocale = getLocale;
 
 	if (!Array.isArray(locales) || locales.length === 0) {
 		throw new Error("createTranslationEngine: 'locales' must be a non-empty array.");
@@ -103,7 +111,8 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 		if (getLocale() === newLocale) return;
 
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
-		internalSetLocale(newLocale as any);
+		internalSetLocale(newLocale as any, { reload: false });
+		activeLocale = newLocale;
 
 		// Keep storages synced on internal changes
 		setCookie(LANGUAGE_CACHE_KEY, newLocale, 365);
@@ -115,7 +124,8 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 
 	if (appRuntime.setLocale !== internalSetLocale) {
 		//eslint-disable-next-line @typescript-eslint/no-explicit-any
-		internalSetLocale(appRuntime.getLocale() as any);
+		internalSetLocale(appRuntime.getLocale() as any, { reload: false });
+		activeLocale = appRuntime.getLocale();
 
 		if (typeof appRuntime.onSetLocale === "function") {
 			appRuntime.onSetLocale(handleLocaleChange);
@@ -186,7 +196,7 @@ export function createTranslationEngine<T extends string>(appRuntime: ParaglideR
 			if (typeof appRuntime.onSetLocale !== "function") {
 				handleLocaleChange(targetLocale);
 			}
-			setLocale(targetLocale);
+			setLocale(targetLocale, { reload: false });
 		} else if (typeof document !== "undefined") {
 			document.documentElement.lang = getLocale();
 		}
