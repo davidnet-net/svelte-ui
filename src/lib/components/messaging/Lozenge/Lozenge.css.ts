@@ -4,11 +4,12 @@ import { token } from "../../../styles/designTokens";
 
 export const baseStyle = style({
 	fontSize: token.global.font.size.small,
-	height: token.global.font.size.small,
 	padding: token.global.spacing.xsmall,
 	borderRadius: token.global.radius.small,
 	width: "fit-content",
-	lineHeight: token.global.font.lineHeight.none
+	lineHeight: token.global.font.lineHeight.normal,
+	display: "inline-flex",
+	alignItems: "center"
 });
 
 export const appearance = styleVariants({
