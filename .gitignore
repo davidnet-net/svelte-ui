@@ -29,3 +29,6 @@ vite.config.ts.timestamp-*
 # Custom
 src/lib/internal/manifests/
 bunfig.toml
+# Claude Code (local/session state, not shared)
+.claude/worktrees/
+.claude/settings.local.json
