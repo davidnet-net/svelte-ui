@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="Spinner" paragraph="A spinner indicates an ongoing loading state." />
+<Header heading={m.docs_page_name_spinner()} paragraph={m.docs_page_components_card_spinner_description()} />

@@ -6,6 +6,7 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
 	import { currentTheme } from "$lib/engines/themeEngine.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./Playground.css";
 
@@ -164,7 +165,7 @@
 					gap="medium">
 					<Spinner size="large" />
 					<p style="margin: 0; text-align: center; font-size: 0.875rem; opacity: 0.8;">
-						Preparing environment...
+						{m.lib_component_playground_preparing()}
 					</p>
 				</Flex>
 			</div>
@@ -173,7 +174,7 @@
 			<iframe
 				bind:this={iframeRef}
 				src={runnerUrl}
-				title="Isolated Component Preview"
+				title={m.lib_component_playground_preview_title()}
 				class={styles.previewIframe}
 				style:opacity={isReady ? 1 : 0}
 				style:pointer-events={isReady ? "auto" : "none"}

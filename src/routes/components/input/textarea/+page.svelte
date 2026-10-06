@@ -4,13 +4,14 @@
 	import TextArea from "$lib/components/input/TextArea/TextArea.svelte";
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="TextArea" paragraph="A textarea allows entering multi-line text." />
+<Header heading={m.docs_page_name_textarea()} paragraph={m.docs_page_components_card_textarea_description()} />
 
 <Flex justifyContent="center" alignItems="center">
 	<Form>
-		<Field label="Your opinion:" name="opinion" required>
+		<Field label={m.docs_page_textarea_field_label()} name="opinion" required>
 			<TextArea maxlength={200} />
 		</Field>
 	</Form>

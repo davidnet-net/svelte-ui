@@ -4,6 +4,7 @@
 	import { focusTrap } from "$lib/engines/focusEngine.svelte";
 	import { shortcutTrap, useShortcut } from "$lib/engines/shortcutEngine.svelte";
 	import { floatingPosition, type Placement } from "$lib/utils/floating.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./Dropdown.css";
 
@@ -48,7 +49,7 @@
 			isOpen = false;
 		},
 		{
-			name: "Close dropdown",
+			name: m.lib_component_dropdown_shortcut_close_name(),
 			preventDefault: true,
 			active: () => isOpen
 		}

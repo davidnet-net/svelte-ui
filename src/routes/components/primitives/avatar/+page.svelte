@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="Avatar" paragraph="An avatar is a visual representation of a user or entity." />
+<Header heading={m.docs_page_name_avatar()} paragraph={m.docs_page_components_card_avatar_description()} />

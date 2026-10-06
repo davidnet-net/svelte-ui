@@ -3,6 +3,7 @@
 	import { fade } from "svelte/transition";
 
 	import { toast } from "$lib/engines";
+	import { m } from "$lib/paraglide/messages.js";
 	import { focusring } from "$lib/styles/global.css";
 	import type { fieldContextType } from "$lib/types/Form";
 
@@ -31,7 +32,7 @@
 		accept = "image/jpeg,image/png,image/webp,image/avif,image/gif",
 		maxSizeBytes = 5 * 1024 * 1024,
 		disabled = false,
-		alt = "Question image",
+		alt = m.lib_component_imageupload_default_alt(),
 		id = undefined,
 		name = undefined
 	}: Props = $props();
@@ -64,13 +65,21 @@
 
 	async function handleFile(file: File) {
 		if (!file.type.startsWith("image/")) {
-			toast("Unsupported file", "Please choose an image file.", "broken_image", 4000, "danger");
+			toast(
+				m.lib_component_imageupload_unsupported_title(),
+				m.lib_component_imageupload_unsupported_content(),
+				"broken_image",
+				4000,
+				"danger"
+			);
 			return;
 		}
 		if (file.size > maxSizeBytes) {
 			toast(
-				"Image too large",
-				`Images must be under ${Math.round(maxSizeBytes / (1024 * 1024))}MB.`,
+				m.lib_component_imageupload_too_large_title(),
+				m.lib_component_imageupload_too_large_content({
+					mb: Math.round(maxSizeBytes / (1024 * 1024))
+				}),
 				"broken_image",
 				4000,
 				"danger"
@@ -84,10 +93,22 @@
 			if (url) {
 				value = url;
 			} else {
-				toast("Upload failed", "Could not upload the image.", "broken_image", 4000, "danger");
+				toast(
+					m.lib_component_imageupload_failed_title(),
+					m.lib_component_imageupload_failed_content(),
+					"broken_image",
+					4000,
+					"danger"
+				);
 			}
 		} catch {
-			toast("Upload failed", "Could not upload the image.", "broken_image", 4000, "danger");
+			toast(
+				m.lib_component_imageupload_failed_title(),
+				m.lib_component_imageupload_failed_content(),
+				"broken_image",
+				4000,
+				"danger"
+			);
 		} finally {
 			uploading = false;
 		}
@@ -147,7 +168,7 @@
 			<IconButton
 				icon="delete"
 				appearance="danger"
-				tip="Remove image"
+				tip={m.lib_component_imageupload_remove_tip()}
 				disabled={disabled || uploading}
 				onclick={clear} />
 		</div>
@@ -156,7 +177,7 @@
 	<div
 		role="button"
 		tabindex="0"
-		aria-label="Upload image"
+		aria-label={m.lib_component_imageupload_upload_alt()}
 		class="{styles.dropzone} {dragActive ? styles.dragOver : ''} {disabled
 			? styles.state.disabled
 			: styles.state.idle} {focusring}"
@@ -172,7 +193,7 @@
 			<Spinner size="medium" />
 		{:else}
 			<Icon icon="add_photo_alternate" size="giant" />
-			<span>Click or drop an image to upload</span>
+			<span>{m.lib_component_imageupload_click_or_drop()}</span>
 		{/if}
 	</div>
 {/if}

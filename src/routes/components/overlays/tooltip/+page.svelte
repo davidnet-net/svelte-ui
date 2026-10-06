@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="Tooltip" paragraph="A tooltip displays helpful information on hover." />
+<Header heading={m.docs_page_name_tooltip()} paragraph={m.docs_page_components_card_tooltip_description()} />

@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 
 	import Button from "$lib/components/input/Button/Button.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
 	import * as styles from "./TokenTree.css";
 	import TokenTree from "./TokenTree.svelte";
@@ -117,7 +118,7 @@
 					<Button
 						onclick={() => copyToClipboard(currentPath)}
 						iconafter={copiedKey === currentPath ? "check_small" : "content_copy"}>
-						Copy Token
+						{m.lib_component_tokentree_copy_token()}
 					</Button>
 				</div>
 			{/if}

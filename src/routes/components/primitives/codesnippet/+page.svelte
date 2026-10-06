@@ -5,6 +5,7 @@
 	import Flex from "$lib/components/primitives/Flex/Flex.svelte";
 	import Changelog from "$lib/internal/components/Changelog/Changelog.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles";
 
 	import * as styles from "./page.css";
@@ -19,17 +20,15 @@ function greet(user: string): string {
 }`;
 </script>
 
-<Header
-	heading="CodeSnippet"
-	paragraph="A premium, theme-aware code snippet viewer supporting syntax highlighting, copy-to-clipboard, filenames, and line numbers." />
+<Header heading={m.docs_page_name_codesnippet()} paragraph={m.docs_page_codesnippet_description()} />
 
 <div class={styles.pageContainer}>
-	<h2>Default (Inline Code String)</h2>
+	<h2>{m.docs_page_codesnippet_s1_heading()}</h2>
 	<p class={styles.paragraph}>
-		Pass a raw code snippet string directly using the <code>code</code>
+		{m.docs_page_codesnippet_s1_desc_prefix()} <code>code</code>
 		(or
 		<code>codeSnippet</code>
-		) prop and specify the language.
+		) {m.docs_page_codesnippet_s1_desc_suffix()}
 	</p>
 	<div class={styles.showcaseContainer}>
 		<div class={styles.showcase}>
@@ -37,12 +36,10 @@ function greet(user: string): string {
 		</div>
 	</div>
 
-	<h2>Text File Import (Vite ?raw)</h2>
+	<h2>{m.docs_page_codesnippet_s2_heading()}</h2>
 	<p class={styles.paragraph}>
-		Import code snippets directly from source files or text files by appending Vite's <code>
-			?raw
-		</code>
-		query suffix to the path:
+		{m.docs_page_codesnippet_s2_desc_prefix()} <code> ?raw </code>
+		{m.docs_page_codesnippet_s2_desc_suffix()}
 		<code>import mySnippet from "./file.txt?raw"</code>
 		.
 	</p>
@@ -52,12 +49,12 @@ function greet(user: string): string {
 		</div>
 	</div>
 
-	<h2>Line Numbers & Non-Copyable</h2>
+	<h2>{m.docs_page_codesnippet_s3_heading()}</h2>
 	<p class={styles.paragraph}>
-		You can enable line numbers using the <code>showLineNumbers</code>
-		prop, or disable copying using the
+		{m.docs_page_codesnippet_s3_desc_prefix()} <code>showLineNumbers</code>
+		{m.docs_page_codesnippet_s3_desc_mid()}
 		<code>cancopy={false}</code>
-		prop.
+		{m.docs_page_codesnippet_s3_desc_suffix()}
 	</p>
 	<div class={styles.showcaseContainer}>
 		<div class={styles.showcase}>
@@ -70,9 +67,9 @@ function greet(user: string): string {
 		</div>
 	</div>
 
-	<h2>JSON Highlighting Example</h2>
+	<h2>{m.docs_page_codesnippet_s4_heading()}</h2>
 	<p class={styles.paragraph}>
-		Highlighter matches themes dynamically. Below is an example highlighting JSON data.
+		{m.docs_page_codesnippet_s4_desc()}
 	</p>
 	<div class={styles.showcaseContainer}>
 		<div class={styles.showcase}>

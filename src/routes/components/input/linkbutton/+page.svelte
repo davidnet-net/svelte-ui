@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="LinkButton" paragraph="A link button is a link styled as a button." />
+<Header heading={m.docs_page_name_linkbutton()} paragraph={m.docs_page_components_card_linkbutton_description()} />

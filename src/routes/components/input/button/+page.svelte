@@ -8,6 +8,7 @@
 	import Changelog from "$lib/internal/components/Changelog/Changelog.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
 	import Playground from "$lib/internal/components/Playground/Playground.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles";
 
 	import * as styles from "./page.css";
@@ -16,139 +17,137 @@
 </script>
 
 <Tabs bind:selected={activeTab}>
-	<Header heading="Button" paragraph="The most used component for interacting with a page.">
+	<Header heading={m.docs_page_name_button()} paragraph={m.docs_page_button_paragraph()}>
 		{#snippet tabs()}
-			<Tab value="examples">Examples</Tab>
-			<Tab value="changelog">Changelog</Tab>
+			<Tab value="examples">{m.docs_page_button_tab_examples()}</Tab>
+			<Tab value="changelog">{m.docs_page_button_tab_changelog()}</Tab>
 		{/snippet}
 	</Header>
 
 	<div class={styles.pageContainer}>
 		<TabPanel value="examples">
 			<div>
-				<h2>Default</h2>
+				<h2>{m.docs_page_button_h2_default()}</h2>
 				<p class={styles.paragraph}>
-					Use default buttons for standard actions that aren't the primary action for a page or
-					container. They are styled with subtle borders and neutral background states.
+					{m.docs_page_button_default_desc()}
 				</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "default", children: "Default button" }}
+					props={{ appearance: "default", children: m.docs_page_button_demo_default() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Primary</h2>
+				<h2>{m.docs_page_button_h2_primary()}</h2>
 				<p class={styles.paragraph}>
-					Use primary buttons to highlight the main call to action on a page. Only one primary
-					button should be visible in a section.
+					{m.docs_page_button_primary_desc()}
 				</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "primary", children: "Primary button" }}
+					props={{ appearance: "primary", children: m.docs_page_button_demo_primary() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Subtle</h2>
+				<h2>{m.docs_page_button_h2_subtle()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "subtle", children: "Subtle button" }}
+					props={{ appearance: "subtle", children: m.docs_page_button_demo_subtle() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Warning</h2>
+				<h2>{m.docs_page_button_h2_warning()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "warning", children: "Warning button" }}
+					props={{ appearance: "warning", children: m.docs_page_button_demo_warning() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Danger</h2>
+				<h2>{m.docs_page_button_h2_danger()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "danger", children: "Danger button" }}
+					props={{ appearance: "danger", children: m.docs_page_button_demo_danger() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Discover</h2>
+				<h2>{m.docs_page_button_h2_discover()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "discover", children: "Discover button" }}
+					props={{ appearance: "discover", children: m.docs_page_button_demo_discover() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Loading</h2>
+				<h2>{m.docs_page_button_h2_loading()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ appearance: "primary", loading: true, children: "Submitting..." }}
+					props={{ appearance: "primary", loading: true, children: m.docs_page_button_demo_loading() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Selected</h2>
+				<h2>{m.docs_page_button_h2_selected()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ selected: true, children: "Selected button" }}
+					props={{ selected: true, children: m.docs_page_button_demo_selected() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Stretch width</h2>
+				<h2>{m.docs_page_button_h2_stretch()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ stretchwidth: true, children: "Stretched button" }}
+					props={{ stretchwidth: true, children: m.docs_page_button_demo_stretch() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Icon before</h2>
+				<h2>{m.docs_page_button_h2_iconbefore()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ iconbefore: "star", children: "Icon before button" }}
+					props={{ iconbefore: "star", children: m.docs_page_button_demo_iconbefore() }}
 					height="100px" />
 			</div>
 
 			<div>
-				<h2>Icon after</h2>
+				<h2>{m.docs_page_button_h2_iconafter()}</h2>
 				<p class={styles.paragraph}>?</p>
 			</div>
 			<div class={styles.showcaseContainer}>
 				<Playground
 					componentId="Button"
-					props={{ iconafter: "star", children: "Icon after button" }}
+					props={{ iconafter: "star", children: m.docs_page_button_demo_iconafter() }}
 					height="100px" />
 			</div>
 		</TabPanel>

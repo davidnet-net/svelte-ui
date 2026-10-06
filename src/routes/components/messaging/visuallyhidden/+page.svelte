@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
 <Header
-	heading="VisuallyHidden"
-	paragraph="Hides elements visually while keeping them accessible to screen readers." />
+	heading={m.docs_page_name_visuallyhidden()}
+	paragraph={m.docs_page_components_card_visuallyhidden_description()} />

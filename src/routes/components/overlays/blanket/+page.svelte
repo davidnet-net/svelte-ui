@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="Blanket" paragraph="A blanket dims the background behind overlay components." />
+<Header heading={m.docs_page_name_blanket()} paragraph={m.docs_page_components_card_blanket_description()} />

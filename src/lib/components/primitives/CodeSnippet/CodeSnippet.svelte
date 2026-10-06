@@ -23,6 +23,7 @@
 
 	import IconButton from "$lib/components/input/IconButton/IconButton.svelte";
 	import Icon from "$lib/components/primitives/Icon/Icon.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 
 	import { styles } from "./CodeSnippet.css";
 
@@ -193,7 +194,7 @@
 				{#if cancopy}
 					<IconButton
 						icon={copied ? "check" : "content_copy"}
-						tip={copied ? "Copied!" : "Copy code"}
+						tip={copied ? m.lib_component_codesnippet_copied() : m.lib_component_codesnippet_copy_tip()}
 						onclick={handleCopy}
 						appearance="subtle" />
 				{/if}

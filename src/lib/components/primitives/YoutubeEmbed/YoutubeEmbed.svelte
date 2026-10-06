@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { m } from "$lib/paraglide/messages.js";
+
 	import { styles } from "./YoutubeEmbed.css";
 
 	interface Props {
@@ -12,7 +14,12 @@
 		title?: string;
 	}
 
-	let { url, autoplay = false, muted = $bindable(autoplay), title = "YouTube video" }: Props = $props();
+	let {
+		url,
+		autoplay = false,
+		muted = $bindable(autoplay),
+		title = m.lib_component_youtube_default_title()
+	}: Props = $props();
 
 	function extractVideoId(input: string): string | null {
 		const trimmed = input.trim();

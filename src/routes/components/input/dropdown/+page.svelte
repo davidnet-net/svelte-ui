@@ -2,6 +2,7 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import Dropdown from "$lib/components/input/Dropdown/Dropdown.svelte";
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 
 	import * as styles from "./page.css";
 
@@ -9,7 +10,7 @@
 	let testDropdownOpen2 = $state(false);
 </script>
 
-<Header heading="Dropdown" paragraph="A dropdown displays a list of options for selection." />
+<Header heading={m.docs_page_name_dropdown()} paragraph={m.docs_page_components_card_dropdown_description()} />
 
 <div class={styles.pageContainer}>
 	<Dropdown isOpen={testDropdownOpen}>
@@ -19,11 +20,11 @@
 					testDropdownOpen = !testDropdownOpen;
 				}}
 				appearance="discover">
-				Open or close
+				{m.docs_page_dropdown_open_close()}
 			</Button>
 		{/snippet}
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
 	</Dropdown>
 
 	<Dropdown isOpen={testDropdownOpen2}>
@@ -33,48 +34,42 @@
 					testDropdownOpen2 = !testDropdownOpen2;
 				}}
 				appearance="discover">
-				large
+				{m.docs_page_dropdown_large()}
 			</Button>
 		{/snippet}
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
-		<Button appearance="subtle">Test 1</Button>
-		<Button appearance="subtle">Test 2</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_1()}</Button>
+		<Button appearance="subtle">{m.docs_page_dropdown_test_2()}</Button>
 	</Dropdown>
 </div>

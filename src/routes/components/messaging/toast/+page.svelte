@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header heading="Toast" paragraph="A toast displays short, temporary feedback messages." />
+<Header heading={m.docs_page_name_toast()} paragraph={m.docs_page_components_card_toast_description()} />

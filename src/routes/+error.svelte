@@ -4,13 +4,14 @@
 	import Button from "$lib/components/input/Button/Button.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
 	import { appState } from "$lib/engines/appStateEngine.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 
 	import { styles } from "./error.css";
 </script>
 
 <svelte:head>
-	<title>Davidnet Design System - {page.error?.message}</title>
+	<title>{m.docs_page_error_title({ message: page.error?.message ?? "" })}</title>
 </svelte:head>
 
 <div class={styles.pageContainer}>
@@ -34,9 +35,9 @@
 		{/if}
 		<div class={styles.buttonContainer}>
 			<Button appearance="primary" iconbefore="arrow_back" onclick={() => history.back()}>
-				Back
+				{m.docs_common_back()}
 			</Button>
-			<LinkButton href="/">Home</LinkButton>
+			<LinkButton href="/">{m.docs_common_home()}</LinkButton>
 		</div>
 	{:else}
 		<div class={styles.backgroundContainer}>
@@ -57,9 +58,10 @@
 			</h1>
 		{/if}
 		<div class={styles.buttonContainer}>
-			<Button iconbefore="arrow_back" onclick={() => history.back()}>Back</Button>
-			<Button appearance="primary" onclick={() => window.location.reload()}>Reload</Button>
-			<LinkButton href="/">Home</LinkButton>
+			<Button iconbefore="arrow_back" onclick={() => history.back()}>{m.docs_common_back()}</Button>
+			<Button appearance="primary" onclick={() => window.location.reload()}
+				>{m.docs_common_reload()}</Button>
+			<LinkButton href="/">{m.docs_common_home()}</LinkButton>
 		</div>
 	{/if}
 </div>

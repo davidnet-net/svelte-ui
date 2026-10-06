@@ -2,6 +2,7 @@
 	import { fade } from "svelte/transition";
 
 	import Skeleton from "$lib/components/loading/Skeleton/Skeleton.svelte";
+	import { m } from "$lib/paraglide/messages.js";
 	import { focusring } from "$lib/styles/global.css";
 
 	import Anchor from "../Anchor/Anchor.svelte";
@@ -36,7 +37,7 @@
 
 	// If it's a link or a button, it needs a label.
 	// If decorative is true, we explicitly hide it.
-	let accessibleName = $derived(decorative ? "" : alt || "Profile picture");
+	let accessibleName = $derived(decorative ? "" : alt || m.lib_component_avatar_default_alt());
 
 	$effect(() => {
 		const img = new Image();

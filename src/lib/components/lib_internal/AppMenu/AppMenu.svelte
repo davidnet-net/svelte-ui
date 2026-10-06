@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Flex, Dropdown, Button, identityState, authState, switchWorkspace } from "$lib";
+	import { m } from "$lib/paraglide/messages.js";
 	import { token } from "$lib/styles/designTokens";
 	import CompactHorizontalCard from "../CompactHorizontalCard/CompactHorizontalCard.svelte";
 	import LinkButton from "$lib/components/input/LinkButton/LinkButton.svelte";
@@ -20,7 +21,7 @@
 						workspaceSwitcherOpen = !workspaceSwitcherOpen;
 					}}
 					appearance="default">
-					Switch workspace
+					{m.lib_component_appmenu_switch_workspace()}
 				</Button>
 			{/snippet}
 
@@ -42,13 +43,20 @@
 				{/each}
 			</Flex>
 			<br />
-			<LinkButton href="#" disabled iconbefore="add">Add organization</LinkButton>
+			<LinkButton href="#" disabled iconbefore="add"
+				>{m.lib_component_appmenu_add_organization()}</LinkButton>
 		</Dropdown>
 
-		<CompactHorizontalCard title="Home" icon="home" href="https://home.davidnet.net" />
-		<CompactHorizontalCard title="Account" icon="for_you" href="https://account.davidnet.net" />
-		<CompactHorizontalCard title="Docs" icon="docs" href="https://docs.davidnet.net" />
-		<CompactHorizontalCard title="Kanban" icon="view_kanban" href="https://kanban.davidnet.net" />
-		<CompactHorizontalCard title="Quiz" icon="quiz" href="https://quiz.davidnet.net" />
+		<CompactHorizontalCard title={m.lib_component_appmenu_home()} icon="home" href="https://home.davidnet.net" />
+		<CompactHorizontalCard
+			title={m.lib_component_appmenu_account()}
+			icon="for_you"
+			href="https://account.davidnet.net" />
+		<CompactHorizontalCard title={m.lib_component_appmenu_docs()} icon="docs" href="https://docs.davidnet.net" />
+		<CompactHorizontalCard
+			title={m.lib_component_appmenu_kanban()}
+			icon="view_kanban"
+			href="https://kanban.davidnet.net" />
+		<CompactHorizontalCard title={m.lib_component_appmenu_quiz()} icon="quiz" href="https://quiz.davidnet.net" />
 	</Flex>
 </div>

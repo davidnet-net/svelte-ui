@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/internal/components/Header/Header.svelte";
+	import * as m from "$lib/paraglide/messages.js";
 </script>
 
-<Header
-	heading="Flex"
-	paragraph="Flex is a primitive layout component that implements the CSS Flexbox API." />
+<Header heading={m.docs_page_name_flex()} paragraph={m.docs_page_components_card_flex_description()} />

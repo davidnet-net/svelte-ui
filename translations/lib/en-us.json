@@ -100,5 +100,52 @@
 	"lib_component_settings_modal_day_friday": "Friday",
 	"lib_component_settings_modal_day_saturday": "Saturday",
 	"lib_component_settings_modal_day_sunday": "Sunday",
-	"lib_common_loading": "Loading"
+	"lib_common_loading": "Loading",
+
+	"lib_component_dropdown_shortcut_close_name": "Close dropdown",
+	"lib_component_codesnippet_copied": "Copied!",
+	"lib_component_codesnippet_copy_tip": "Copy code",
+	"lib_component_avatar_default_alt": "Profile picture",
+	"lib_component_youtube_default_title": "YouTube video",
+
+	"lib_component_imageupload_default_alt": "Question image",
+	"lib_component_imageupload_unsupported_title": "Unsupported file",
+	"lib_component_imageupload_unsupported_content": "Please choose an image file.",
+	"lib_component_imageupload_too_large_title": "Image too large",
+	"lib_component_imageupload_too_large_content": "Images must be under {mb}MB.",
+	"lib_component_imageupload_remove_tip": "Remove image",
+	"lib_component_imageupload_failed_title": "Upload failed",
+	"lib_component_imageupload_failed_content": "Could not upload the image.",
+	"lib_component_imageupload_upload_alt": "Upload image",
+	"lib_component_imageupload_click_or_drop": "Click or drop an image to upload",
+
+	"lib_component_appmenu_switch_workspace": "Switch workspace",
+	"lib_component_appmenu_add_organization": "Add organization",
+	"lib_component_appmenu_home": "Home",
+	"lib_component_appmenu_account": "Account",
+	"lib_component_appmenu_docs": "Docs",
+	"lib_component_appmenu_kanban": "Kanban",
+	"lib_component_appmenu_quiz": "Quiz",
+
+	"lib_component_tokentree_copy_token": "Copy Token",
+
+	"lib_component_playground_preparing": "Preparing environment...",
+	"lib_component_playground_preview_title": "Isolated Component Preview",
+
+	"lib_component_reportmodal_title_profile": "User Profile",
+	"lib_component_reportmodal_title_short": "Short",
+	"lib_component_reportmodal_title_game": "Game",
+	"lib_component_reportmodal_title": "Report {type}",
+	"lib_component_reportmodal_description": "Please provide a detailed reason for reporting this {reportType}. False reports may result in account penalties.",
+	"lib_component_reportmodal_reason_label": "Reason for reporting",
+	"lib_component_reportmodal_error_empty": "Please provide a reason for this report.",
+	"lib_component_reportmodal_error_too_long": "Reason is too long (max 2000 characters).",
+	"lib_component_reportmodal_submit": "Submit Report",
+	"lib_component_reportmodal_failed_title": "Report Failed",
+	"lib_component_reportmodal_failed_content": "Failed to submit the report. Please try again later.",
+	"lib_component_reportmodal_auth_title": "Authentication Required",
+	"lib_component_reportmodal_auth_content": "You must be logged in to submit a report.",
+	"lib_component_reportmodal_submitted_title": "Report Submitted",
+	"lib_component_reportmodal_thank_you": "Thank you.",
+	"lib_component_reportmodal_received": "Your report has been received and will be reviewed by a moderator."
 }
